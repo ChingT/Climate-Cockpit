@@ -21,8 +21,8 @@ const PageRoutes = () => {
                        element={<HeroPage/>}/>
                 <Route path="solutions" element={
                     <SolutionsPage/>}/>
-                <Route path="auth" element={<AuthenticationLayout/>}>
-                    <Route index element={<SignInSection/>}/>
+                <Route element={<AuthenticationLayout/>}>
+                    <Route path="signin" element={<SignInSection/>}/>
                     <Route path="signup" element={<SignUpSection/>}/>
                     <Route path="congratulations" element={<CongratsSection/>}/>
                     <Route path="verification" element={<VerificationSection/>}/>

@@ -26,7 +26,7 @@ function CongratsSection(){
                         </ConfirmationText>
                     </div>
                     <div>
-                        <Link to="/auth/verification">
+                        <Link to="/verification">
                             <PrimaryButton>continue</PrimaryButton>
                         </Link>
                         <CreateAccountProgress step={2}/>

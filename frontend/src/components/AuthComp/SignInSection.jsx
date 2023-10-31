@@ -46,7 +46,7 @@ function SignInSection(){
         <>
             <SignInHeader>
                 <p>Don&apos;t have an account?</p>
-                <Link to="/auth/signup">
+                <Link to="/signup">
                     <SecondaryButton>sign up</SecondaryButton>
                 </Link>
             </SignInHeader>
