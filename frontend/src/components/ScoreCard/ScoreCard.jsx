@@ -1,3 +1,5 @@
+import ScoreCardCategory from "./ScorecardCategory.jsx";
+
 export default function ScoreCard() {
     return (
         <>
@@ -9,13 +11,3 @@ export default function ScoreCard() {
     );
 }
 
-function ScoreCardCategory() {
-    return (
-        <>
-            <>ScoreCardCategory Name</>
-            <>Level</>
-            <>Level Tags</>
-            <>Sum</>
-        </>
-    );
-}

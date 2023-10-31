@@ -1,6 +1,10 @@
+import {CategoryLabel, ImpactIcon} from "./solution.style.js";
+
 export default function SolutionDropDown() {
     return (
         <>
+            <ImpactIcon />
+            <CategoryLabel />
             <>Description</>
             <>Progress Bar</>
             <Resources/>
