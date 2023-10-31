@@ -1,6 +1,5 @@
-import styled from 'styled-components'
-import {defaultButtonStyles} from '../../../styles/globalStyles.js'
-
+import styled from "styled-components";
+import { defaultButtonStyles } from "../../../styles/globalStyles.js";
 
 export const InputWrapper = styled.div`
   padding: 2.5rem 3.8rem;
@@ -25,7 +24,8 @@ export const InputWrapper = styled.div`
       font-size: 0.75rem;
     }
 
-    input, textarea {
+    input,
+    textarea {
       background: none;
       border: none;
       font: inherit;
@@ -59,8 +59,7 @@ export const InputWrapper = styled.div`
       }
     }
   }
-
-`
+`;
 
 export const CustomFileInputButton = styled.div`
   position: relative;
@@ -73,4 +72,4 @@ export const CustomFileInputButton = styled.div`
     height: 100%;
     opacity: 0;
   }
-`
+`;

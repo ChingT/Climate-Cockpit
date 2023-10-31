@@ -1,69 +1,67 @@
-import {useState} from 'react'
-import {Link, useNavigate} from 'react-router-dom'
-import LetterIcon from '../../assets/svgs/letter.svg'
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import LetterIcon from "../../assets/svgs/letter.svg";
 import {
-    AuthForm,
-    AuthFormContainer,
-    ErrorMessage,
-    FormTitle,
-    InputFieldContainer,
-    SignInHeader
-} from './AutenthicationLayout.style.js'
-import {PrimaryButton, SecondaryButton} from '../../styles/globalStyles.js'
-import useApiRequest from '../../hooks/useApiRequest.js'
-import CreateAccountProgress from './CreateAccountProgress.jsx'
-
+  AuthForm,
+  AuthFormContainer,
+  ErrorMessage,
+  FormTitle,
+  InputFieldContainer,
+  SignInHeader,
+} from "./AutenthicationLayout.style.js";
+import { PrimaryButton, SecondaryButton } from "../../styles/globalStyles.js";
+import useApiRequest from "../../hooks/useApiRequest.js";
+import CreateAccountProgress from "./CreateAccountProgress.jsx";
 
 function SignUpSection() {
-    const [userEmail, setEmail] = useState('')
-    const navigate = useNavigate()
-    const {sendRequest, error, data} = useApiRequest()
+  const [userEmail, setEmail] = useState("");
+  const navigate = useNavigate();
+  const { sendRequest, error, data } = useApiRequest();
 
-    const handleSignUpClick = async (e) => {
-        e.preventDefault()
-        sendRequest('post', 'auth/registration/', {email: userEmail})
-    }
+  const handleSignUpClick = async (e) => {
+    e.preventDefault();
+    sendRequest("post", "auth/registration/", { email: userEmail });
+  };
 
-    if (data === 'success') {
-        localStorage.setItem('registered_email', userEmail)
-        navigate('/congratulations')
-    }
+  if (data === "success") {
+    localStorage.setItem("registered_email", userEmail);
+    navigate("/congratulations");
+  }
 
-    return (
-        <>
-            <SignInHeader>
-                <p>Already have an account?</p>
-                <Link to="/signin">
-                    <SecondaryButton>sign in</SecondaryButton>
-                </Link>
-            </SignInHeader>
-            <AuthFormContainer>
-                <AuthForm>
-                    <div className={'input-container'}>
-                        <FormTitle>Sign Up</FormTitle>
-                        <InputFieldContainer>
-                            <div className={'input-wrapper'}>
-                                <img src={LetterIcon}></img>
-                                <input
-                                    placeholder="Email"
-                                    type="email"
-                                    value={userEmail}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                            </div>
-                            {error?.email && <ErrorMessage>{error.email}</ErrorMessage>}
-                        </InputFieldContainer>
-                        {error?.detail && <ErrorMessage>{error.detail}</ErrorMessage>}
-                    </div>
-                    <div>
-                        <PrimaryButton onClick={handleSignUpClick}>SIGN
-                            UP</PrimaryButton>
-                        <CreateAccountProgress step={1}/>
-                    </div>
-                </AuthForm>
-            </AuthFormContainer>
-        </>
-    )
+  return (
+    <>
+      <SignInHeader>
+        <p>Already have an account?</p>
+        <Link to="/signin">
+          <SecondaryButton>sign in</SecondaryButton>
+        </Link>
+      </SignInHeader>
+      <AuthFormContainer>
+        <AuthForm>
+          <div className={"input-container"}>
+            <FormTitle>Sign Up</FormTitle>
+            <InputFieldContainer>
+              <div className={"input-wrapper"}>
+                <img src={LetterIcon}></img>
+                <input
+                  placeholder="Email"
+                  type="email"
+                  value={userEmail}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              {error?.email && <ErrorMessage>{error.email}</ErrorMessage>}
+            </InputFieldContainer>
+            {error?.detail && <ErrorMessage>{error.detail}</ErrorMessage>}
+          </div>
+          <div>
+            <PrimaryButton onClick={handleSignUpClick}>SIGN UP</PrimaryButton>
+            <CreateAccountProgress step={1} />
+          </div>
+        </AuthForm>
+      </AuthFormContainer>
+    </>
+  );
 }
 
-export default SignUpSection
+export default SignUpSection;
