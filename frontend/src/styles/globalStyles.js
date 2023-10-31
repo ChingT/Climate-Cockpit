@@ -114,7 +114,7 @@ export const CheckMark = styled.img`
 
 export default GlobalStyle;
 
-export const Icon = styled.img`
+export const MegatonIcon = styled.img`
   width: 1rem;
   height: 1rem;
 `;

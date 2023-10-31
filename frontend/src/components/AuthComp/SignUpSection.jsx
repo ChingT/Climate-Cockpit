@@ -26,14 +26,14 @@ function SignUpSection(){
 
     if(data === 'success'){
         localStorage.setItem('registered_email', userEmail)
-        navigate('/congratulations')
+        navigate('/auth/congratulations')
     }
 
     return (
         <>
             <SignInHeader>
                 <p>Already have an account?</p>
-                <Link to="/">
+                <Link to="/auth">
                     <SecondaryButton>sign in</SecondaryButton>
                 </Link>
             </SignInHeader>

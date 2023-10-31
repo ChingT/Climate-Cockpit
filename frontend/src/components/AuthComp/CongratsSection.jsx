@@ -10,6 +10,7 @@ import {CheckMark, PrimaryButton} from '../../styles/globalStyles.js'
 import CreateAccountProgress from './CreateAccountProgress.jsx'
 
 
+
 function CongratsSection(){
     const userEmail = localStorage.getItem('registered_email')
 
@@ -25,7 +26,7 @@ function CongratsSection(){
                         </ConfirmationText>
                     </div>
                     <div>
-                        <Link to="/verification">
+                        <Link to="/auth/verification">
                             <PrimaryButton>continue</PrimaryButton>
                         </Link>
                         <CreateAccountProgress step={2}/>

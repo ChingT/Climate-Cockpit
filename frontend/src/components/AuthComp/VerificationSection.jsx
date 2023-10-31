@@ -30,7 +30,7 @@ const VerificationSection = () => {
 
   useEffect(() => {
     if (data === "success") {
-      navigate("/");
+      navigate("/auth");
       localStorage.removeItem("registered_email");
     }
   }, [data]);

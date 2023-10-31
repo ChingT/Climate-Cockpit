@@ -1,21 +1,21 @@
 export default function ScoreCard() {
-  return (
-    <>
-      {/* 10 of this */}
-      <ScoreBar />
-      <>Statement</>
-      <>Total Score</>
-    </>
-  );
+    return (
+        <>
+            {/* 10 of this */}
+            <ScoreCardCategory/>
+            <>Statement</>
+            <>Total Score</>
+        </>
+    );
 }
 
-function ScoreBar() {
-  return (
-    <>
-      <>Category Name</>
-      <>Level</>
-      <>Level Tags</>
-      <>Sum</>
-    </>
-  );
+function ScoreCardCategory() {
+    return (
+        <>
+            <>ScoreCardCategory Name</>
+            <>Level</>
+            <>Level Tags</>
+            <>Sum</>
+        </>
+    );
 }
