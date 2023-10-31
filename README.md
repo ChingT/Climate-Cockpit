@@ -10,6 +10,18 @@ https://www.figma.com/file/KMcmmUApmDXahwsdGtfjAA/
 
 ## Backend API Endpoints
 
+### Solutions
+
+- `/solutions/list/` GET: Get a list of all available solutions.
+- `/solutions/category/` GET: Get a list of all solution categories.
+- `/solutions/support/<int:user_id>/` GET: Get the solutions supported by a
+  specific user.
+- `/solutions/impact/<int:user_id>/` GET: Get the impact for a specific user.
+- `/solutions/scorecard/<int:user_id>/` GET: Get the scorecard for a specific
+  user.
+- `/solutions/dashboard/<int:user_id>/` GET: Get the dashboard for a specific
+  user.
+
 ### Registration
 
 - `/auth/registration/` POST: Register new user by asking for email (a
