@@ -1,10 +1,12 @@
-import styled from 'styled-components'
-import {CardWithShadowStyles, defaultButtonStyles} from '../../../styles/globalStyles.js'
-
+import styled from "styled-components";
+import {
+  CardWithShadowStyles,
+  defaultButtonStyles,
+} from "../../../styles/globalStyles.js";
 
 export const ProfileBackground = styled.img`
   position: absolute;
-  top: ${props => props.theme.header_height};
+  top: ${(props) => props.theme.header_height};
   left: 50%;
 
   width: calc(100% - 2rem);
@@ -14,18 +16,17 @@ export const ProfileBackground = styled.img`
   transform: translateX(-50%);
   object-fit: cover;
   border-radius: 0 0 1rem 1rem;
-`
-
+`;
 
 export const ProfileHeaderContainer = styled(CardWithShadowStyles)`
   position: relative;
-  max-width: ${props => props.theme.max_content_width};
+  max-width: ${(props) => props.theme.max_content_width};
   min-height: 16rem;
 
   margin-top: 10rem;
   display: flex;
   z-index: 2;
-`
+`;
 
 export const ProfileHeaderLeftContainer = styled.div`
   display: flex;
@@ -54,13 +55,13 @@ export const ProfileHeaderLeftContainer = styled.div`
   button {
     width: 10rem;
   }
-`
+`;
 
 export const ProfileHeaderRightContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 75%;
-`
+`;
 
 export const AvatarImg = styled.img`
   width: 6rem;
@@ -68,7 +69,7 @@ export const AvatarImg = styled.img`
   border-radius: 50%;
   object-fit: cover;
   opacity: 0.9;
-`
+`;
 
 export const EditAvatarContainer = styled.div`
   display: flex;
@@ -85,7 +86,8 @@ export const EditAvatarContainer = styled.div`
     align-items: center;
   }
 
-  input[type=file], button {
+  input[type="file"],
+  button {
     ${defaultButtonStyles}
   }
 
@@ -94,14 +96,14 @@ export const EditAvatarContainer = styled.div`
     max-width: 100%;
     margin-top: 1rem;
   }
-`
+`;
 
 export const SavedChangesMessage = styled(CardWithShadowStyles)`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
+
   width: 18rem;
   height: 12rem;
   display: flex;
@@ -110,4 +112,4 @@ export const SavedChangesMessage = styled(CardWithShadowStyles)`
   align-items: center;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-`
+`;

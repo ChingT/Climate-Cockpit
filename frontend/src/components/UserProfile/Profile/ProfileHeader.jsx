@@ -18,7 +18,7 @@ function ProfileHeader({ userdata, profileId, error }) {
   const currentUser = useSelector((store) => store.loggedInUser.user);
   const friendRequests = useSelector((store) => store.friendRequests);
   const requestObject = friendRequests.find(
-    (request) => request.receiver.id === Number(profileId)
+    (request) => request.receiver.id === Number(profileId),
   );
 
   return (

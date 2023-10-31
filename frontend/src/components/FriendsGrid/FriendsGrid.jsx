@@ -1,9 +1,9 @@
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import useAutoFetch from "../../hooks/useAutoFetch.js";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 import FriendCard from "./FriendCard.jsx";
-import {FriendsGridContainer} from "./FriendCard.style.js";
+import { FriendsGridContainer } from "./FriendCard.style.js";
 
 export const FindFriendsContainer = styled.div`
   position: relative;

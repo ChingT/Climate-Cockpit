@@ -1,5 +1,4 @@
-import styled from 'styled-components'
-
+import styled from "styled-components";
 
 export const ProfileAboutContainer = styled.div`
   display: grid;
@@ -37,24 +36,24 @@ export const ProfileAboutContainer = styled.div`
   .phone {
     flex: 35%;
   }
-`
+`;
 
 export const LikedThingsContainer = styled.ul`
   width: 100%;
   display: flex;
-  justify-content: ${props => props.centered ? 'center' : 'unset'};
+  justify-content: ${(props) => (props.centered ? "center" : "unset")};
   flex-wrap: wrap;
   row-gap: 1rem;
   column-gap: 0.5rem;
   list-style: none;
 
   li {
-    background-color: rgba(0,0,0,0.05);
+    background-color: rgba(0, 0, 0, 0.05);
     border-radius: 999px;
     font-size: 0.875rem;
     padding: 0.7rem 1rem;
     text-transform: capitalize;
-    
+
     button {
       background: none;
       border: none;
@@ -63,4 +62,4 @@ export const LikedThingsContainer = styled.ul`
       cursor: pointer;
     }
   }
-`
+`;

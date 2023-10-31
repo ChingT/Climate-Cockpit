@@ -86,7 +86,9 @@ export const SecondaryButton = styled.button`
 `;
 
 export const CardWithShadowStyles = styled.div`
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2), 0px 10px 20px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0px 0px 1px rgba(0, 0, 0, 0.2),
+    0px 10px 20px rgba(0, 0, 0, 0.05);
   width: 100%;
   height: 100%;
   background-color: white;

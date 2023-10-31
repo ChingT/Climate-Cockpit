@@ -1,5 +1,4 @@
-import styled from 'styled-components'
-
+import styled from "styled-components";
 
 const LoadingSpinnerContainer = styled.div`
   display: flex;
@@ -27,14 +26,14 @@ const LoadingSpinnerContainer = styled.div`
       transform: rotate(360deg);
     }
   }
-`
+`;
 
 const LoadingSpinner = () => {
-    return (
-        <LoadingSpinnerContainer className="loading-spinner-container">
-            <div className="loading-spinner"/>
-        </LoadingSpinnerContainer>
-    )
-}
+  return (
+    <LoadingSpinnerContainer className="loading-spinner-container">
+      <div className="loading-spinner" />
+    </LoadingSpinnerContainer>
+  );
+};
 
-export default LoadingSpinner
+export default LoadingSpinner;

@@ -10,6 +10,8 @@ export const Title = styled.div``;
 
 export const NumberOfSupporters = styled.div``;
 
-export const Category = styled.div``;
+export const CategoryLabel = styled.div``;
 
-export const Impact = styled.div``;
+export const ImpactIcon = styled.div``;
+
+export const LevelButton = styled.div``;

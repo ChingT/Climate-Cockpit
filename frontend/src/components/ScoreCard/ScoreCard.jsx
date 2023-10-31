@@ -1,21 +1,12 @@
-export default function ScoreCard() {
-    return (
-        <>
-            {/* 10 of this */}
-            <ScoreCardCategory/>
-            <>Statement</>
-            <>Total Score</>
-        </>
-    );
-}
+import ScoreCardCategory from "./ScorecardCategory.jsx";
 
-function ScoreCardCategory() {
-    return (
-        <>
-            <>ScoreCardCategory Name</>
-            <>Level</>
-            <>Level Tags</>
-            <>Sum</>
-        </>
-    );
+export default function ScoreCard() {
+  return (
+    <>
+      {/* 10 of this */}
+      <ScoreCardCategory />
+      <>Statement</>
+      <>Total Score</>
+    </>
+  );
 }
