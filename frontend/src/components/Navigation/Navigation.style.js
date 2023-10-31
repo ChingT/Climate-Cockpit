@@ -3,14 +3,12 @@ import {Link, NavLink} from 'react-router-dom'
 
 
 export const HeaderContainer = styled.header`
-  height: 96px;
+  height: ${(props) => props.theme.header_height};
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2), 0px 10px 20px rgba(0, 0, 0, 0.05);
-  background: conic-gradient(from 90deg at 1.1px 1.1px, #f3f3e4 25%, rgb(217, 217, 217) 0);
-  background-size: 24px 24px;
   position: fixed;
   top: 0;
   z-index: 10;

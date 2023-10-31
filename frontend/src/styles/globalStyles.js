@@ -12,19 +12,16 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: conic-gradient(from 90deg at 1.1px 1.1px, #f3f3e4 25%, rgb(217, 217, 217) 0);
-    background-size: 24px 24px;
-
   }
 
   #root {
     height: 100%;
     min-height: 100vh;
+    background: conic-gradient(from 90deg at 1.1px 1.1px, #f3f3e4 25%, rgb(217, 217, 217) 0);
+    background-size: 24px 24px;
   }
 
   main {
-    background: conic-gradient(from 90deg at 1.1px 1.1px, #f3f3e4 25%, rgb(217, 217, 217) 0);
-    background-size: 24px 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
