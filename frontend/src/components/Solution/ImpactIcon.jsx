@@ -1,11 +1,13 @@
-import {ImpactIconDiv} from "./solution.style.js";
+import { ImpactIconDiv } from "./solution.style.js";
 
 function ImpactIcon() {
-    let impact = -5
+  let impact = -5;
 
-    return (<ImpactIconDiv>
-        <div>{impact}</div>
-    </ImpactIconDiv>)
+  return (
+    <ImpactIconDiv>
+      <div>{impact}</div>
+    </ImpactIconDiv>
+  );
 }
 
-export default ImpactIcon
+export default ImpactIcon;
