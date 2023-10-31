@@ -9,12 +9,11 @@ export const SearchBarContainer = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   -webkit-background-clip: padding-box; /* for Safari */
   background-clip: padding-box; /* for Firefox 4+, Opera, Chrome */
-  
 `;
 
 export const SearchBarWrapper = styled.div`
   width: 100%;
-  max-width: ${props => props.theme.max_content_width};
+  max-width: ${(props) => props.theme.max_content_width};
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -26,7 +25,6 @@ export const ContainerWrapperLeft = styled.form`
   height: 100%;
   align-items: center;
   justify-content: start;
-  
 `;
 export const SearchIcon = styled.img`
   margin: 0 1rem 0 1rem;
@@ -46,8 +44,6 @@ export const ContainerWrapperRight = styled.div`
   height: 100%;
   align-items: center;
   justify-content: end;
-
-  
 `;
 export const FilterWrapper = styled.div`
   display: flex;
@@ -68,11 +64,10 @@ export const FilterSetter = styled.button`
   justify-content: center;
   align-items: center;
   border-bottom: 2px solid;
-  border-color: ${props => props.filterActive ? 'black' : 'transparent'};
-  color: ${props => props.filterActive ? 'black' : 'rgba(0,0,0,0.5)'};
-  
+  border-color: ${(props) => (props.filterActive ? "black" : "transparent")};
+  color: ${(props) => (props.filterActive ? "black" : "rgba(0,0,0,0.5)")};
+
   &:hover {
     border-color: black;
   }
 `;
-

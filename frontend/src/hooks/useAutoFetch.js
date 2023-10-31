@@ -1,16 +1,15 @@
-import {useEffect} from 'react'
-import useApiRequest from './useApiRequest.js'
-
+import { useEffect } from "react";
+import useApiRequest from "./useApiRequest.js";
 
 const useAutoFetch = (method, url, requestData, trigger) => {
-    const token = localStorage.getItem('auth-token')
-    const {sendRequest, data, error, loading} = useApiRequest()
+  const token = localStorage.getItem("auth-token");
+  const { sendRequest, data, error, loading } = useApiRequest();
 
-    useEffect(() => {
-        if (token) sendRequest(method, url, requestData)
-    }, [url, trigger])
+  useEffect(() => {
+    if (token) sendRequest(method, url, requestData);
+  }, [url, trigger]);
 
-    return {data, error, loading}
-}
+  return { data, error, loading };
+};
 
-export default useAutoFetch
+export default useAutoFetch;
