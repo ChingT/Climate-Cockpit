@@ -1,10 +1,21 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import store from "./store/store.js";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en.json";
+import App from "./App.jsx";
+import GlobalStyle from "./styles/globalStyles.js";
+import { ThemeProvider } from "styled-components";
+import theme from "./styles/theme.js";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+TimeAgo.addDefaultLocale(en);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <App />
+    </ThemeProvider>
+  </Provider>,
+);
