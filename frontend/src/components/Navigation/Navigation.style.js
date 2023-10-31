@@ -1,6 +1,5 @@
-import styled from 'styled-components'
-import {Link, NavLink} from 'react-router-dom'
-
+import styled from "styled-components";
+import { Link, NavLink } from "react-router-dom";
 
 export const HeaderContainer = styled.header`
   height: 96px;
@@ -8,14 +7,20 @@ export const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2), 0px 10px 20px rgba(0, 0, 0, 0.05);
-  background: conic-gradient(from 90deg at 1.1px 1.1px, #f3f3e4 25%, rgb(217, 217, 217) 0);
+  box-shadow:
+    0px 0px 1px rgba(0, 0, 0, 0.2),
+    0px 10px 20px rgba(0, 0, 0, 0.05);
+  background: conic-gradient(
+    from 90deg at 1.1px 1.1px,
+    #f3f3e4 25%,
+    rgb(217, 217, 217) 0
+  );
   background-size: 24px 24px;
   position: fixed;
   top: 0;
   z-index: 10;
   padding: 0 2rem;
-`
+`;
 
 export const ContainerLeft = styled.div`
   display: flex;
@@ -28,7 +33,7 @@ export const ContainerLeft = styled.div`
     height: 100%;
     gap: 2rem;
   }
-`
+`;
 
 export const NavbarLink = styled(NavLink)`
   text-decoration: none;
@@ -41,20 +46,20 @@ export const NavbarLink = styled(NavLink)`
   border-color: transparent;
 
   &.active {
-    border-color: #AD73FD;
+    border-color: #ad73fd;
     color: #ad73fd;
   }
 
   &:hover:not(.active) {
-    border-color: #ccc
+    border-color: #ccc;
   }
-`
+`;
 
 export const ContainerRight = styled.div`
   display: flex;
   align-items: center;
   gap: 2rem;
-`
+`;
 
 export const LogoWrapper = styled(Link)`
   display: flex;
@@ -69,7 +74,7 @@ export const LogoWrapper = styled(Link)`
   p {
     font-size: 22px;
   }
-`
+`;
 
 export const NotificationButton = styled.button`
   background: none;
@@ -92,7 +97,7 @@ export const NotificationButton = styled.button`
       top: -0.8rem;
       right: 0;
 
-      background: linear-gradient(132.96deg, #C468FF 3.32%, #6E91F6 100%);
+      background: linear-gradient(132.96deg, #c468ff 3.32%, #6e91f6 100%);
       box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.07);
       border-radius: 50%;
       display: flex;
@@ -103,7 +108,7 @@ export const NotificationButton = styled.button`
       color: white;
     }
   }
-`
+`;
 
 export const Avatar = styled.img`
   width: 40px;
@@ -111,7 +116,7 @@ export const Avatar = styled.img`
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
-`
+`;
 
 export const MenuContainer = styled.div`
   position: relative;
@@ -120,7 +125,7 @@ export const MenuContainer = styled.div`
     padding: 0.4rem;
     cursor: pointer;
   }
-`
+`;
 
 export const ActionsWrapper = styled.ul`
   position: absolute;
@@ -130,13 +135,12 @@ export const ActionsWrapper = styled.ul`
   background-color: white;
   border-radius: 0.2rem;
   overflow: hidden;
-`
+`;
 
 export const ActionContainer = styled.li`
   list-style: none;
   cursor: pointer;
   font-size: 0.875rem;
-
 
   &:first-child {
     border-bottom: 1px solid #d8d3d3;
@@ -146,7 +150,8 @@ export const ActionContainer = styled.li`
     background: rgba(0, 0, 0, 0.05);
   }
 
-  > a, > div {
+  > a,
+  > div {
     width: 100%;
     padding: 0.8rem 1.2rem;
 
@@ -155,14 +160,14 @@ export const ActionContainer = styled.li`
     gap: 1rem;
 
     img {
-      opacity: .35;
+      opacity: 0.35;
     }
 
     &.active {
       background: rgba(0, 0, 0, 0.2);
     }
   }
-`
+`;
 
 export const NotificationsContainer = styled.div`
   position: absolute;
@@ -176,7 +181,7 @@ export const NotificationsContainer = styled.div`
   gap: 3rem;
   border: 1px solid rgb(230, 230, 230);
   border-radius: 0.5rem;
-`
+`;
 
 export const RequestTypeContainer = styled.div`
   > p {
@@ -190,7 +195,7 @@ export const RequestTypeContainer = styled.div`
     flex-direction: column;
     gap: 1rem;
   }
-`
+`;
 
 export const RequestContainer = styled.div`
   display: flex;
@@ -206,7 +211,7 @@ export const RequestContainer = styled.div`
       text-decoration: underline;
 
       img {
-        transform: scale(1.1)
+        transform: scale(1.1);
       }
     }
   }
@@ -223,17 +228,16 @@ export const RequestContainer = styled.div`
       opacity: 0.5;
     }
   }
-`
+`;
 
 export const RequestStatusIcon = styled.img`
   height: 2.5rem;
   aspect-ratio: 1/1;
 
-  cursor: ${props => props.noClick ? 'default' : 'pointer'};
-`
+  cursor: ${(props) => (props.noClick ? "default" : "pointer")};
+`;
 
 export const ButtonsWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-`
-
+`;
