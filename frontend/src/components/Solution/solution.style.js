@@ -19,6 +19,9 @@ export const ImpactIconDiv = styled.div`
   background-color: black;
   color: white;
   border-radius: 10px;
+  width: 6vh;
+  height: 6vh;
+  border: 2px solid red;
 `;
 
 export const LevelButton = styled.div``;
