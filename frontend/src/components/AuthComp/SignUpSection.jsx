@@ -14,7 +14,7 @@ import useApiRequest from '../../hooks/useApiRequest.js'
 import CreateAccountProgress from './CreateAccountProgress.jsx'
 
 
-function SignUpSection(){
+function SignUpSection() {
     const [userEmail, setEmail] = useState('')
     const navigate = useNavigate()
     const {sendRequest, error, data} = useApiRequest()
@@ -24,7 +24,7 @@ function SignUpSection(){
         sendRequest('post', 'auth/registration/', {email: userEmail})
     }
 
-    if(data === 'success'){
+    if (data === 'success') {
         localStorage.setItem('registered_email', userEmail)
         navigate('/congratulations')
     }
@@ -33,7 +33,7 @@ function SignUpSection(){
         <>
             <SignInHeader>
                 <p>Already have an account?</p>
-                <Link to="/">
+                <Link to="/signin">
                     <SecondaryButton>sign in</SecondaryButton>
                 </Link>
             </SignInHeader>
@@ -56,7 +56,8 @@ function SignUpSection(){
                         {error?.detail && <ErrorMessage>{error.detail}</ErrorMessage>}
                     </div>
                     <div>
-                        <PrimaryButton onClick={handleSignUpClick}>SIGN UP</PrimaryButton>
+                        <PrimaryButton onClick={handleSignUpClick}>SIGN
+                            UP</PrimaryButton>
                         <CreateAccountProgress step={1}/>
                     </div>
                 </AuthForm>
