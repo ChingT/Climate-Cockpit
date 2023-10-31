@@ -1,12 +1,12 @@
-import {CategoryLabel} from "../Solution/solution.style.js";
+import { CategoryLabel } from "../Solution/solution.style.js";
 
 export default function ScoreCardCategory() {
-    return (
-        <>
-            <CategoryLabel/>
-            <>Level</>
-            <>Level Tags</>
-            <>Sum</>
-        </>
-    );
+  return (
+    <>
+      <CategoryLabel />
+      <>Level</>
+      <>Level Tags</>
+      <>Sum</>
+    </>
+  );
 }

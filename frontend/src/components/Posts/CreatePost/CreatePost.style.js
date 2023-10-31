@@ -1,12 +1,13 @@
-import styled from 'styled-components'
-
+import styled from "styled-components";
 
 export const CreatePostModalContainer = styled.div`
   width: 100%;
   min-height: 6rem;
   max-width: 42rem;
   background: #ffffff;
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2), 0px 10px 20px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0px 0px 1px rgba(0, 0, 0, 0.2),
+    0px 10px 20px rgba(0, 0, 0, 0.05);
   border-radius: 4px;
 
   .body-container {
@@ -69,7 +70,7 @@ export const CreatePostModalContainer = styled.div`
     border-top: 1px solid #ccc;
     padding: 1rem 2rem;
   }
-`
+`;
 
 export const TextField = styled.textarea`
   width: 100%;
@@ -79,7 +80,7 @@ export const TextField = styled.textarea`
   line-height: 1.6;
   background: none;
   resize: none;
-`
+`;
 
 export const CustomImageUploadButton = styled.div`
   position: relative;
@@ -101,7 +102,7 @@ export const CustomImageUploadButton = styled.div`
     height: 100%;
     opacity: 40%;
   }
-`
+`;
 
 export const SubmitButton = styled.button`
   width: 3.5rem;
@@ -114,19 +115,21 @@ export const SubmitButton = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
-`
+`;
 
 export const CreatePostCardContainer = styled.div`
   width: 100%;
   min-height: 6rem;
   background: #ffffff;
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2), 0px 10px 20px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0px 0px 1px rgba(0, 0, 0, 0.2),
+    0px 10px 20px rgba(0, 0, 0, 0.05);
   border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.8rem;
-`
+`;
 
 export const WrapperDiv = styled.div`
   width: 100%;
@@ -136,13 +139,13 @@ export const WrapperDiv = styled.div`
   gap: 2rem;
 
   p {
-    color: ${props => props.theme.colors.lightGray};
+    color: ${(props) => props.theme.colors.lightGray};
   }
-  
+
   img:nth-of-type(2) {
     width: 32px;
   }
-`
+`;
 export const Avatar = styled.img`
   width: 7rem;
   aspect-ratio: 1/1;
@@ -151,4 +154,4 @@ export const Avatar = styled.img`
   align-items: center;
   justify-content: center;
   object-fit: cover;
-`
+`;

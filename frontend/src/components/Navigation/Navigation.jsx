@@ -1,6 +1,6 @@
-import {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import avatarImage from "../../assets/svgs/avatar.svg";
 import findFriendLogo from "../../assets/svgs/icon-friends.svg";
@@ -8,7 +8,7 @@ import MenuDot from "../../assets/svgs/menu.svg";
 import bell from "../../assets/svgs/notification_bell.svg";
 import postsLogo from "../../assets/svgs/posts_logo.svg";
 import useAutoFetch from "../../hooks/useAutoFetch.js";
-import {setRequests} from "../../store/slices/friendRequests.js";
+import { setRequests } from "../../store/slices/friendRequests.js";
 import FriendsRequestsContainer from "./FriendsRequests/FriendsRequestsContainer.jsx";
 import {
   Avatar,
@@ -23,85 +23,84 @@ import {
 import NavigationActionsContainer from "./NavigationActionsContainer.jsx";
 
 const Navigation = () => {
-    const loggedInUser = useSelector((store) => store.loggedInUser.user);
-    const dispatch = useDispatch();
-    const friendRequests = useSelector((store) => store.friendRequests);
+  const loggedInUser = useSelector((store) => store.loggedInUser.user);
+  const dispatch = useDispatch();
+  const friendRequests = useSelector((store) => store.friendRequests);
 
-    const [showMenu, setShowMenu] = useState(false);
-    const [showNotifications, setShowNotifications] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
 
-    const {data} = useAutoFetch("get", "social/friends/requests/");
+  const { data } = useAutoFetch("get", "social/friends/requests/");
 
-    const [sentRequests, setSentRequests] = useState([]);
-    const [receivedRequests, setReceivedRequests] = useState([]);
-    const requestsCount = sentRequests.length + receivedRequests.length;
+  const [sentRequests, setSentRequests] = useState([]);
+  const [receivedRequests, setReceivedRequests] = useState([]);
+  const requestsCount = sentRequests.length + receivedRequests.length;
 
-    useEffect(() => {
-        dispatch(setRequests(data?.results));
-    }, [data]);
+  useEffect(() => {
+    dispatch(setRequests(data?.results));
+  }, [data]);
 
-    useEffect(() => {
-        setSentRequests(
-            friendRequests.filter(
-                (request) =>
-                    request.requester.id === loggedInUser.id && request.status === "P"
-            )
-        );
-        setReceivedRequests(
-            friendRequests.filter(
-                (request) =>
-                    request.requester.id !== loggedInUser.id && request.status === "P"
-            )
-        );
-    }, [friendRequests]);
-
-    return (
-        <HeaderContainer>
-            <ContainerLeft>
-                <LogoWrapper to="/">
-                    <img src={logo}></img>
-                    <p>Motion</p>
-                </LogoWrapper>
-
-                <nav>
-                    <NavbarLink to="/posts">
-                        <img src={postsLogo}></img>
-                        <p>Posts</p>
-                    </NavbarLink>
-                    <NavbarLink to="/find-friends">
-                        <img src={findFriendLogo}></img>
-                        <p>Find Friends</p>
-                    </NavbarLink>
-                </nav>
-            </ContainerLeft>
-
-            <ContainerRight>
-                <NotificationButton
-                    onClick={() => setShowNotifications(!showNotifications)}
-                >
-                    <div className={"icon-wrapper"}>
-                        <img src={bell}></img>
-                        <p className={"request-count"}>{requestsCount}</p>
-                    </div>
-                    {showNotifications && (
-                        <FriendsRequestsContainer
-                            setShowNotifications={setShowNotifications}
-                            sentRequests={sentRequests}
-                            receivedRequests={receivedRequests}
-                        />
-                    )}
-                </NotificationButton>
-                <Link to={"/profile"}>
-                    <Avatar src={loggedInUser?.avatar || avatarImage}></Avatar>
-                </Link>
-                <MenuContainer>
-                    <img src={MenuDot} onClick={() => setShowMenu(!showMenu)}/>
-                    {showMenu &&
-                        <NavigationActionsContainer setShowMenu={setShowMenu}/>}
-                </MenuContainer>
-            </ContainerRight>
-        </HeaderContainer>
+  useEffect(() => {
+    setSentRequests(
+      friendRequests.filter(
+        (request) =>
+          request.requester.id === loggedInUser.id && request.status === "P",
+      ),
     );
+    setReceivedRequests(
+      friendRequests.filter(
+        (request) =>
+          request.requester.id !== loggedInUser.id && request.status === "P",
+      ),
+    );
+  }, [friendRequests]);
+
+  return (
+    <HeaderContainer>
+      <ContainerLeft>
+        <LogoWrapper to="/">
+          <img src={logo}></img>
+          <p>Motion</p>
+        </LogoWrapper>
+
+        <nav>
+          <NavbarLink to="/posts">
+            <img src={postsLogo}></img>
+            <p>Posts</p>
+          </NavbarLink>
+          <NavbarLink to="/find-friends">
+            <img src={findFriendLogo}></img>
+            <p>Find Friends</p>
+          </NavbarLink>
+        </nav>
+      </ContainerLeft>
+
+      <ContainerRight>
+        <NotificationButton
+          onClick={() => setShowNotifications(!showNotifications)}
+        >
+          <div className={"icon-wrapper"}>
+            <img src={bell}></img>
+            <p className={"request-count"}>{requestsCount}</p>
+          </div>
+          {showNotifications && (
+            <FriendsRequestsContainer
+              setShowNotifications={setShowNotifications}
+              sentRequests={sentRequests}
+              receivedRequests={receivedRequests}
+            />
+          )}
+        </NotificationButton>
+        <Link to={"/profile"}>
+          <Avatar src={loggedInUser?.avatar || avatarImage}></Avatar>
+        </Link>
+        <MenuContainer>
+          <img src={MenuDot} onClick={() => setShowMenu(!showMenu)} />
+          {showMenu && <NavigationActionsContainer setShowMenu={setShowMenu} />}
+        </MenuContainer>
+      </ContainerRight>
+    </HeaderContainer>
+  );
 };
 
 export default Navigation;
