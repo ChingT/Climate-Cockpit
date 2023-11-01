@@ -11,5 +11,5 @@ export const ProgressContainer = styled.div`
 export const ProgressBar = styled.div`
   height: 100%;
   background-color: ${(props) => props.theme.ProgressBar.backgroundColor};
-  width: ${(props) => props.percentage}%;
+  width: ${(props) => props.$percentage}%;
 `;

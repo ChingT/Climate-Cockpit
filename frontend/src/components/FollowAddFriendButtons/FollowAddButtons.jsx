@@ -44,7 +44,7 @@ function FollowAddButtons({ friendInfo, requestObject }) {
 
   return (
     <>
-      <FollowOrRequestButton follow={FollowUser} onClick={toggleFriendFollow}>
+      <FollowOrRequestButton $follow={FollowUser} onClick={toggleFriendFollow}>
         {FollowUser ? "Following" : "Follow"}
       </FollowOrRequestButton>
       {requestStatus !== undefined && (
