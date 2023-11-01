@@ -1,4 +1,5 @@
-import { CategoryLabel, ImpactIcon } from "./solution.style.js";
+import { CategoryLabel } from "./solution.style.js";
+import ImpactIcon from "./ImpactIcon.jsx";
 
 export default function SolutionDropDown() {
   return (

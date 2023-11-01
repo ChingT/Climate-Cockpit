@@ -17,10 +17,11 @@ const GlobalStyle = createGlobalStyle`
   #root {
     height: 100%;
     min-height: 100vh;
+    background: conic-gradient(from 90deg at 1.1px 1.1px, #f3f3e4 25%, rgb(217, 217, 217) 0);
+    background-size: 24px 24px;
   }
 
   main {
-    background-color: #F8F8F9;
     display: flex;
     flex-direction: column;
     align-items: center;
