@@ -4,9 +4,8 @@ const theme = {
     borderColor: "black",
   },
   colors: {
-    primary: "#e47d31",
+    primary: "black",
     secondary: "white",
-
     lightGray: "#aaa",
     lightGrayBorder: "#ddd",
   },
@@ -20,6 +19,7 @@ const theme = {
     primary: "black",
     secondary: "#4c4c4c",
     impactIcon: "white",
+    button: "white",
   },
   fonts: {
     cabinSketchRegular: "Cabin Sketch",
