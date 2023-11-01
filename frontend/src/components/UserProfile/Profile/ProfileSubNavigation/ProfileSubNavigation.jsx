@@ -21,7 +21,7 @@ function ProfileSubNavigation({ userdata, profileId }) {
       {filters.map((filter) => {
         return (
           <ProfileSubNavItem
-            filterActive={filter === activeFilter}
+            $filterActive={filter === activeFilter}
             key={filter}
             onClick={() => handleProfileFilter(filter)}
           >
