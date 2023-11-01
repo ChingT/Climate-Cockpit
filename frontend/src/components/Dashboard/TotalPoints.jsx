@@ -5,15 +5,14 @@ export default function TotalPoints({
   inlandEmissions,
   importedEmissions,
   removedEmissions,
+  solutionEmissions,
   totalEmissions,
 }) {
   return (
     <DashboardCategoriesTotalPoints>
       <div>
         <div>Inland Emissions</div>
-        <div style={{ color: theme.fontColors.emissionColor }}>
-          {inlandEmissions}
-        </div>
+        <div className="inland-emissions">{inlandEmissions}</div>
       </div>
       <div>
         <div>+</div>
@@ -21,9 +20,7 @@ export default function TotalPoints({
       </div>
       <div>
         <div>Imports</div>
-        <div style={{ color: theme.fontColors.emissionColor }}>
-          +{importedEmissions}
-        </div>
+        <div className="imported-emissions">{importedEmissions}</div>
       </div>
       <div>
         <div>+</div>
@@ -31,9 +28,7 @@ export default function TotalPoints({
       </div>
       <div>
         <div>Removal</div>
-        <div style={{ color: theme.fontColors.removalColor }}>
-          -{removedEmissions}
-        </div>
+        <div className="removed-emissions">{removedEmissions}</div>
       </div>
       <div>
         <div>-</div>
@@ -41,9 +36,7 @@ export default function TotalPoints({
       </div>
       <div>
         <div>Solution</div>
-        <div style={{ color: theme.fontColors.solutionColor }}>
-          ={totalEmissions}
-        </div>
+        <div className="solution-emissions">{solutionEmissions}</div>
       </div>
       <div>
         <div>=</div>
@@ -51,7 +44,7 @@ export default function TotalPoints({
       </div>
       <div>
         <div>Total</div>
-        <div>=116</div>
+        <div>{totalEmissions}</div>
       </div>
     </DashboardCategoriesTotalPoints>
   );
