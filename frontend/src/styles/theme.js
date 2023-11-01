@@ -9,13 +9,13 @@ const theme = {
   backgroundColors: {
     primary: "rgba(253, 247, 221, 0.2)",
     secondary: "white",
-    iconUnselected: "black";
-    iconSelected: "blue";
+    iconUnselected: "black",
+    iconSelected: "blue",
   },
   fontColors: {
     primary: "black",
     secondary: "#4c4c4c",
-    iconFont: "white";
+    iconFont: "white",
   },
   fontFamily: {
     fontFamily: "Roboto",
