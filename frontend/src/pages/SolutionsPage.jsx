@@ -4,8 +4,9 @@ import SolutionDropDown from "../components/Solution/SolutionDropDown.jsx";
 import SolutionFilter from "../components/SolutionFilter/SolutionFilter.jsx";
 import styled from "styled-components";
 
-const Main = styled.div `
-    margin-top: 4rem`
+const Main = styled.div`
+  margin-top: 4rem;
+`;
 const SolutionsPage = () => {
   return (
     <Main>
