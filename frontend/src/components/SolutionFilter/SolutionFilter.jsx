@@ -13,8 +13,7 @@ import {
 } from "./SolutionFilter.style.js";
 
 export default function SolutionFilter() {
-  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(true);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
