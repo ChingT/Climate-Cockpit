@@ -8,7 +8,7 @@ import {
   ErrorMessage,
   FormTitle,
   InputFieldContainer,
-} from "./AutenthicationLayout.style.js";
+} from "../Layout/Layout.style.js";
 import CreateAccountProgress from "./CreateAccountProgress.jsx";
 import InputField from "./InputField.jsx";
 
