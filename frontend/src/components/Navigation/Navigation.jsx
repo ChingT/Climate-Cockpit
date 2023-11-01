@@ -31,7 +31,6 @@ import {
   StyledImage,
   TextImage,
 } from "./Navigation.style.js";
-import navigationActionsContainer from "./NavigationActionsContainer.jsx";
 import NavigationActionsContainer from "./NavigationActionsContainer.jsx";
 
 const Navigation = () => {
@@ -76,12 +75,28 @@ const Navigation = () => {
         <SolutionWrapper to="/solutions">
           <img src={solutions}></img>
         </SolutionWrapper>
-        <ProfileWrapper to="/profile">
-          <img src={profile}></img>
-        </ProfileWrapper>
-        <SocialWrapper to="/posts">
-          <img src={social}></img>
-        </SocialWrapper>
+        {loggedInUser ? (
+          <>
+            <ProfileWrapper to="/profile">
+              <img src={profile}></img>
+            </ProfileWrapper>
+          </>
+        ) : (
+          <ProfileWrapper to="/signup">
+            <img src={profile}></img>
+          </ProfileWrapper>
+        )}
+        {loggedInUser ? (
+          <>
+            <SocialWrapper to="/posts">
+              <img src={social}></img>
+            </SocialWrapper>
+          </>
+        ) : (
+          <SocialWrapper to="/signup">
+            <img src={social}></img>
+          </SocialWrapper>
+        )}
 
         <nav>
           {loggedInUser ? (
