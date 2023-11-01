@@ -30,9 +30,6 @@ const theme = {
   fonts: {
     cabinSketchRegular: "Cabin Sketch",
   },
-  fonts: {
-    cabinSketchRegular: "Cabin Sketch",
-  },
   breakPoints: {
     md: "min-width:800px",
   },
