@@ -1,4 +1,4 @@
-import { AuthFormContainer } from "../components/AuthComp/AutenthicationLayout.style.js";
+import { AuthFormContainer } from "../components/Layout/Layout.style.js";
 
 const NotFound = () => {
   return (

@@ -1,7 +1,7 @@
 import {
   ErrorMessage,
   InputFieldContainer,
-} from "./AutenthicationLayout.style.js";
+} from "../Layout/Layout.style.js";
 
 const InputField = ({
   userData,

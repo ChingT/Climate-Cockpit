@@ -12,7 +12,7 @@ import {
   FormTitle,
   InputFieldContainer,
   SignInHeader,
-} from "./AutenthicationLayout.style.js";
+} from "../Layout/Layout.style.js";
 import useApiRequest from "../../hooks/useApiRequest.js";
 import { PrimaryButton, SecondaryButton } from "../../styles/globalStyles.js";
 import CreateAccountProgress from "./CreateAccountProgress.jsx";

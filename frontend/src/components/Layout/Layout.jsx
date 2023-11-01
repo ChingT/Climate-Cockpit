@@ -32,7 +32,7 @@ const HomePageContainer = styled.div`
   }
 `;
 
-const AuthenticationLayout = () => {
+const Layout = () => {
   return (
     <HomePageContainer>
       <HomeHeroSection />
@@ -43,4 +43,4 @@ const AuthenticationLayout = () => {
   );
 };
 
-export default AuthenticationLayout;
+export default Layout;
