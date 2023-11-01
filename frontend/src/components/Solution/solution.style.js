@@ -16,8 +16,8 @@ export const ImpactIconDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: black;
-  color: white;
+  background-color: ${props => (isSelected ? props.theme.backgroundColors.iconSelected : props.theme.backgroundColors.iconUnselected)};
+  color: ${(props => props.theme.fontColors.impactIcon});;
   border-radius: 10px;
   width: 6vh;
   height: 6vh;
