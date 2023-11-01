@@ -1,23 +1,32 @@
 import { useState } from "react";
-import filter from "../../assets/other_icons/filter.svg";
 import filter_icon from "../../assets/images/filtering_categories.png";
 import sorting_icon from "../../assets/images/sorting_categories.png";
+import filter from "../../assets/other_icons/filter.svg";
 import {
   ContainerTop,
   DropdownContent,
   DropdownLayout,
   DropdownSelect,
   DropdownSort,
-  SortingOption,
   StyledImage,
   TitleAndImage,
 } from "./SolutionFilter.style.js";
 
 export default function SolutionFilter() {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("");
 
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+  const closeDropdown = () => setIsDropdownOpen(false);
+
+  const handleSelectChange = (e) => {
+    setSelectedCategory(e.target.value);
+    setIsDropdownOpen(false);
+  };
+
   const categories = [
+    "All",
     "Buildings",
     "Electricity",
     "Food",
@@ -29,85 +38,47 @@ export default function SolutionFilter() {
     "Transport",
     "Trash",
   ];
+  const sortingOptions = ["Impact", "Alphabetically", "Number of Supporters"];
+  const statusOptions = ["Open", "Done"];
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+  const dropdown = (title, icon, options) => {
+    const dropdownOptions = options.map((option) => (
+      <option key={option} value={option}>
+        {option}
+      </option>
+    ));
+    return (
+      <DropdownSort>
+        <ContainerTop>
+          <TitleAndImage>
+            <img src={icon} alt={`Icon for ${title}`} />
+            <h3>{title}</h3>
+          </TitleAndImage>
+        </ContainerTop>
+        <DropdownSelect value={selectedCategory} onChange={handleSelectChange}>
+          {dropdownOptions}
+        </DropdownSelect>
+      </DropdownSort>
+    );
   };
 
-  const handleSelectChange = (e) => {
-    setSelectedCategory(e.target.value);
-    setIsDropdownOpen(false);
-  };
-
-  const closeDropdown = () => {
-    setIsDropdownOpen(false);
-  };
+  const CategoryDropdown = dropdown("Category Filter", filter_icon, categories);
+  const SortingDropdown = dropdown(
+    "Sorting Options",
+    sorting_icon,
+    sortingOptions
+  );
+  const StatusDropdown = dropdown("Status Filter", filter_icon, statusOptions);
 
   return (
     <DropdownLayout>
       <StyledImage src={filter} onClick={toggleDropdown} alt="Filter" />
       {isDropdownOpen && (
         <DropdownContent>
-          <DropdownSort>
-            <ContainerTop>
-              <TitleAndImage>
-                <img src={filter_icon} alt="Filter Icon" />
-                <h3>Category Filter</h3>
-              </TitleAndImage>
-              <StyledImage
-                src={filter}
-                style={{ width: "27px", paddingBottom: "1rem" }}
-                onClick={closeDropdown}
-                alt="Close Filter"
-              />
-            </ContainerTop>
-            <DropdownSelect
-              value={selectedCategory}
-              onChange={handleSelectChange}
-            >
-              <option value="">All</option>
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </DropdownSelect>
-          </DropdownSort>
-          <DropdownSort>
-            <TitleAndImage>
-              <img
-                src={sorting_icon}
-                alt="Sort Icon"
-                style={{ width: "20px" }}
-              />
-              <h3>Sorting Options</h3>
-            </TitleAndImage>
-            <DropdownSelect
-              value={selectedCategory}
-              onChange={handleSelectChange}
-            >
-              <SortingOption value="Impact">Impact</SortingOption>
-              <SortingOption value="Alphabetically">
-                Alphabetically
-              </SortingOption>
-              <SortingOption value="Number of Supporters">
-                Number of Supporters
-              </SortingOption>
-            </DropdownSelect>
-          </DropdownSort>
-          <DropdownSort>
-            <TitleAndImage>
-              <img src={filter_icon} alt="Filter Icon" />
-              <h3>Status Filter</h3>
-            </TitleAndImage>
-            <DropdownSelect
-              value={selectedCategory}
-              onChange={handleSelectChange}
-            >
-              <SortingOption value="Open">Open</SortingOption>
-              <SortingOption value="Done">Done</SortingOption>
-            </DropdownSelect>
-          </DropdownSort>
+          <StyledImage src={filter} onClick={closeDropdown} alt="Filter" />
+          {CategoryDropdown}
+          {SortingDropdown}
+          {StatusDropdown}
         </DropdownContent>
       )}
     </DropdownLayout>

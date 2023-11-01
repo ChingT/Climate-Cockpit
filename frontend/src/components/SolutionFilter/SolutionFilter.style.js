@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const StyledImage = styled.img`
-  width: 40px;
-  height: 40px;
+  width: auto;
+  height: 25px;
   cursor: pointer;
 `;
 
@@ -35,6 +35,11 @@ export const TitleAndImage = styled.div`
   flex-direction: row;
   gap: 1rem;
   margin-bottom: 0.5rem;
+
+  img {
+    height: 20px;
+    width: auto;
+  }
 `;
 
 export const DropdownSelect = styled.select`
@@ -53,11 +58,6 @@ export const DropdownSort = styled.div`
   width: 100%;
 `;
 
-export const SortingOption = styled.option`
-  padding: 5px;
-  background-color: white;
-`;
-
 export const ContainerTop = styled.div`
   display: flex;
   width: 100%;
@@ -68,4 +68,3 @@ export const ContainerTop = styled.div`
 `;
 
 DropdownSort.displayName = "DropdownSort";
-SortingOption.displayName = "SortingOption";
