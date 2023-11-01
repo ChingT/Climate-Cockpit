@@ -10,7 +10,7 @@ const theme = {
     primary: "rgba(253, 247, 221, 0.2)",
     secondary: "white",
     iconUnselected: "black";
-    iconSelected: "blue"
+    iconSelected: "blue";
   },
   fontColors: {
     primary: "black",
