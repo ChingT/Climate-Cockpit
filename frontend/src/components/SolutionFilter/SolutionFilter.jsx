@@ -1,21 +1,34 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import filter from "../../assets/other_icons/filter.svg";
-import filter_icon from "../../assets/images/Filter Icon(1).png";
-import sorting_icon from "../../assets/images/Sort Icon.png";
+import filter_icon from "../../assets/images/filtering_categories.png";
+import sorting_icon from "../../assets/images/sorting_categories.png";
 import {
-  DropdownLayout,
-  StyledImage,
+  ContainerTop,
   DropdownContent,
+  DropdownLayout,
   DropdownSelect,
   DropdownSort,
   SortingOption,
+  StyledImage,
   TitleAndImage,
-  ContainerTop,
 } from "./SolutionFilter.style.js";
 
 export default function SolutionFilter() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
+
+  const categories = [
+    "Buildings",
+    "Electricity",
+    "Food",
+    "Import",
+    "Industry",
+    "Innovation",
+    "Money",
+    "Nature",
+    "Transport",
+    "Trash",
+  ];
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -52,16 +65,11 @@ export default function SolutionFilter() {
             onChange={handleSelectChange}
           >
             <option value="">All</option>
-            <option value="Buildings">Buildings</option>
-            <option value="Electricity">Electricity</option>
-            <option value="Food">Food</option>
-            <option value="Import">Import</option>
-            <option value="Industry">Industry</option>
-            <option value="Innovation">Innovation</option>
-            <option value="Money">Money</option>
-            <option value="Nature">Nature</option>
-            <option value="Transport">Transport</option>
-            <option value="Trash">Trash</option>
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
           </DropdownSelect>
           <DropdownSort>
             <TitleAndImage>
