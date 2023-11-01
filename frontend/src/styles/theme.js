@@ -16,6 +16,12 @@ const theme = {
     primary: "black",
     secondary: "#4c4c4c",
     impactIcon: "white",
+    emissionColor: "red",
+    solutionColor: "blue",
+    removalColor: "green",
+  },
+  fontSize: {
+    equation: "18px",
   },
   fontFamily: {
     fontFamily: "Roboto",
