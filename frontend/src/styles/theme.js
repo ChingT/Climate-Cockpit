@@ -21,7 +21,7 @@ const theme = {
     md: "min-width:800px",
   },
   max_content_width: "64rem",
-  header_height: "5rem",
+  header_height: "96px",
 };
 
 export default theme;
