@@ -14,6 +14,16 @@ const theme = {
     secondary: "white",
     impactIconUnselected: "black",
     impactIconSelected: "#0077BF",
+    electricityLabel: "purple",
+    buildingsLabel: "orange",
+    transportLabel: "violet",
+    foodLabel: "green",
+    trashLabel: "grey",
+    industryLabel: "red",
+    importLabel: "pink",
+    natureLabel: "lightgreen",
+    moneyLabel: "yellow",
+    innovationLabel: "blue",
   },
   fontColors: {
     primary: "black",
@@ -23,6 +33,9 @@ const theme = {
   },
   fonts: {
     cabinSketchRegular: "Cabin Sketch",
+  },
+  fontsSize: {
+    label: "14px",
   },
   breakPoints: {
     md: "min-width:800px",
