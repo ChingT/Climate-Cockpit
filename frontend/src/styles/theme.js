@@ -1,6 +1,6 @@
 const theme = {
-  ProgressBarColors: {
-    progressBarBackground: "#f50606",
+  ProgressBar: {
+    backgroundColor: "#f50606",
     borderColor: "black",
   },
   colors: {
