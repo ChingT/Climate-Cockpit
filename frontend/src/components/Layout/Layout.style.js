@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const SignInHeader = styled.header`
+  margin-top: 4rem;
   display: flex;
   justify-content: flex-end;
   align-items: center;

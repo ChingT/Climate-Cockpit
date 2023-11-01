@@ -1,3 +1,4 @@
+import { ButtonsStyle } from "../../styles/buttons.style.js";
 export default function HeroPageButton() {
-  return <button></button>;
+  return <ButtonsStyle>Start Your Climate Journey</ButtonsStyle>;
 }

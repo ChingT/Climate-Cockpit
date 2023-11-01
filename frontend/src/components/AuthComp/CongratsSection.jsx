@@ -5,7 +5,7 @@ import {
   AuthFormContainer,
   ConfirmationText,
   FormTitle,
-} from "./AutenthicationLayout.style.js";
+} from "../Layout/Layout.style.js";
 import { CheckMark, PrimaryButton } from "../../styles/globalStyles.js";
 import CreateAccountProgress from "./CreateAccountProgress.jsx";
 

@@ -10,11 +10,11 @@ export const HeaderContainer = styled.header`
   box-shadow:
     0px 0px 1px rgba(0, 0, 0, 0.2),
     0px 10px 20px rgba(0, 0, 0, 0.05);
-  background-color: #fff;
   position: fixed;
   top: 0;
   z-index: 10;
   padding: 0 2rem;
+  border-bottom: solid rgba(0, 119, 191, 1) 1px;
 `;
 
 export const ContainerLeft = styled.div`
@@ -30,24 +30,43 @@ export const ContainerLeft = styled.div`
   }
 `;
 
+export const StyledP = styled.p`
+  font-size: 18px;
+`;
+
 export const NavbarLink = styled(NavLink)`
   text-decoration: none;
   color: black;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 
   border-bottom: 2px solid;
   border-color: transparent;
 
   &.active {
-    border-color: #ad73fd;
-    color: #ad73fd;
+    border-color: #ffae00;
   }
 
   &:hover:not(.active) {
     border-color: #ccc;
   }
+`;
+
+export const PostsTextImage = styled.img`
+  width: 65px;
+  height: 21px;
+  margin-right: 2rem;
+`;
+
+export const TextImage = styled.img`
+  width: 150px;
+  height: 20px;
+`;
+
+export const StyledImage = styled.img`
+  width: 36px;
+  height: 36px;
 `;
 
 export const ContainerRight = styled.div`
@@ -57,17 +76,43 @@ export const ContainerRight = styled.div`
 `;
 
 export const LogoWrapper = styled(Link)`
-  display: flex;
-  gap: 1rem;
-
   img {
-    height: 26px;
-    width: 26px;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.07);
+    height: 55.4px;
+    width: 293.79px;
   }
+`;
 
-  p {
-    font-size: 22px;
+export const SolutionWrapper = styled(Link)`
+  img {
+    height: 20px;
+    width: 129px;
+  }
+`;
+
+export const ProfileWrapper = styled(Link)`
+  img {
+    height: 20px;
+    width: 91px;
+  }
+`;
+
+export const SocialWrapper = styled(Link)`
+  img {
+    height: 20px;
+    width: 79px;
+    margin-right: 3.7rem;
+  }
+`;
+
+export const MenuContainer = styled.div`
+  position: relative;
+
+  > img {
+    padding: 0.06rem;
+    margin-top: 0.3rem;
+    cursor: pointer;
+    width: 2.2rem;
+    height: 2.1rem;
   }
 `;
 
@@ -81,25 +126,26 @@ export const NotificationButton = styled.button`
     cursor: pointer;
 
     > img {
-      height: 1.2rem;
-      padding-right: 1.5rem;
+      height: 2.45rem;
+      width: 3.6rem;
+      padding-right: 0.7rem;
     }
 
     .request-count {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: bold;
       position: absolute;
-      top: -0.8rem;
+      top: -0.6rem;
       right: 0;
 
-      background: linear-gradient(132.96deg, #c468ff 3.32%, #6e91f6 100%);
+      background: rgba(0, 0, 0, 1);
       box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.07);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 1.3rem;
-      width: 1.3rem;
+      height: 1.2rem;
+      width: 1.2rem;
       color: white;
     }
   }
@@ -111,15 +157,6 @@ export const Avatar = styled.img`
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
-`;
-
-export const MenuContainer = styled.div`
-  position: relative;
-
-  > img {
-    padding: 0.4rem;
-    cursor: pointer;
-  }
 `;
 
 export const ActionsWrapper = styled.ul`

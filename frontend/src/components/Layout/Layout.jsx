@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
-import HomeHeroSection from "./HomeHeroSection/HomeHeroSection.jsx";
 import styled from "styled-components";
-import { HeroSectionContainer } from "./HomeHeroSection/HomeHeroSection.style.js";
+import Navigation from "../Navigation/Navigation.jsx";
 
 const AuthenticationContainer = styled.div`
   display: flex;
@@ -22,25 +21,23 @@ const HomePageContainer = styled.div`
   @media (${(props) => props.theme.breakPoints.md}) {
     flex-direction: row;
 
-    ${HeroSectionContainer} {
-      width: 40%;
-    }
-
     ${AuthenticationContainer} {
-      width: 60%;
+      width: 100%;
     }
   }
 `;
 
-const AuthenticationLayout = () => {
+const Layout = () => {
   return (
-    <HomePageContainer>
-      <HomeHeroSection />
-      <AuthenticationContainer>
-        <Outlet />
-      </AuthenticationContainer>
-    </HomePageContainer>
+    <>
+      <Navigation />
+      <HomePageContainer>
+        <AuthenticationContainer>
+          <Outlet />
+        </AuthenticationContainer>
+      </HomePageContainer>
+    </>
   );
 };
 
-export default AuthenticationLayout;
+export default Layout;

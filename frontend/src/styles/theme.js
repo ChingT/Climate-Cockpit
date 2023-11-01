@@ -1,8 +1,11 @@
 const theme = {
+  ProgressBar: {
+    backgroundColor: "#f50606",
+    borderColor: "black",
+  },
   colors: {
-    primary: "#e47d31",
+    primary: "black",
     secondary: "white",
-
     lightGray: "#aaa",
     lightGrayBorder: "#ddd",
   },
@@ -16,12 +19,16 @@ const theme = {
     primary: "black",
     secondary: "#4c4c4c",
     impactIcon: "white",
+    button: "white",
     emissionColor: "red",
     solutionColor: "blue",
     removalColor: "green",
   },
   fontSize: {
     equation: "18px",
+  },
+  fonts: {
+    cabinSketchRegular: "Cabin Sketch",
   },
   fontFamily: {
     fontFamily: "Roboto",
