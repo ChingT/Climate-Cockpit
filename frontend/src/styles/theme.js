@@ -20,6 +20,15 @@ const theme = {
     secondary: "#4c4c4c",
     impactIcon: "white",
     button: "white",
+    emissionColor: "red",
+    solutionColor: "blue",
+    removalColor: "green",
+  },
+  fontSize: {
+    equation: "18px",
+  },
+  fonts: {
+    cabinSketchRegular: "Cabin Sketch",
   },
   fonts: {
     cabinSketchRegular: "Cabin Sketch",
