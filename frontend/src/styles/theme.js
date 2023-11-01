@@ -17,8 +17,8 @@ const theme = {
     secondary: "#4c4c4c",
     impactIcon: "white",
   },
-  fontFamily: {
-    fontFamily: "Roboto",
+  fonts: {
+    cabinSketchRegular: "Cabin Sketch",
   },
   breakPoints: {
     md: "min-width:800px",

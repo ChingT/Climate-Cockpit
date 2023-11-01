@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle, css } from "styled-components";
+import CabinSketch from "./CabinSketch.fonts/cabin-sketch.regular.ttf";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -7,9 +8,15 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  @font-face {
+    font-family: 'CabinSketch';
+    src: url(${CabinSketch}) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
   body {
     width: 100vw;
-    font-family: 'Roboto', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
