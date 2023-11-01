@@ -20,7 +20,6 @@ const HomePageContainer = styled.div`
 
   @media (${(props) => props.theme.breakPoints.md}) {
     flex-direction: row;
-    
 
     ${AuthenticationContainer} {
       width: 100%;
@@ -30,14 +29,14 @@ const HomePageContainer = styled.div`
 
 const AuthenticationLayout = () => {
   return (
-      <>
-          <Navigation />
-    <HomePageContainer>
-      <AuthenticationContainer>
-        <Outlet />
-      </AuthenticationContainer>
-    </HomePageContainer>
-          </>
+    <>
+      <Navigation />
+      <HomePageContainer>
+        <AuthenticationContainer>
+          <Outlet />
+        </AuthenticationContainer>
+      </HomePageContainer>
+    </>
   );
 };
 

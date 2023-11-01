@@ -20,7 +20,8 @@ import {
   ContainerLeft,
   ContainerRight,
   HeaderContainer,
-  LogoWrapper, MenuContainer,
+  LogoWrapper,
+  MenuContainer,
   NavbarLink,
   NotificationButton,
   PostsTextImage,
@@ -82,7 +83,7 @@ const Navigation = () => {
           <img src={social}></img>
         </SocialWrapper>
 
-         <nav>
+        <nav>
           {loggedInUser ? (
             <>
               <NavbarLink to="/posts">
@@ -99,43 +100,46 @@ const Navigation = () => {
       </ContainerLeft>
 
       <nav>
-          {loggedInUser ? (
-            <>
-      <ContainerRight>
-        <NotificationButton
-          onClick={() => setShowNotifications(!showNotifications)}
-        >
-          <div className={"icon-wrapper"}>
-            <img src={lightbulb} alt="Lightbulb" />
-            {requestsCount >= 0 && (
-              <p className={"request-count"}>{requestsCount}</p>
-            )}
-          </div>
-          {showNotifications && (
-            <FriendsRequestsContainer
-              setShowNotifications={setShowNotifications}
-              sentRequests={sentRequests}
-              receivedRequests={receivedRequests}
-            />
-          )}
-        </NotificationButton>
-        <Link to={"/profile"}>
-          <Avatar src={loggedInUser?.avatar || avatarImage} alt="Avatar" />
-        </Link>
-        <MenuContainer>
-          <img
-            src={MenuDot}
-            alt="Menu"
-            onClick={() => setShowMenu(!showMenu)}
-          />
-          {showMenu && (
-            <NavigationActionsContainer setShowMenu={setShowMenu} />
-          )}
-        </MenuContainer>
-      </ContainerRight>
-              </>
-          ) : null}
-        </nav>
+        {loggedInUser ? (
+          <>
+            <ContainerRight>
+              <NotificationButton
+                onClick={() => setShowNotifications(!showNotifications)}
+              >
+                <div className={"icon-wrapper"}>
+                  <img src={lightbulb} alt="Lightbulb" />
+                  {requestsCount >= 0 && (
+                    <p className={"request-count"}>{requestsCount}</p>
+                  )}
+                </div>
+                {showNotifications && (
+                  <FriendsRequestsContainer
+                    setShowNotifications={setShowNotifications}
+                    sentRequests={sentRequests}
+                    receivedRequests={receivedRequests}
+                  />
+                )}
+              </NotificationButton>
+              <Link to={"/profile"}>
+                <Avatar
+                  src={loggedInUser?.avatar || avatarImage}
+                  alt="Avatar"
+                />
+              </Link>
+              <MenuContainer>
+                <img
+                  src={MenuDot}
+                  alt="Menu"
+                  onClick={() => setShowMenu(!showMenu)}
+                />
+                {showMenu && (
+                  <NavigationActionsContainer setShowMenu={setShowMenu} />
+                )}
+              </MenuContainer>
+            </ContainerRight>
+          </>
+        ) : null}
+      </nav>
     </HeaderContainer>
   );
 };
