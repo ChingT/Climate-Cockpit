@@ -1,5 +1,4 @@
 import { ProgressBar, ProgressContainer } from "./ProgressBar.style.js";
-import React from "react";
 
 function ProgressComponent({ percentage }) {
   return (
