@@ -24,7 +24,7 @@ export const ImpactIconDiv = styled.div`
   border-radius: 10px;
   width: 6vh;
   height: 6vh;
-  border: 2px solid red;
+  font-size: 3vh;
 `;
 
 export const LevelButton = styled.div``;
