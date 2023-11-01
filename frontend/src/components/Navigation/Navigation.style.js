@@ -14,6 +14,7 @@ export const HeaderContainer = styled.header`
   top: 0;
   z-index: 10;
   padding: 0 2rem;
+  border-bottom: solid rgba(0, 119, 191, 1) 1px;
 `;
 
 export const ContainerLeft = styled.div`
@@ -44,8 +45,7 @@ export const NavbarLink = styled(NavLink)`
   border-color: transparent;
 
   &.active {
-    border-color: rgba(0, 119, 191, 1);
-    color: rgba(0, 119, 191, 1);
+    border-color: #ffae00;
   }
 
   &:hover:not(.active) {
@@ -108,8 +108,11 @@ export const MenuContainer = styled.div`
   position: relative;
 
   > img {
-    padding: 0.4rem;
+    padding: 0.06rem;
+    margin-top: 0.3rem;
     cursor: pointer;
+    width: 2.2rem;
+    height: 2.1rem;
   }
 `;
 

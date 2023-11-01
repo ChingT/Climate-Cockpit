@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../../assets/header_icons/logo.png";
 import avatarImage from "../../assets/svgs/avatar.svg";
-import MenuDot from "../../assets/svgs/menu.svg";
+import MenuDot from "../../assets/svgs/menu_dots.svg";
 import findFriendLogo from "../../assets/header_icons/find_friends.png";
 import lightbulb from "../../assets/header_icons/lightbulb-6624237-5487997.png";
 import posts from "../../assets/header_icons/posts.png";
