@@ -1,6 +1,6 @@
 import ImpactIcon from "./ImpactIcon.jsx";
 import ProgressComponent from "./ProgressBar.jsx";
-import { CategoryLabel } from "./solution.style.js";
+import CategoryLabel from "./CategoryLabel.jsx";
 
 export default function SolutionDropDown() {
   return (
