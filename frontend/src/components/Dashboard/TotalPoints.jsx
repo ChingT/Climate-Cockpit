@@ -1,5 +1,4 @@
 import { DashboardCategoriesTotalPoints } from "./dashboard.style.js";
-import theme from "../../styles/theme.js";
 
 export default function TotalPoints({
   inlandEmissions,
