@@ -17,7 +17,7 @@ export const DropdownContent = styled.div`
   align-items: flex-start;
   top: 100%;
   left: 0;
-  width: 21rem;
+  width: 17rem;
   background-color: ${(props) => props.theme.backgroundColors.secondary};
   border: 1px solid
     ${(props) => props.theme.backgroundColors.impactIconSelected};
@@ -26,18 +26,19 @@ export const DropdownContent = styled.div`
   padding: 10px;
   border-radius: 5px;
   gap: 1.4rem;
-  height: 27rem;
+  height: 21rem;
 `;
 
 export const TitleAndImage = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: row;
   gap: 1rem;
   margin-bottom: 0.5rem;
 `;
 
 export const DropdownSelect = styled.select`
-  width: 100%;
+  width: inherit;
   padding: 5px;
   margin-top: 0px;
   border: 1px solid ${(props) => props.theme.backgroundColors.lightGrayBorder};
@@ -49,6 +50,7 @@ export const DropdownSort = styled.div`
   margin-top: 10px;
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 export const SortingOption = styled.option`
@@ -62,6 +64,7 @@ export const ContainerTop = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
+  gap: 3rem;
 `;
 
 DropdownSort.displayName = "DropdownSort";

@@ -48,29 +48,31 @@ export default function SolutionFilter() {
       <StyledImage src={filter} onClick={toggleDropdown} alt="Filter" />
       {isDropdownOpen && (
         <DropdownContent>
-          <ContainerTop>
-            <TitleAndImage>
-              <img src={filter_icon} alt="Filter Icon" />
-              <h3>Category Filter</h3>
-            </TitleAndImage>
-            <StyledImage
-              src={filter}
-              style={{ width: "27px", paddingBottom: "1rem" }}
-              onClick={closeDropdown}
-              alt="Close Filter"
-            />
-          </ContainerTop>
-          <DropdownSelect
-            value={selectedCategory}
-            onChange={handleSelectChange}
-          >
-            <option value="">All</option>
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </DropdownSelect>
+          <DropdownSort>
+            <ContainerTop>
+              <TitleAndImage>
+                <img src={filter_icon} alt="Filter Icon" />
+                <h3>Category Filter</h3>
+              </TitleAndImage>
+              <StyledImage
+                src={filter}
+                style={{ width: "27px", paddingBottom: "1rem" }}
+                onClick={closeDropdown}
+                alt="Close Filter"
+              />
+            </ContainerTop>
+            <DropdownSelect
+              value={selectedCategory}
+              onChange={handleSelectChange}
+            >
+              <option value="">All</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </DropdownSelect>
+          </DropdownSort>
           <DropdownSort>
             <TitleAndImage>
               <img
@@ -80,19 +82,31 @@ export default function SolutionFilter() {
               />
               <h3>Sorting Options</h3>
             </TitleAndImage>
-            <SortingOption value="Impact">Impact</SortingOption>
-            <SortingOption value="Alphabetically">Alphabetically</SortingOption>
-            <SortingOption value="Number of Supporters">
-              Number of Supporters
-            </SortingOption>
+            <DropdownSelect
+              value={selectedCategory}
+              onChange={handleSelectChange}
+            >
+              <SortingOption value="Impact">Impact</SortingOption>
+              <SortingOption value="Alphabetically">
+                Alphabetically
+              </SortingOption>
+              <SortingOption value="Number of Supporters">
+                Number of Supporters
+              </SortingOption>
+            </DropdownSelect>
           </DropdownSort>
           <DropdownSort>
             <TitleAndImage>
               <img src={filter_icon} alt="Filter Icon" />
               <h3>Status Filter</h3>
             </TitleAndImage>
-            <SortingOption value="Open">Open</SortingOption>
-            <SortingOption value="Done">Done</SortingOption>
+            <DropdownSelect
+              value={selectedCategory}
+              onChange={handleSelectChange}
+            >
+              <SortingOption value="Open">Open</SortingOption>
+              <SortingOption value="Done">Done</SortingOption>
+            </DropdownSelect>
           </DropdownSort>
         </DropdownContent>
       )}
