@@ -14,4 +14,4 @@ export const CategoryLabel = styled.div``;
 
 export const ImpactIcon = styled.div``;
 
-export const LevelButton = styled.div ``
+export const LevelButton = styled.div``;

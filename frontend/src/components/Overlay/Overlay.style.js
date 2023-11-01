@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const OverlayContainer = styled.div`
   .overlay__background {
@@ -51,4 +51,4 @@ export const OverlayContainer = styled.div`
     font-size: 36px;
     cursor: pointer;
   }
-`
+`;

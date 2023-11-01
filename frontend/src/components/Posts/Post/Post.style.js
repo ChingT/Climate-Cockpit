@@ -1,7 +1,6 @@
-import styled, {css} from 'styled-components'
-import {Link} from 'react-router-dom'
-import {CardWithShadowStyles} from '../../../styles/globalStyles.js'
-
+import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
+import { CardWithShadowStyles } from "../../../styles/globalStyles.js";
 
 export const PostContainer = styled(CardWithShadowStyles)`
   display: flex;
@@ -11,15 +10,15 @@ export const PostContainer = styled(CardWithShadowStyles)`
   font-size: 0.875rem;
   height: unset;
   max-width: 58rem;
-`
+`;
 
 export const SharedPostContainer = styled(PostContainer)`
-  padding:0 0 0 1rem;
+  padding: 0 0 0 1rem;
   box-shadow: none;
   border-radius: 0;
-  border-left: 1px solid ${props => props.theme.colors.lightGrayBorder};
+  border-left: 1px solid ${(props) => props.theme.colors.lightGrayBorder};
   grid-column: 1/-1;
-`
+`;
 
 export const Avatar = styled.img`
   width: 3rem;
@@ -32,17 +31,17 @@ export const Avatar = styled.img`
   &.default {
     filter: saturate(0) brightness(1.3);
   }
-`
+`;
 
 export const PostHeaderWrapper = styled.div`
   display: flex;
-`
+`;
 
 export const ProfileLinkWrapper = styled(Link)`
   width: 100%;
   display: flex;
   gap: 1rem;
-`
+`;
 
 export const AuthorInfoWrapper = styled.div`
   width: 100%;
@@ -53,18 +52,18 @@ export const AuthorInfoWrapper = styled.div`
   .date {
     opacity: 50%;
   }
-`
+`;
 
 export const EditButton = styled.button`
   background: none;
   border: none;
   padding-left: 1rem;
-`
+`;
 
 export const PostText = styled.p`
   font-size: 1rem;
   cursor: pointer;
-`
+`;
 
 export const PostImageContainer = styled.div`
   display: grid;
@@ -72,7 +71,7 @@ export const PostImageContainer = styled.div`
   gap: 1rem;
   width: 100%;
   cursor: pointer;
-`
+`;
 
 export const PostImage = styled.img`
   border-radius: 0.5rem;
@@ -83,18 +82,18 @@ export const PostImage = styled.img`
   &:hover {
     transform: scale(1.02);
   }
-`
+`;
 
 export const FooterContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`
+`;
 
 export const PostActionWrapper = styled.div`
   display: flex;
   gap: 2rem;
-`
+`;
 
 export const PostActionButton = styled.button`
   background: none;
@@ -115,13 +114,13 @@ export const PostActionButton = styled.button`
   &:hover img {
     transform: scale(1.2);
   }
-`
+`;
 
 export const LikeCount = styled.p`
   opacity: 50%;
-`
+`;
 
-export const PostContentContainer = styled.div``
+export const PostContentContainer = styled.div``;
 
 export const ModalPostContainer = styled(PostContainer)`
   width: 80vw;
@@ -139,14 +138,16 @@ export const ModalPostContainer = styled(PostContainer)`
     flex-direction: column;
   }
 
-  ${props => !props.hasImages && css`
-    width: 32rem;
-    height: 20rem;
+  ${(props) =>
+    !props.hasImages &&
+    css`
+      width: 32rem;
+      height: 20rem;
 
-    ${PostContentContainer} {
-      width: 100%;
-    }
-  `};
+      ${PostContentContainer} {
+        width: 100%;
+      }
+    `};
 
   ${PostImageContainer} {
     display: flex;
@@ -156,7 +157,7 @@ export const ModalPostContainer = styled(PostContainer)`
     width: 66%;
 
     overflow: scroll;
-    border-right: 1px solid ${props => props.theme.colors.lightGray};
+    border-right: 1px solid ${(props) => props.theme.colors.lightGray};
   }
 
   ${PostImage} {
@@ -190,8 +191,8 @@ export const ModalPostContainer = styled(PostContainer)`
   }
 
   ${PostActionWrapper} {
-    border-top: 1px solid ${props => props.theme.colors.lightGray};
+    border-top: 1px solid ${(props) => props.theme.colors.lightGray};
     padding: 1.5rem;
     width: 100%;
   }
-`
+`;
