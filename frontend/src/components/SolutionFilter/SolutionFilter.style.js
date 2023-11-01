@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const StyledImage = styled.img`
   width: 40px;
   height: 40px;
+  cursor: pointer;
 `;
 
 export const DropdownLayout = styled.div`
@@ -55,9 +56,12 @@ export const SortingOption = styled.option`
   background-color: white;
 `;
 
-export const SortingImage = styled.image`
-  width: 35px;
-  height: 35px;
+export const ContainerTop = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
 `;
 
 DropdownSort.displayName = "DropdownSort";

@@ -7,9 +7,10 @@ import {
   StyledImage,
   DropdownContent,
   DropdownSelect,
-  DropdownSort, // Added for sorting section
+  DropdownSort,
   SortingOption,
-  TitleAndImage, // Added for sorting options
+  TitleAndImage,
+  ContainerTop,
 } from "./SolutionFilter.style.js";
 
 export default function SolutionFilter() {
@@ -25,15 +26,27 @@ export default function SolutionFilter() {
     setIsDropdownOpen(false);
   };
 
+  const closeDropdown = () => {
+    setIsDropdownOpen(false);
+  };
+
   return (
     <DropdownLayout>
       <StyledImage src={filter} onClick={toggleDropdown} alt="Filter" />
       {isDropdownOpen && (
         <DropdownContent>
-          <TitleAndImage>
-            <img src={filter_icon} alt="Filter Icon" />
-            <h3>Category Filter</h3>
-          </TitleAndImage>
+          <ContainerTop>
+            <TitleAndImage>
+              <img src={filter_icon} alt="Filter Icon" />
+              <h3>Category Filter</h3>
+            </TitleAndImage>
+            <StyledImage
+              src={filter}
+              style={{ width: "27px", paddingBottom: "1rem" }}
+              onClick={closeDropdown}
+              alt="Close Filter"
+            />
+          </ContainerTop>
           <DropdownSelect
             value={selectedCategory}
             onChange={handleSelectChange}
