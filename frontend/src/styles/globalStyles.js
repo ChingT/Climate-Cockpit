@@ -7,14 +7,14 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
-  
+
   @font-face {
     font-family: 'CabinSketch';
-    src: url(${CabinSketch}) format('truetype'); 
-    font-weight: normal; 
+    src: url(${CabinSketch}) format('truetype');
+    font-weight: normal;
     font-style: normal;
   }
-  
+
   body {
     width: 100vw;
     -webkit-font-smoothing: antialiased;
