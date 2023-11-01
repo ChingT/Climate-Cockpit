@@ -1,7 +1,7 @@
 import { useState } from "react";
-import filter_icon from "../../assets/images/filtering_categories.png";
-import sorting_icon from "../../assets/images/sorting_categories.png";
-import filter from "../../assets/other_icons/filter.svg";
+import funnelIcon from "../../assets/images/filtering_categories.png";
+import sortingIcon from "../../assets/images/sorting_categories.png";
+import filterIcon from "../../assets/other_icons/filter.svg";
 import {
   ContainerTop,
   DropdownContent,
@@ -62,20 +62,20 @@ export default function SolutionFilter() {
     );
   };
 
-  const CategoryDropdown = dropdown("Category Filter", filter_icon, categories);
+  const CategoryDropdown = dropdown("Category Filter", funnelIcon, categories);
   const SortingDropdown = dropdown(
     "Sorting Options",
-    sorting_icon,
+    sortingIcon,
     sortingOptions
   );
-  const StatusDropdown = dropdown("Status Filter", filter_icon, statusOptions);
+  const StatusDropdown = dropdown("Status Filter", funnelIcon, statusOptions);
 
   return (
     <DropdownLayout>
-      <StyledImage src={filter} onClick={toggleDropdown} alt="Filter" />
+      <StyledImage src={filterIcon} onClick={toggleDropdown} alt="Filter" />
       {isDropdownOpen && (
         <DropdownContent>
-          <StyledImage src={filter} onClick={closeDropdown} alt="Filter" />
+          <StyledImage src={filterIcon} onClick={closeDropdown} alt="Filter" />
           {CategoryDropdown}
           {SortingDropdown}
           {StatusDropdown}
