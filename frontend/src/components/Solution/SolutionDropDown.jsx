@@ -1,5 +1,6 @@
-import { CategoryLabel } from "./solution.style.js";
 import ImpactIcon from "./ImpactIcon.jsx";
+import ProgressComponent from "./ProgressBar.jsx";
+import { CategoryLabel } from "./solution.style.js";
 
 export default function SolutionDropDown() {
   return (
@@ -7,7 +8,7 @@ export default function SolutionDropDown() {
       <ImpactIcon />
       <CategoryLabel />
       <>Description</>
-      <>Progress Bar</>
+      <ProgressComponent percentage={31} />
       <Resources />
       <>Level Buttons</>
     </>

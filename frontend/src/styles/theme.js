@@ -1,4 +1,8 @@
 const theme = {
+  ProgressBar: {
+    backgroundColor: "#f50606",
+    borderColor: "black",
+  },
   colors: {
     primary: "#e47d31",
     secondary: "white",
