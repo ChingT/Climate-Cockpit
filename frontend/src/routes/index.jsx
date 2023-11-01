@@ -17,9 +17,9 @@ const PageRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route element={<AuthenticationLayout />}>
         <Route path="/" element={<HeroPage />} />
         <Route path="solutions" element={<SolutionsPage />} />
-        <Route element={<AuthenticationLayout />}>
           <Route path="signin" element={<SignInSection />} />
           <Route path="signup" element={<SignUpSection />} />
           <Route path="congratulations" element={<CongratsSection />} />
