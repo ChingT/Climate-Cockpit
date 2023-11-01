@@ -9,10 +9,13 @@ const theme = {
   backgroundColors: {
     primary: "rgba(253, 247, 221, 0.2)",
     secondary: "white",
+    impactIconUnselected: "black",
+    impactIconSelected: "#0077BF",
   },
   fontColors: {
     primary: "black",
     secondary: "#4c4c4c",
+    impactIcon: "white",
   },
   fonts: {
     cabinSketchRegular: "Cabin Sketch",

@@ -27,7 +27,7 @@ const HomePageContainer = styled.div`
   }
 `;
 
-const AuthenticationLayout = () => {
+const Layout = () => {
   return (
     <>
       <Navigation />
@@ -40,4 +40,4 @@ const AuthenticationLayout = () => {
   );
 };
 
-export default AuthenticationLayout;
+export default Layout;
