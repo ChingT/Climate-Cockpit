@@ -1,13 +1,13 @@
+import { ProgressBar, ProgressContainer } from "./ProgressBar.style.js";
 import React from "react";
-import "./ProgressBar.css";
 
-function ProgressBar({ percentage }) {
+function ProgressComponent({ percentage }) {
   return (
-    <div className="progress-container">
-      <div className="progress-bar" style={{ width: `${percentage}%` }}></div>
+    <ProgressContainer>
+      <ProgressBar percentage={percentage} />
       <p>{percentage}% of energy consumed in Switzerland is clean.</p>
-    </div>
+    </ProgressContainer>
   );
 }
 
-export default ProgressBar;
+export default ProgressComponent;
