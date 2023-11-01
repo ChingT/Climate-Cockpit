@@ -1,7 +1,4 @@
-import {
-  ErrorMessage,
-  InputFieldContainer,
-} from "../Layout/Layout.style.js";
+import { ErrorMessage, InputFieldContainer } from "../Layout/Layout.style.js";
 
 const InputField = ({
   userData,
