@@ -15,6 +15,7 @@ import social from "../../assets/header_icons/social.png";
 import useAutoFetch from "../../hooks/useAutoFetch.js";
 import { setRequests } from "../../store/slices/friendRequests.js";
 import FriendsRequestsContainer from "./FriendsRequests/FriendsRequestsContainer.jsx";
+import { ButtonsStyle } from "../../styles/buttons.style.js";
 import {
   Avatar,
   ContainerLeft,
@@ -153,7 +154,16 @@ const Navigation = () => {
               </MenuContainer>
             </ContainerRight>
           </>
-        ) : null}
+        ) : (
+          <div>
+            <Link to="/signup">
+              <ButtonsStyle>Sign Up</ButtonsStyle>
+            </Link>
+            <Link to="/signin">
+              <ButtonsStyle>Log In</ButtonsStyle>
+            </Link>
+          </div>
+        )}
       </nav>
     </HeaderContainer>
   );
