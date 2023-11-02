@@ -12,8 +12,7 @@ User = get_user_model()
 
 
 class ListUserAPIView(ListAPIView):
-    """
-    get: List all users.
+    """get: List all users.
 
     List all users.\
     You can filter the users with the URL search parameters.\
@@ -27,8 +26,7 @@ class ListUserAPIView(ListAPIView):
 
 
 class GetUserAPIView(RetrieveAPIView):
-    """
-    get: Retrieve one user
+    """get: Retrieve one user.
 
     Retrieve one user by user ID.
     """
@@ -39,8 +37,7 @@ class GetUserAPIView(RetrieveAPIView):
 
 
 class GetUpdateDeleteMeAPIView(RetrieveUpdateDestroyAPIView):
-    """
-    get: Retrieve the logged-in user.
+    """get: Retrieve the logged-in user.
 
     Retrieve the logged-in user.
 
