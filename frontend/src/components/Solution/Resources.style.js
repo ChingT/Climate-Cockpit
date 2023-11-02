@@ -99,13 +99,8 @@ export const SimpleModal = styled.div`
   z-index: 1000;
 `;
 
-export const ModalContent = styled.div`
-  //width: 39%;
-  //background: gray;
-  //padding: 20px;
-  //border-radius: 10px;
-  //z-index: 1001;
-`;
+export const ModalContent = styled.div``;
+
 const rotate = keyframes`
   from {
     transform: rotate(0deg);
