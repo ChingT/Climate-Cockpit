@@ -1,5 +1,21 @@
 import styled from "styled-components";
 
+export const DashboardGridDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 2px solid red;
+  & > div {
+    display: flex;
+    flex-direction: row;
+    border: 2px solid blue;
+  }
+`;
+
+export const DashboardIcons = styled.div`
+  width: 100px;
+  height: 100px;
+`;
+
 export const DashboardCategoriesTotalPoints = styled.div`
   display: flex;
   justify-content: space-around;
