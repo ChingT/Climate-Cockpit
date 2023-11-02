@@ -1,4 +1,10 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import icon_search from "../../assets/svgs/search_icon.svg";
+import {
+  setPostsFilter,
+  setSearchText,
+} from "../../store/slices/postsFilter.js";
 import {
   ContainerWrapperLeft,
   ContainerWrapperRight,
@@ -9,12 +15,6 @@ import {
   SearchIcon,
   SearchInput,
 } from "./SearchAndFilterBar.style.js";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  setPostsFilter,
-  setSearchText,
-} from "../../store/slices/postsFilter.js";
-import { useState } from "react";
 
 const SearchAndFilterBar = () => {
   const dispatch = useDispatch();
@@ -43,7 +43,7 @@ const SearchAndFilterBar = () => {
           <FilterWrapper>
             {filters.map((filter) => (
               <FilterSetter
-                filterActive={selectedFilter === filter}
+                $filterActive={selectedFilter === filter}
                 key={filter}
                 onClick={() => dispatch(setPostsFilter(filter))}
               >

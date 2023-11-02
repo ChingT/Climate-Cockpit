@@ -1,4 +1,9 @@
 const theme = {
+  ResourcesColors: {
+    tabColor: "#000",
+    videoBackground: "#da1515",
+    playButton: "white",
+  },
   ProgressBar: {
     backgroundColor: "#f50606",
     borderColor: "black",
@@ -34,6 +39,12 @@ const theme = {
     secondary: "#4c4c4c",
     impactIcon: "white",
     button: "white",
+    emissionColor: "red",
+    solutionColor: "blue",
+    removalColor: "green",
+  },
+  fontSize: {
+    equation: "18px",
   },
   fonts: {
     cabinSketchRegular: "Cabin Sketch",

@@ -25,10 +25,10 @@ const FriendsGrid = ({ url }) => {
       {loading && <LoadingSpinner />}
       <FriendsGridContainer>
         {data &&
-          data.results.map((friend) => {
+          data.results.map((friend, index) => {
             return (
               <FriendCard
-                key={friend.id}
+                key={index}
                 friendInfo={friend}
                 requestObject={checkRequest(friend.id)}
               />

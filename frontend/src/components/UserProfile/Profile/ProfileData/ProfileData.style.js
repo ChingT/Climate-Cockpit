@@ -41,7 +41,7 @@ export const ProfileAboutContainer = styled.div`
 export const LikedThingsContainer = styled.ul`
   width: 100%;
   display: flex;
-  justify-content: ${(props) => (props.centered ? "center" : "unset")};
+  justify-content: ${(props) => (props.$centered ? "center" : "unset")};
   flex-wrap: wrap;
   row-gap: 1rem;
   column-gap: 0.5rem;

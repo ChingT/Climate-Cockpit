@@ -6,7 +6,7 @@ export const FollowOrRequestButton = styled.button`
   font-size: 0.625rem;
 
   ${(props) =>
-    props.follow &&
+    props.$follow &&
     css`
       background: linear-gradient(132.96deg, #c468ff 3.32%, #6e91f6 100%);
       border-color: transparent;

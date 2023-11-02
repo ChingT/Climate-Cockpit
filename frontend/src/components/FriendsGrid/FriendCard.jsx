@@ -1,15 +1,15 @@
-import {
-  FriendAvatar,
-  FriendCardContainer,
-  FriendName,
-  FriendLocation,
-  ButtonsWrapper,
-  FriendAbout,
-  FriendCardHeader,
-} from "./FriendCard.style.js";
 import avatarImage from "../../assets/svgs/avatar.svg";
 import FollowAddButtons from "../FollowAddFriendButtons/FollowAddButtons.jsx";
 import { LikedThingsContainer } from "../UserProfile/Profile/ProfileData/ProfileData.style.js";
+import {
+  ButtonsWrapper,
+  FriendAbout,
+  FriendAvatar,
+  FriendCardContainer,
+  FriendCardHeader,
+  FriendLocation,
+  FriendName,
+} from "./FriendCard.style.js";
 
 const FriendCard = ({ friendInfo, requestObject }) => {
   return (
@@ -30,7 +30,7 @@ const FriendCard = ({ friendInfo, requestObject }) => {
         />
       </ButtonsWrapper>
       <FriendAbout>{friendInfo.about_me}</FriendAbout>
-      <LikedThingsContainer centered>
+      <LikedThingsContainer $centered>
         {friendInfo.things_user_likes.map((thing) => (
           <li key={thing}>{thing}</li>
         ))}

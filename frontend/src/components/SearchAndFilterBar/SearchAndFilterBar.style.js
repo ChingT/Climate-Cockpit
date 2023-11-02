@@ -64,8 +64,8 @@ export const FilterSetter = styled.button`
   justify-content: center;
   align-items: center;
   border-bottom: 2px solid;
-  border-color: ${(props) => (props.filterActive ? "black" : "transparent")};
-  color: ${(props) => (props.filterActive ? "black" : "rgba(0,0,0,0.5)")};
+  border-color: ${(props) => (props.$filterActive ? "black" : "transparent")};
+  color: ${(props) => (props.$filterActive ? "black" : "rgba(0,0,0,0.5)")};
 
   &:hover {
     border-color: black;
