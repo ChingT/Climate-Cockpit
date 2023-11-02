@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import theme from "../../styles/theme.js";
 import blue_texture from "../../assets/images/blue_texture.png";
-import orange_texture from "../../assets/images/orange_texture.png";
 import green_texture from "../../assets/images/green_texture.png";
+import orange_texture from "../../assets/images/orange_texture.png";
 
 export const ScorecardContainer = styled.div`
   width: 50rem;
@@ -28,18 +27,12 @@ export const CategoryPart = styled.div`
   flex: 1;
   background-size: cover;
   background-position: center;
-  border: 2px solid ${theme.ProgressBar.borderColor};
-  background-image: ${({ isFilled, level }) => {
-    switch (level) {
-      case 1:
-        return isFilled ? `url(${blue_texture})` : "none";
-      case 2:
-        return isFilled ? `url(${orange_texture})` : "none";
-      case 3:
-        return isFilled ? `url(${green_texture})` : "none";
-      default:
-        return "none";
-    }
+  border: 2px solid ${(props) => props.theme.ProgressBar.borderColor};
+  background-image: ${(props) => {
+    const textures = [null, blue_texture, orange_texture, green_texture];
+    return props.$isFilled
+      ? `url(${textures[props.$level] || "none"})`
+      : "none";
   }};
 `;
 

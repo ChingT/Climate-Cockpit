@@ -1,4 +1,3 @@
-import React from "react";
 import {
   CategoryBar,
   CategoryPart,
@@ -32,8 +31,8 @@ function ScorecardCategory() {
               {Array.from({ length: 3 }).map((_, partIndex) => (
                 <CategoryPart
                   key={partIndex}
-                  isFilled={partIndex < category.categoryLevel}
-                  level={category.categoryLevel}
+                  $isFilled={partIndex < category.categoryLevel}
+                  $level={category.categoryLevel}
                 />
               ))}
             </CategoryBar>
