@@ -20,8 +20,8 @@ export const LevelNames = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin-left: 17.5%;
-  width: 84%;
+  margin-left: 15%;
+  width: 80%;
 `;
 
 export const CategoryPart = styled.div`
@@ -50,4 +50,12 @@ export const TitleAndBar = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 4%;
+`;
+
+export const ScoreIcon = styled.div`
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+  color: ${(props) => props.theme.backgroundColors.impactIconSelected};
+  margin-bottom: 1.1%;
 `;

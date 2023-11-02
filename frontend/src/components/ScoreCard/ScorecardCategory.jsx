@@ -37,6 +37,7 @@ function ScorecardCategory() {
                 />
               ))}
             </CategoryBar>
+            <Score />
           </TitleAndBar>
           <LevelNames>
             {Object.keys(category.levelNames).map((level) => (
@@ -48,7 +49,6 @@ function ScorecardCategory() {
           </LevelNames>
         </div>
       ))}
-      <Score />
     </ScorecardContainer>
   );
 }
