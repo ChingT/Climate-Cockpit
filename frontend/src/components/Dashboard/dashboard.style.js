@@ -20,11 +20,13 @@ export const DashboardGridDiv = styled.div`
   }
 
   /* Add styles for left column here */
+
   .left-column {
     justify-content: flex-start; /* Align content in the left column to the left */
   }
 
   /* Add styles for right column here */
+
   .right-column {
     justify-content: flex-end; /* Align content in the right column to the right */
   }
