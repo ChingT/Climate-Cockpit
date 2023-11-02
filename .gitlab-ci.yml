@@ -23,8 +23,9 @@ build:
 
 lint:
   stage: lint
+  when: always
   script:
-    - docker run --rm "$CI_PIPELINE_ID:$CI_COMMIT_REF_NAME" flake8 .
+    - docker run --rm "$CI_PIPELINE_ID:$CI_COMMIT_REF_NAME" ruff check .
 
 push:
   stage: push
