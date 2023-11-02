@@ -12,5 +12,6 @@ dependencies:
       - django-fullurl==1.4
       - drf-yasg==1.21.7
       - gunicorn==21.2.0
+      - Pillow==10.1.0
       - pre-commit==3.5.0
       - flake8==6.1.0
