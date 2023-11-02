@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   CloseButton,
   Container,
@@ -138,7 +138,6 @@ function Resources() {
               height="315"
               src={modalVideo}
               title="Video player"
-              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
@@ -165,7 +164,7 @@ function Resources() {
         <VideoContainer>
           {newsList.map((news, index) => (
             <div key={index}>
-              <a href={news.link}>
+              <a href={news.link} target="_blank" rel="noreferrer noopener">
                 {news.thumbnail && (
                   <img
                     src={news.thumbnail}
@@ -185,7 +184,7 @@ function Resources() {
         <VideoContainer>
           {booksList.map((book, index) => (
             <div key={index}>
-              <a href={book.link}>
+              <a href={book.link} target="_blank" rel="noreferrer noopener">
                 {book.thumbnail && (
                   <img
                     src={book.thumbnail}
