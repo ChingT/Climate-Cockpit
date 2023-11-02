@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  app:
+    image: ${CI_REGISTRY_IMAGE}:master
+    env_file:
+      - ./envs/prod.env
+    command: sh /scripts/prod.sh
+    volumes:
+      - static_files:/static-files
+      - media_files:/media-files
+      - build:/frontend/dist
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16.0
+    env_file:
+      - ./envs/prod.env
+    volumes:
+      - postgres_db:/var/lib/postgresql/data
+
+  nginx:
+    image: nginx:1.25.2
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./nginx:/etc/nginx/conf.d/
+      - static_files:/static-files
+      - media_files:/media-files
+      - build:/build
+      - /etc/letsencrypt:/etc/letsencrypt
+
+volumes:
+  postgres_db:
+  static_files:
+  media_files:
+  build:
