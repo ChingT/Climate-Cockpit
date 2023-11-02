@@ -1,11 +1,12 @@
 import React from "react";
 import {
-    CategoryBar,
-    CategoryPart,
-    LevelNames,
-    ScorecardContainer, TitleAndBar,
+  CategoryBar,
+  CategoryPart,
+  LevelNames,
+  ScorecardContainer,
+  TitleAndBar,
 } from "./Scorecard.style.js";
-import {CategoryLabelDiv} from "../Solution/solution.style.js";
+import { CategoryLabelDiv } from "../Solution/solution.style.js";
 import Score from "./Score.jsx";
 
 function ScorecardCategory() {
@@ -17,7 +18,7 @@ function ScorecardCategory() {
         2: "Renewable",
         3: "Sun Energy",
       },
-      categoryLevel: 2,
+      categoryLevel: 1,
     },
   ];
 
@@ -25,17 +26,18 @@ function ScorecardCategory() {
     <ScorecardContainer>
       {data.map((category, index) => (
         <div key={index}>
-            <TitleAndBar>
-                <CategoryLabelDiv>{category.categoryName}</CategoryLabelDiv>
-          <CategoryBar>
-            {Array.from({ length: 3 }).map((_, partIndex) => (
-              <CategoryPart
-                key={partIndex}
-                isFilled={partIndex < category.categoryLevel}
-              />
-            ))}
-          </CategoryBar>
-                </TitleAndBar>
+          <TitleAndBar>
+            <CategoryLabelDiv>{category.categoryName}</CategoryLabelDiv>
+            <CategoryBar>
+              {Array.from({ length: 3 }).map((_, partIndex) => (
+                <CategoryPart
+                  key={partIndex}
+                  isFilled={partIndex < category.categoryLevel}
+                  level={category.categoryLevel}
+                />
+              ))}
+            </CategoryBar>
+          </TitleAndBar>
           <LevelNames>
             {Object.keys(category.levelNames).map((level) => (
               <span key={level}>
@@ -46,7 +48,7 @@ function ScorecardCategory() {
           </LevelNames>
         </div>
       ))}
-        <Score />
+      <Score />
     </ScorecardContainer>
   );
 }
