@@ -5,6 +5,7 @@
 }
 body {
   overflow: hidden;
+  width: 50%;
 }
 #viewport {
   -webkit-perspective: 1000px;
