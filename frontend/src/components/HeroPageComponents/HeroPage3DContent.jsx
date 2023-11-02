@@ -2,10 +2,10 @@ import { ButtonsStyle } from "../../styles/buttons.style.js";
 import { NavLink } from "react-router-dom";
 import climate_challenge from "../../assets/images/climate_challenge.png";
 import {
-    ClimateChallengeWrapper,
-    CustomH4,
-    LeftBar,
-    StyledH4
+  ClimateChallengeWrapper,
+  CustomH4,
+  LeftBar,
+  StyledH4,
 } from "./HeroPage.style.js";
 
 export default function HeroPage3DContent() {

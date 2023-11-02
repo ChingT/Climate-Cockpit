@@ -38,12 +38,12 @@ export const StyledH4 = styled.h4`
   font-size: 24px;
   font-weight: 700;
   line-height: 60px;
-  color: ${props => props.theme.fontColors.heroPageMainColor}; 
+  color: ${(props) => props.theme.fontColors.heroPageMainColor};
 `;
 
 export const CustomH4 = styled.h4`
   font-size: 24px;
   font-weight: 700;
   line-height: 60px;
-  color: ${props => props.theme.fontColors.heroPageSecondaryColor}; 
+  color: ${(props) => props.theme.fontColors.heroPageSecondaryColor};
 `;
