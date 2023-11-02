@@ -1,3 +1,4 @@
-python app/manage.py collectstatic --no-input
-python app/manage.py migrate
-gunicorn -w 4 -b 0.0.0.0:8000 app.project.wsgi:application
+cd app/
+python manage.py collectstatic --no-input
+python manage.py migrate
+gunicorn -w 4 -b 0.0.0.0:8000 project.wsgi:application
