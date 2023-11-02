@@ -15,7 +15,11 @@ export const CategoryLabelDiv = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  font-size: ${(props) => props.theme.fontsSize.label};
+  font-size: ${(props) => props.theme.categoryLabels.fontSize};
+  background-color: ${(props) => props.$backgroundColor};
+  color: ${(props) => props.theme.categoryLabels.color};
+
+  width: 80px;
 `;
 
 export const ImpactIconDiv = styled.div`

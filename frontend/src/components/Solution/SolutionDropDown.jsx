@@ -6,7 +6,7 @@ export default function SolutionDropDown() {
   return (
     <>
       <ImpactIcon />
-      <CategoryLabel />
+      <CategoryLabel category="electricity" />
       <>Description</>
       <ProgressComponent percentage={31} />
       <Resources />

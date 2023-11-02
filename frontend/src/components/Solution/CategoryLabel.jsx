@@ -3,23 +3,23 @@ import theme from "../../styles/theme.js";
 
 function CategoryLabel({ category }) {
   let colourCategoryMapping = {
-    electricity: theme.backgroundColors.electricityLabel,
-    buildings: theme.backgroundColors.buildingsLabel,
-    transport: theme.backgroundColors.transportLabel,
-    food: theme.backgroundColors.foodLabel,
-    trash: theme.backgroundColors.trashLabel,
-    industry: theme.backgroundColors.industryLabel,
-    import: theme.backgroundColors.importLabel,
-    nature: theme.backgroundColors.natureLabel,
-    money: theme.backgroundColors.moneyLabel,
-    innovation: theme.backgroundColors.innovationLabel,
+    electricity: theme.categoryLabels.electricity,
+    buildings: theme.categoryLabels.buildings,
+    transport: theme.categoryLabels.transport,
+    food: theme.categoryLabels.food,
+    trash: theme.categoryLabels.trash,
+    industry: theme.categoryLabels.industry,
+    import: theme.categoryLabels.import,
+    nature: theme.categoryLabels.nature,
+    money: theme.categoryLabels.money,
+    innovation: theme.categoryLabels.innovation,
   };
+  const backgroundColor =
+    colourCategoryMapping[category] || theme.categoryLabels.default;
 
   return (
-    <CategoryLabelDiv>
-      <div style={{ backgroundColor: colourCategoryMapping[category] }}>
-        Hello World
-      </div>
+    <CategoryLabelDiv $backgroundColor={backgroundColor}>
+      <div>{category}</div>
     </CategoryLabelDiv>
   );
 }
