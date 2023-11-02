@@ -26,8 +26,8 @@ import plantsIcon from "../../assets/dashboard_icons/Agriculture_Plants.png";
 import plantsIconBlue from "../../assets/dashboard_icons/Agriculture_Plants_Blue.png";
 import electricityIcon from "../../assets/dashboard_icons/Electricity.png";
 import electricityIconBlue from "../../assets/dashboard_icons/Electricity_Blue.png";
-import importsIcon from "../../assets/dashboard_icons/Imports_Long.png";
-import importsIconBlue from "../../assets/dashboard_icons/Imports.png";
+import importsIcon from "../../assets/dashboard_icons/Imports.png";
+import importsIconBlue from "../../assets/dashboard_icons/ImportsBlue.png";
 import removalIcon from "../../assets/dashboard_icons/Nature.png";
 import { DashboardGridDiv } from "./dashboard.style.js";
 
@@ -81,8 +81,8 @@ export default function DashboardGrid() {
   const additionalRemoval = 1;
 
   const imageStyle = {
-    width: "80px", // Set the desired width here
-    height: "80px", // Set the desired height here
+    width: "9vw", // Set the desired width here
+    height: "9vw", // Set the desired height here
   };
 
   const renderIcons = (count, imageUrl) => {
@@ -140,27 +140,42 @@ export default function DashboardGrid() {
         {renderIcons(totalCars - reducedCars, carIcon)}
         {renderIcons(reducedCars, carIconBlue)}
       </div>
-
-      <p>Agriculture</p>
       <div>
-        {renderIcons(totalCowMeat - reducedCowMeat, cowMeatIcon)}
-        {renderIcons(reducedCowMeat, cowMeatIconBlue)}
-        {renderIcons(totalCowMilk - reducedCowMilk, cowMilkIcon)}
-        {renderIcons(reducedCowMilk, cowMilkIconBlue)}
-        {renderIcons(totalOtherMeat - reducedOtherMeat, otherMeatIcon)}
-        {renderIcons(reducedOtherMeat, otherMeatIconBlue)}
-        {renderIcons(totalPlants - reducedPlants, plantsIcon)}
-        {renderIcons(reducedPlants, plantsIconBlue)}
-        {renderIcons(totalElectricity - reducedElectricity, electricityIcon)}
-        {renderIcons(reducedElectricity, electricityIconBlue)}
+        <div className="left-column">
+          <p>Agriculture</p>
+        </div>
+        <div className="right-column">
+          <p>Electricity</p>
+        </div>
       </div>
+      <div>
+        <div className="left-column">
+          {renderIcons(totalCowMeat - reducedCowMeat, cowMeatIcon)}
+          {renderIcons(reducedCowMeat, cowMeatIconBlue)}
+          {renderIcons(totalCowMilk - reducedCowMilk, cowMilkIcon)}
+          {renderIcons(reducedCowMilk, cowMilkIconBlue)}
+          {renderIcons(totalOtherMeat - reducedOtherMeat, otherMeatIcon)}
+          {renderIcons(reducedOtherMeat, otherMeatIconBlue)}
+          {renderIcons(totalPlants - reducedPlants, plantsIcon)}
+          {renderIcons(reducedPlants, plantsIconBlue)}
+        </div>
+        <div className="right-column">
+          {renderIcons(totalElectricity - reducedElectricity, electricityIcon)}
+          {renderIcons(reducedElectricity, electricityIconBlue)}
+        </div>
+      </div>
+
       <h2>Imports</h2>
       <div>
         {renderIcons(totalImports - reducedImports, importsIcon)}
         {renderIcons(reducedImports, importsIconBlue)}
       </div>
+
       <h2>Removal</h2>
-      <div>{renderIcons(totalRemoval + additionalRemoval, removalIcon)}</div>
+
+      <div className="left-column">
+        {renderIcons(totalRemoval + additionalRemoval, removalIcon)}
+      </div>
     </DashboardGridDiv>
   );
 }

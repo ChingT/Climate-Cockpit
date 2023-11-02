@@ -4,16 +4,30 @@ export const DashboardGridDiv = styled.div`
   display: flex;
   flex-direction: column;
   border: 2px solid red;
+
   & > div {
     display: flex;
     flex-direction: row;
     border: 2px solid blue;
+    justify-content: space-between; /* Align children with space between */
   }
-`;
 
-export const DashboardIcons = styled.div`
-  width: 100px;
-  height: 100px;
+  & > div > div {
+    display: flex;
+    flex-direction: row;
+    border: 2px solid green;
+    align-items: center; /* Center align items within the inner div */
+  }
+
+  /* Add styles for left column here */
+  .left-column {
+    justify-content: flex-start; /* Align content in the left column to the left */
+  }
+
+  /* Add styles for right column here */
+  .right-column {
+    justify-content: flex-end; /* Align content in the right column to the right */
+  }
 `;
 
 export const DashboardCategoriesTotalPoints = styled.div`
