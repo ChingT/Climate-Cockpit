@@ -65,7 +65,7 @@ export default function SolutionFilter() {
   const SortingDropdown = dropdown(
     "Sorting Options",
     sortingIcon,
-    sortingOptions
+    sortingOptions,
   );
   const StatusDropdown = dropdown("Status Filter", funnelIcon, statusOptions);
 

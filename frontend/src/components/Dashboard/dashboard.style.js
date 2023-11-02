@@ -1,5 +1,34 @@
 import styled from "styled-components";
 
+export const DashboardGridDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  & > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Align children with space between */
+  }
+
+  & > div > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Center align items within the inner div */
+  }
+
+  /* Add styles for left column here */
+
+  .left-column {
+    justify-content: flex-start; /* Align content in the left column to the left */
+  }
+
+  /* Add styles for right column here */
+
+  .right-column {
+    justify-content: flex-end; /* Align content in the right column to the right */
+  }
+`;
+
 export const DashboardCategoriesTotalPoints = styled.div`
   display: flex;
   justify-content: space-around;
