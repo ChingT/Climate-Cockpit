@@ -1,4 +1,9 @@
 const theme = {
+  ResourcesColors: {
+    tabColor: "#000",
+    videoBackground: "#da1515",
+    playButton: "white",
+  },
   ProgressBar: {
     backgroundColor: "#f50606",
     borderColor: "black",

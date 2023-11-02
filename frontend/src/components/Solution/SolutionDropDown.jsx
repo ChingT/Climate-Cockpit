@@ -1,6 +1,11 @@
 import ImpactIcon from "./ImpactIcon.jsx";
 import ProgressComponent from "./ProgressBar.jsx";
 import { CategoryLabel } from "./solution.style.js";
+import Resources from "./Resources.jsx";
+import theme from "../../styles/theme.js";
+
+import React from "react";
+import { ThemeProvider } from "styled-components";
 
 export default function SolutionDropDown() {
   return (
@@ -9,17 +14,11 @@ export default function SolutionDropDown() {
       <CategoryLabel />
       <>Description</>
       <ProgressComponent percentage={31} />
-      <Resources />
-      <>Level Buttons</>
-    </>
-  );
-}
+      <ThemeProvider theme={theme}>
+        <Resources />
+      </ThemeProvider>
 
-function Resources() {
-  return (
-    <>
-      <>Tabs(videos, news, books)</>
-      <>Embedded videos / links</>
+      <>Level Buttons</>
     </>
   );
 }
