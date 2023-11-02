@@ -1,10 +1,10 @@
-import ScoreCardCategory from "./ScorecardCategory.jsx";
+import ScorecardCategory from "./ScorecardCategory.jsx";
 
 export default function ScoreCard() {
   return (
     <>
       {/* 10 of this */}
-      <ScoreCardCategory />
+      <ScorecardCategory />
       <>Statement</>
       <>Total Score</>
     </>
