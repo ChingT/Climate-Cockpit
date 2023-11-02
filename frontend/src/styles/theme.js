@@ -14,6 +14,11 @@ const theme = {
     lightGray: "#aaa",
     lightGrayBorder: "#ddd",
   },
+  ScoreCardLevels: {
+    level_1: "orange",
+    level_2: "green",
+    level_3: "blue",
+  },
   backgroundColors: {
     primary: "rgba(253, 247, 221, 0.2)",
     secondary: "white",
