@@ -16,8 +16,10 @@ export const CategoryLabelDiv = styled.div`
   justify-content: center;
   border-radius: 10px;
   font-size: ${(props) => props.theme.categoryLabels.fontSize};
-  background-color: ${(props) => props.$backgroundColor};
-  color: ${(props) => props.theme.categoryLabels.color};
+  background-color: ${(props) =>
+    props.theme.categoryLabels[props.$category] ||
+    props.theme.categoryLabels.default};
+  color: ${(props) => props.theme.categoryLabels.fontColor};
 
   width: 80px;
 `;
