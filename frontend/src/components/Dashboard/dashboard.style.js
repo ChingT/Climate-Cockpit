@@ -3,19 +3,16 @@ import styled from "styled-components";
 export const DashboardGridDiv = styled.div`
   display: flex;
   flex-direction: column;
-  border: 2px solid red;
 
   & > div {
     display: flex;
     flex-direction: row;
-    border: 2px solid blue;
     justify-content: space-between; /* Align children with space between */
   }
 
   & > div > div {
     display: flex;
     flex-direction: row;
-    border: 2px solid green;
     align-items: center; /* Center align items within the inner div */
   }
 
