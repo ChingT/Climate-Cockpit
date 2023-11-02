@@ -21,7 +21,7 @@ from django.urls import include, path
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 
-schema_view = get_schema_view(
+SchemaView = get_schema_view(
     openapi.Info(
         title="Climate Cockpit API",
         default_version="v1",
@@ -34,14 +34,19 @@ schema_view = get_schema_view(
     permission_classes=[],
 )
 
+social_urlpatterns = [
+    path("followers/", include("user.social.urls")),
+]
 
 api_urlpatterns = [
     path("admin/", admin.site.urls),
     path(
         "docs/",
-        schema_view.with_ui("swagger", cache_timeout=0),
+        SchemaView.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
     ),
+    path("users/", include("user.users.urls")),
+    path("social/", include(social_urlpatterns)),
 ]
 
 urlpatterns = [path("api/", include(api_urlpatterns))]

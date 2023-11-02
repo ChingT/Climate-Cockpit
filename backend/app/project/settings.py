@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "fullurl",
     # own
+    "user",
 ]
 
 MIDDLEWARE = [
@@ -168,3 +169,6 @@ SWAGGER_SETTINGS = {
         "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}
     },
 }
+
+
+AUTH_USER_MODEL = "user.User"
