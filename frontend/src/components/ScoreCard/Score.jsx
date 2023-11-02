@@ -1,4 +1,4 @@
 const Score = () => {
-    return <></>
-}
-export default Score
+  return <></>;
+};
+export default Score;
