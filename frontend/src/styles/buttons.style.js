@@ -7,4 +7,5 @@ export const ButtonsStyle = styled.button`
   box-shadow: rgba(0, 0, 0, 0.25);
   padding: 10px 20px 10px 20px;
   cursor: pointer;
+  font-size: 19px;
 `;
