@@ -51,7 +51,7 @@ export const Tab = styled.div`
   padding: 5px;
   cursor: pointer;
   color: ${(props) => props.theme.ResourcesColors.tabColor};
-  border-bottom: ${(props) => (props.isActive ? "2px solid black" : "none")};
+  border-bottom: ${(props) => (props.$isActive ? "2px solid black" : "none")};
 `;
 
 export const VideoContainer = styled.div`
@@ -91,8 +91,8 @@ export const SimpleModal = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  visibility: ${(props) => (props.show ? "visible" : "hidden")};
-  opacity: ${(props) => (props.show ? "1" : "0")};
+  visibility: ${(props) => (props.$show ? "visible" : "hidden")};
+  opacity: ${(props) => (props.$show ? "1" : "0")};
   transition:
     opacity 0.1s,
     visibility 0.1s;
@@ -124,7 +124,7 @@ export const CloseButton = styled.button`
   }
 
   animation: ${(props) =>
-    props.show
+    props.$show
       ? css`
           ${rotate} 10s linear infinite
         `

@@ -113,24 +113,24 @@ function Resources() {
       <Container>
         <Tab
           onClick={() => setActiveTab("VIDEOS")}
-          isActive={activeTab === "VIDEOS"}
+          $isActive={activeTab === "VIDEOS"}
         >
           VIDEOS
         </Tab>
         <Tab
           onClick={() => setActiveTab("News")}
-          isActive={activeTab === "News"}
+          $isActive={activeTab === "News"}
         >
           News
         </Tab>
         <Tab
           onClick={() => setActiveTab("Books")}
-          isActive={activeTab === "Books"}
+          $isActive={activeTab === "Books"}
         >
           Books
         </Tab>
       </Container>
-      <SimpleModal show={!!modalVideo} onClick={closeModal}>
+      <SimpleModal $show={!!modalVideo} onClick={closeModal}>
         <ModalContent onClick={handleModalClick}>
           {modalVideo && (
             <iframe
@@ -142,7 +142,7 @@ function Resources() {
               allowFullScreen
             ></iframe>
           )}
-          <CloseButton show={!!modalVideo} onClick={closeModal} />
+          <CloseButton $show={!!modalVideo} onClick={closeModal} />
         </ModalContent>
       </SimpleModal>
 
