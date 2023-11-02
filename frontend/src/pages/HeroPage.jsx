@@ -1,16 +1,24 @@
 import Hero3DCloud from "../components/HeroPageComponents/Hero3DCloud.jsx";
-import HeroPageButton from "../components/HeroPageComponents/HeroPageButton.jsx";
-import styled from "styled-components";
+import {
+  Main,
+  StyledNavLink,
+} from "../components/HeroPageComponents/HeroPage.style.js";
+import HeroPage3DContent from "../components/HeroPageComponents/HeroPage3DContent.jsx";
+import { ButtonsStyle } from "../styles/buttons.style.js";
 
-const Main = styled.div`
-  margin-top: 4rem;
-`;
 const HeroPage = () => {
   return (
-    <Main>
-      <Hero3DCloud />
-      <HeroPageButton />
-    </Main>
+    <>
+      <Main>
+        <HeroPage3DContent />
+        <Hero3DCloud />
+      </Main>
+      <StyledNavLink to="/solutions">
+        <ButtonsStyle style={{ padding: "20px 60px 20px 60px" }}>
+          Start Your Climate Journey
+        </ButtonsStyle>
+      </StyledNavLink>
+    </>
   );
 };
 
