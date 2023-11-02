@@ -5,6 +5,7 @@ import ProfileSubSection from "../components/UserProfile/Profile/ProfileSubSecti
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setProfileFilter } from "../store/slices/profileFilter.js";
+import ScoreCard from "../components/ScoreCard/ScoreCard.jsx";
 
 function ProfilePage() {
   const { profileId } = useParams();
@@ -23,6 +24,7 @@ function ProfilePage() {
         <>
           <ProfileHeader userdata={data} profileId={profileId} />
           <ProfileSubSection userID={profileId} />
+          <ScoreCard />
         </>
       )}
       {error && <ProfileHeader error />}
