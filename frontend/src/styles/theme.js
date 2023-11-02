@@ -21,6 +21,7 @@ const theme = {
     impactIconSelected: "#0077BF",
   },
   categoryLabels: {
+    default: "white",
     electricity: "purple",
     buildings: "orange",
     transport: "violet",
@@ -32,7 +33,7 @@ const theme = {
     money: "yellow",
     innovation: "blue",
     fontSize: "14px",
-    color: "black",
+    fontColor: "black",
   },
   fontColors: {
     primary: "black",
