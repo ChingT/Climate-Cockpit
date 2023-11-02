@@ -10,7 +10,19 @@ export const Title = styled.div``;
 
 export const NumberOfSupporters = styled.div``;
 
-export const CategoryLabel = styled.div``;
+export const CategoryLabelDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: ${(props) => props.theme.categoryLabels.fontSize};
+  background-color: ${(props) =>
+    props.theme.categoryLabels[props.$category] ||
+    props.theme.categoryLabels.default};
+  color: ${(props) => props.theme.categoryLabels.fontColor};
+
+  width: 80px;
+`;
 
 export const ImpactIconDiv = styled.div`
   display: flex;
