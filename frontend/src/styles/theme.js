@@ -13,6 +13,7 @@ const theme = {
     secondary: "white",
     lightGray: "#aaa",
     lightGrayBorder: "#ddd",
+    solutionPagePrimaryColor: "#0077BF",
   },
   backgroundColors: {
     primary: "rgba(253, 247, 221, 0.2)",

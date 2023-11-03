@@ -1,16 +1,19 @@
-import styled from "styled-components";
-import SolutionDashboard from "../components/Dashboard/SolutionDashboard.jsx";
 import SolutionDropDown from "../components/Solution/SolutionDropDown.jsx";
 import SolutionFilter from "../components/SolutionFilter/SolutionFilter.jsx";
-const Main = styled.div`
-  height: 100%;
-`;
+import styled from "styled-components";
+import SolutionDashboard from "../components/Dashboard/SolutionDashboard.jsx";
+import {LeftBar, Main, RightBar} from "../components/Dashboard/dashboard.style.js";
+
 const SolutionsPage = () => {
   return (
     <Main>
-      <SolutionDashboard />
-      <SolutionFilter />
-      <SolutionDropDown />
+      <LeftBar>
+        <SolutionDashboard />
+      </LeftBar>
+      <RightBar>
+        <SolutionFilter />
+        <SolutionDropDown />
+      </RightBar>
     </Main>
   );
 };
