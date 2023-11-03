@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django_extensions.db.models import TimeStampedModel
 
 User = get_user_model()
 
@@ -12,11 +13,9 @@ class Image(models.Model):
         return f"{self.image} for post {self.post}"
 
 
-class Post(models.Model):
+class Post(TimeStampedModel):
     user = models.ForeignKey(User, models.CASCADE, related_name="posts")
     content = models.TextField()
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
     liked_by = models.ManyToManyField(User, related_name="liked_posts", blank=True)
     shared = models.ForeignKey(
         "Post", models.CASCADE, related_name="sharing_posts", blank=True, null=True
