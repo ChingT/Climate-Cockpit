@@ -8,8 +8,7 @@ import React, { useState, useEffect } from "react";
 import eCarIcon from "./../../assets/solution_icons/eCar.svg";
 import SvgIcon from "./SvgIcon.jsx";
 import supportersIcon from "./../../assets/other_icons/supporters.png";
-import { Link } from "react-router-dom";
-import { ButtonsStyle } from "../../styles/buttons.style.js";
+
 import SolutionButton from "./SolutionButton.jsx";
 
 const CHECKBOX_API_ENDPOINT = "/api/checkbox-status";
@@ -24,6 +23,7 @@ let description =
 let progress = 4;
 let progress_description = "of all cars in Switzerland are electric.";
 let number_of_supporters = 2301;
+let button_text = "Yes, I have an electric car";
 let videos_title = "How to drive an electric car";
 let videos_url = "Video_URL";
 let news_title = "Electric car news";
@@ -54,9 +54,10 @@ export default function SolutionDropDown() {
     setIsChecked(event.target.checked);
     // Here you could also send the new status to the API if needed
   };
+
   return (
     <SolutionContainer>
-      <div>
+      <div className="solutionBar">
         <div>
           <div>
             <input
@@ -68,7 +69,7 @@ export default function SolutionDropDown() {
           <div>
             <SvgIcon svg_icon={eCarIcon} />
           </div>
-          <div>{name}</div>
+          <div className="solutionName">{name}</div>
         </div>
         <div>
           <div>
@@ -99,7 +100,7 @@ export default function SolutionDropDown() {
           <Resources />
         </div>
         <div>
-          <SolutionButton />
+          <SolutionButton button_text={button_text} selected={false} />
         </div>
       </div>
     </SolutionContainer>

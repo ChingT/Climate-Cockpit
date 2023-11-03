@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const SolutionContainer = styled.div`
-  border: 2px solid yellow;
   display: flex; /* This makes it a flex container */
   flex-direction: column; /* This stacks children vertically */
 
@@ -9,13 +8,26 @@ export const SolutionContainer = styled.div`
     display: flex; /* This will align the children in a row */
     justify-content: space-between; /* Spreads the two inner divs across the full width */
     align-items: center; /* Aligns the items vertically */
-    border: 2px solid blue; /* Keeping your border for clarity */
+    border: 3px solid black; /* Keeping your border for clarity */
+    border-radius: 10px;
+    padding: 5px;
     width: 100%; /* Ensures that the row takes the full width of its container */
+   
 
     & > div:first-child {
       display: flex; /* Aligns checkbox, icon, and name in a row */
       align-items: center;
-      /* If you want all items to touch the left edge, remove padding/margin from these elements */
+      justify-content: flex-start;
+      gap: 10px;
+      input {
+          margin: 10px; /
+      }
+      .solutionName{
+        font-size: 30px; // Change this to the font-size you want
+        margin: 10px; /
+        font-weight: bold;
+      }
+    
     }
 
     & > div:last-child {
@@ -77,13 +89,20 @@ export const ImpactIconDiv = styled.div`
   }
 `;
 export const SolutionButtonStyle = styled.div`
-  background-color: ${(props) => props.theme.colors.unselectedSolution};
   color: ${(props) => props.theme.fontColors.button};
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.25);
   padding: 10px 20px 10px 20px;
   cursor: pointer;
   font-size: 19px;
+  width: auto; // or you can set it to a specific value, for example, width: 150px;
+  max-width: 300px; // This will ensure that the button does not exceed 200px in width
+  display: flex; // Enables flexbox for this container
+  justify-content: center; // Centers content horizontally
+  align-items: center; // Centers content vertically
+  text-align: center; // Centers text horizontally for inline or inline-block elements
+  height: 50px; // You can set a specific height for your button
+  font-weight: bold;
 `;
 
 export const SvgIconDiv = styled.div`
