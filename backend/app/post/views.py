@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from post.models import Image, Post
+from post.models import Post
 from post.serializers import PostSerializer
 from rest_framework import status
 from rest_framework.filters import SearchFilter
@@ -10,6 +10,7 @@ from rest_framework.generics import (
     RetrieveUpdateDestroyAPIView,
 )
 from rest_framework.parsers import FormParser, MultiPartParser
+from rest_framework.permissions import SAFE_METHODS, IsAuthenticated
 from rest_framework.response import Response
 from user.permissions import IsAdmin, IsOwner
 
@@ -34,12 +35,6 @@ class ListCreatePostAPIView(ListCreateAPIView):
     search_fields = ["content"]
     parser_classes = (MultiPartParser, FormParser)  # Enable file upload support
 
-    def perform_create(self, serializer):
-        post = serializer.save(user=self.request.user)
-        images_data = self.request.FILES.getlist("images")
-        for image_data in images_data:
-            Image.objects.create(post=post, image=image_data)
-
 
 class RetrieveUpdateDestroyPostAPIView(RetrieveUpdateDestroyAPIView):
     """get: Retrieve a post.
@@ -62,17 +57,12 @@ class RetrieveUpdateDestroyPostAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all().order_by("-created")
     serializer_class = PostSerializer
     lookup_url_kwarg = "post_id"
-    permission_classes = [IsOwner | IsAdmin]
     parser_classes = (MultiPartParser, FormParser)  # Enable file upload support
 
-    def perform_update(self, serializer):
-        # Ensure the author remains the same during updates
-        post = serializer.save(user=self.request.user)
-        images_data = self.request.FILES.getlist("images")
-        # Delete the images that previously belong to the post
-        Image.objects.filter(post=post).delete()
-        for image_data in images_data:
-            Image.objects.create(post=post, image=image_data)
+    def get_permission_classes(self):
+        if self.request.method in SAFE_METHODS:
+            return [IsAuthenticated]
+        return [IsOwner | IsAdmin]
 
 
 class ToggleLikePost(CreateAPIView):

@@ -43,6 +43,16 @@ class PostSerializer(serializers.ModelSerializer):
     def get_amount_of_likes(self, instance: Post):
         return instance.liked_by.count()
 
+    def _handle_images(self, post: Post):
+        images_data = self.context["request"].FILES.getlist("images")
+        Image.objects.filter(post=post).delete()
+        for image_data in images_data:
+            Image.objects.create(post=post, image=image_data)
+
+    def save(self, validated_data):
+        super().save(user=self.context["request"].user)
+        self._handle_images(validated_data["post"])
+
     class Meta:
         model = Post
         fields = [
