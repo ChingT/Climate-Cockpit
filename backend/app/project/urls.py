@@ -20,6 +20,7 @@ SchemaView = get_schema_view(
 
 social_urlpatterns = [
     path("followers/", include("user.social.urls")),
+    path("posts/", include("post.urls")),
 ]
 
 api_urlpatterns = [
