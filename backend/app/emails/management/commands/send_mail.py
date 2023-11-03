@@ -1,7 +1,6 @@
 import time
 
 from django.core.management.base import BaseCommand
-
 from emails.models import Email
 
 
