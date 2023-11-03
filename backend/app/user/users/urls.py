@@ -1,5 +1,4 @@
 from django.urls import path
-
 from user.users.views import GetUpdateDeleteMeAPIView, GetUserAPIView, ListUserAPIView
 
 urlpatterns = [

@@ -66,3 +66,15 @@ export const DashboardCategoriesTotalPoints = styled.div`
     color: ${(props) => props.theme.fontColors.solutionColor};
   }
 `;
+
+export const CircleShapedPoints = styled.div`
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background-color: ${(props) => props.theme.emissionColors[props.type]};
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${(props) => props.theme.fontColors.emissionLevel};
+`;

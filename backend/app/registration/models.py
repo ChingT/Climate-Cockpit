@@ -1,16 +1,9 @@
-import secrets
-import string
-
 from django.contrib.auth import get_user_model
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
+from utils import code_generator
 
 User = get_user_model()
-
-
-def code_generator(length=5, characters=string.digits):
-    """Generate a random code."""
-    return "".join(secrets.choice(characters) for _ in range(length))
 
 
 class Registration(TimeStampedModel):
@@ -18,20 +11,25 @@ class Registration(TimeStampedModel):
 
     Attributes
     ----------
-        user (User): The related user.
-        code (str): Random code used for registration and password reset.
-        code_type (str): Type of the code ("RV" for Registration Validation,
-        "PR" for Password Reset).
-        code_used (bool): Indicates if the code has been used.
+    - user (User): The related user.
+    - code (str): Random code used for registration and password reset.
+    - code_type (TypeChoices): Type of the code
+    - code_used (bool): Indicates if the code has been used.
     """
 
-    USER_CHOICES = (("RV", "Registration Validation"), ("PR", "Password Reset"))
+    class TypeChoices(models.TextChoices):
+        REGISTRATION_VALIDATION = "RV", "Registration Validation"
+        PASSWORD_RESET = "PR", "Password Reset"
 
     user = models.OneToOneField(
-        on_delete=models.CASCADE, related_name="registration_profile", to=User
+        User, on_delete=models.CASCADE, related_name="registration"
     )
     code = models.CharField(max_length=15, default=code_generator)
-    code_type = models.CharField(max_length=2, choices=USER_CHOICES)
+    code_type = models.CharField(
+        max_length=2,
+        choices=TypeChoices.choices,
+        default=TypeChoices.REGISTRATION_VALIDATION,
+    )
     code_used = models.BooleanField(default=False)
 
     def __str__(self):

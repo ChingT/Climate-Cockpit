@@ -1,5 +1,4 @@
 from django.urls import path
-
 from user.social.views import ListFollowersUser, ListFollowingUser, ToggleFollowingUser
 
 urlpatterns = [
