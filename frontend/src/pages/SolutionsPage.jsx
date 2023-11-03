@@ -2,17 +2,18 @@ import SolutionDropDown from "../components/Solution/SolutionDropDown.jsx";
 import SolutionFilter from "../components/SolutionFilter/SolutionFilter.jsx";
 import styled from "styled-components";
 import SolutionDashboard from "../components/Dashboard/SolutionDashboard.jsx";
+import {LeftBar, Main, RightBar} from "../components/Dashboard/dashboard.style.js";
 
-const Main = styled.div`
-  margin-top: 4rem;
-  overflow: scroll;
-`;
 const SolutionsPage = () => {
   return (
     <Main>
-      <SolutionDashboard />
-      <SolutionFilter />
-      <SolutionDropDown />
+      <LeftBar>
+        <SolutionDashboard />
+      </LeftBar>
+      <RightBar>
+        <SolutionFilter />
+        <SolutionDropDown />
+      </RightBar>
     </Main>
   );
 };

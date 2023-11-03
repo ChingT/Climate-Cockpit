@@ -5,7 +5,9 @@ import Navigation from "../Navigation/Navigation.jsx";
 const AuthenticationContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 2.5rem;
+  padding-top: 1rem;
+  height: 100%;
+  width: 100%;
 `;
 
 const HomePageContainer = styled.div`
