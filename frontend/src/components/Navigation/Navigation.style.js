@@ -15,6 +15,12 @@ export const HeaderContainer = styled.header`
   z-index: 10;
   padding: 0 2rem;
   border-bottom: solid rgba(0, 119, 191, 1) 1px;
+  background: conic-gradient(
+    from 90deg at 1.1px 1.1px,
+    #f3f3e4 25%,
+    rgb(217, 217, 217) 0
+  );
+  background-size: 24px 24px;
 `;
 
 export const ContainerLeft = styled.div`

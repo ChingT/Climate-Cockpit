@@ -54,6 +54,7 @@ export const StyledH2 = styled.h2`
 `;
 
 export const DashboardCategoriesTotalPoints = styled.div`
+  padding-top: 5rem;
   display: flex;
   justify-content: space-around;
   flex-direction: row;
