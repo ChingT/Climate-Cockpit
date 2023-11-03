@@ -5,13 +5,18 @@ import SolutionDashboard from "../components/Dashboard/SolutionDashboard.jsx";
 
 const Main = styled.div`
   margin-top: 4rem;
+  overflow: scroll;
 `;
 const SolutionsPage = () => {
   return (
     <Main>
-      <SolutionDashboard />
-      <SolutionFilter />
-      <SolutionDropDown />
+      <div>
+        <SolutionDashboard />
+      </div>
+      <div>
+        <SolutionFilter />
+        <SolutionDropDown />
+      </div>
     </Main>
   );
 };

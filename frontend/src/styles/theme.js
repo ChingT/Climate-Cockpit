@@ -13,6 +13,8 @@ const theme = {
     secondary: "white",
     lightGray: "#aaa",
     lightGrayBorder: "#ddd",
+    unselectedSolution: "red",
+    selectedSolution: "green",
   },
   backgroundColors: {
     primary: "rgba(253, 247, 221, 0.2)",
