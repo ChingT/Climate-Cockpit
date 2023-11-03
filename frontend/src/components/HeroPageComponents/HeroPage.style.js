@@ -21,6 +21,7 @@ export const StyledNavLink = styled(NavLink)`
   justify-content: center;
   align-items: center;
   margin-bottom: 12rem;
+  z-index: 2;
 `;
 
 export const LeftBar = styled.div`
