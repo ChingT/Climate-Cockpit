@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
+from emails.templates.email_factory import EmailFactory
 from rest_framework import serializers
 
 from registration.models import Registration, code_generator
@@ -48,7 +49,7 @@ def validate_code(code):
 def validate_code_and_email(data):
     user = User.objects.get(email=data["email"])
     reg_profile = Registration.objects.get(code=data["code"])
-    if reg_profile != user.registration_profile:
+    if reg_profile != user.registration:
         raise ValidationError({"code": ["The code does not belong to this email."]})
 
 
@@ -67,6 +68,10 @@ class RegistrationSerializer(serializers.Serializer):
 
         profile = Registration(user=new_user, code_type="RV")
         profile.save()
+
+        notification_email = EmailFactory.create_registration_confirmation(profile.code)
+        notification_email.to = email
+        notification_email.save(request=self.context["request"])
         return new_user
 
 
@@ -90,9 +95,9 @@ class RegistrationValidationSerializer(serializers.Serializer):
         user.username = self.validated_data["username"]
         user.set_password(self.validated_data["password"])
         user.is_active = True
-        user.registration_profile.code_used = True
+        user.registration.code_used = True
         user.save()
-        user.registration_profile.save()
+        user.registration.save()
         post_user_registration_validation.send(sender=User, user=user)
         return user
 
@@ -104,11 +109,15 @@ class PasswordResetSerializer(serializers.Serializer):
         email = self.validated_data["email"]
         user = User.objects.get(email=email)
 
-        profile = user.registration_profile
+        profile = user.registration
         profile.code = code_generator()
         profile.code_used = False
         profile.code_type = "PR"
         profile.save()
+
+        notification_email = EmailFactory.create_password_reset_request(profile.code)
+        notification_email.to = email
+        notification_email.save(request=self.context["request"])
 
 
 class PasswordResetValidationSerializer(serializers.Serializer):
@@ -128,8 +137,8 @@ class PasswordResetValidationSerializer(serializers.Serializer):
         code = self.validated_data["code"]
         user = Registration.objects.get(code=code).user
         user.set_password(self.validated_data["password"])
-        user.registration_profile.code_used = True
+        user.registration.code_used = True
         user.save()
-        user.registration_profile.save()
+        user.registration.save()
         post_user_password_reset_validation.send(sender=User, user=user)
         return user

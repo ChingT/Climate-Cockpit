@@ -28,7 +28,7 @@ class Registration(TimeStampedModel):
     USER_CHOICES = (("RV", "Registration Validation"), ("PR", "Password Reset"))
 
     user = models.OneToOneField(
-        on_delete=models.CASCADE, related_name="registration_profile", to=User
+        on_delete=models.CASCADE, related_name="registration", to=User
     )
     code = models.CharField(max_length=15, default=code_generator)
     code_type = models.CharField(max_length=2, choices=USER_CHOICES)

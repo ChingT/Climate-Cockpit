@@ -1,9 +1,10 @@
-version: '3'
+version: "3"
 
 services:
   app:
     image: ${CI_REGISTRY_IMAGE}:master
     env_file:
+      - ./envs/base.env
       - ./envs/prod.env
     command: sh /scripts/prod.sh
     volumes:
@@ -13,18 +14,28 @@ services:
     depends_on:
       - postgres
 
+  email:
+    image: ${CI_REGISTRY_IMAGE}:master
+    command: "python manage.py send_mail"
+    env_file:
+      - ./envs/base.env
+      - ./envs/prod.env
+    depends_on:
+      - postgres
+      - app
+
   postgres:
     image: postgres:16.0
     env_file:
-      - ./envs/prod.env
+      - ./envs/base.env
     volumes:
       - postgres_db:/var/lib/postgresql/data
 
   nginx:
     image: nginx:1.25.2
     ports:
-      - '80:80'
-      - '443:443'
+      - "80:80"
+      - "443:443"
     volumes:
       - ./nginx:/etc/nginx/conf.d/
       - static_files:/static-files
