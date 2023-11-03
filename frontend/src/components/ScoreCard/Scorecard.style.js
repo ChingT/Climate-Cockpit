@@ -13,7 +13,7 @@ export const ScorecardContainer = styled.div`
 
 export const CategoryBar = styled.div`
   display: flex;
-  width: 100%;
+  width: 80%;
   height: 35px;
   margin-bottom: 1px;
 `;
@@ -46,13 +46,12 @@ export const TitleAndBar = styled.div`
   height: inherit;
   flex-direction: row;
   align-items: center;
-  gap: 4%;
+  gap: 2rem;
 `;
 
 export const ScoreIcon = styled.div`
-  font-weight: 700;
-  font-size: 28px;
-  line-height: 30px;
+  width: 1rem;
+  font-weight: bold;
+  font-size: 1.5rem;
   color: ${(props) => props.theme.backgroundColors.impactIconSelected};
-  margin-bottom: 2.1%;
 `;
