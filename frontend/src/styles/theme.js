@@ -20,6 +20,12 @@ const theme = {
     impactIconUnselected: "black",
     impactIconSelected: "#0077BF",
   },
+  emissionColors: {
+    imported: "red",
+    inland: "red",
+    removed: "green",
+    solution: "blue",
+  },
   categoryLabels: {
     default: "white",
     electricity: "purple",
@@ -39,6 +45,7 @@ const theme = {
     primary: "black",
     secondary: "#4c4c4c",
     impactIcon: "white",
+    emissionLevel: "white",
     button: "white",
     emissionColor: "red",
     solutionColor: "blue",
