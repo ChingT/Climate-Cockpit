@@ -29,7 +29,13 @@ import electricityIconBlue from "../../assets/dashboard_icons/Electricity_Blue.p
 import importsIcon from "../../assets/dashboard_icons/Imports.png";
 import importsIconBlue from "../../assets/dashboard_icons/ImportsBlue.png";
 import removalIcon from "../../assets/dashboard_icons/Nature.png";
-import { DashboardGridDiv } from "./dashboard.style.js";
+import {
+  DashboardGridDiv,
+  Import,
+  Removal,
+  StyledH2,
+} from "./dashboard.style.js";
+import CircleShapedEmissionPoints from "./CircleShapedEmissionPoints.jsx";
 
 export default function DashboardGrid() {
   const totalIndustry = 10;
@@ -81,8 +87,8 @@ export default function DashboardGrid() {
   const additionalRemoval = 1;
 
   const imageStyle = {
-    width: "9vw", // Set the desired width here
-    height: "9vw", // Set the desired height here
+    width: "3.7vw", // Set the desired width here
+    height: "3.8vw", // Set the desired height here
   };
 
   const renderIcons = (count, imageUrl) => {
@@ -92,90 +98,110 @@ export default function DashboardGrid() {
   };
 
   return (
-    <DashboardGridDiv>
-      <h2>Inland Emissions</h2>
-      <p>Industry</p>
-      <div>
-        {renderIcons(totalIndustry - reducedIndustry, industry)}
-        {renderIcons(reducedIndustry, industryBlue)}
-      </div>
-      <div>
-        {renderIcons(
-          totalBuildingCommercial - reducedBuildingCommercial,
-          buildingIndustry,
-        )}
-        {renderIcons(reducedBuildingCommercial, buildingIndustryBlue)}
-
-        {renderIcons(totalTrucks - reducedTrucks, Trucks)}
-        {renderIcons(reducedTrucks, TrucksBlue)}
-
-        {renderIcons(totalFreightPlanes - reducedFreightPlanes, freightPlanes)}
-        {renderIcons(reducedFreightPlanes, freightPlanesBlue)}
-
-        {renderIcons(totalTrashIndustry - reducedTrashIndustry, trashIndustry)}
-        {renderIcons(reducedTrashIndustry, trashIndustryBlue)}
-      </div>
-
-      <p>Households</p>
-      <div>
-        {renderIcons(
-          totalBuildingResidential - reducedBuildingResidential,
-          buildingResidentialIcon,
-        )}
-        {renderIcons(reducedBuildingResidential, buildingResidentialIconBlue)}
-
-        {renderIcons(
-          totalPassengerPlanes - reducedPassengerPlanes,
-          passengerPlaneIcon,
-        )}
-        {renderIcons(reducedPassengerPlanes, passengerPlaneIconBlue)}
-
-        {renderIcons(
-          totalTrashHouseholds - reducedTrashHouseholds,
-          trashHouseholdsIcon,
-        )}
-        {renderIcons(reducedTrashHouseholds, trashHouseholdsIconBlue)}
-      </div>
-      <div>
-        {renderIcons(totalCars - reducedCars, carIcon)}
-        {renderIcons(reducedCars, carIconBlue)}
-      </div>
-      <div>
-        <div className="left-column">
-          <p>Agriculture</p>
+    <>
+        <StyledH2>Inland Emissions</StyledH2>
+      <DashboardGridDiv>
+        <p>Industry</p>
+        <div>
+          {renderIcons(totalIndustry - reducedIndustry, industry)}
+          {renderIcons(reducedIndustry, industryBlue)}
         </div>
-        <div className="right-column">
-          <p>Electricity</p>
-        </div>
-      </div>
-      <div>
-        <div className="left-column">
-          {renderIcons(totalCowMeat - reducedCowMeat, cowMeatIcon)}
-          {renderIcons(reducedCowMeat, cowMeatIconBlue)}
-          {renderIcons(totalCowMilk - reducedCowMilk, cowMilkIcon)}
-          {renderIcons(reducedCowMilk, cowMilkIconBlue)}
-          {renderIcons(totalOtherMeat - reducedOtherMeat, otherMeatIcon)}
-          {renderIcons(reducedOtherMeat, otherMeatIconBlue)}
-          {renderIcons(totalPlants - reducedPlants, plantsIcon)}
-          {renderIcons(reducedPlants, plantsIconBlue)}
-        </div>
-        <div className="right-column">
-          {renderIcons(totalElectricity - reducedElectricity, electricityIcon)}
-          {renderIcons(reducedElectricity, electricityIconBlue)}
-        </div>
-      </div>
+        <div>
+          {renderIcons(
+            totalBuildingCommercial - reducedBuildingCommercial,
+            buildingIndustry,
+          )}
+          {renderIcons(reducedBuildingCommercial, buildingIndustryBlue)}
 
-      <h2>Imports</h2>
-      <div>
+          {renderIcons(totalTrucks - reducedTrucks, Trucks)}
+          {renderIcons(reducedTrucks, TrucksBlue)}
+
+          {renderIcons(
+            totalFreightPlanes - reducedFreightPlanes,
+            freightPlanes,
+          )}
+          {renderIcons(reducedFreightPlanes, freightPlanesBlue)}
+
+          {renderIcons(
+            totalTrashIndustry - reducedTrashIndustry,
+            trashIndustry,
+          )}
+          {renderIcons(reducedTrashIndustry, trashIndustryBlue)}
+        </div>
+
+        <p>Households</p>
+        <div>
+          {renderIcons(
+            totalBuildingResidential - reducedBuildingResidential,
+            buildingResidentialIcon,
+          )}
+          {renderIcons(reducedBuildingResidential, buildingResidentialIconBlue)}
+
+          {renderIcons(
+            totalPassengerPlanes - reducedPassengerPlanes,
+            passengerPlaneIcon,
+          )}
+          {renderIcons(reducedPassengerPlanes, passengerPlaneIconBlue)}
+
+          {renderIcons(
+            totalTrashHouseholds - reducedTrashHouseholds,
+            trashHouseholdsIcon,
+          )}
+          {renderIcons(reducedTrashHouseholds, trashHouseholdsIconBlue)}
+        </div>
+        <div>
+          {renderIcons(totalCars - reducedCars, carIcon)}
+          {renderIcons(reducedCars, carIconBlue)}
+        </div>
+        <div>
+          <div className="left-column">
+            <p>Agriculture</p>
+          </div>
+          <div className="right-column">
+            <p>Electricity</p>
+          </div>
+        </div>
+        <div>
+          <div className="left-column">
+            {renderIcons(totalCowMeat - reducedCowMeat, cowMeatIcon)}
+            {renderIcons(reducedCowMeat, cowMeatIconBlue)}
+            {renderIcons(totalCowMilk - reducedCowMilk, cowMilkIcon)}
+            {renderIcons(reducedCowMilk, cowMilkIconBlue)}
+            {renderIcons(totalOtherMeat - reducedOtherMeat, otherMeatIcon)}
+            {renderIcons(reducedOtherMeat, otherMeatIconBlue)}
+            {renderIcons(totalPlants - reducedPlants, plantsIcon)}
+            {renderIcons(reducedPlants, plantsIconBlue)}
+          </div>
+          <div className="right-column">
+            {renderIcons(
+              totalElectricity - reducedElectricity,
+              electricityIcon,
+            )}
+            {renderIcons(reducedElectricity, electricityIconBlue)}
+              <CircleShapedEmissionPoints
+            data={{ type: "inland", total_number: 47 }}
+          />
+          </div>
+        </div>
+      </DashboardGridDiv>
+      <StyledH2>Imports</StyledH2>
+      <Import>
         {renderIcons(totalImports - reducedImports, importsIcon)}
         {renderIcons(reducedImports, importsIconBlue)}
-      </div>
+        <CircleShapedEmissionPoints
+          data={{ type: "imported", total_number: 71 }}
+        />
+      </Import>
 
-      <h2>Removal</h2>
-
-      <div className="left-column">
-        {renderIcons(totalRemoval + additionalRemoval, removalIcon)}
-      </div>
-    </DashboardGridDiv>
+      <StyledH2>Removal</StyledH2>
+      <Removal>
+        <div className="left-column">
+          {renderIcons(totalRemoval + additionalRemoval, removalIcon)}
+          <CircleShapedEmissionPoints
+            data={{ type: "removed", total_number: -2 }}
+          />
+        </div>
+      </Removal>
+    </>
   );
 }
