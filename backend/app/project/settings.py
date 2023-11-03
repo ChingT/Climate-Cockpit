@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "fullurl",
     # own
     "user",
+    "registration",
 ]
 
 MIDDLEWARE = [
