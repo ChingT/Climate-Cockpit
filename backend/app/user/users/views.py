@@ -5,7 +5,6 @@ from rest_framework.generics import (
     RetrieveAPIView,
     RetrieveUpdateDestroyAPIView,
 )
-
 from user.serializers import UserSerializer
 
 User = get_user_model()
