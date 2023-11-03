@@ -1,13 +1,13 @@
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from emails.templates.email_factory import EmailFactory
-from rest_framework import serializers
-
-from registration.models import Registration, code_generator
+from registration.models import Registration
 from registration.signals import (
     post_user_password_reset_validation,
     post_user_registration_validation,
 )
+from rest_framework import serializers
+from utils import code_generator
 
 User = get_user_model()
 
@@ -39,11 +39,10 @@ def validate_code(code):
     except Registration.DoesNotExist as err:
         message = "This code is not valid!"
         raise ValidationError(message) from err
-    else:
-        if reg_profile.code_used:
-            message = "This code has already been used!"
-            raise ValidationError(message)
-        return code
+    if reg_profile.code_used:
+        message = "This code has already been used!"
+        raise ValidationError(message)
+    return code
 
 
 def validate_code_and_email(data):
@@ -66,7 +65,9 @@ class RegistrationSerializer(serializers.Serializer):
         new_user = User(username=email, email=email, is_active=False)
         new_user.save()
 
-        profile = Registration(user=new_user, code_type="RV")
+        profile = Registration(
+            user=new_user, code_type=Registration.TypeChoices.REGISTRATION_VALIDATION
+        )
         profile.save()
 
         notification_email = EmailFactory.create_registration_confirmation(profile.code)
@@ -112,7 +113,7 @@ class PasswordResetSerializer(serializers.Serializer):
         profile = user.registration
         profile.code = code_generator()
         profile.code_used = False
-        profile.code_type = "PR"
+        profile.code_type = Registration.TypeChoices.PASSWORD_RESET
         profile.save()
 
         notification_email = EmailFactory.create_password_reset_request(profile.code)
