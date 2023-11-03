@@ -2,7 +2,6 @@
 
 from django.db import migrations, models
 import django_extensions.db.fields
-import utils
 
 
 class Migration(migrations.Migration):
@@ -14,14 +13,18 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Registration',
+            name='Email',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('created', django_extensions.db.fields.CreationDateTimeField(auto_now_add=True, verbose_name='created')),
                 ('modified', django_extensions.db.fields.ModificationDateTimeField(auto_now=True, verbose_name='modified')),
-                ('code', models.CharField(default=utils.code_generator, max_length=15)),
-                ('code_type', models.CharField(choices=[('RV', 'Registration Validation'), ('PR', 'Password Reset')], default='RV', max_length=2)),
-                ('code_used', models.BooleanField(default=False)),
+                ('to', models.EmailField(max_length=254, verbose_name='To')),
+                ('subject', models.CharField(max_length=200, verbose_name='Subject')),
+                ('content', models.TextField(verbose_name='Content')),
+                ('footer', models.TextField(verbose_name='Footer')),
+                ('compiled_template', models.TextField(blank=True, verbose_name='compiled_template')),
+                ('bcc', models.TextField(blank=True, verbose_name='bcc')),
+                ('is_sent', models.BooleanField(default=False, verbose_name='is_sent')),
             ],
             options={
                 'get_latest_by': 'modified',
