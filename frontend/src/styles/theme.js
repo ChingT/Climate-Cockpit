@@ -43,6 +43,8 @@ const theme = {
     emissionColor: "red",
     solutionColor: "blue",
     removalColor: "green",
+    heroPageMainColor: "#545454",
+    heroPageSecondaryColor: "#0077BF",
   },
   fontSize: {
     equation: "18px",
