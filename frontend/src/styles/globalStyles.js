@@ -22,19 +22,24 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #root {
+    min-height: calc(100vh - 96px);
     height: 100%;
-    min-height: 100vh;
+    width: 100vw;
     background: conic-gradient(from 90deg at 1.1px 1.1px, #f3f3e4 25%, rgb(217, 217, 217) 0);
     background-size: 24px 24px;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 
-  main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: ${(props) => props.theme.header_height} 2rem 2rem;
-    min-height: 100vh;
-  }
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: ${(props) => props.theme.header_height} 2rem 2rem;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto; 
+}
 
   a {
     text-decoration: none;
