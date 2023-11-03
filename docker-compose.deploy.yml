@@ -16,7 +16,7 @@ services:
 
   email:
     image: ${CI_REGISTRY_IMAGE}:master
-    command: "python manage.py send_mail"
+    command: "python app/manage.py send_mail"
     env_file:
       - ./envs/base.env
       - ./envs/prod.env
