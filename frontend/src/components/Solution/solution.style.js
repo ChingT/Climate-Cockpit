@@ -12,41 +12,83 @@ export const SolutionContainer = styled.div`
     border-radius: 10px;
     padding: 5px;
     width: 100%; /* Ensures that the row takes the full width of its container */
-   
+
 
     & > div:first-child {
       display: flex; /* Aligns checkbox, icon, and name in a row */
       align-items: center;
       justify-content: flex-start;
       gap: 10px;
+
       input {
-          margin: 10px; /
+        margin: 10px;
+      /
       }
-      .solutionName{
+
+      .solutionName {
         font-size: 30px; // Change this to the font-size you want
-        margin: 10px; /
-        font-weight: bold;
+        margin: 10px;
+      / font-weight: bold;
       }
-    
+
     }
 
     & > div:last-child {
-      display: flex; /* Aligns supporters/category and impact in a row */
+      display: flex; /* Aligns checkbox, icon, and name in a row */
       align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-right: 5px;
+
+      & > div:first-child {
+        display: flex; /* Aligns checkbox, icon, and name in a row */
+        align-items: center;
+        flex-direction: column; /* This stacks children vertically */
+        justify-content: center;
+
+
+        /* If you want all items to touch the right edge, remove padding/margin from these elements */
+      }
+
       /* If you want all items to touch the right edge, remove padding/margin from these elements */
     }
+
   }
 
   & > div:last-child {
+    border: 2px solid red;
+    display: flex; /* Aligns checkbox, icon, and name in a row */
+    align-items: flex-start;
+    flex-direction: column; /* This stacks children vertically */
+    justify-content: space-between;
+    gap: 10px;
+    padding: 20px;
+
+
     /* Styles for the second main div (Explanation, ProgressBar, etc.) remain the same */
     /* ... */
   }
-  .supporters {
-    img {
-      width: 8%; // Set the width to 80% of its parent
-      height: auto; // Maintain the aspect ratio of the image
-    }
+  
+.solutionButton {
+  display: flex;
+  justify-content: center; /* Centers the button horizontally */
+  align-items: center; /* Centers the button vertically, if the container's height is defined */
+  width: 100%; /* Ensures the container takes the full width */
+}
+
+  /* Styles for the second main div (Explanation, ProgressBar, etc.) remain the same */
+  /* ... */
+}
+
+}
+.supporters {
+  img {
+    width: 20px; // Set the width to 80% of its parent
+    height: auto; // Maintain the aspect ratio of the image
   }
+}
+
+
 `;
 
 export const CheckMark = styled.div``;
@@ -84,6 +126,7 @@ export const ImpactIconDiv = styled.div`
   width: 6vh;
   height: 6vh;
   font-size: 3vh;
+
   img {
     filter: brightness(0) invert(1);
   }
@@ -114,6 +157,7 @@ export const SvgIconDiv = styled.div`
   border-radius: 10px;
   width: 6vh;
   height: 6vh;
+
   img {
     filter: brightness(0) invert(1);
     width: 80%; // Set the width to 80% of its parent
