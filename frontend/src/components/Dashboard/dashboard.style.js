@@ -30,6 +30,7 @@ export const DashboardGridDiv = styled.div`
 `;
 
 export const DashboardCategoriesTotalPoints = styled.div`
+  padding-top: 5rem;
   display: flex;
   justify-content: space-around;
   flex-direction: row;
