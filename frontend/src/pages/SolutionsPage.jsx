@@ -5,6 +5,7 @@ import SolutionDashboard from "../components/Dashboard/SolutionDashboard.jsx";
 
 const Main = styled.div`
   margin-top: 4rem;
+  overflow: scroll;
 `;
 const SolutionsPage = () => {
   return (
