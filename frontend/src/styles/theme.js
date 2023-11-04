@@ -1,4 +1,8 @@
 const theme = {
+  GeneralBackground: {
+    background:
+      "conic-gradient(from 90deg at 1.1px 1.1px, #f3f3e4 25%, rgb(217, 217, 217) 0)",
+  },
   ResourcesColors: {
     tabColor: "#000",
     videoBackground: "#da1515",
