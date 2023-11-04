@@ -1,16 +1,9 @@
 import styled from "styled-components";
-
-export const SignInHeader = styled.header`
-  margin-top: 4rem;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-  gap: 2rem;
-  font-size: 0.8rem;
-`;
+import drought from "../../assets/images/drought2.png";
+import theme from "../../styles/theme.js";
 
 export const AuthFormContainer = styled.div`
+  background: url(${drought}) no-repeat center top/cover;
   height: 100%;
   width: 100%;
   display: flex;
@@ -19,18 +12,20 @@ export const AuthFormContainer = styled.div`
 `;
 
 export const AuthForm = styled.form`
-  width: 100%;
-  height: 100%;
-  max-width: ${(props) => (props.cols > 1 ? "40rem" : "20rem")};
+  width: 27%;
+  height: 40%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 7rem;
 
   .input-container {
-    flex: 1;
+    flex: 2;
     display: grid;
-    align-content: center;
+    align-content: flex-start;
     justify-items: center;
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -40,6 +35,11 @@ export const AuthForm = styled.form`
         1fr
       );
     }
+
+    .input-wrapper input::placeholder {
+      color: ${(props) => props.theme.fontColors.primary};
+      font-size: 18px;
+    }
   }
 `;
 
@@ -47,7 +47,7 @@ export const FormTitle = styled.h2`
   font-size: 2.5rem;
   font-weight: 500;
   text-align: center;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   grid-column: 1/-1;
 `;
 
@@ -57,7 +57,7 @@ export const InputFieldContainer = styled.div`
 
   label {
     text-transform: capitalize;
-    color: ${(props) => props.theme.colors.lightGray};
+    color: ${(props) => props.theme.fontColors.heroPageSecondaryColor};
   }
 
   .input-wrapper {
@@ -66,17 +66,20 @@ export const InputFieldContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 1.5rem;
-
-    img {
-      width: 1.5rem;
-      height: 1.5rem;
-    }
+    font-style: italic;
 
     input {
       border: none;
       flex: 1 1 24rem;
       padding: 1rem 0.25rem;
       font: inherit;
+      background: ${theme.GeneralBackground.background};
+      background-size: 24px 24px;
+
+      &:focus {
+        outline: 2px solid
+          ${(props) => props.theme.backgroundColors.impactIconSelected};
+      }
     }
   }
 `;
@@ -84,11 +87,12 @@ export const InputFieldContainer = styled.div`
 export const ConfirmationText = styled.p`
   text-align: center;
   line-height: 1.6;
+  font-size: 18px;
   margin-bottom: 2rem;
 `;
 
 export const ErrorMessage = styled.p`
   color: red;
-  font-size: 14px;
-  margin-top: 0.5rem;
+  font-size: 16px;
+  margin-top: 0.2rem;
 `;

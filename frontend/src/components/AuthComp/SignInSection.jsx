@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import AvatarIcon from "../../assets/svgs/avatar.svg";
-import PasswordIcon from "../../assets/svgs/password.svg";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../store/slices/loggedInUser.js";
 import { useDispatch } from "react-redux";
 
@@ -11,11 +9,9 @@ import {
   ErrorMessage,
   FormTitle,
   InputFieldContainer,
-  SignInHeader,
 } from "../Layout/Layout.style.js";
 import useApiRequest from "../../hooks/useApiRequest.js";
-import { PrimaryButton, SecondaryButton } from "../../styles/globalStyles.js";
-import CreateAccountProgress from "./CreateAccountProgress.jsx";
+import { ButtonsStyle } from "../../styles/buttons.style.js";
 
 function SignInSection() {
   const [user, setUser] = useState({ email: undefined, password: undefined });
@@ -43,19 +39,12 @@ function SignInSection() {
 
   return (
     <>
-      <SignInHeader>
-        <p>Don&apos;t have an account?</p>
-        <Link to="/signup">
-          <SecondaryButton>sign up</SecondaryButton>
-        </Link>
-      </SignInHeader>
       <AuthFormContainer>
         <AuthForm onSubmit={handleLogin}>
           <div className={"input-container"}>
             <FormTitle>Sign In</FormTitle>
             <InputFieldContainer>
               <div className={"input-wrapper"}>
-                <img src={AvatarIcon}></img>
                 <input
                   placeholder="Email"
                   type="email"
@@ -68,7 +57,6 @@ function SignInSection() {
             </InputFieldContainer>
             <InputFieldContainer>
               <div className={"input-wrapper"}>
-                <img src={PasswordIcon} alt="Password icon" />
                 <input
                   placeholder="Password"
                   type="password"
@@ -82,8 +70,7 @@ function SignInSection() {
             {error?.detail && <p className={"error-message"}>{error.detail}</p>}
           </div>
           <div className={"form-footer"}>
-            <PrimaryButton onClick={handleLogin}>sign in</PrimaryButton>
-            <CreateAccountProgress />
+            <ButtonsStyle onClick={handleLogin}>Sign in</ButtonsStyle>
           </div>
         </AuthForm>
       </AuthFormContainer>
