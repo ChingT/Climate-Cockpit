@@ -6,7 +6,7 @@ const useApiRequest = (auth) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  axios.defaults.baseURL = "https://motion.propulsion-home.ch/backend/api/";
+  axios.defaults.baseURL = "https://climate-cockpit.propulsion-learn.ch/api/";
 
   const sendRequest = (method, url, requestData, isFormData) => {
     setLoading(true);
