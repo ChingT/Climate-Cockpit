@@ -27,7 +27,7 @@ class ListCreateCommentAPIView(ListCreateAPIView):
     def get_queryset(self):
         post_id = self.kwargs.get(self.lookup_url_kwarg)
         target_post = get_object_or_404(Post, id=post_id)
-        return Comment.objects.filter(post=target_post)
+        return Comment.objects.filter(post=target_post).order_by("-created")
 
     def perform_create(self, serializer):
         post_id = self.kwargs.get(self.lookup_url_kwarg)
