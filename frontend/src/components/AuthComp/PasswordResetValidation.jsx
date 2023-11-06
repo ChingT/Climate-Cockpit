@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
@@ -9,6 +9,7 @@ import {
   InputField,
 } from "../Layout/Layout.style.js";
 import { ButtonsStyle } from "../../styles/buttons.style.js";
+import useApiRequest from "../../hooks/useApiRequest.js";
 
 function PasswordResetValidation() {
   const [userData, setUserData] = useState({
@@ -17,25 +18,18 @@ function PasswordResetValidation() {
     password: "",
     password_repeat: "",
   });
-  const [error, setError] = useState(null);
+  const { sendRequest, error, data } = useApiRequest("noAuth");
   const navigate = useNavigate();
 
-  const handleValidationSubmit = async (e) => {
+  const handleValidationSubmit = (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.patch(
-        "auth/password-reset/validation/",
-        userData,
-      );
-      if (response.status === 200) {
-        navigate("/signin");
-      }
-    } catch (error) {
-      setError(
-        "Password reset validation failed. Please double-check your inputs.",
-      );
-    }
+    sendRequest("patch", "auth/password-reset/validation/", userData);
   };
+  useEffect(() => {
+    if (data === "success") {
+      navigate("/signin");
+    }
+  }, [data]);
 
   return (
     <>
@@ -103,7 +97,10 @@ function PasswordResetValidation() {
               </div>
             </InputField>
           </div>
-          {error && <ErrorMessage>{error}</ErrorMessage>}
+          {error?.non_field_errors && (
+            <ErrorMessage>{error.non_field_errors}</ErrorMessage>
+          )}
+          {error?.detail && <ErrorMessage>{error.detail}</ErrorMessage>}
           <div>
             <ButtonsStyle
               style={{ marginTop: "2.7rem" }}
