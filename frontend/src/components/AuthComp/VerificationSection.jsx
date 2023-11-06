@@ -28,11 +28,11 @@ const VerificationSection = () => {
   };
 
   useEffect(() => {
-    if (data === "success") {
-      navigate("/auth");
+    if (data !== null) {
       localStorage.removeItem("registered_email");
+      navigate("/signin");
     }
-  }, [data]);
+  }, [navigate, data]);
 
   return (
     <>

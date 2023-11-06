@@ -50,7 +50,7 @@ const Navigation = () => {
 
   useEffect(() => {
     dispatch(setRequests(data?.results));
-  }, [data]);
+  }, [data, dispatch]);
 
   useEffect(() => {
     setSentRequests(
@@ -65,7 +65,7 @@ const Navigation = () => {
           request.requester.id !== loggedInUser.id && request.status === "P",
       ),
     );
-  }, [friendRequests]);
+  }, [friendRequests, loggedInUser]);
 
   return (
     <HeaderContainer>
