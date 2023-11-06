@@ -11,8 +11,8 @@ const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'CabinSketch';
     src: url(${CabinSketch}) format('truetype');
-    font-weight: normal;
-    font-style: normal;
+    font-weight: 400;
+    font-style: italic;
   }
 
   body {
@@ -22,19 +22,28 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #root {
+    min-height: calc(100vh - 96px);
     height: 100%;
-    min-height: 100vh;
+    width: 100vw;
     background: conic-gradient(from 90deg at 1.1px 1.1px, #f3f3e4 25%, rgb(217, 217, 217) 0);
     background-size: 24px 24px;
-  }
-
-  main {
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: ${(props) => props.theme.header_height} 2rem 2rem;
-    min-height: 100vh;
+    font-family: 'CabinSketch',serif;
+  }  
+  
+  main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem; 
+  min-height: calc(100vh - ${(props) => props.theme.header_height});
+  max-height: calc(100vh - ${(props) => props.theme.header_height});
+  overflow-y: auto;
+  margin-top: ${(props) => props.theme.header_height};
   }
+
 
   a {
     text-decoration: none;
@@ -47,27 +56,15 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export const defaultButtonStyles = css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 100%;
-
-  background-color: white;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 999px;
-
-  margin: 0 auto;
-  padding: 1em 2em;
-
-  font-size: 0.75rem;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  white-space: nowrap;
-
+  background-color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.fontColors.button};
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25);
+  padding: 10px 20px 10px 20px;
   cursor: pointer;
-
-  transition: background-color 200ms linear;
+  font-size: 19px;
+  font-family: "CabinSketch", serif;
+  font-weight: 600;
 
   &:hover {
     background-color: #d2baff;

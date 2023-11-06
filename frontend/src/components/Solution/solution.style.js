@@ -109,7 +109,6 @@ export const CategoryLabelDiv = styled.div`
     props.theme.categoryLabels[props.$category] ||
     props.theme.categoryLabels.default};
   color: ${(props) => props.theme.categoryLabels.fontColor};
-
   width: 80px;
 `;
 

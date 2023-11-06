@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
-import CheckMarkIcon from "../../assets/svgs/checkmark_new.svg";
+import CheckMarkIcon from "../../assets/images/CheckMarcIcon.png";
 import {
   AuthForm,
   AuthFormContainer,
   ConfirmationText,
   FormTitle,
 } from "../Layout/Layout.style.js";
-import { CheckMark, PrimaryButton } from "../../styles/globalStyles.js";
-import CreateAccountProgress from "./CreateAccountProgress.jsx";
+import { CheckMark } from "../../styles/globalStyles.js";
+import { ButtonsStyle } from "../../styles/buttons.style.js";
 
 function CongratsSection() {
   const userEmail = localStorage.getItem("registered_email");
@@ -26,9 +26,8 @@ function CongratsSection() {
           </div>
           <div>
             <Link to="/verification">
-              <PrimaryButton>continue</PrimaryButton>
+              <ButtonsStyle>Continue</ButtonsStyle>
             </Link>
-            <CreateAccountProgress step={2} />
           </div>
         </AuthForm>
       </AuthFormContainer>

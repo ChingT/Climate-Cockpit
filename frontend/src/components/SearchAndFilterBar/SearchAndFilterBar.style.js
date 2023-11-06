@@ -52,6 +52,7 @@ export const FilterWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-right: 1rem;
+  font-family: inherit;
 `;
 export const FilterSetter = styled.button`
   background: none;
@@ -66,6 +67,7 @@ export const FilterSetter = styled.button`
   border-bottom: 2px solid;
   border-color: ${(props) => (props.$filterActive ? "black" : "transparent")};
   color: ${(props) => (props.$filterActive ? "black" : "rgba(0,0,0,0.5)")};
+  font-family: inherit;
 
   &:hover {
     border-color: black;

@@ -1,17 +1,14 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import LetterIcon from "../../assets/svgs/letter.svg";
+import { useNavigate } from "react-router-dom";
 import {
   AuthForm,
   AuthFormContainer,
   ErrorMessage,
   FormTitle,
   InputFieldContainer,
-  SignInHeader,
 } from "../Layout/Layout.style.js";
-import { PrimaryButton, SecondaryButton } from "../../styles/globalStyles.js";
 import useApiRequest from "../../hooks/useApiRequest.js";
-import CreateAccountProgress from "./CreateAccountProgress.jsx";
+import { ButtonsStyle } from "../../styles/buttons.style.js";
 
 function SignUpSection() {
   const [userEmail, setEmail] = useState("");
@@ -30,19 +27,12 @@ function SignUpSection() {
 
   return (
     <>
-      <SignInHeader>
-        <p>Already have an account?</p>
-        <Link to="/signin">
-          <SecondaryButton>sign in</SecondaryButton>
-        </Link>
-      </SignInHeader>
       <AuthFormContainer>
         <AuthForm>
           <div className={"input-container"}>
             <FormTitle>Sign Up</FormTitle>
             <InputFieldContainer>
               <div className={"input-wrapper"}>
-                <img src={LetterIcon}></img>
                 <input
                   placeholder="Email"
                   type="email"
@@ -55,8 +45,7 @@ function SignUpSection() {
             {error?.detail && <ErrorMessage>{error.detail}</ErrorMessage>}
           </div>
           <div>
-            <PrimaryButton onClick={handleSignUpClick}>SIGN UP</PrimaryButton>
-            <CreateAccountProgress step={1} />
+            <ButtonsStyle onClick={handleSignUpClick}>Sign up</ButtonsStyle>
           </div>
         </AuthForm>
       </AuthFormContainer>

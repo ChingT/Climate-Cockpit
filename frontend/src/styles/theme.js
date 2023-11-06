@@ -1,4 +1,8 @@
 const theme = {
+  General: {
+    background:
+      "conic-gradient(from 90deg at 1.1px 1.1px, #f3f3e4 25%, rgb(217, 217, 217) 0)",
+  },
   ResourcesColors: {
     tabColor: "#000",
     videoBackground: "#da1515",
@@ -13,6 +17,7 @@ const theme = {
     secondary: "white",
     lightGray: "#aaa",
     lightGrayBorder: "#ddd",
+    solutionPagePrimaryColor: "#0077BF",
     unselectedSolution: "red",
     selectedSolution: "green",
   },
@@ -30,16 +35,16 @@ const theme = {
   },
   categoryLabels: {
     default: "white",
-    electricity: "purple",
-    buildings: "orange",
-    transport: "violet",
-    food: "green",
-    trash: "grey",
-    industry: "red",
-    import: "pink",
-    nature: "lightgreen",
-    money: "yellow",
-    innovation: "blue",
+    Electricity: "purple",
+    Buildings: "orange",
+    Transport: "violet",
+    Food: "green",
+    Trash: "grey",
+    Industry: "red",
+    Import: "pink",
+    Nature: "lightgreen",
+    Money: "yellow",
+    Innovation: "blue",
     fontSize: "14px",
     fontColor: "black",
   },

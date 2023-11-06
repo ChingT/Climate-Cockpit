@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useApiRequest from "../../hooks/useApiRequest.js";
-import { PrimaryButton } from "../../styles/globalStyles.js";
 import {
   AuthForm,
   AuthFormContainer,
@@ -9,8 +8,8 @@ import {
   FormTitle,
   InputFieldContainer,
 } from "../Layout/Layout.style.js";
-import CreateAccountProgress from "./CreateAccountProgress.jsx";
 import InputField from "./InputField.jsx";
+import { ButtonsStyle } from "../../styles/buttons.style.js";
 
 const VerificationSection = () => {
   const registeredEmail = localStorage.getItem("registered_email");
@@ -57,26 +56,27 @@ const VerificationSection = () => {
               id={"email"}
               error={error}
               handleInput={handleInput}
-              label={"E-mail"}
+              placeholder="Email"
             />
 
             <InputField
               userData={userData}
               id={"username"}
               error={error}
+              placeholder="Username"
               handleInput={handleInput}
-              label={"Username"}
+              lplaceholder="Username"
             />
 
             <InputField
-              label="First Name"
+              placeholder="First Name"
               userData={userData}
               error={error}
               handleInput={handleInput}
               id={"first_name"}
             />
             <InputField
-              label="Last Name"
+              placeholder="Last Name"
               userData={userData}
               error={error}
               id={"last_name"}
@@ -85,7 +85,7 @@ const VerificationSection = () => {
 
             <InputField
               userData={userData}
-              label="Password"
+              placeholder="Password"
               error={error}
               id={"password"}
               handleInput={handleInput}
@@ -94,7 +94,7 @@ const VerificationSection = () => {
 
             <InputField
               userData={userData}
-              label="Repeat Password"
+              placeholder="Password Repeat"
               error={error}
               id={"password_repeat"}
               handleInput={handleInput}
@@ -107,11 +107,13 @@ const VerificationSection = () => {
           </div>
           <div>
             <InputFieldContainer span={2}>
-              <PrimaryButton onClick={handleValidationSubmit}>
+              <ButtonsStyle
+                style={{ marginTop: "3rem" }}
+                onClick={handleValidationSubmit}
+              >
                 Complete
-              </PrimaryButton>
+              </ButtonsStyle>
             </InputFieldContainer>
-            <CreateAccountProgress step={3} />
           </div>
         </AuthForm>
       </AuthFormContainer>
