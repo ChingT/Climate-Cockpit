@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "./CloudAnimation.css";
 
 const Hero3DCloud = () => {
@@ -12,7 +12,7 @@ const Hero3DCloud = () => {
         window[vendors[x] + "CancelRequestAnimationFrame"];
     }
     if (!window.requestAnimationFrame)
-      window.requestAnimationFrame = function (callback, element) {
+      window.requestAnimationFrame = function (callback) {
         const currTime = new Date().getTime();
         const timeToCall = Math.max(0, 16 - (currTime - lastTime));
         const id = window.setTimeout(() => {

@@ -1,19 +1,19 @@
 import { useState } from "react";
 import {
-  Avatar,
-  PostText,
-  LikeCount,
-  PostHeaderWrapper,
-  PostImageContainer,
   AuthorInfoWrapper,
-  PostImage,
+  Avatar,
+  EditButton,
   FooterContainer,
-  ProfileLinkWrapper,
+  LikeCount,
+  ModalPostContainer,
   PostActionButton,
   PostActionWrapper,
-  ModalPostContainer,
   PostContentContainer,
-  EditButton,
+  PostHeaderWrapper,
+  PostImage,
+  PostImageContainer,
+  PostText,
+  ProfileLinkWrapper,
 } from "./Post.style.js";
 import likeHeart from "../../../assets/svgs/heart_rgb.png";
 import shareArrow from "../../../assets/svgs/share.svg";
@@ -26,7 +26,6 @@ import Overlay from "../../Overlay/Overlay.jsx";
 
 const ModalPost = ({ postData, onClose }) => {
   const userData = useSelector((store) => store.loggedInUser.user);
-  const [editModeActive, setEditModeActive] = useState(false);
 
   const [postIsLiked, setPostIsLiked] = useState(postData.logged_in_user_liked);
   const [amountOfLikes, setAmountOfLikes] = useState(postData.amount_of_likes);
@@ -73,7 +72,7 @@ const ModalPost = ({ postData, onClose }) => {
               </AuthorInfoWrapper>
             </ProfileLinkWrapper>
             {userData.id === postData.user.id && (
-              <EditButton onClick={() => setEditModeActive(true)}>
+              <EditButton>
                 <img src={MenuDot} />
               </EditButton>
             )}
