@@ -22,9 +22,9 @@ function ProfileData(props) {
       </div>
 
       <div className={"right-container"}>
-        <h3>Things I like</h3>
+        <h3>Memberships</h3>
         <LikedThingsContainer>
-          {props.userdata.things_user_likes.map((thing) => {
+          {props.userdata.memberships.map((thing) => {
             return <li key={thing}>{thing}</li>;
           })}
         </LikedThingsContainer>
