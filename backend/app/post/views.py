@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from friend_request.models import get_friends
 from post.models import Post
 from post.serializers import PostSerializer
 from rest_framework import status
@@ -173,6 +174,5 @@ class ListFriendsPost(ListAPIView):
     search_fields = ["content"]
 
     def get_queryset(self):
-        # TODO(ching): Fix this when friend model is implemented.
-        # 009
-        return Post.objects.all().order_by("-created")
+        friends = get_friends(self.request.user)
+        return Post.objects.filter(user__in=friends).order_by("-created")
