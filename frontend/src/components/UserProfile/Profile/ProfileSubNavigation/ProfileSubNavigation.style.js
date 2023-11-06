@@ -5,12 +5,14 @@ export const SubSectionNavContainer = styled.div`
   align-items: center;
   padding: 0 2rem;
   column-gap: 2rem;
+  font-family: inherit;
 `;
 
 export const ProfileSubNavItem = styled.button`
   background: none;
   border: none;
   text-align: left;
+  font-family: inherit;
 
   width: 100%;
   max-width: 5rem;
