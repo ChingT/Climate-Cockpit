@@ -3,6 +3,9 @@ const theme = {
     background:
       "conic-gradient(from 90deg at 1.1px 1.1px, #f3f3e4 25%, rgb(217, 217, 217) 0)",
   },
+  ResetPasswordColors: {
+    color: "#0077BF",
+  },
   ResourcesColors: {
     tabColor: "#000",
     videoBackground: "#da1515",

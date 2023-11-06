@@ -45,7 +45,12 @@ function SignUpSection() {
             {error?.detail && <ErrorMessage>{error.detail}</ErrorMessage>}
           </div>
           <div>
-            <ButtonsStyle onClick={handleSignUpClick}>Sign up</ButtonsStyle>
+            <ButtonsStyle
+              style={{ marginBottom: "5rem" }}
+              onClick={handleSignUpClick}
+            >
+              Sign up
+            </ButtonsStyle>
           </div>
         </AuthForm>
       </AuthFormContainer>
