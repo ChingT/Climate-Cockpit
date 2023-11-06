@@ -21,7 +21,14 @@ class ListUserAPIView(ListAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.filter(is_active=True).order_by("-date_joined")
     filter_backends = [SearchFilter]
-    search_fields = ["username", "first_name", "last_name"]
+    search_fields = [
+        "username",
+        "first_name",
+        "last_name",
+        "location",
+        "about_me",
+        "memberships",
+    ]
 
 
 class GetUserAPIView(RetrieveAPIView):
