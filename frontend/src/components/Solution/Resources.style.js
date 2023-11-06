@@ -42,18 +42,24 @@ export const BookThumbnail = styled.img`
 export const VideoInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  height: auto;
+  width: 200px;
 `;
 
 export const VideoTitle = styled.h3`
-  margin: 0;
-  padding-top: 5px;
+  margin: 10px 0 5px;
+  width: 100%;
+  text-align: start;
   font-size: 1rem;
 `;
 
 export const VideoDescription = styled.p`
-  margin: 0;
+  margin-top: auto;
+  width: 100%;
+  text-align: start;
   font-size: 0.85rem;
   color: #666;
 `;
@@ -74,7 +80,7 @@ export const Tab = styled.div`
 export const VideoContainer = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   gap: 10px;
   padding: 10px 0;

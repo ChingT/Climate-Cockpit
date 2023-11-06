@@ -51,24 +51,24 @@ function Resources() {
   ];
   const videoList = [
     {
-      url: "https://www.youtube.com/embed/FIZI3k7mTvA",
-      title: "Video Title 1",
-      source: "This is a description for Video 1.",
+      url: "https://www.youtube.com/embed/J3Zsj4Lfs_o",
+      title: "Saving lives through clean cookstoves",
+      source: "TEDx",
     },
     {
-      url: "https://www.youtube.com/embed/FIZI3k7mTvA",
-      title: "Video Title 2",
-      source: "This is a description for Video 2.",
+      url: "https://www.youtube.com/embed/scoikYF4ni0",
+      title: "Take Back Cooking: A Solution to Climate Change",
+      source: "TEDx",
     },
     {
-      url: "https://www.youtube.com/embed/FIZI3k7mTvA",
-      title: "Video Title 3",
-      source: "This is a description for Video 3.",
+      url: "https://www.youtube.com/embed/E5pi93CemD4",
+      title: "Zero waste cooking",
+      source: "TEDx",
     },
     {
-      url: "https://www.youtube.com/embed/FIZI3k7mTvA",
-      title: "Video Title 4",
-      source: "This is a description for Video 4.",
+      url: "https://www.youtube.com/embed/hX2aZUav-54",
+      title: "It’s Time To Break Up With Our Gas Stoves",
+      source: "Climate Town",
     },
   ];
   const booksList = [
