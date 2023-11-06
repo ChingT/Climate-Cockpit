@@ -88,6 +88,7 @@ class UserSerializer(serializers.ModelSerializer):
             "amount_of_friends",
             "amount_of_followers",
             "amount_following",
+            "memberships",
         ]
 
 
