@@ -1,7 +1,14 @@
-from comment.models import Comment
-from comment.serializers import CommentSerializer
 from post.models import Post
-from rest_framework.generics import ListCreateAPIView, get_object_or_404
+from rest_framework.generics import (
+    ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView,
+    get_object_or_404,
+)
+from rest_framework.permissions import SAFE_METHODS, IsAuthenticated
+from user.permissions import IsAdmin, IsOwner
+
+from .models import Comment
+from .serializers import CommentSerializer
 
 
 class ListCreateCommentAPIView(ListCreateAPIView):
@@ -26,3 +33,31 @@ class ListCreateCommentAPIView(ListCreateAPIView):
         post_id = self.kwargs.get(self.lookup_url_kwarg)
         target_post = get_object_or_404(Post, id=post_id)
         serializer.save(user=self.request.user, post=target_post)
+
+
+class RetrieveUpdateDestroyCommentAPIView(RetrieveUpdateDestroyAPIView):
+    """get: Retrieve a comment.
+
+    Retrieve a comment by comment ID.
+
+    put: Update a comment.
+
+    Update a comment by comment ID.
+
+    patch: Update a comment partially.
+
+    Update a comment partially by comment ID.
+
+    delete: Delete a comment.
+
+    Delete a comment by comment ID.
+    """
+
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    lookup_url_kwarg = "comment_id"
+
+    def get_permission_classes(self):
+        if self.request.method in SAFE_METHODS:
+            return [IsAuthenticated]
+        return [IsOwner | IsAdmin]
