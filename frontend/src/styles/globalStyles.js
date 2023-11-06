@@ -11,8 +11,8 @@ const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'CabinSketch';
     src: url(${CabinSketch}) format('truetype');
-    font-weight: normal;
-    font-style: normal;
+    font-weight: 400;
+    font-style: italic;
   }
 
   body {
@@ -30,6 +30,7 @@ const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
+    font-family: 'CabinSketch',serif;
   }
 
 main {
@@ -40,7 +41,7 @@ main {
   min-height: calc(100vh - ${(props) => props.theme.header_height});
   max-height: calc(100vh - ${(props) => props.theme.header_height});
   overflow-y: auto;
-  margin-top: ${(props) => props.theme.header_height}; 
+  margin-top: ${(props) => props.theme.header_height};
 }
 
 
