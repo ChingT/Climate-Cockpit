@@ -22,6 +22,14 @@ class FriendRequest(TimeStampedModel):
     )
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default="P")
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["requester", "receiver"],
+                name="unique_requester_receiver",
+            )
+        ]
+
     def __str__(self):
         return (
             f"FriendRequest from {self.requester} to {self.receiver} "
