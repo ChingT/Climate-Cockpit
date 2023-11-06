@@ -36,7 +36,7 @@ const LeftEditContainer = ({ initialAvatar, handleProfileUpdate }) => {
   };
 
   useEffect(() => {
-    if (data) {
+    if (data !== null) {
       localStorage.setItem("user", JSON.stringify(data));
       dispatch(loginUser({ user: data }));
       setImageToUpload(undefined);

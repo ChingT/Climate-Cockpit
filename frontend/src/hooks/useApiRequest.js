@@ -23,15 +23,11 @@ const useApiRequest = (auth) => {
 
     axios({ method, url, data: requestData })
       .then((response) => {
-        if (response.status >= 200 && response.status < 300) {
-          if (Object.keys(response.data).length === 0) {
-            return setData("success");
-          } else {
-            return setData(response.data);
-          }
-        }
+        console.log("response.data", response.data);
+        return setData(response.data);
       })
       .catch((error) => {
+        console.log("error.response.data", error.response.data);
         setError(error.response.data);
       })
       .finally(() => setLoading(false));

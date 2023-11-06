@@ -20,7 +20,7 @@ function SignUpSection() {
     sendRequest("post", "auth/registration/", { email: userEmail });
   };
 
-  if (data === "success") {
+  if (data !== null) {
     localStorage.setItem("registered_email", userEmail);
     navigate("/congratulations");
   }

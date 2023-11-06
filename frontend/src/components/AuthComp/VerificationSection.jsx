@@ -28,7 +28,7 @@ const VerificationSection = () => {
   };
 
   useEffect(() => {
-    if (data === "success") {
+    if (data !== null) {
       navigate("/auth");
       localStorage.removeItem("registered_email");
     }

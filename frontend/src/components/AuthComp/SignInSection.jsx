@@ -29,7 +29,7 @@ function SignInSection() {
   };
 
   useEffect(() => {
-    if (data) {
+    if (data !== null) {
       dispatch(loginUser({ user: data.user, accessToken: data.access }));
       localStorage.setItem("user", JSON.stringify(data.user));
       localStorage.setItem("auth-token", data.access);
