@@ -1,9 +1,17 @@
 from django.contrib.auth import get_user_model
-from django.db.models import Q
-from friend_request.models import FriendRequest, get_friends, is_friend
+from friend_request.models import (
+    FriendRequest,
+    get_friend_requests_involved,
+    get_friends,
+)
 from friend_request.permissions import IsFriendRequestReceiver, IsFriendRequestSender
-from friend_request.serializers import FriendRequestSerializer
-from rest_framework.exceptions import ValidationError
+from friend_request.serializers import (
+    FriendRequestSerializer,
+    validate_friend_request_not_exist,
+    validate_not_friend,
+    validate_requester_not_receiver,
+    validate_status,
+)
 from rest_framework.generics import (
     CreateAPIView,
     ListAPIView,
@@ -11,7 +19,6 @@ from rest_framework.generics import (
     get_object_or_404,
 )
 from rest_framework.permissions import IsAuthenticated
-from user.permissions import IsAdmin
 from user.serializers import UserSerializer
 
 User = get_user_model()
@@ -42,22 +49,9 @@ class FriendRequestCreateView(CreateAPIView):
         requester = self.request.user
         user_id = self.kwargs.get(self.lookup_url_kwarg)
         receiver = get_object_or_404(User, id=user_id)
-
-        if requester == receiver:
-            msg = "You cannot send a friend request to yourself."
-            raise ValidationError(msg)
-
-        if is_friend(requester, receiver):
-            msg = "The user is already your friend."
-            raise ValidationError(msg)
-
-        friend_requests = FriendRequest.objects.filter(
-            Q(requester=requester, receiver=receiver)
-            | Q(requester=receiver, receiver=requester)
-        )
-        if friend_requests.exists():
-            msg = "This friend request already exists"
-            raise ValidationError(msg)
+        validate_requester_not_receiver(requester, receiver)
+        validate_friend_request_not_exist(requester, receiver)
+        validate_not_friend(requester, receiver)
 
         serializer.save(
             requester=requester, receiver=receiver, status=FriendRequest.DEFAULT_STATUS
@@ -73,10 +67,7 @@ class ListFriendRequestsView(ListAPIView):
     serializer_class = FriendRequestSerializer
 
     def get_queryset(self):
-        current_user = self.request.user
-        return FriendRequest.objects.filter(
-            Q(requester=current_user) | Q(receiver=current_user)
-        )
+        return get_friend_requests_involved(self.request.user).order_by("-modified")
 
 
 class RetrieveUpdateDestroyFriendRequestView(RetrieveUpdateDestroyAPIView):
@@ -105,7 +96,7 @@ class RetrieveUpdateDestroyFriendRequestView(RetrieveUpdateDestroyAPIView):
     lookup_url_kwarg = "friend_request_id"
 
     def get_permissions(self):
-        permission_classes = [IsAuthenticated | IsAdmin]
+        permission_classes = [IsAuthenticated]
         if self.request.method in ["PUT", "PATCH"]:
             permission_classes += [IsFriendRequestReceiver]
         elif self.request.method in ["DELETE"]:
@@ -113,12 +104,6 @@ class RetrieveUpdateDestroyFriendRequestView(RetrieveUpdateDestroyAPIView):
         return [permission() for permission in permission_classes]
 
     def perform_update(self, serializer):
-        if serializer.validated_data["status"] == FriendRequest.DEFAULT_STATUS:
-            msg = "You can only modify the status to 'A' or 'R'."
-            raise ValidationError(msg)
-
         instance = self.get_object()
-        if instance.status != FriendRequest.DEFAULT_STATUS:
-            msg = "You can only modify pending requests."
-            raise ValidationError(msg)
+        validate_status(instance.status, serializer.validated_data["status"])
         serializer.save()

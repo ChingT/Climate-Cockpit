@@ -22,14 +22,6 @@ class FriendRequest(TimeStampedModel):
     )
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default="P")
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["requester", "receiver"],
-                name="unique_requester_receiver",
-            )
-        ]
-
     def __str__(self):
         return (
             f"FriendRequest from {self.requester} to {self.receiver} "
@@ -37,11 +29,16 @@ class FriendRequest(TimeStampedModel):
         )
 
 
+def get_friend_requests_involved(user1, user2=None):
+    if user2:
+        return FriendRequest.objects.filter(
+            Q(requester=user1, receiver=user2) | Q(requester=user2, receiver=user1)
+        )
+    return FriendRequest.objects.filter(Q(requester=user1) | Q(receiver=user1))
+
+
 def get_friends(user):
-    # Filter the accepted friend requests where the current user is involved.
-    accepted_friend_requests = FriendRequest.objects.filter(
-        Q(requester=user) | Q(receiver=user), status="A"
-    )
+    accepted_friend_requests = get_friend_requests_involved(user).filter(status="A")
     friends = User.objects.filter(
         Q(friend_requests_sent__in=accepted_friend_requests)
         | Q(friend_requests_received__in=accepted_friend_requests)
