@@ -1,14 +1,8 @@
-import styled, { css, keyframes } from "styled-components";
-
-const shake = keyframes`
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  10%, 30%, 50%, 70%, 90% { transform: translate(-3px, 0) rotate(-2deg); }
-  20%, 40%, 60%, 80% { transform: translate(3px, 0) rotate(2deg); }
-`;
+import styled from "styled-components";
 
 export const Video = styled.div`
-  width: 100px;
-  height: 60px;
+  width: 200px;
+  height: 120px;
   background-color: ${(props) => props.theme.ResourcesColors.videoBackground};
   display: flex;
   justify-content: center;
@@ -19,9 +13,32 @@ export const Video = styled.div`
   transition: transform 0.1s ease;
   &:hover {
     transform: scale(1.05);
-    animation: ${shake} 1.5s;
   }
 `;
+export const BookNews = styled.div`
+  width: 200px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+export const NewsThumbnail = styled.img`
+  max-width: 100%;
+  max-height: 100px;
+`;
+export const BookThumbnail = styled.img`
+  max-width: 100%;
+  max-height: 100px;
+`;
+
 export const VideoInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -62,23 +79,14 @@ export const VideoContainer = styled.div`
   gap: 10px;
   padding: 10px 0;
 `;
-export const NewsItem = styled.div`
-  max-width: 300px;
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
-`;
-
-export const NewsImage = styled.img`
-  max-width: 100%;
-  height: auto;
-`;
-export const PlayButton = styled.div`
-  width: 30px;
-  height: 30px;
-  background-color: ${(props) => props.theme.ResourcesColors.playButton};
-  clip-path: polygon(100% 50%, 0 0, 0 100%);
+export const Overlay = styled.div`
   position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  cursor: pointer;
 `;
 
 export const SimpleModal = styled.div`
@@ -91,24 +99,16 @@ export const SimpleModal = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  visibility: ${(props) => (props.$show ? "visible" : "hidden")};
-  opacity: ${(props) => (props.$show ? "1" : "0")};
+  visibility: ${(props) => (props.show ? "visible" : "hidden")};
+  opacity: ${(props) => (props.show ? "1" : "0")};
   transition:
     opacity 0.1s,
     visibility 0.1s;
-  z-index: 1000;
+  z-index: 1002;
 `;
 
 export const ModalContent = styled.div``;
 
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-`;
 export const CloseButton = styled.button`
   position: absolute;
   top: 150px;
@@ -122,11 +122,4 @@ export const CloseButton = styled.button`
   &:after {
     content: "×";
   }
-
-  animation: ${(props) =>
-    props.$show
-      ? css`
-          ${rotate} 10s linear infinite
-        `
-      : "none"};
 `;
