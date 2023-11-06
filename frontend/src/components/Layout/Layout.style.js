@@ -73,7 +73,7 @@ export const InputFieldContainer = styled.div`
       flex: 1 1 24rem;
       padding: 1rem 0.25rem;
       font: inherit;
-      background: ${theme.GeneralBackground.background};
+      background: ${theme.General.background};
       background-size: 24px 24px;
 
       &:focus {
