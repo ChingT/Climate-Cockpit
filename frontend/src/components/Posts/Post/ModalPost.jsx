@@ -42,11 +42,11 @@ const ModalPost = ({ postData, onClose }) => {
 
   return (
     <Overlay onClose={onClose}>
-      <ModalPostContainer hasImages={postHasImages}>
+      <ModalPostContainer $hasImages={postHasImages}>
         {postHasImages && (
           <PostImageContainer>
-            {postData.images.map((image) => (
-              <PostImage key={image.id} src={image.image} alt={image.image} />
+            {postData.images.map((image, index) => (
+              <PostImage key={index} src={image.image} alt={image.image} />
             ))}
           </PostImageContainer>
         )}
