@@ -2,7 +2,11 @@ import SolutionDropDown from "../components/Solution/SolutionDropDown.jsx";
 import SolutionFilter from "../components/SolutionFilter/SolutionFilter.jsx";
 import styled from "styled-components";
 import SolutionDashboard from "../components/Dashboard/SolutionDashboard.jsx";
-import {LeftBar, Main, RightBar} from "../components/Dashboard/dashboard.style.js";
+import {
+  LeftBar,
+  Main,
+  RightBar,
+} from "../components/Dashboard/dashboard.style.js";
 
 const SolutionsPage = () => {
   return (

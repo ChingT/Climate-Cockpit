@@ -99,7 +99,7 @@ export default function DashboardGrid() {
 
   return (
     <>
-        <StyledH2>Inland Emissions</StyledH2>
+      <StyledH2>Inland Emissions</StyledH2>
       <DashboardGridDiv>
         <p>Industry</p>
         <div>
@@ -178,9 +178,9 @@ export default function DashboardGrid() {
               electricityIcon,
             )}
             {renderIcons(reducedElectricity, electricityIconBlue)}
-              <CircleShapedEmissionPoints
-            data={{ type: "inland", total_number: 47 }}
-          />
+            <CircleShapedEmissionPoints
+              data={{ type: "inland", total_number: 47 }}
+            />
           </div>
         </div>
       </DashboardGridDiv>
