@@ -133,7 +133,7 @@ function Resources() {
           Books
         </Tab>
       </Container>
-      <SimpleModal show={!!modalVideo} onClick={closeModal}>
+      <SimpleModal $show={!!modalVideo} onClick={closeModal}>
         <ModalContent onClick={handleModalClick}>
           {modalVideo && (
             <iframe

@@ -105,8 +105,8 @@ export const SimpleModal = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  visibility: ${(props) => (props.show ? "visible" : "hidden")};
-  opacity: ${(props) => (props.show ? "1" : "0")};
+  visibility: ${(props) => (props.$show ? "visible" : "hidden")};
+  opacity: ${(props) => (props.$show ? "1" : "0")};
   transition:
     opacity 0.1s,
     visibility 0.1s;
