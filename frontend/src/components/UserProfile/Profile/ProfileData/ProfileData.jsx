@@ -15,10 +15,6 @@ function ProfileData(props) {
           <h3>Email</h3>
           <p>{props.userdata.email}</p>
         </div>
-        <div className={"phone"}>
-          <h3>Phone</h3>
-          <p>{props.userdata.phone_number}</p>
-        </div>
       </div>
 
       <div className={"right-container"}>
