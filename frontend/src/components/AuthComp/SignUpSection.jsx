@@ -13,7 +13,7 @@ import { ButtonsStyle } from "../../styles/buttons.style.js";
 function SignUpSection() {
   const [userEmail, setEmail] = useState("");
   const navigate = useNavigate();
-  const { sendRequest, error, data } = useApiRequest();
+  const { sendRequest, error, data } = useApiRequest("noAuth");
 
   const handleSignUpClick = async (e) => {
     e.preventDefault();
