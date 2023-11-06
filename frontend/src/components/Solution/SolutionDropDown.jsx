@@ -13,7 +13,6 @@ import SolutionButton from "./SolutionButton.jsx";
 
 const CHECKBOX_API_ENDPOINT = "/api/checkbox-status";
 
-// Assumed input from backend
 let supporter = "User";
 let category = "electricity";
 let name = "Electric Cars";
@@ -24,17 +23,11 @@ let progress = 12;
 let progress_description = "of all cars in Switzerland are electric.";
 let number_of_supporters = 2301;
 let button_text = "Yes, I have an electric car";
-let videos_title = "How to drive an electric car";
-let videos_url = "Video_URL";
-let news_title = "Electric car news";
-let news_url = "News_URL";
-let book_title = "Electric car book";
-let book_url = "Book_URL";
 
 export default function SolutionDropDown() {
   const [isChecked, setIsChecked] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
-  // Fetch checkbox status from API
   useEffect(() => {
     const fetchCheckboxStatus = async () => {
       try {
@@ -45,20 +38,25 @@ export default function SolutionDropDown() {
         console.error("Failed to fetch checkbox status:", error);
       }
     };
-
     fetchCheckboxStatus();
   }, []);
 
-  // Handle checkbox change
   const handleCheckboxChange = (event) => {
-    setIsChecked(event.target.checked);
-    // Here you could also send the new status to the API if needed
+    const newCheckedStatus = event.target.checked;
+    setIsChecked(newCheckedStatus);
+  };
+
+  const handleButtonSelectionChange = (isSelected) => {
+    setIsChecked(isSelected);
+  };
+  const handleSolutionDropDown = () => {
+    setIsVisible(!isVisible);
   };
 
   return (
-    <SolutionContainer>
-      <div className="solutionBar">
-        <div>
+    <SolutionContainer detailsVisible={isVisible}>
+      <div className="solutionBar" onClick={handleSolutionDropDown}>
+        <div className="solutionBarLeft">
           <div>
             <input
               type="checkbox"
@@ -71,11 +69,10 @@ export default function SolutionDropDown() {
           </div>
           <div className="solutionName">{name}</div>
         </div>
-        <div>
-          <div>
+        <div className="solutionBarRight">
+          <div className="solutionBarRightInner">
             <div className="supporters">
               <img src={supportersIcon} alt="Supporters" />
-
               {number_of_supporters}
             </div>
             <div>
@@ -87,22 +84,28 @@ export default function SolutionDropDown() {
           </div>
         </div>
       </div>
-      <div>
-        <div>{description}</div>
-        <div>
-          <ProgressComponent
-            percentage={progress}
-            progress_description={progress_description} // assuming progress_description is a string variable
-          />
+      {isVisible && (
+        <div className="solutionDetails">
+          <div>{description}</div>
+          <div>
+            <ProgressComponent
+              percentage={progress}
+              progress_description={progress_description}
+            />
+          </div>
+          <div></div>
+          <div>
+            <Resources />
+          </div>
+          <div className="solutionButton">
+            <SolutionButton
+              button_text={button_text}
+              initialSelected={isChecked}
+              onSelectionChange={handleButtonSelectionChange}
+            />
+          </div>
         </div>
-        <div></div>
-        <div>
-          <Resources />
-        </div>
-        <div className="solutionButton">
-          <SolutionButton button_text={button_text} selected={false} />
-        </div>
-      </div>
+      )}
     </SolutionContainer>
   );
 }

@@ -1,94 +1,79 @@
 import styled from "styled-components";
 
 export const SolutionContainer = styled.div`
-  display: flex; /* This makes it a flex container */
-  flex-direction: column; /* This stacks children vertically */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 3px solid yellow;
 
-  & > div:first-child {
-    display: flex; /* This will align the children in a row */
-    justify-content: space-between; /* Spreads the two inner divs across the full width */
-    align-items: center; /* Aligns the items vertically */
-    border: 3px solid black; /* Keeping your border for clarity */
+  .solutionBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 3px solid black;
+    background-color: ${(props) =>
+      props.detailsVisible
+        ? props.theme.backgroundColors.selectedSolutionBar
+        : "transparent"};
     border-radius: 10px;
     padding: 5px;
-    width: 100%; /* Ensures that the row takes the full width of its container */
-
-
-    & > div:first-child {
-      display: flex; /* Aligns checkbox, icon, and name in a row */
-      align-items: center;
-      justify-content: flex-start;
-      gap: 10px;
-
-      input {
-        margin: 10px;
-      /
-      }
-
-      .solutionName {
-        font-size: 30px; // Change this to the font-size you want
-        margin: 10px;
-      / font-weight: bold;
-      }
-
-    }
-
-    & > div:last-child {
-      display: flex; /* Aligns checkbox, icon, and name in a row */
-      align-items: center;
-      justify-content: flex-end;
-      gap: 10px;
-      margin-right: 5px;
-
-      & > div:first-child {
-        display: flex; /* Aligns checkbox, icon, and name in a row */
-        align-items: center;
-        flex-direction: column; /* This stacks children vertically */
-        justify-content: center;
-
-
-        /* If you want all items to touch the right edge, remove padding/margin from these elements */
-      }
-
-      /* If you want all items to touch the right edge, remove padding/margin from these elements */
-    }
-
   }
 
-  & > div:last-child {
+  .solutionBarLeft {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: 3px solid blue;
+    gap: 10px;
+  }
+
+  .solutionName {
+    font-size: ${(props) => props.theme.fontSize.solutionName};
+    margin: 10px;
+    font-weight: bold;
+  }
+
+  .solutionBarRight {
+    border: 3px solid green;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-right: 5px;
+  }
+
+  .solutionBarRightInner {
+    border: 3px solid blue;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .supporters {
+    img {
+      width: 20px;
+      height: auto;
+    }
+  }
+
+  .solutionDetails {
     border: 2px solid red;
-    display: flex; /* Aligns checkbox, icon, and name in a row */
+    display: flex;
     align-items: flex-start;
-    flex-direction: column; /* This stacks children vertically */
+    flex-direction: column;
     justify-content: space-between;
     gap: 10px;
     padding: 20px;
-
-
-    /* Styles for the second main div (Explanation, ProgressBar, etc.) remain the same */
-    /* ... */
   }
-  
-.solutionButton {
-  display: flex;
-  justify-content: center; /* Centers the button horizontally */
-  align-items: center; /* Centers the button vertically, if the container's height is defined */
-  width: 100%; /* Ensures the container takes the full width */
-}
 
-  /* Styles for the second main div (Explanation, ProgressBar, etc.) remain the same */
-  /* ... */
-}
-
-}
-.supporters {
-  img {
-    width: 20px; // Set the width to 80% of its parent
-    height: auto; // Maintain the aspect ratio of the image
+  .solutionButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
-}
-
-
 `;
 
 export const CheckMark = styled.div``;
@@ -137,13 +122,13 @@ export const SolutionButtonStyle = styled.div`
   padding: 10px 20px 10px 20px;
   cursor: pointer;
   font-size: 19px;
-  width: auto; // or you can set it to a specific value, for example, width: 150px;
-  max-width: 300px; // This will ensure that the button does not exceed 200px in width
-  display: flex; // Enables flexbox for this container
-  justify-content: center; // Centers content horizontally
-  align-items: center; // Centers content vertically
-  text-align: center; // Centers text horizontally for inline or inline-block elements
-  height: 50px; // You can set a specific height for your button
+  width: auto;
+  max-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 50px;
   font-weight: bold;
 `;
 
@@ -159,8 +144,8 @@ export const SvgIconDiv = styled.div`
 
   img {
     filter: brightness(0) invert(1);
-    width: 80%; // Set the width to 80% of its parent
-    height: auto; // Maintain the aspect ratio of the image
+    width: 80%;
+    height: auto;
   }
 `;
 

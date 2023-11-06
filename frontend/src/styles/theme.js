@@ -26,6 +26,7 @@ const theme = {
     secondary: "white",
     impactIconUnselected: "black",
     impactIconSelected: "#0077BF",
+    selectedSolutionBar: "rgba(0, 0, 255, 0.3)",
   },
   emissionColors: {
     imported: "red",
@@ -62,6 +63,7 @@ const theme = {
   },
   fontSize: {
     equation: "18px",
+    solutionName: "30px",
   },
   fonts: {
     cabinSketchRegular: "Cabin Sketch",

@@ -1,13 +1,19 @@
 // Import the styled component
 import { SolutionButtonStyle } from "./solution.style.js";
-import { Link } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import theme from "../../styles/theme.js";
 
-function SolutionButton({ button_text, selected }) {
-  // You can now use `selected` within your component to conditionally apply styles or logic
+function SolutionButton({ button_text, onSelectionChange, initialSelected }) {
+  const [selected, setSelected] = useState(initialSelected || false);
 
-  // For example, you might want to apply a different style if selected is true
+  const handleClick = () => {
+    const newSelected = !selected;
+    setSelected(newSelected);
+
+    if (onSelectionChange) {
+      onSelectionChange(newSelected);
+    }
+  };
   const buttonStyle = selected
     ? {
         backgroundColor: theme.colors.selectedSolution,
@@ -17,14 +23,9 @@ function SolutionButton({ button_text, selected }) {
       };
 
   return (
-    <>
-      <Link to="/signup">
-        {/* Apply the buttonStyle based on the `selected` prop */}
-        <SolutionButtonStyle style={buttonStyle}>
-          {button_text}
-        </SolutionButtonStyle>
-      </Link>
-    </>
+    <SolutionButtonStyle style={buttonStyle} onClick={handleClick}>
+      {button_text}
+    </SolutionButtonStyle>
   );
 }
 
