@@ -55,7 +55,7 @@ class RetrieveUpdateDestroyPostAPIView(RetrieveUpdateDestroyAPIView):
     Delete a post by post ID.
     """
 
-    queryset = Post.objects.all().order_by("-created")
+    queryset = Post.objects.all()
     serializer_class = PostSerializer
     lookup_url_kwarg = "post_id"
     parser_classes = (MultiPartParser, FormParser)  # Enable file upload support
@@ -73,7 +73,7 @@ class ToggleLikePost(CreateAPIView):
     """
 
     serializer_class = PostSerializer
-    queryset = Post.objects.all().order_by("-created")
+    queryset = Post.objects.all()
     lookup_url_kwarg = "post_id"
 
     def post(self, request, *args, **kwargs):
