@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "emails",
     "post",
     "comment",
+    "friend_request",
 ]
 
 MIDDLEWARE = [

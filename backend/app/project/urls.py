@@ -22,6 +22,7 @@ social_urlpatterns = [
     path("followers/", include("user.social.urls")),
     path("posts/", include("post.urls")),
     path("comments/", include("comment.urls")),
+    path("friends/", include("friend_request.urls")),
 ]
 
 api_urlpatterns = [
