@@ -37,9 +37,13 @@ def validate_not_friend(requester, receiver):
 
 def validate_status(old_status, new_status):
     if old_status != FriendRequest.DEFAULT_STATUS:
-        msg = "You can only modify pending requests."
+        msg = f"You can only modify {FriendRequest.DEFAULT_STATUS.label} requests."
         raise ValidationError({"status": [msg]})
 
     if new_status == FriendRequest.DEFAULT_STATUS:
-        msg = "You can only modify the status to 'A' or 'R'."
+        choices = FriendRequest.StatusChoices
+        msg = (
+            "You can only modify the status to "
+            f"{choices.ACCEPTED} or {choices.REJECTED}."
+        )
         raise ValidationError({"status": [msg]})

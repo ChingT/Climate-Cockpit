@@ -7,12 +7,12 @@ User = get_user_model()
 
 
 class FriendRequest(TimeStampedModel):
-    STATUS_CHOICES = (
-        ("P", "Pending"),
-        ("A", "Accepted"),
-        ("R", "Rejected"),
-    )
-    DEFAULT_STATUS = "P"
+    class StatusChoices(models.TextChoices):
+        PENDING = "P", "pending"
+        ACCEPTED = "A", "accepted"
+        REJECTED = "R", "rejected"
+
+    DEFAULT_STATUS = StatusChoices.PENDING
 
     requester = models.ForeignKey(
         User, models.CASCADE, related_name="friend_requests_sent"
@@ -20,7 +20,12 @@ class FriendRequest(TimeStampedModel):
     receiver = models.ForeignKey(
         User, models.CASCADE, related_name="friend_requests_received"
     )
-    status = models.CharField(max_length=1, choices=STATUS_CHOICES, default="P")
+    status = models.CharField(
+        max_length=1,
+        choices=StatusChoices.choices,
+        default=DEFAULT_STATUS,
+        help_text=f"Select from {StatusChoices.choices}",
+    )
 
     def __str__(self):
         return (
@@ -38,7 +43,9 @@ def get_friend_requests_involved(user1, user2=None):
 
 
 def get_friends(user):
-    accepted_friend_requests = get_friend_requests_involved(user).filter(status="A")
+    accepted_friend_requests = get_friend_requests_involved(user).filter(
+        status=FriendRequest.StatusChoices.ACCEPTED
+    )
     friends = User.objects.filter(
         Q(friend_requests_sent__in=accepted_friend_requests)
         | Q(friend_requests_received__in=accepted_friend_requests)
