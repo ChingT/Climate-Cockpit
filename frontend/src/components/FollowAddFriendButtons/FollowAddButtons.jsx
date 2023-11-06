@@ -25,7 +25,7 @@ function FollowAddButtons({ friendInfo, requestObject }) {
     if (data !== null) {
       dispatch(setRequests(data?.results));
     }
-  }, [data]);
+  }, [dispatch, data]);
 
   const toggleFriendFollow = () => {
     setFollowUser(!FollowUser);

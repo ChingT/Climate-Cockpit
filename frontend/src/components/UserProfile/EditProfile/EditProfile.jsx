@@ -53,9 +53,12 @@ function EditProfile() {
     if (data) {
       localStorage.setItem("user", JSON.stringify(data));
       dispatch(loginUser({ user: data }));
-      setUserData({ ...userData, memberships: data.memberships });
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        memberships: data.memberships,
+      }));
     }
-  }, [data]);
+  }, [data, dispatch]);
 
   return (
     <>

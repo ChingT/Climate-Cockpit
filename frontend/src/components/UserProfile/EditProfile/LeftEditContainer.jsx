@@ -42,7 +42,7 @@ const LeftEditContainer = ({ initialAvatar, handleProfileUpdate }) => {
       setImageToUpload(undefined);
       setImagePreview(undefined);
     }
-  }, [data]);
+  }, [data, dispatch]);
 
   return (
     <EditAvatarContainer>

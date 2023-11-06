@@ -29,10 +29,10 @@ const VerificationSection = () => {
 
   useEffect(() => {
     if (data !== null) {
-      navigate("/signin");
       localStorage.removeItem("registered_email");
+      navigate("/signin");
     }
-  }, [data]);
+  }, [navigate, data]);
 
   return (
     <>
