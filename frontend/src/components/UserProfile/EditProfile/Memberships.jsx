@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { LikedThingsContainer } from "../Profile/ProfileData/ProfileData.style.js";
 
-const ThingsUserLikes = ({ things, setUserData, userData }) => {
+const Memberships = ({ things, setUserData, userData }) => {
   const [newThing, setNewThing] = useState("");
 
   const submitNewThing = (e) => {
     e.preventDefault();
     if (newThing.length > 0) {
-      setUserData({ ...userData, things_user_likes: [...things, newThing] });
+      setUserData({ ...userData, memberships: [...things, newThing] });
       setNewThing("");
     }
   };
@@ -16,14 +16,14 @@ const ThingsUserLikes = ({ things, setUserData, userData }) => {
     const thingToRemove = e.target.previousSibling.innerHTML;
     setUserData({
       ...userData,
-      things_user_likes: things.filter((thing) => thing !== thingToRemove),
+      memberships: things.filter((thing) => thing !== thingToRemove),
     });
   };
 
   return (
     <>
       <div className={"input-field things-liked"}>
-        <label>Things I Like</label>
+        <label>Memberships</label>
         <LikedThingsContainer>
           {things?.map((thing) => {
             return (
@@ -37,7 +37,7 @@ const ThingsUserLikes = ({ things, setUserData, userData }) => {
         <form onSubmit={submitNewThing} className="input-submit-wrapper">
           <input
             type="text"
-            id="things_user_likes"
+            id="memberships"
             onChange={(e) => setNewThing(e.target.value)}
             value={newThing}
             placeholder={"Type something ..."}
@@ -49,4 +49,4 @@ const ThingsUserLikes = ({ things, setUserData, userData }) => {
   );
 };
 
-export default ThingsUserLikes;
+export default Memberships;

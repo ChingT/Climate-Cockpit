@@ -11,17 +11,24 @@ User = get_user_model()
 
 
 class ListUserAPIView(ListAPIView):
-    """get: List all users.
+    """get: List all active users.
 
-    List all users.\
+    List all active users.\
     You can filter the users with the URL search parameters.\
     For example, to search for posts with a keyword: /users/?search=keyword
     """
 
     serializer_class = UserSerializer
-    queryset = User.objects.all()
+    queryset = User.objects.filter(is_active=True).order_by("-date_joined")
     filter_backends = [SearchFilter]
-    search_fields = ["username", "first_name", "last_name"]
+    search_fields = [
+        "username",
+        "first_name",
+        "last_name",
+        "location",
+        "about_me",
+        "memberships",
+    ]
 
 
 class GetUserAPIView(RetrieveAPIView):

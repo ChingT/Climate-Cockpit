@@ -1,4 +1,7 @@
 from django.contrib.auth import get_user_model
+from django.db.models import Q
+from friend_request.models import FriendRequest, get_friends, is_friend
+from post.models import Post
 from rest_framework import serializers
 
 User = get_user_model()
@@ -16,35 +19,51 @@ class UserSerializer(serializers.ModelSerializer):
     amount_of_followers = serializers.SerializerMethodField()
     amount_following = serializers.SerializerMethodField()
 
-    def get_logged_in_user_is_following(self, instance):
+    def get_logged_in_user_is_following(self, instance: User):
         current_user = self.context["request"].user
         return instance.followers.filter(id=current_user.id).exists()
 
-    def get_logged_in_user_is_friends(self, instance):
-        pass
+    def get_logged_in_user_is_friends(self, instance: User):
+        current_user = self.context["request"].user
+        return is_friend(instance, current_user)
 
-    def get_logged_in_user_is_rejected(self, instance):
-        pass
+    def get_logged_in_user_is_rejected(self, instance: User):
+        current_user = self.context["request"].user
+        return FriendRequest.objects.filter(
+            Q(requester=instance),
+            Q(receiver=current_user),
+            status=FriendRequest.StatusChoices.REJECTED,
+        ).exists()
 
-    def get_logged_in_user_received_fr(self, instance):
-        pass
+    def get_logged_in_user_received_fr(self, instance: User):
+        current_user = self.context["request"].user
+        return FriendRequest.objects.filter(
+            Q(requester=instance),
+            Q(receiver=current_user),
+            status=FriendRequest.StatusChoices.PENDING,
+        ).exists()
 
-    def get_logged_in_user_sent_fr(self, instance):
-        pass
+    def get_logged_in_user_sent_fr(self, instance: User):
+        current_user = self.context["request"].user
+        return FriendRequest.objects.filter(
+            Q(requester=current_user),
+            Q(receiver=instance),
+            status=FriendRequest.StatusChoices.PENDING,
+        ).exists()
 
-    def get_amount_of_posts(self, instance):
-        pass
+    def get_amount_of_posts(self, instance: User):
+        return instance.posts.count()
 
-    def get_amount_of_likes(self, instance):
-        pass
+    def get_amount_of_likes(self, instance: User):
+        return Post.objects.filter(liked_by=instance).count()
 
-    def get_amount_of_friends(self, instance):
-        pass
+    def get_amount_of_friends(self, instance: User):
+        return get_friends(instance).count()
 
-    def get_amount_of_followers(self, instance):
+    def get_amount_of_followers(self, instance: User):
         return instance.followers.count()
 
-    def get_amount_following(self, instance):
+    def get_amount_following(self, instance: User):
         return instance.followees.count()
 
     class Meta:
@@ -69,6 +88,7 @@ class UserSerializer(serializers.ModelSerializer):
             "amount_of_friends",
             "amount_of_followers",
             "amount_following",
+            "memberships",
         ]
 
 

@@ -16,7 +16,7 @@ function ProfilePage() {
 
   useEffect(() => {
     dispatch(setProfileFilter("posts"));
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

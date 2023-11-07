@@ -31,7 +31,7 @@ const FriendCard = ({ friendInfo, requestObject }) => {
       </ButtonsWrapper>
       <FriendAbout>{friendInfo.about_me}</FriendAbout>
       <LikedThingsContainer $centered>
-        {friendInfo.things_user_likes.map((thing) => (
+        {friendInfo.memberships.map((thing) => (
           <li key={thing}>{thing}</li>
         ))}
       </LikedThingsContainer>

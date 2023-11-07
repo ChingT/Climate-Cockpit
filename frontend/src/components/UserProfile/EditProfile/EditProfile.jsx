@@ -1,22 +1,22 @@
-import {
-  ProfileHeaderContainer,
-  ProfileHeaderRightContainer,
-  ProfileHeaderLeftContainer,
-  ProfileBackground,
-  SavedChangesMessage,
-} from "../Profile/ProfileHeader.style.js";
 import { useEffect, useState } from "react";
-import useApiRequest from "../../../hooks/useApiRequest.js";
-import { loginUser } from "../../../store/slices/loggedInUser.js";
 import { useDispatch } from "react-redux";
-import useAutoFetch from "../../../hooks/useAutoFetch.js";
-import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner.jsx";
-import { InputWrapper } from "./EditProfile.style.js";
-import LeftEditContainer from "./LeftEditContainer.jsx";
-import ThingsUserLikes from "./ThingsUserLikes.jsx";
 import BackgroundImage from "../../../assets/images/profile_background.png";
 import CheckMarkIcon from "../../../assets/svgs/checkmark_new.svg";
+import useApiRequest from "../../../hooks/useApiRequest.js";
+import useAutoFetch from "../../../hooks/useAutoFetch.js";
+import { loginUser } from "../../../store/slices/loggedInUser.js";
 import { CheckMark } from "../../../styles/globalStyles.js";
+import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner.jsx";
+import {
+  ProfileBackground,
+  ProfileHeaderContainer,
+  ProfileHeaderLeftContainer,
+  ProfileHeaderRightContainer,
+  SavedChangesMessage,
+} from "../Profile/ProfileHeader.style.js";
+import { InputWrapper } from "./EditProfile.style.js";
+import LeftEditContainer from "./LeftEditContainer.jsx";
+import Memberships from "./Memberships.jsx";
 
 function EditProfile() {
   const { data, loading } = useAutoFetch("get", "users/me/");
@@ -26,7 +26,6 @@ function EditProfile() {
     email: { type: "email", value: data?.email, label: "Email" },
     username: { type: "text", value: data?.username, label: "Username" },
     location: { type: "text", value: data?.location, label: "Location" },
-    phone_number: { type: "phone", value: data?.phone_number, label: "Phone" },
     about_me: { type: "text", value: data?.about_me, label: "About" },
     password: { type: "password", value: data?.password, label: "Password" },
   };
@@ -54,9 +53,12 @@ function EditProfile() {
     if (data) {
       localStorage.setItem("user", JSON.stringify(data));
       dispatch(loginUser({ user: data }));
-      setUserData({ ...userData, things_user_likes: data.things_user_likes });
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        memberships: data.memberships,
+      }));
     }
-  }, [data]);
+  }, [data, dispatch]);
 
   return (
     <>
@@ -111,8 +113,8 @@ function EditProfile() {
                     );
                   })}
                 </form>
-                <ThingsUserLikes
-                  things={userData.things_user_likes}
+                <Memberships
+                  things={userData.memberships}
                   setUserData={setUserData}
                   userData={userData}
                 />

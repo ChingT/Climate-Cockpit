@@ -1,19 +1,18 @@
 import { useState } from "react";
 import {
-  Avatar,
-  PostText,
-  LikeCount,
-  PostHeaderWrapper,
-  PostImageContainer,
   AuthorInfoWrapper,
-  PostContainer,
-  PostImage,
+  Avatar,
+  EditButton,
   FooterContainer,
-  ProfileLinkWrapper,
+  LikeCount,
   PostActionButton,
   PostActionWrapper,
-  EditButton,
-  SharedPostContainer,
+  PostContainer,
+  PostHeaderWrapper,
+  PostImage,
+  PostImageContainer,
+  PostText,
+  ProfileLinkWrapper,
 } from "./Post.style.js";
 import likeHeart from "../../../assets/svgs/heart_rgb.png";
 import shareArrow from "../../../assets/svgs/share.svg";

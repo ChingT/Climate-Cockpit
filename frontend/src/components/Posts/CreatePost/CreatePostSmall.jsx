@@ -7,7 +7,6 @@ import {
 import defaultAvatar from "../../../assets/svgs/avatar.svg";
 
 import { useSelector } from "react-redux";
-import { useState } from "react";
 import sendIcon from "../../../assets/svgs/send_button.svg";
 import CreatePostModal from "./CreatePostModal.jsx";
 

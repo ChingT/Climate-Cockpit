@@ -100,6 +100,7 @@ export const PostActionButton = styled.button`
   border: none;
   display: flex;
   gap: 1rem;
+  font-family: inherit;
 
   img {
     filter: saturate(0) brightness(1.35);
@@ -139,7 +140,7 @@ export const ModalPostContainer = styled(PostContainer)`
   }
 
   ${(props) =>
-    !props.hasImages &&
+    !props.$hasImages &&
     css`
       width: 32rem;
       height: 20rem;

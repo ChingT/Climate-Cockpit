@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from friend_request.models import get_friends
 from post.models import Post
 from post.serializers import PostSerializer
 from rest_framework import status
@@ -54,7 +55,7 @@ class RetrieveUpdateDestroyPostAPIView(RetrieveUpdateDestroyAPIView):
     Delete a post by post ID.
     """
 
-    queryset = Post.objects.all().order_by("-created")
+    queryset = Post.objects.all()
     serializer_class = PostSerializer
     lookup_url_kwarg = "post_id"
     parser_classes = (MultiPartParser, FormParser)  # Enable file upload support
@@ -72,7 +73,7 @@ class ToggleLikePost(CreateAPIView):
     """
 
     serializer_class = PostSerializer
-    queryset = Post.objects.all().order_by("-created")
+    queryset = Post.objects.all()
     lookup_url_kwarg = "post_id"
 
     def post(self, request, *args, **kwargs):
@@ -173,6 +174,5 @@ class ListFriendsPost(ListAPIView):
     search_fields = ["content"]
 
     def get_queryset(self):
-        # TODO(ching): Fix this when friend model is implemented.
-        # 009
-        return Post.objects.all().order_by("-created")
+        friends = get_friends(self.request.user)
+        return Post.objects.filter(user__in=friends).order_by("-created")

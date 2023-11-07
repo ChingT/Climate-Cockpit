@@ -18,7 +18,7 @@ class ListFollowersUser(ListAPIView):
     serializer_class = UserSerializer
 
     def get_queryset(self):
-        return User.objects.filter(followees=self.request.user)
+        return User.objects.filter(followees=self.request.user).order_by("-date_joined")
 
 
 class ListFollowingUser(ListAPIView):
@@ -30,7 +30,7 @@ class ListFollowingUser(ListAPIView):
     serializer_class = UserSerializer
 
     def get_queryset(self):
-        return User.objects.filter(followers=self.request.user)
+        return User.objects.filter(followers=self.request.user).order_by("-date_joined")
 
 
 class ToggleFollowingUser(GenericAPIView):
