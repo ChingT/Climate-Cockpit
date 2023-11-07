@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import BackgroundImage from "../../../assets/images/profile_background.png";
+import BackgroundImage from "../../../assets/images/trees.jpg";
 import CheckMarkIcon from "../../../assets/svgs/checkmark_new.svg";
 import useApiRequest from "../../../hooks/useApiRequest.js";
 import useAutoFetch from "../../../hooks/useAutoFetch.js";
@@ -9,7 +9,7 @@ import { CheckMark } from "../../../styles/globalStyles.js";
 import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner.jsx";
 import {
   ProfileBackground,
-  ProfileHeaderContainer,
+  ProfileHeaderEditContainer,
   ProfileHeaderLeftContainer,
   ProfileHeaderRightContainer,
   SavedChangesMessage,
@@ -66,7 +66,7 @@ function EditProfile() {
         src={BackgroundImage}
         alt="Background"
       ></ProfileBackground>
-      <ProfileHeaderContainer>
+      <ProfileHeaderEditContainer>
         {loading ? (
           <LoadingSpinner />
         ) : (
@@ -128,7 +128,7 @@ function EditProfile() {
             </ProfileHeaderRightContainer>
           </>
         )}
-      </ProfileHeaderContainer>
+      </ProfileHeaderEditContainer>
     </>
   );
 }

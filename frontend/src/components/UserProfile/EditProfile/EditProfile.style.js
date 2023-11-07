@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { defaultButtonStyles } from "../../../styles/globalStyles.js";
+import { ButtonsStyle } from "../../../styles/buttons.style.js";
 
 export const InputWrapper = styled.div`
   padding: 2.5rem 3.8rem;
@@ -36,7 +36,7 @@ export const InputWrapper = styled.div`
     }
 
     > button {
-      ${defaultButtonStyles}
+      ${ButtonsStyle}
     }
   }
 
@@ -55,7 +55,7 @@ export const InputWrapper = styled.div`
       }
 
       button {
-        ${defaultButtonStyles}
+        ${ButtonsStyle}
       }
     }
   }
