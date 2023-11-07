@@ -10,6 +10,7 @@ export const PostContainer = styled(CardWithShadowStyles)`
   font-size: 0.875rem;
   height: unset;
   max-width: 58rem;
+  position: relative;
 `;
 
 export const SharedPostContainer = styled(PostContainer)`
