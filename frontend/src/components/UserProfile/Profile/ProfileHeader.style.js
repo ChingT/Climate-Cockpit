@@ -5,7 +5,6 @@ import {
   defaultButtonStyles,
 } from "../../../styles/globalStyles.js";
 
-
 export const ProfilePageMain = styled.div`
   display: flex;
   flex-direction: row;
@@ -13,20 +12,19 @@ export const ProfilePageMain = styled.div`
   width: 96%;
   gap: 6rem;
   margin-top: 5rem;
-`
+`;
 
-export const LeftBlock = styled.div `
+export const LeftBlock = styled.div`
   display: flex;
   flex-direction: column;
   height: 90%;
-`
+`;
 
-export const RightBlock = styled.div `
+export const RightBlock = styled.div`
   display: flex;
   flex-direction: column;
   height: 90%;
-`
-
+`;
 
 export const ProfileBackground = styled.img`
   position: absolute;
@@ -44,7 +42,7 @@ export const ProfileHeaderContainer = styled(CardWithShadowStyles)`
   position: relative;
   max-width: ${(props) => props.theme.max_content_width};
   min-height: 16rem;
-  
+
   display: flex;
   z-index: 2;
 `;

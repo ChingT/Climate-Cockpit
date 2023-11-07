@@ -9,7 +9,7 @@ import ScoreCard from "../components/ScoreCard/ScoreCard.jsx";
 import {
   LeftBlock,
   ProfilePageMain,
-  RightBlock
+  RightBlock,
 } from "../components/UserProfile/Profile/ProfileHeader.style.js";
 
 function ProfilePage() {
@@ -28,12 +28,12 @@ function ProfilePage() {
       {data && (
         <ProfilePageMain>
           <LeftBlock>
-          <ProfileHeader userdata={data} profileId={profileId} />
-          <ProfileSubSection userID={profileId} />
-            </LeftBlock>
+            <ProfileHeader userdata={data} profileId={profileId} />
+            <ProfileSubSection userID={profileId} />
+          </LeftBlock>
           <RightBlock>
-          <ScoreCard />
-            </RightBlock>
+            <ScoreCard />
+          </RightBlock>
         </ProfilePageMain>
       )}
       {error && <ProfileHeader error />}
