@@ -33,7 +33,7 @@ function PasswordResetValidation() {
     if (data === "success") {
       navigate("/signin");
     }
-  }, [data]);
+  }, [data, navigate]);
 
   return (
     <>
