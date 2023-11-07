@@ -1,5 +1,6 @@
 import Score from "./Score.jsx";
 import {
+  FinalContainer,
   ScorecardContainer,
   ScoreCardContent,
   TitleAndBar,
@@ -108,8 +109,10 @@ export default function ScoreCard() {
           <ScorecardCategory key={category} category={category} />
         ))}
         <TitleAndBar>
-          {summary}
-          <Score score={totalScore} />
+          <FinalContainer>
+            {summary}
+            <Score score={totalScore} />
+          </FinalContainer>
         </TitleAndBar>
       </ScoreCardContent>
     </ScorecardContainer>

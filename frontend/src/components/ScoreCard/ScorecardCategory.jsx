@@ -1,40 +1,42 @@
 import CategoryLabel from "../Solution/CategoryLabel.jsx";
 import Score from "./Score.jsx";
 import {
-    BarAndLevel,
-    CategoryBar,
-    CategoryPart,
-    LevelNames,
-    TitleAndBar,
+  BarAndLevel,
+  CategoryBar,
+  CategoryPart,
+  CategoryWrap,
+  LevelNames,
+  TitleAndBar,
 } from "./Scorecard.style.js";
 
 function ScorecardCategory({ category }) {
   return (
     <div>
       <TitleAndBar>
-        <CategoryLabel category={category.name} />
-          <BarAndLevel>
-        <CategoryBar>
-          {Array.from({ length: 3 }).map((_, partIndex) => (
-            <CategoryPart
-              key={partIndex}
-              $isFilled={partIndex < category.level}
-              $level={category.level}
-            />
-          ))}
-        </CategoryBar>
+        <CategoryWrap>
+          <CategoryLabel category={category.name} />
+        </CategoryWrap>
+        <BarAndLevel>
+          <CategoryBar>
+            {Array.from({ length: 3 }).map((_, partIndex) => (
+              <CategoryPart
+                key={partIndex}
+                $isFilled={partIndex < category.level}
+                $level={category.level}
+              />
+            ))}
+          </CategoryBar>
           <LevelNames>
-        {Object.keys(category.levelNames).map((level) => (
-          <span key={level}>
-            {category.levelNames[level]}
-            {parseInt(level) !== Object.keys(category.levelNames).length}
-          </span>
-        ))}
-      </LevelNames>
-          </BarAndLevel>
+            {Object.keys(category.levelNames).map((level) => (
+              <span key={level}>
+                {category.levelNames[level]}
+                {parseInt(level) !== Object.keys(category.levelNames).length}
+              </span>
+            ))}
+          </LevelNames>
+        </BarAndLevel>
         <Score score={category.score} />
       </TitleAndBar>
-
     </div>
   );
 }

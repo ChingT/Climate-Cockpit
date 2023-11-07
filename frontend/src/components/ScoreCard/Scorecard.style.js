@@ -5,6 +5,10 @@ import orange_texture from "../../assets/images/orange_texture.png";
 
 export const ScorecardContainer = styled.div`
   width: 47rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   background-color: white;
   padding: 24px;
   border-radius: 15px;
@@ -13,9 +17,8 @@ export const ScorecardContainer = styled.div`
 `;
 
 export const ScoreCardContent = styled.div`
-  width: 92%;
+  width: 94%;
   height: inherit;
-  margin-left: 4%;
   margin-top: 2%;
 `;
 
@@ -23,7 +26,7 @@ export const CategoryBar = styled.div`
   display: flex;
   width: 98%;
   height: 35px;
-  margin-bottom: 0.15rem;
+  margin-bottom: 0.3rem;
 `;
 
 export const LevelNames = styled.div`
@@ -33,16 +36,18 @@ export const LevelNames = styled.div`
   width: 98%;
   padding-bottom: 15px;
   span {
-    word-wrap: break-word; 
+    word-wrap: break-word;
   }
 `;
 
-export const BarAndLevel = styled.div `
+export const BarAndLevel = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: inherit`
+  width: inherit;
+`;
+
 export const CategoryPart = styled.div`
   flex: 1;
   background-size: cover;
@@ -61,8 +66,13 @@ export const TitleAndBar = styled.div`
   width: 100%;
   height: inherit;
   flex-direction: row;
-  align-items: center;
+  align-items: start;
   gap: 2rem;
+`;
+
+export const CategoryWrap = styled.div`
+  display: flex;
+  margin-top: 1.5%;
 `;
 
 export const ScoreIcon = styled.div`
@@ -70,8 +80,19 @@ export const ScoreIcon = styled.div`
   font-weight: bold;
   font-size: 1.5rem;
   display: flex;
+  margin-top: 0.75%;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   color: ${(props) => props.theme.backgroundColors.impactIconSelected};
+`;
+
+export const FinalContainer = styled.div`
+  width: inherit;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.3%;
+  margin-bottom: 0.8%;
 `;

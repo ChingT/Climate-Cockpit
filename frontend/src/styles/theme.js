@@ -57,6 +57,7 @@ const theme = {
     removalColor: "green",
     heroPageMainColor: "#545454",
     heroPageSecondaryColor: "#0077BF",
+    profilePageSecondaryColor: "#0077BF",
   },
   fontSize: {
     equation: "18px",
