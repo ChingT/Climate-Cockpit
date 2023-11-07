@@ -12,7 +12,7 @@ const InputField = ({
   span,
 }) => {
   return (
-    <InputFieldContainer span={span}>
+    <InputFieldContainer $span={span}>
       {label && <label htmlFor={id}>{label}</label>}
       <div className={"input-wrapper"}>
         {icon && <img src={icon}></img>}

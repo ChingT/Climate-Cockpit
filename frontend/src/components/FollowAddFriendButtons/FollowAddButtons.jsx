@@ -9,7 +9,7 @@ import { setRequests } from "../../store/slices/friendRequests.js";
 import { useDispatch } from "react-redux";
 
 function FollowAddButtons({ friendInfo, requestObject }) {
-  const { sendRequest, data } = useApiRequest(requestObject?.status);
+  const { sendRequest, data } = useApiRequest();
   const dispatch = useDispatch();
   const [deleteRequestHover, setHover] = useState(false);
   const [FollowUser, setFollowUser] = useState(
@@ -22,8 +22,10 @@ function FollowAddButtons({ friendInfo, requestObject }) {
   }, [requestObject]);
 
   useEffect(() => {
-    dispatch(setRequests(data?.results));
-  }, [data]);
+    if (data !== null) {
+      dispatch(setRequests(data?.results));
+    }
+  }, [dispatch, data]);
 
   const toggleFriendFollow = () => {
     setFollowUser(!FollowUser);

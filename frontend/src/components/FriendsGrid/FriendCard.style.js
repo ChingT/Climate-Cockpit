@@ -2,6 +2,12 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { CardWithShadowStyles } from "../../styles/globalStyles.js";
 
+export const FindFriendsContainer = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: ${(props) => props.theme.max_content_width};
+  margin: 2rem auto 0;
+`;
 export const FriendsGridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
