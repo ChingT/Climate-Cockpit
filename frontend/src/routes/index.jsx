@@ -12,6 +12,8 @@ import PostsPage from "../pages/PostsPage.jsx";
 import ProfilePage from "../pages/ProfilePage.jsx";
 import SolutionsPage from "../pages/SolutionsPage.jsx";
 import ProtectedRoutes from "./ProtectedRoutes.jsx";
+import PasswordReset from "../components/AuthComp/PasswordReset.jsx";
+import PasswordResetValidation from "../components/AuthComp/PasswordResetValidation.jsx";
 
 const PageRoutes = () => {
   return (
@@ -22,6 +24,11 @@ const PageRoutes = () => {
           <Route path="solutions" element={<SolutionsPage />} />
           <Route path="signin" element={<SignInSection />} />
           <Route path="signup" element={<SignUpSection />} />
+          <Route path="password-reset" element={<PasswordReset />} />
+          <Route
+            path="password-reset-validation"
+            element={<PasswordResetValidation />}
+          />
           <Route path="congratulations" element={<CongratsSection />} />
           <Route path="verification" element={<VerificationSection />} />
           <Route path="*" element={<NotFound />} />

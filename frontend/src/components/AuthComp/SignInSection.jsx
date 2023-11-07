@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../store/slices/loggedInUser.js";
 import { useDispatch } from "react-redux";
-
 import {
   AuthForm,
   AuthFormContainer,
   ErrorMessage,
   FormTitle,
   InputFieldContainer,
+  ResetNavLink,
 } from "../Layout/Layout.style.js";
 import useApiRequest from "../../hooks/useApiRequest.js";
 import { ButtonsStyle } from "../../styles/buttons.style.js";
@@ -70,8 +70,11 @@ function SignInSection() {
             {error?.detail && <p className={"error-message"}>{error.detail}</p>}
           </div>
           <div className={"form-footer"}>
-            <ButtonsStyle onClick={handleLogin}>Sign in</ButtonsStyle>
+            <ButtonsStyle style={{ marginTop: "2.5rem" }} onClick={handleLogin}>
+              Sign in
+            </ButtonsStyle>
           </div>
+          <ResetNavLink to="/password-reset/">Forgot password?</ResetNavLink>
         </AuthForm>
       </AuthFormContainer>
     </>
