@@ -4,7 +4,6 @@ export const SolutionContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  border: 3px solid yellow;
 
   .solutionBar {
     display: flex;
@@ -23,7 +22,6 @@ export const SolutionContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    border: 3px solid blue;
     gap: 10px;
   }
 
@@ -34,7 +32,6 @@ export const SolutionContainer = styled.div`
   }
 
   .solutionBarRight {
-    border: 3px solid green;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -43,8 +40,6 @@ export const SolutionContainer = styled.div`
   }
 
   .solutionBarRightInner {
-    border: 3px solid blue;
-
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -59,7 +54,7 @@ export const SolutionContainer = styled.div`
   }
 
   .solutionDetails {
-    border: 2px solid red;
+    border: 3px solid black;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
