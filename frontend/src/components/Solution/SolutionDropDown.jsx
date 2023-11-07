@@ -1,19 +1,18 @@
 import ImpactIcon from "./ImpactIcon.jsx";
 
+import { useEffect, useState } from "react";
+import supportersIcon from "./../../assets/other_icons/supporters.png";
+import eCarIcon from "./../../assets/solution_icons/eCar.svg";
+import CategoryLabel from "./CategoryLabel.jsx";
 import ProgressComponent from "./ProgressBar.jsx";
 import Resources from "./Resources.jsx";
-import CategoryLabel from "./CategoryLabel.jsx";
-import { SolutionContainer } from "./solution.style.js";
-import React, { useState, useEffect } from "react";
-import eCarIcon from "./../../assets/solution_icons/eCar.svg";
 import SvgIcon from "./SvgIcon.jsx";
-import supportersIcon from "./../../assets/other_icons/supporters.png";
+import { SolutionContainer } from "./solution.style.js";
 
 import SolutionButton from "./SolutionButton.jsx";
 
 const CHECKBOX_API_ENDPOINT = "/api/checkbox-status";
 
-let supporter = "User";
 let category = "electricity";
 let name = "Electric Cars";
 let impact = -5;
@@ -54,7 +53,7 @@ export default function SolutionDropDown() {
   };
 
   return (
-    <SolutionContainer visibleOrChecked={isVisible || isChecked}>
+    <SolutionContainer $visibleOrChecked={isVisible || isChecked}>
       <div className="solutionBar" onClick={handleSolutionDropDown}>
         <div className="solutionBarLeft">
           <div>
