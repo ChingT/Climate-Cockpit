@@ -26,6 +26,8 @@ lint:
   when: always
   script:
     - docker run --rm "$CI_PIPELINE_ID:$CI_COMMIT_REF_NAME" ruff check .
+    - docker run --rm "$CI_PIPELINE_ID:$CI_COMMIT_REF_NAME" /bin/sh -c "cd
+      /frontend && npm run lint"
 
 push:
   stage: push
