@@ -16,7 +16,7 @@ import { ButtonsStyle } from "../../styles/buttons.style.js";
 function SignInSection() {
   const [user, setUser] = useState({ email: undefined, password: undefined });
   const navigate = useNavigate();
-  const { sendRequest, data, error } = useApiRequest();
+  const { sendRequest, data, error } = useApiRequest("noAuth");
   const dispatch = useDispatch();
 
   const handleInput = (e) => {
@@ -29,7 +29,7 @@ function SignInSection() {
   };
 
   useEffect(() => {
-    if (data) {
+    if (data !== null) {
       dispatch(loginUser({ user: data.user, accessToken: data.access }));
       localStorage.setItem("user", JSON.stringify(data.user));
       localStorage.setItem("auth-token", data.access);

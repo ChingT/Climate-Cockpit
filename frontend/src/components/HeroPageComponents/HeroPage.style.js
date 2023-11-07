@@ -11,7 +11,7 @@ export const Main = styled.div`
   height: 100vh;
 `;
 
-export const ClimateChallengeWrapper = styled.image`
+export const ClimateChallengeWrapper = styled.div`
   width: 805px;
   height: 140px;
 `;
