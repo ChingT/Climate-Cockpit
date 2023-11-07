@@ -37,7 +37,7 @@ const VerificationSection = () => {
   return (
     <>
       <AuthFormContainer>
-        <AuthForm className="activation-form" cols={2}>
+        <AuthForm className="activation-form" $cols={2}>
           <div className="input-container">
             <FormTitle>Verification</FormTitle>
             <InputField
@@ -106,7 +106,7 @@ const VerificationSection = () => {
             {error?.detail && <ErrorMessage>{error.detail}</ErrorMessage>}
           </div>
           <div>
-            <InputFieldContainer span={2}>
+            <InputFieldContainer $span={2}>
               <ButtonsStyle
                 style={{ marginTop: "3rem" }}
                 onClick={handleValidationSubmit}

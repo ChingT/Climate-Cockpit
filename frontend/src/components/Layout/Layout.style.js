@@ -32,7 +32,7 @@ export const AuthForm = styled.form`
     gap: 2rem;
     @media (${(props) => props.theme.breakPoints.md}) {
       grid-template-columns: repeat(
-        ${(props) => (props.cols ? props.cols : 1)},
+        ${(props) => (props.$cols ? props.$cols : 1)},
         1fr
       );
     }
@@ -62,7 +62,7 @@ export const FormTitlePasswordReset = styled.h2`
 `;
 
 export const InputFieldContainer = styled.div`
-  grid-column: 1 / ${(props) => (props.span ? -1 : "unset")};
+  grid-column: 1 / ${(props) => (props.$span ? -1 : "unset")};
   width: 100%;
 
   label {
@@ -95,7 +95,7 @@ export const InputFieldContainer = styled.div`
 `;
 
 export const InputField = styled.div`
-  grid-column: 1 / ${(props) => (props.span ? -1 : "unset")};
+  grid-column: 1 / ${(props) => (props.$span ? -1 : "unset")};
   width: 70%;
 
   label {

@@ -114,7 +114,7 @@ export const CircleShapedPoints = styled.div`
   top: -1.2rem;
   right: -1.2rem;
   border-radius: 50%;
-  background-color: ${(props) => props.theme.emissionColors[props.type]};
+  background-color: ${(props) => props.theme.emissionColors[props.$type]};
   font-size: 18px;
   display: flex;
   align-items: center;
