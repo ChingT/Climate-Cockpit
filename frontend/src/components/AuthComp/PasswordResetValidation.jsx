@@ -30,7 +30,7 @@ function PasswordResetValidation() {
   };
 
   useEffect(() => {
-    if (data === "success") {
+    if (data !== null) {
       navigate("/signin");
     }
   }, [data, navigate]);

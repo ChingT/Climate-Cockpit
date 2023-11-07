@@ -21,7 +21,7 @@ export default function PasswordResetRequest() {
   };
 
   useEffect(() => {
-    if (data === "success") {
+    if (data !== null) {
       navigate("/password-reset-validation");
     }
   }, [data, navigate]);
