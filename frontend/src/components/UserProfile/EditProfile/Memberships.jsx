@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { LikedThingsContainer } from "../Profile/ProfileData/ProfileData.style.js";
+import { ProfileButton } from "../Profile/ProfileHeader.style.js";
 
 const Memberships = ({ things, setUserData, userData }) => {
   const [newThing, setNewThing] = useState("");
@@ -42,7 +43,7 @@ const Memberships = ({ things, setUserData, userData }) => {
             value={newThing}
             placeholder={"Type something ..."}
           />
-          <button onClick={submitNewThing}>Add</button>
+          <ProfileButton onClick={submitNewThing}>Add</ProfileButton>
         </form>
       </div>
     </>

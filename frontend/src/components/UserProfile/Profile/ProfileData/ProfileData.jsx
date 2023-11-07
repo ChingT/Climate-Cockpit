@@ -1,4 +1,6 @@
 import {
+  AboutMe,
+  Grid,
   LikedThingsContainer,
   ProfileAboutContainer,
 } from "./ProfileData.style.js";
@@ -6,25 +8,19 @@ import {
 function ProfileData(props) {
   return (
     <ProfileAboutContainer>
-      <div className={"left-container"}>
-        <div className={"about"}>
-          <h3>About</h3>
-          <p>{props.userdata.about_me}</p>
-        </div>
-        <div className={"email"}>
-          <h3>Email</h3>
-          <p>{props.userdata.email}</p>
-        </div>
-      </div>
+      <AboutMe>
+        <h3>About me</h3>
+        <p>{props.userdata.about_me}</p>
+      </AboutMe>
 
-      <div className={"right-container"}>
+      <LikedThingsContainer>
         <h3>Memberships</h3>
-        <LikedThingsContainer>
+        <Grid>
           {props.userdata.memberships.map((thing) => {
             return <li key={thing}>{thing}</li>;
           })}
-        </LikedThingsContainer>
-      </div>
+        </Grid>
+      </LikedThingsContainer>
     </ProfileAboutContainer>
   );
 }

@@ -25,12 +25,12 @@ function ProfileSubNavigation({ userdata, profileId }) {
             key={filter}
             onClick={() => handleProfileFilter(filter)}
           >
+            <span className="nav-item-text">{filter}</span>
             <span className="nav-item-counter">
               {userdata[`amount_of_${filter}`] === undefined
                 ? userdata[`amount_${filter}`]
                 : userdata[`amount_of_${filter}`]}
             </span>
-            <span className="nav-item-text">{filter}</span>
           </ProfileSubNavItem>
         );
       })}
