@@ -1,10 +1,11 @@
 import CategoryLabel from "../Solution/CategoryLabel.jsx";
 import Score from "./Score.jsx";
 import {
-  CategoryBar,
-  CategoryPart,
-  LevelNames,
-  TitleAndBar,
+    BarAndLevel,
+    CategoryBar,
+    CategoryPart,
+    LevelNames,
+    TitleAndBar,
 } from "./Scorecard.style.js";
 
 function ScorecardCategory({ category }) {
@@ -12,6 +13,7 @@ function ScorecardCategory({ category }) {
     <div>
       <TitleAndBar>
         <CategoryLabel category={category.name} />
+          <BarAndLevel>
         <CategoryBar>
           {Array.from({ length: 3 }).map((_, partIndex) => (
             <CategoryPart
@@ -21,10 +23,7 @@ function ScorecardCategory({ category }) {
             />
           ))}
         </CategoryBar>
-        <Score score={category.score} />
-      </TitleAndBar>
-
-      <LevelNames>
+          <LevelNames>
         {Object.keys(category.levelNames).map((level) => (
           <span key={level}>
             {category.levelNames[level]}
@@ -32,6 +31,10 @@ function ScorecardCategory({ category }) {
           </span>
         ))}
       </LevelNames>
+          </BarAndLevel>
+        <Score score={category.score} />
+      </TitleAndBar>
+
     </div>
   );
 }
