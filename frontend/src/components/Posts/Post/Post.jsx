@@ -1,19 +1,18 @@
 import { useState } from "react";
 import {
-  Avatar,
-  PostText,
-  LikeCount,
-  PostHeaderWrapper,
-  PostImageContainer,
   AuthorInfoWrapper,
-  PostContainer,
-  PostImage,
+  Avatar,
+  EditButton,
   FooterContainer,
-  ProfileLinkWrapper,
+  LikeCount,
   PostActionButton,
   PostActionWrapper,
-  EditButton,
-  SharedPostContainer,
+  PostContainer,
+  PostHeaderWrapper,
+  PostImage,
+  PostImageContainer,
+  PostText,
+  ProfileLinkWrapper,
 } from "./Post.style.js";
 import likeHeart from "../../../assets/svgs/heart_rgb.png";
 import shareArrow from "../../../assets/svgs/share.svg";
@@ -24,15 +23,30 @@ import useApiRequest from "../../../hooks/useApiRequest.js";
 import MenuDot from "../../../assets/svgs/menu.svg";
 import ModalPost from "./ModalPost.jsx";
 import SharedPost from "./SharedPost.jsx";
+import CommentsSection from "../../Solution/CommentsSection.jsx";
 
 const Post = ({ postData, setPostToShare, setShowCreatePostModal }) => {
   const userData = useSelector((store) => store.loggedInUser.user);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
+  const [commentText, setCommentText] = useState("");
+  const [comments, setComments] = useState(postData.comments || []);
   const [postIsLiked, setPostIsLiked] = useState(postData.logged_in_user_liked);
   const [amountOfLikes, setAmountOfLikes] = useState(postData.amount_of_likes);
   const { sendRequest } = useApiRequest();
 
+  const handlePostComment = () => {
+    if (!commentText.trim()) return;
+    sendRequest("post", `social/posts/${postData.id}/comments/`, {
+      content: commentText,
+    })
+      .then((response) => {
+        setComments([...comments, response.data]);
+        setCommentText("");
+      })
+      .catch((error) => {
+        console.error("Failed to post comment", error);
+      });
+  };
   const handleClickLike = () => {
     sendRequest("post", `social/posts/toggle-like/${postData.id}/`);
     setPostIsLiked(!postIsLiked);
@@ -105,6 +119,13 @@ const Post = ({ postData, setPostToShare, setShowCreatePostModal }) => {
         </PostActionWrapper>
         <LikeCount>{amountOfLikes} likes</LikeCount>
       </FooterContainer>
+
+      <CommentsSection
+        comments={comments}
+        commentText={commentText}
+        handleCommentChange={(e) => setCommentText(e.target.value)}
+        postComment={handlePostComment}
+      />
     </PostContainer>
   );
 };

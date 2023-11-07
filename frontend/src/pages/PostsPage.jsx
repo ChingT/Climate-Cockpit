@@ -1,6 +1,6 @@
+import { useSelector } from "react-redux";
 import SearchAndFilterBar from "../components/SearchAndFilterBar/SearchAndFilterBar.jsx";
 import PostsGrid from "../components/Posts/PostsGrid.jsx";
-import { useSelector } from "react-redux";
 
 const PostsPage = () => {
   const filterStateURLs = {
