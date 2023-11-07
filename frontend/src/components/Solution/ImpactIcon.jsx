@@ -1,8 +1,8 @@
 import { ImpactIconDiv } from "./solution.style.js";
 
-function ImpactIcon({ impact }) {
+function ImpactIcon({ impact, visibleOrChecked }) {
   return (
-    <ImpactIconDiv>
+    <ImpactIconDiv visibleOrChecked={visibleOrChecked}>
       <div>{impact}</div>
     </ImpactIconDiv>
   );

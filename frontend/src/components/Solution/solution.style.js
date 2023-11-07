@@ -11,7 +11,7 @@ export const SolutionContainer = styled.div`
     align-items: center;
     border: 3px solid black;
     background-color: ${(props) =>
-      props.detailsVisible
+      props.visibleOrChecked
         ? props.theme.backgroundColors.selectedSolutionBar
         : "transparent"};
     border-radius: 10px;
@@ -97,7 +97,7 @@ export const ImpactIconDiv = styled.div`
   align-items: center;
   justify-content: center;
   background-color: ${(props) =>
-    props.isSelected
+    props.visibleOrChecked
       ? props.theme.backgroundColors.impactIconSelected
       : props.theme.backgroundColors.impactIconUnselected};
   color: ${(props) => props.theme.fontColors.impactIcon};

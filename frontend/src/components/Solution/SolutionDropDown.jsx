@@ -54,7 +54,7 @@ export default function SolutionDropDown() {
   };
 
   return (
-    <SolutionContainer detailsVisible={isVisible}>
+    <SolutionContainer visibleOrChecked={isVisible || isChecked}>
       <div className="solutionBar" onClick={handleSolutionDropDown}>
         <div className="solutionBarLeft">
           <div>
@@ -80,23 +80,27 @@ export default function SolutionDropDown() {
             </div>
           </div>
           <div>
-            <ImpactIcon impact={impact} />
+            <ImpactIcon
+              impact={impact}
+              visibleOrChecked={isVisible || isChecked}
+            />
           </div>
         </div>
       </div>
       {isVisible && (
         <div className="solutionDetails">
           <div>{description}</div>
-          <div>
-            <ProgressComponent
-              percentage={progress}
-              progress_description={progress_description}
-            />
-          </div>
+
+          <ProgressComponent
+            className="progressBar"
+            percentage={progress}
+            progress_description={progress_description}
+          />
+
           <div></div>
-          <div>
-            <Resources />
-          </div>
+
+          <Resources />
+
           <div className="solutionButton">
             <SolutionButton
               button_text={button_text}
