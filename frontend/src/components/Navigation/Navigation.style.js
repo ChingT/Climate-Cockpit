@@ -272,7 +272,7 @@ export const RequestStatusIcon = styled.img`
   height: 2.5rem;
   aspect-ratio: 1/1;
 
-  cursor: ${(props) => (props.noClick ? "default" : "pointer")};
+  cursor: ${(props) => (props.$noClick ? "default" : "pointer")};
 `;
 
 export const ButtonsWrapper = styled.div`
