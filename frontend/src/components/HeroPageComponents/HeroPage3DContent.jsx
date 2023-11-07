@@ -1,5 +1,3 @@
-import { ButtonsStyle } from "../../styles/buttons.style.js";
-import { NavLink } from "react-router-dom";
 import climate_challenge from "../../assets/images/climate_challenge.png";
 import {
   ClimateChallengeWrapper,
@@ -11,7 +9,7 @@ import {
 export default function HeroPage3DContent() {
   return (
     <LeftBar>
-      <ClimateChallengeWrapper to="/">
+      <ClimateChallengeWrapper>
         <img src={climate_challenge} />
       </ClimateChallengeWrapper>
       <StyledH4>

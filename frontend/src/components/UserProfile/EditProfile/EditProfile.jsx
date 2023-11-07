@@ -26,7 +26,6 @@ function EditProfile() {
     email: { type: "email", value: data?.email, label: "Email" },
     username: { type: "text", value: data?.username, label: "Username" },
     location: { type: "text", value: data?.location, label: "Location" },
-    phone_number: { type: "phone", value: data?.phone_number, label: "Phone" },
     about_me: { type: "text", value: data?.about_me, label: "About" },
     password: { type: "password", value: data?.password, label: "Password" },
   };
@@ -54,9 +53,12 @@ function EditProfile() {
     if (data) {
       localStorage.setItem("user", JSON.stringify(data));
       dispatch(loginUser({ user: data }));
-      setUserData({ ...userData, memberships: data.memberships });
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        memberships: data.memberships,
+      }));
     }
-  }, [data]);
+  }, [data, dispatch]);
 
   return (
     <>

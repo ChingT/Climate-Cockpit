@@ -140,7 +140,7 @@ export const ModalPostContainer = styled(PostContainer)`
   }
 
   ${(props) =>
-    !props.hasImages &&
+    !props.$hasImages &&
     css`
       width: 32rem;
       height: 20rem;

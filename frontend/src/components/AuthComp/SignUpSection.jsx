@@ -13,14 +13,14 @@ import { ButtonsStyle } from "../../styles/buttons.style.js";
 function SignUpSection() {
   const [userEmail, setEmail] = useState("");
   const navigate = useNavigate();
-  const { sendRequest, error, data } = useApiRequest();
+  const { sendRequest, error, data } = useApiRequest("noAuth");
 
   const handleSignUpClick = async (e) => {
     e.preventDefault();
     sendRequest("post", "auth/registration/", { email: userEmail });
   };
 
-  if (data === "success") {
+  if (data !== null) {
     localStorage.setItem("registered_email", userEmail);
     navigate("/congratulations");
   }
@@ -45,7 +45,12 @@ function SignUpSection() {
             {error?.detail && <ErrorMessage>{error.detail}</ErrorMessage>}
           </div>
           <div>
-            <ButtonsStyle onClick={handleSignUpClick}>Sign up</ButtonsStyle>
+            <ButtonsStyle
+              style={{ marginBottom: "5rem" }}
+              onClick={handleSignUpClick}
+            >
+              Sign up
+            </ButtonsStyle>
           </div>
         </AuthForm>
       </AuthFormContainer>

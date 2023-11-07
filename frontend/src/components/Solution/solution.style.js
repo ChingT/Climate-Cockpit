@@ -28,7 +28,7 @@ export const ImpactIconDiv = styled.div`
   align-items: center;
   justify-content: center;
   background-color: ${(props) =>
-    props.isSelected
+    props.$isSelected
       ? props.theme.backgroundColors.impactIconSelected
       : props.theme.backgroundColors.impactIconUnselected};
   color: ${(props) => props.theme.fontColors.impactIcon};

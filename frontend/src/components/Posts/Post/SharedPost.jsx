@@ -1,16 +1,17 @@
 import { useState } from "react";
+import defaultAvatar from "../../../assets/svgs/avatar.svg";
+
 import {
-  Avatar,
-  PostText,
-  PostHeaderWrapper,
-  PostImageContainer,
   AuthorInfoWrapper,
-  PostImage,
-  ProfileLinkWrapper,
+  Avatar,
   EditButton,
+  PostHeaderWrapper,
+  PostImage,
+  PostImageContainer,
+  PostText,
+  ProfileLinkWrapper,
   SharedPostContainer,
 } from "./Post.style.js";
-import defaultAvatar from "../../../assets/svgs/avatar.svg";
 import { useSelector } from "react-redux";
 import ReactTimeAgo from "react-time-ago";
 import MenuDot from "../../../assets/svgs/menu.svg";
@@ -57,8 +58,8 @@ const SharedPost = ({ postData }) => {
         </PostText>
       </PostHeaderWrapper>
       <PostImageContainer onClick={() => setModalIsOpen(true)}>
-        {postData.images.map((image) => (
-          <PostImage key={image.id} src={image.image} alt={image.image} />
+        {postData.images.map((image, index) => (
+          <PostImage key={index} src={image.image} alt={image.image} />
         ))}
       </PostImageContainer>
     </SharedPostContainer>
