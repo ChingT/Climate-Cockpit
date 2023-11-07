@@ -74,9 +74,7 @@ function SignInSection() {
               Sign in
             </ButtonsStyle>
           </div>
-          <ResetNavLink to="/password-reset/">
-            Forgot your password
-          </ResetNavLink>
+          <ResetNavLink to="/password-reset/">Forgot password</ResetNavLink>
         </AuthForm>
       </AuthFormContainer>
     </>

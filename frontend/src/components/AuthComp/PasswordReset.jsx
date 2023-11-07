@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   AuthForm,
@@ -12,16 +12,19 @@ import useApiRequest from "../../hooks/useApiRequest.js";
 
 export default function PasswordResetRequest() {
   const [userEmail, setEmail] = useState("");
-  const { sendRequest, error, data } = useApiRequest("noAuth"); // Initialize the API hook
+  const { sendRequest, error, data } = useApiRequest("noAuth");
   const navigate = useNavigate();
 
   const handlePasswordResetRequest = async (e) => {
     e.preventDefault();
     sendRequest("post", "auth/password-reset/", { email: userEmail });
+  };
+
+  useEffect(() => {
     if (data === "success") {
       navigate("/password-reset-validation");
     }
-  };
+  }, [data, navigate]);
   return (
     <AuthFormContainer>
       <AuthForm>
@@ -44,7 +47,7 @@ export default function PasswordResetRequest() {
             style={{ marginTop: "1rem" }}
             onClick={handlePasswordResetRequest}
           >
-            Request Reset
+            Send password reset email
           </ButtonsStyle>
         </div>
       </AuthForm>

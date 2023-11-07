@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import {
   AuthForm,
   AuthFormContainer,
@@ -25,6 +24,11 @@ function PasswordResetValidation() {
     e.preventDefault();
     sendRequest("patch", "auth/password-reset/validation/", userData);
   };
+
+  const handleInput = (e) => {
+    setUserData({ ...userData, [e.target.id]: e.target.value });
+  };
+
   useEffect(() => {
     if (data === "success") {
       navigate("/signin");
@@ -42,57 +46,44 @@ function PasswordResetValidation() {
             <InputField>
               <div className={"input-wrapper"}>
                 <input
+                  id="email"
                   placeholder="Email"
                   type="email"
                   value={userData.email}
-                  onChange={(e) =>
-                    setUserData({
-                      ...userData,
-                      email: e.target.value,
-                    })
-                  }
+                  onChange={handleInput}
                 />
               </div>
             </InputField>
             <InputField>
               <div className={"input-wrapper"}>
                 <input
+                  id="code"
                   placeholder="Validation Code"
                   type="text"
                   value={userData.code}
-                  onChange={(e) =>
-                    setUserData({ ...userData, code: e.target.value })
-                  }
+                  onChange={handleInput}
                 />
               </div>
             </InputField>
             <InputField>
               <div className={"input-wrapper"}>
                 <input
+                  id="password"
                   placeholder="New Password"
                   type="password"
                   value={userData.password}
-                  onChange={(e) =>
-                    setUserData({
-                      ...userData,
-                      password: e.target.value,
-                    })
-                  }
+                  onChange={handleInput}
                 />
               </div>
             </InputField>
             <InputField>
               <div className={"input-wrapper"}>
                 <input
+                  id="password_repeat"
                   placeholder="Repeat Password"
                   type="password"
                   value={userData.password_repeat}
-                  onChange={(e) =>
-                    setUserData({
-                      ...userData,
-                      password_repeat: e.target.value,
-                    })
-                  }
+                  onChange={handleInput}
                 />
               </div>
             </InputField>
