@@ -1,7 +1,6 @@
-// Import the styled component
-import { SolutionButtonStyle } from "./solution.style.js";
-import React, { useState } from "react";
+import { useState } from "react";
 import theme from "../../styles/theme.js";
+import { SolutionButtonStyle } from "./solution.style.js";
 
 function SolutionButton({ button_text, onSelectionChange, initialSelected }) {
   const [selected, setSelected] = useState(initialSelected || false);
