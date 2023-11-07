@@ -1,29 +1,50 @@
 import styled from "styled-components";
+import orange_texture from "../../../assets/images/orange_texture.png";
 import {
   CardWithShadowStyles,
   defaultButtonStyles,
 } from "../../../styles/globalStyles.js";
+
+
+export const ProfilePageMain = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: inherit;
+  width: 96%;
+  gap: 6rem;
+  margin-top: 5rem;
+`
+
+export const LeftBlock = styled.div `
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+`
+
+export const RightBlock = styled.div `
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+`
+
 
 export const ProfileBackground = styled.img`
   position: absolute;
   top: ${(props) => props.theme.header_height};
   left: 50%;
 
-  width: calc(100% - 2rem);
-  max-width: 90rem;
-  min-height: 12rem;
+  width: 100vw;
+  height: 16rem;
 
   transform: translateX(-50%);
   object-fit: cover;
-  border-radius: 0 0 1rem 1rem;
 `;
 
 export const ProfileHeaderContainer = styled(CardWithShadowStyles)`
   position: relative;
   max-width: ${(props) => props.theme.max_content_width};
   min-height: 16rem;
-
-  margin-top: 10rem;
+  
   display: flex;
   z-index: 2;
 `;

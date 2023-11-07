@@ -9,6 +9,7 @@ export const ScorecardContainer = styled.div`
   padding: 24px;
   border-radius: 15px;
   margin-bottom: 5px;
+  position: relative;
 `;
 
 export const CategoryBar = styled.div`

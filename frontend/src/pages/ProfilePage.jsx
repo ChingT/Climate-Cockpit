@@ -6,6 +6,11 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setProfileFilter } from "../store/slices/profileFilter.js";
 import ScoreCard from "../components/ScoreCard/ScoreCard.jsx";
+import {
+  LeftBlock,
+  ProfilePageMain,
+  RightBlock
+} from "../components/UserProfile/Profile/ProfileHeader.style.js";
 
 function ProfilePage() {
   const { profileId } = useParams();
@@ -21,11 +26,15 @@ function ProfilePage() {
   return (
     <>
       {data && (
-        <>
+        <ProfilePageMain>
+          <LeftBlock>
           <ProfileHeader userdata={data} profileId={profileId} />
           <ProfileSubSection userID={profileId} />
+            </LeftBlock>
+          <RightBlock>
           <ScoreCard />
-        </>
+            </RightBlock>
+        </ProfilePageMain>
       )}
       {error && <ProfileHeader error />}
     </>
