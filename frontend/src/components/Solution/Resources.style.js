@@ -11,6 +11,7 @@ export const Video = styled.div`
   border-radius: 20px;
   cursor: pointer;
   transition: transform 0.1s ease;
+
   &:hover {
     transform: scale(1.05);
   }
@@ -26,6 +27,7 @@ export const BookNews = styled.div`
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.1s ease;
+
   &:hover {
     transform: scale(1.05);
   }
@@ -79,11 +81,13 @@ export const Tab = styled.div`
 
 export const VideoContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
   gap: 10px;
   padding: 10px 0;
+  overflow-x: scroll;
+  border: 2px solid red;
 `;
 export const Overlay = styled.div`
   position: absolute;

@@ -21,12 +21,15 @@ const theme = {
     lightGray: "#aaa",
     lightGrayBorder: "#ddd",
     solutionPagePrimaryColor: "#0077BF",
+    unselectedSolution: "red",
+    selectedSolution: "green",
   },
   backgroundColors: {
     primary: "rgba(253, 247, 221, 0.2)",
     secondary: "white",
     impactIconUnselected: "black",
     impactIconSelected: "#0077BF",
+    selectedSolutionBar: "rgba(0, 0, 255, 0.3)",
   },
   emissionColors: {
     imported: "red",
@@ -63,6 +66,7 @@ const theme = {
   },
   fontSize: {
     equation: "18px",
+    solutionName: "30px",
   },
   fonts: {
     cabinSketchRegular: "Cabin Sketch",
