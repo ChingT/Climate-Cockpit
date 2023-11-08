@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import {
-  Comment as CommentBlock,
+  CommentBlock,
   CommentContent,
   CommentInput,
   CommentsContainer,
   InputContainer,
   PostButton,
-  Timestamp,
   UserName,
 } from "./Comment.style.js";
 import useApiRequest from "../../hooks/useApiRequest.js";
+import ReactTimeAgo from "react-time-ago";
 
 const CommentsSection = ({ postId }) => {
   const [comments, setComments] = useState([]);
@@ -65,9 +65,7 @@ const CommentsSection = ({ postId }) => {
         <CommentBlock key={comment.id}>
           <UserName>{`${comment.user.first_name} ${comment.user.last_name}`}</UserName>{" "}
           <CommentContent>{comment.content}</CommentContent>
-          <Timestamp>
-            {new Date(comment.created).toLocaleString()}
-          </Timestamp>{" "}
+          <ReactTimeAgo date={Date.parse(comment.created)} locale="en-US" />
         </CommentBlock>
       ))}
     </CommentsContainer>

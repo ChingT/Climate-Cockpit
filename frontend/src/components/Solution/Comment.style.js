@@ -73,8 +73,3 @@ export const CommentBlock = styled.div`
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); // A deeper shadow on hover for an interactive effect
   }
 `;
-
-export const Timestamp = styled.div`
-  font-size: 0.8em;
-  color: #a1a1a1;
-`;
