@@ -112,7 +112,7 @@ function Resources() {
     event.stopPropagation();
   };
   return (
-    <div>
+    <div style={{ width: "100%" }}>
       <Container>
         <Tab
           onClick={() => setActiveTab("Videos")}

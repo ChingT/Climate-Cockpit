@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const ProgressContainer = styled.div`
-  width: 631px;
+  width: 100%;
   height: 35px;
   border: 2px solid ${(props) => props.theme.ProgressBar.borderColor};
   margin-bottom: 25px;
   padding: 2px;
+
+}
 `;
 
 export const ProgressBar = styled.div`
