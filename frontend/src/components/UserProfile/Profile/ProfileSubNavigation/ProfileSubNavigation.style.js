@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import blue_texture from "../../../../assets/images/blue_texture.png";
 
 export const SubSectionNavContainer = styled.div`
   display: flex;
@@ -9,6 +8,7 @@ export const SubSectionNavContainer = styled.div`
   column-gap: 2rem;
   font-family: inherit;
   margin-top: 0.5%;
+  position: relative;
 `;
 
 export const ProfileSubNavItem = styled.button`

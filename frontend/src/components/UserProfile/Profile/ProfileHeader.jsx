@@ -1,19 +1,18 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import BackgroundImage from "../../../assets/images/trees.jpg";
+import BackgroundImage from "../../../assets/images/blue_sky.jpg";
 import avatarImage from "../../../assets/svgs/avatar.svg";
-import { SecondaryButton } from "../../../styles/globalStyles.js";
 import FollowAddButtons from "../../FollowAddFriendButtons/FollowAddButtons.jsx";
 import ProfileData from "./ProfileData/ProfileData.jsx";
 import {
-  AvatarImg,
-  NameAndLocation,
-  ProfileBackground,
-  ProfileButton,
-  ProfileHeaderContainer,
-  ProfileHeaderLeftContainer,
-  ProfileHeaderRightContainer,
-  ProfileHeaderTop,
+    AvatarImg, FriendProfileButtons,
+    NameAndLocation,
+    ProfileBackground,
+    ProfileButton,
+    ProfileHeaderContainer,
+    ProfileHeaderLeftContainer,
+    ProfileHeaderRightContainer,
+    ProfileHeaderTop,
 } from "./ProfileHeader.style.js";
 import ProfileSubNavigation from "./ProfileSubNavigation/ProfileSubNavigation.jsx";
 
@@ -40,10 +39,11 @@ function ProfileHeader({ userdata, profileId, error }) {
                   <ProfileButton>Edit Profile</ProfileButton>
                 </Link>
               ) : (
+                  <FriendProfileButtons>
                 <FollowAddButtons
                   friendInfo={userdata}
                   requestObject={requestObject}
-                />
+                /></FriendProfileButtons>
               )}
             </ProfileHeaderLeftContainer>
 

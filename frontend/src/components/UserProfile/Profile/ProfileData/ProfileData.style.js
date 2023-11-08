@@ -48,7 +48,6 @@ export const LikedThingsContainer = styled.ul`
   width: 50%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   justify-content: ${(props) => (props.$centered ? "center" : "unset")};
   flex-wrap: wrap;
   row-gap: 1rem;

@@ -1,22 +1,24 @@
 import styled from "styled-components";
 import {
   CardWithShadowStyles,
-  defaultButtonStyles,
 } from "../../../styles/globalStyles.js";
 import blue_texture from "../../../assets/images/blue_texture.png";
+import {ButtonsStyle} from "../../../styles/buttons.style.js";
+import pencil_texture from "../../../assets/images/paper_texture.jpg"
+
 
 export const ProfilePageMain = styled.div`
   display: flex;
   flex-direction: row;
   height: inherit;
   width: 97%;
-  gap: 4rem;
-  margin-top: 5rem;
+  gap: 5rem;
+  margin-top: 4rem;
 `;
 
 export const LeftBlock = styled.div`
   display: flex;
-  margin-left: 1%;
+  margin-left: 2.4%;
   flex-direction: column;
   height: 90%;
   width: 50%;
@@ -38,7 +40,7 @@ export const ProfileBackground = styled.img`
   top: ${(props) => props.theme.header_height};
   left: 50%;
   width: 100vw;
-  height: 16rem;
+  height: 17rem;
   transform: translateX(-50%);
   object-fit: cover;
 `;
@@ -88,7 +90,7 @@ export const ProfileHeaderRightContainer = styled.div`
 export const AvatarImg = styled.img`
   width: 89%;
   object-fit: cover;
-  opacity: 0.9;
+  opacity: 0.96;
   height: 64%;
   border-radius: 50%;
   border: 4px solid #ffffff;
@@ -98,6 +100,23 @@ export const AvatarImg = styled.img`
   position: relative;
   left: -15%;
 `;
+
+export const StyledInputHeader = styled.input`
+  outline: none;
+  &:focus {
+    outline: 2px solid ${(props) => props.theme.fontColors.profilePageSecondaryColor};
+  }
+`;
+
+export const StyledTextArea = styled.textarea`
+  outline: none;
+  &:focus {
+    outline: 2px solid ${(props) => props.theme.fontColors.profilePageSecondaryColor};
+  }
+`;
+
+export const FriendProfileButtons = styled.div `
+  margin-left: 6rem;`
 
 export const EditAvatarImg = styled.img`
   width: 66%;
@@ -117,6 +136,7 @@ export const EditAvatarImg = styled.img`
 
 export const ProfileHeaderEditContainer = styled.div`
   position: relative;
+  background-image: url(${pencil_texture});
   height: fit-content;
   max-width: ${(props) => props.theme.max_content_width};
   display: flex;
@@ -141,7 +161,7 @@ export const EditAvatarContainer = styled.div`
 
   input[type="file"],
   button {
-    ${defaultButtonStyles}
+    ${ButtonsStyle}
   }
 
   button {
@@ -150,6 +170,12 @@ export const EditAvatarContainer = styled.div`
     margin-top: 1rem;
   }
 `;
+
+export const LabelStyle = styled.div `
+  font-size: 18px; 
+  font-weight: bold;
+  color: ${(props) => props.theme.fontColors.profilePageSecondaryColor};
+  `
 
 export const ProfileButton = styled.button`
   position: relative;
