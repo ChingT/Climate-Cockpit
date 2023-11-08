@@ -7,7 +7,7 @@ import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-const PostsGrid = ({ url, inProfile }) => {
+const PostsGrid = ({ url, inProfile, columnsCount, gutter  }) => {
   const [postToShare, setPostToShare] = useState();
   const searchText = useSelector((store) => store.postsFilter.filterSearch);
   let urlToFetch = url;
@@ -19,7 +19,7 @@ const PostsGrid = ({ url, inProfile }) => {
 
   return (
     <MainContainer>
-      <Masonry columnsCount={2} gutter={"2rem"}>
+      <Masonry columnsCount={columnsCount} gutter={gutter}>
         {!inProfile && (
           <CreatePostSmall
             postToShare={postToShare}
