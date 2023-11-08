@@ -68,7 +68,7 @@ const theme = {
   breakPoints: {
     md: "min-width:800px",
   },
-  max_content_width: "64rem",
+  max_content_width: "77rem",
   header_height: "96px",
 };
 
