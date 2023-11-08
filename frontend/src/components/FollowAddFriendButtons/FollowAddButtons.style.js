@@ -38,8 +38,9 @@ export const FollowOrRequestButton = styled.button`
     `}
 `;
 
-export const RevokeRequest = styled.p `
-  font-size: 17px;`
+export const RevokeRequest = styled.p`
+  font-size: 17px;
+`;
 
 export const TickerAndButton = styled.div`
   width: inherit;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {
-  FollowOrRequestButton, RevokeRequest,
+  FollowOrRequestButton,
+  RevokeRequest,
   TickerAndButton,
   TickerImage,
 } from "./FollowAddButtons.style.js";
@@ -67,9 +68,7 @@ function FollowAddButtons({ friendInfo, requestObject }) {
                 Request sent
               </TickerAndButton>
             ) : (
-                <RevokeRequest>
-              Revoke request
-                  </RevokeRequest>
+              <RevokeRequest>Revoke request</RevokeRequest>
             ))}
         </FollowOrRequestButton>
       )}

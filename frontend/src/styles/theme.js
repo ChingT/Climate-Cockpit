@@ -1,14 +1,14 @@
-import pink_texture from "../assets/category_textures/pink_texture_1.png"
-import purple_texture from "../assets/category_textures/purple_texture.png"
-import violet_texture from "../assets/images/violet_texture.jpg"
-import light_green_texture from "../assets/category_textures/light_green_texture.jpg"
-import gray_texture1 from "../assets/category_textures/gray_pencil_texture.png"
-import gray_texture from "../assets/images/paper_texture.jpg"
-import red_texture from "../assets/category_textures/light_red_texture.png"
-import orange_texture from "../assets/category_textures/light_orange_texture.png"
-import dark_green_texture from "../assets/category_textures/dark_green_texture.png"
-import blue_texture from "../assets/images/light_blue_texture.jpg"
-import yellow_texture from "../assets/category_textures/yellow_texture.jpg"
+import pink_texture from "../assets/category_textures/pink_texture_1.png";
+import purple_texture from "../assets/category_textures/purple_texture.png";
+import violet_texture from "../assets/images/violet_texture.jpg";
+import light_green_texture from "../assets/category_textures/light_green_texture.jpg";
+import gray_texture1 from "../assets/category_textures/gray_pencil_texture.png";
+import gray_texture from "../assets/images/paper_texture.jpg";
+import red_texture from "../assets/category_textures/light_red_texture.png";
+import orange_texture from "../assets/category_textures/light_orange_texture.png";
+import dark_green_texture from "../assets/category_textures/dark_green_texture.png";
+import blue_texture from "../assets/images/light_blue_texture.jpg";
+import yellow_texture from "../assets/category_textures/yellow_texture.jpg";
 
 const theme = {
   General: {

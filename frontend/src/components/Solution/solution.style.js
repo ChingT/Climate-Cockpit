@@ -7,8 +7,7 @@ export const CategoryLabelDiv = styled.div`
   border-radius: 10px;
   font-size: ${(props) => props.theme.categoryLabels.fontSize};
   font-weight: 600;
-  background-image: 
-          ${(props) =>
+  background-image: ${(props) =>
     props.theme.categoryLabels[props.$category] ||
     props.theme.categoryLabels.default};
   color: ${(props) => props.theme.categoryLabels.fontColor};
