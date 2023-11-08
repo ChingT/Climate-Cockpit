@@ -70,10 +70,20 @@ class Migration(migrations.Migration):
                 ),
                 ("name", models.CharField(max_length=255)),
                 ("impact", models.FloatField(blank=True, null=True)),
-                ("text", models.TextField()),
+                (
+                    "text",
+                    models.TextField(
+                        help_text="To include impact in text, use: text.replace('{impact}', impact + '%')"
+                    ),
+                ),
                 ("text_source", models.URLField(blank=True)),
                 ("progress", models.FloatField(blank=True, null=True)),
-                ("progress_text", models.TextField()),
+                (
+                    "progress_text",
+                    models.TextField(
+                        help_text="To include progress in progress_text, use: progress_text.replace('{progress}', progress + '%')"
+                    ),
+                ),
                 ("progress_source", models.URLField(blank=True)),
                 ("button_text", models.CharField(max_length=255)),
                 ("icon_name", models.CharField(max_length=255)),
