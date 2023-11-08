@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CommentBlock,
   CommentContent,
@@ -18,6 +18,7 @@ const CommentsSection = ({ postId }) => {
 
   useEffect(() => {
     sendRequest("get", `social/comments/${postId}/?limit=3`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
