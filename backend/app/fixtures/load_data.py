@@ -2,6 +2,7 @@ import csv
 from pathlib import Path
 
 from django.apps import AppConfig
+from rest_framework.generics import get_object_or_404
 
 
 def populate_solutions(apps: AppConfig, schema_editor):
@@ -19,3 +20,20 @@ def populate_solutions(apps: AppConfig, schema_editor):
                     del data[field_name]
 
             Solution.objects.create(**data)
+
+
+def populate_resources(apps: AppConfig, schema_editor):
+    Solution = apps.get_model("solution", "Solution")  # noqa: N806
+    Resource = apps.get_model("solution", "Resource")  # noqa: N806
+
+    csv_file_path = Path("fixtures/source/solutions_videos.csv")
+    with Path.open(csv_file_path, encoding="utf-8") as csv_file:
+        csv_reader = csv.DictReader(csv_file)
+        for row in csv_reader:
+            data = dict(**row)
+            data["solution"] = get_object_or_404(Solution, name=data["solution"])
+            for field_name in row:
+                if not data[field_name]:
+                    del data[field_name]
+
+            Resource.objects.create(**data)
