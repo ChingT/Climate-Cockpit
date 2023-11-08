@@ -5,7 +5,6 @@ export const SolutionListDiv = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  border: 2px solid red;
 `;
 
 export const SolutionContainer = styled.div`
