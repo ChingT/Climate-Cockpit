@@ -14,10 +14,12 @@ export const InputWrapper = styled.div`
   }
 
   .input-field {
+    font-size: 18px;
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
     width: 100%;
+  }
 
     label {
       opacity: 0.5;
@@ -30,7 +32,7 @@ export const InputWrapper = styled.div`
       border: none;
       font: inherit;
 
-      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      border-bottom: 2px solid rgba(0, 0, 0, 0.2);
       padding-bottom: 1em;
       resize: none;
     }

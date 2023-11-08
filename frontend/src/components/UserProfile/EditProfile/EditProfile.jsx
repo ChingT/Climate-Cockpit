@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import BackgroundImage from "../../../assets/images/trees.jpg";
+import BackgroundImage from "../../../assets/images/blue_sky.jpg";
 import CheckMarkIcon from "../../../assets/svgs/checkmark_new.svg";
 import useApiRequest from "../../../hooks/useApiRequest.js";
 import useAutoFetch from "../../../hooks/useAutoFetch.js";
@@ -8,13 +8,14 @@ import { loginUser } from "../../../store/slices/loggedInUser.js";
 import { CheckMark } from "../../../styles/globalStyles.js";
 import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner.jsx";
 import {
+  LabelStyle,
   ProfileBackground,
   ProfileHeaderEditContainer,
   ProfileHeaderLeftContainer,
   ProfileHeaderRightContainer,
-  SavedChangesMessage,
+  SavedChangesMessage, StyledInputHeader, StyledTextArea,
 } from "../Profile/ProfileHeader.style.js";
-import { InputWrapper } from "./EditProfile.style.js";
+import {InputWrapper} from "./EditProfile.style.js";
 import LeftEditContainer from "./LeftEditContainer.jsx";
 import Memberships from "./Memberships.jsx";
 
@@ -26,8 +27,8 @@ function EditProfile() {
     email: { type: "email", value: data?.email, label: "Email" },
     username: { type: "text", value: data?.username, label: "Username" },
     location: { type: "text", value: data?.location, label: "Location" },
-    about_me: { type: "text", value: data?.about_me, label: "About" },
     password: { type: "password", value: data?.password, label: "Password" },
+    about_me: { type: "text", value: data?.about_me, label: "About" },
   };
 
   const { sendRequest } = useApiRequest();
@@ -83,9 +84,9 @@ function EditProfile() {
                   {Object.keys(inputFields).map((field) => {
                     return (
                       <div className={"input-field"} key={field}>
-                        <label>{inputFields[field].label}</label>
+                        <LabelStyle>{inputFields[field].label}</LabelStyle>
                         {field !== "about_me" ? (
-                          <input
+                          <StyledInputHeader
                             type={inputFields[field].type}
                             value={
                               userData[field] === undefined
@@ -96,7 +97,7 @@ function EditProfile() {
                             onChange={handleInput}
                           />
                         ) : (
-                          <textarea
+                          <StyledTextArea
                             name="Text1"
                             cols="40"
                             rows="5"
@@ -119,6 +120,7 @@ function EditProfile() {
                   userData={userData}
                 />
                 {changesSaved && (
+
                   <SavedChangesMessage>
                     <CheckMark src={CheckMarkIcon} />
                     changes saved!
