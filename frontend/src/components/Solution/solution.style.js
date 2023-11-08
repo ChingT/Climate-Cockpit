@@ -3,8 +3,10 @@ import styled from "styled-components";
 export const SolutionListDiv = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
+  height: 100vh; /* Set to the height of the viewport */
+  overflow-y: auto; /* This allows the list to scroll */
 `;
 
 export const SolutionContainer = styled.div`
