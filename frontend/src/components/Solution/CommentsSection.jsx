@@ -25,8 +25,8 @@ const CommentsSection = ({ postId }) => {
       if (data.results) {
         setComments(data.results);
       }
-      if (data.newComment) {
-        setComments((prevComments) => [...prevComments, data.newComment]);
+      if (data.content) {
+        setComments((prevComments) => [data, ...prevComments]);
       }
     }
   }, [data, error]);
@@ -35,6 +35,31 @@ const CommentsSection = ({ postId }) => {
     setCommentText(e.target.value);
   };
 
+  const deleteComment = (commentId) => {
+    sendRequest("delete", `social/comments/comment/${commentId}/`);
+
+    setComments((currentComments) =>
+      currentComments.filter((comment) => comment.id !== commentId),
+    );
+  };
+
+  useEffect(() => {
+    if (error) {
+      console.error("Error deleting the comment:", error);
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (data && !error) {
+      if (data.commentDeleted) {
+        setComments((prevComments) =>
+          prevComments.filter(
+            (comment) => comment.id !== data.commentDeletedId,
+          ),
+        );
+      }
+    }
+  }, [data, error]);
   const postComment = () => {
     if (!commentText.trim()) return;
 
@@ -49,7 +74,7 @@ const CommentsSection = ({ postId }) => {
     postComment(commentText);
   };
 
-  console.log(comments);
+  console.log(data);
 
   return (
     <CommentsContainer>
@@ -66,6 +91,9 @@ const CommentsSection = ({ postId }) => {
           <UserName>{`${comment.user.first_name} ${comment.user.last_name}`}</UserName>{" "}
           <CommentContent>{comment.content}</CommentContent>
           <ReactTimeAgo date={Date.parse(comment.created)} locale="en-US" />
+          <PostButton onClick={() => deleteComment(comment.id)}>
+            Delete
+          </PostButton>
         </CommentBlock>
       ))}
     </CommentsContainer>
