@@ -12,7 +12,7 @@ export const ScorecardContainer = styled.div`
   background-color: white;
   padding: 24px 20px;
   border-radius: 6px;
-  position: absolute; 
+  position: absolute;
   top: 12rem;
   z-index: 100;
 `;

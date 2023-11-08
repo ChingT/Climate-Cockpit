@@ -5,14 +5,15 @@ import avatarImage from "../../../assets/svgs/avatar.svg";
 import FollowAddButtons from "../../FollowAddFriendButtons/FollowAddButtons.jsx";
 import ProfileData from "./ProfileData/ProfileData.jsx";
 import {
-    AvatarImg, FriendProfileButtons,
-    NameAndLocation,
-    ProfileBackground,
-    ProfileButton,
-    ProfileHeaderContainer,
-    ProfileHeaderLeftContainer,
-    ProfileHeaderRightContainer,
-    ProfileHeaderTop,
+  AvatarImg,
+  FriendProfileButtons,
+  NameAndLocation,
+  ProfileBackground,
+  ProfileButton,
+  ProfileHeaderContainer,
+  ProfileHeaderLeftContainer,
+  ProfileHeaderRightContainer,
+  ProfileHeaderTop,
 } from "./ProfileHeader.style.js";
 import ProfileSubNavigation from "./ProfileSubNavigation/ProfileSubNavigation.jsx";
 
@@ -39,11 +40,12 @@ function ProfileHeader({ userdata, profileId, error }) {
                   <ProfileButton>Edit Profile</ProfileButton>
                 </Link>
               ) : (
-                  <FriendProfileButtons>
-                <FollowAddButtons
-                  friendInfo={userdata}
-                  requestObject={requestObject}
-                /></FriendProfileButtons>
+                <FriendProfileButtons>
+                  <FollowAddButtons
+                    friendInfo={userdata}
+                    requestObject={requestObject}
+                  />
+                </FriendProfileButtons>
               )}
             </ProfileHeaderLeftContainer>
 

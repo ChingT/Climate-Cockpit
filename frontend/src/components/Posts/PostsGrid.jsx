@@ -7,7 +7,7 @@ import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-const PostsGrid = ({ url, inProfile, columnsCount, gutter  }) => {
+const PostsGrid = ({ url, inProfile, columnsCount, gutter }) => {
   const [postToShare, setPostToShare] = useState();
   const searchText = useSelector((store) => store.postsFilter.filterSearch);
   let urlToFetch = url;

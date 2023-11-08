@@ -1,11 +1,14 @@
 import { useState } from "react";
-import {Grid, LikedThingsContainer} from "../Profile/ProfileData/ProfileData.style.js";
+import {
+  Grid,
+  LikedThingsContainer,
+} from "../Profile/ProfileData/ProfileData.style.js";
 import {
   LabelStyle,
   ProfileButton,
-  StyledInputHeader
+  StyledInputHeader,
 } from "../Profile/ProfileHeader.style.js";
-import purple_texture from "../../../assets/images/purple_texture.jpg"
+import purple_texture from "../../../assets/images/purple_texture.jpg";
 
 const Memberships = ({ things, setUserData, userData }) => {
   const [newThing, setNewThing] = useState("");
@@ -32,15 +35,15 @@ const Memberships = ({ things, setUserData, userData }) => {
         <LabelStyle>Memberships</LabelStyle>
         <LikedThingsContainer>
           <Grid>
-  {things?.map((thing) => {
-            return (
-              <li key={thing}>
-                <span>{thing}</span>
-                <button onClick={removeThing}>&#10005;</button>
-              </li>
-            );
-          })}
-             </Grid>
+            {things?.map((thing) => {
+              return (
+                <li key={thing}>
+                  <span>{thing}</span>
+                  <button onClick={removeThing}>&#10005;</button>
+                </li>
+              );
+            })}
+          </Grid>
         </LikedThingsContainer>
         <form onSubmit={submitNewThing} className="input-submit-wrapper">
           <StyledInputHeader

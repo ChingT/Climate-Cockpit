@@ -13,9 +13,11 @@ import {
   ProfileHeaderEditContainer,
   ProfileHeaderLeftContainer,
   ProfileHeaderRightContainer,
-  SavedChangesMessage, StyledInputHeader, StyledTextArea,
+  SavedChangesMessage,
+  StyledInputHeader,
+  StyledTextArea,
 } from "../Profile/ProfileHeader.style.js";
-import {InputWrapper} from "./EditProfile.style.js";
+import { InputWrapper } from "./EditProfile.style.js";
 import LeftEditContainer from "./LeftEditContainer.jsx";
 import Memberships from "./Memberships.jsx";
 
@@ -120,7 +122,6 @@ function EditProfile() {
                   userData={userData}
                 />
                 {changesSaved && (
-
                   <SavedChangesMessage>
                     <CheckMark src={CheckMarkIcon} />
                     changes saved!

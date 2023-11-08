@@ -1,11 +1,8 @@
 import styled from "styled-components";
-import {
-  CardWithShadowStyles,
-} from "../../../styles/globalStyles.js";
+import { CardWithShadowStyles } from "../../../styles/globalStyles.js";
 import blue_texture from "../../../assets/images/blue_texture.png";
-import {ButtonsStyle} from "../../../styles/buttons.style.js";
-import pencil_texture from "../../../assets/images/paper_texture.jpg"
-
+import { ButtonsStyle } from "../../../styles/buttons.style.js";
+import pencil_texture from "../../../assets/images/paper_texture.jpg";
 
 export const ProfilePageMain = styled.div`
   display: flex;
@@ -104,19 +101,22 @@ export const AvatarImg = styled.img`
 export const StyledInputHeader = styled.input`
   outline: none;
   &:focus {
-    outline: 2px solid ${(props) => props.theme.fontColors.profilePageSecondaryColor};
+    outline: 2px solid
+      ${(props) => props.theme.fontColors.profilePageSecondaryColor};
   }
 `;
 
 export const StyledTextArea = styled.textarea`
   outline: none;
   &:focus {
-    outline: 2px solid ${(props) => props.theme.fontColors.profilePageSecondaryColor};
+    outline: 2px solid
+      ${(props) => props.theme.fontColors.profilePageSecondaryColor};
   }
 `;
 
-export const FriendProfileButtons = styled.div `
-  margin-left: 6rem;`
+export const FriendProfileButtons = styled.div`
+  margin-left: 6rem;
+`;
 
 export const EditAvatarImg = styled.img`
   width: 66%;
@@ -171,11 +171,11 @@ export const EditAvatarContainer = styled.div`
   }
 `;
 
-export const LabelStyle = styled.div `
-  font-size: 18px; 
+export const LabelStyle = styled.div`
+  font-size: 18px;
   font-weight: bold;
   color: ${(props) => props.theme.fontColors.profilePageSecondaryColor};
-  `
+`;
 
 export const ProfileButton = styled.button`
   position: relative;

@@ -1,8 +1,8 @@
 import avatarImage from "../../assets/svgs/avatar.svg";
 import FollowAddButtons from "../FollowAddFriendButtons/FollowAddButtons.jsx";
 import {
-    Grid,
-    LikedThingsContainer
+  Grid,
+  LikedThingsContainer,
 } from "../UserProfile/Profile/ProfileData/ProfileData.style.js";
 import {
   ButtonsWrapper,
@@ -34,11 +34,11 @@ const FriendCard = ({ friendInfo, requestObject }) => {
       </ButtonsWrapper>
       <FriendAbout>{friendInfo.about_me}</FriendAbout>
       <LikedThingsContainer $centered>
-          <Grid>
-        {friendInfo.memberships.map((thing) => (
-          <li key={thing}>{thing}</li>
-        ))}
-              </Grid>
+        <Grid>
+          {friendInfo.memberships.map((thing) => (
+            <li key={thing}>{thing}</li>
+          ))}
+        </Grid>
       </LikedThingsContainer>
     </FriendCardContainer>
   );

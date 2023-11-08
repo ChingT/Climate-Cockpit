@@ -1,11 +1,8 @@
 import styled, { css } from "styled-components";
-import {ButtonsStyle} from "../../styles/buttons.style.js";
-import blue_texture from "../../assets/images/blue_texture.png"
-import purple_texture from "../../assets/images/purple_texture.jpg"
-import light_pink_texture from "../../assets/images/light_pink_texture.png"
-
-
-
+import { ButtonsStyle } from "../../styles/buttons.style.js";
+import blue_texture from "../../assets/images/blue_texture.png";
+import purple_texture from "../../assets/images/purple_texture.jpg";
+import light_pink_texture from "../../assets/images/light_pink_texture.png";
 
 export const FollowOrRequestButton = styled.button`
   ${ButtonsStyle};
@@ -41,14 +38,14 @@ export const FollowOrRequestButton = styled.button`
     `}
 `;
 
-export const TickerAndButton = styled.div `
+export const TickerAndButton = styled.div`
   width: inherit;
   display: flex;
   padding-left: 2px;
   padding-right: 2px;
   flex-direction: row;
   font-size: 17px;
-`
+`;
 export const TickerImage = styled.img`
   height: 50%;
   width: 1.5em;
