@@ -76,10 +76,7 @@ class Migration(migrations.Migration):
                 ("progress_text", models.TextField()),
                 ("progress_source", models.URLField(blank=True)),
                 ("button_text", models.CharField(max_length=255)),
-                (
-                    "icon",
-                    models.ImageField(blank=True, null=True, upload_to="solution_icon"),
-                ),
+                ("icon_name", models.CharField(max_length=255)),
                 (
                     "category",
                     models.ForeignKey(

@@ -30,7 +30,7 @@ class SolutionSerializer(serializers.ModelSerializer):
             "progress_text",
             "progress_source",
             "button_text",
-            "icon",
+            "icon_name",
             "number_of_supporters",
         ]
 

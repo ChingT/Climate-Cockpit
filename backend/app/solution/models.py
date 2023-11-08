@@ -19,7 +19,7 @@ class Solution(TimeStampedModel):
     progress_text = models.TextField()
     progress_source = models.URLField(blank=True)
     button_text = models.CharField(max_length=255)
-    icon = models.ImageField(upload_to="solution_icon", blank=True, null=True)
+    icon_name = models.CharField(max_length=255)
 
     def __str__(self):
         return f"Solution: {self.name}"
