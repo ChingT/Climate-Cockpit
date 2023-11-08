@@ -1,6 +1,11 @@
 import { useState } from "react";
-import { LikedThingsContainer } from "../Profile/ProfileData/ProfileData.style.js";
-import { ProfileButton } from "../Profile/ProfileHeader.style.js";
+import {Grid, LikedThingsContainer} from "../Profile/ProfileData/ProfileData.style.js";
+import {
+  LabelStyle,
+  ProfileButton,
+  StyledInputHeader
+} from "../Profile/ProfileHeader.style.js";
+import purple_texture from "../../../assets/images/purple_texture.jpg"
 
 const Memberships = ({ things, setUserData, userData }) => {
   const [newThing, setNewThing] = useState("");
@@ -24,9 +29,10 @@ const Memberships = ({ things, setUserData, userData }) => {
   return (
     <>
       <div className={"input-field things-liked"}>
-        <label>Memberships</label>
+        <LabelStyle>Memberships</LabelStyle>
         <LikedThingsContainer>
-          {things?.map((thing) => {
+          <Grid>
+  {things?.map((thing) => {
             return (
               <li key={thing}>
                 <span>{thing}</span>
@@ -34,9 +40,10 @@ const Memberships = ({ things, setUserData, userData }) => {
               </li>
             );
           })}
+             </Grid>
         </LikedThingsContainer>
         <form onSubmit={submitNewThing} className="input-submit-wrapper">
-          <input
+          <StyledInputHeader
             type="text"
             id="memberships"
             onChange={(e) => setNewThing(e.target.value)}
