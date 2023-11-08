@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import drought from "../../assets/images/drought2.png";
+import polarBear from "../../assets/images/polar_bear.png";
 import theme from "../../styles/theme.js";
 
 export const AuthFormContainer = styled.div`
-  background: url(${drought}) no-repeat center top/cover;
+  background: url(${polarBear}) no-repeat center top/cover;
   height: 100%;
   width: 100%;
   display: flex;
