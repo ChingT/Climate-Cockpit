@@ -2,11 +2,11 @@ from django.db import models
 from django_extensions.db.models import TimeStampedModel
 
 
-class Category(models.Model):
+class Category(TimeStampedModel):
     name = models.CharField(max_length=50)
 
     def __str__(self):
-        return f"Category {self.name}"
+        return f"Category: {self.name}"
 
 
 class Solution(TimeStampedModel):
@@ -22,10 +22,10 @@ class Solution(TimeStampedModel):
     icon = models.ImageField(upload_to="solution_icon", blank=True, null=True)
 
     def __str__(self):
-        return f"Solution {self.name}"
+        return f"Solution: {self.name}"
 
 
-class Resource(models.Model):
+class Resource(TimeStampedModel):
     class TypeChoices(models.TextChoices):
         VIDEOS = "videos", "videos"
         NEWS = "news", "news"
@@ -33,10 +33,11 @@ class Resource(models.Model):
 
     DEFAULT_TYPE = TypeChoices.VIDEOS
 
-    solution = models.ForeignKey(Category, models.CASCADE, related_name="resources")
+    solution = models.ForeignKey(Solution, models.CASCADE, related_name="resources")
     title = models.CharField(max_length=300)
-    source = models.CharField(max_length=100)
-    link = models.URLField()
+    source = models.CharField(max_length=100, blank=True)
+    author = models.CharField(max_length=100, blank=True)
+    url = models.URLField(blank=True)
     resource_type = models.CharField(
         max_length=10,
         choices=TypeChoices.choices,
@@ -45,4 +46,4 @@ class Resource(models.Model):
     )
 
     def __str__(self):
-        return f"Category {self.name}"
+        return f"Resource: {self.title}"

@@ -4,7 +4,7 @@ from django.db import migrations, models
 import django.db.models.deletion
 import django_extensions.db.fields
 
-from fixtures.load_data import populate_solutions
+from fixtures.load_data import populate_solutions, populate_resources
 
 
 class Migration(migrations.Migration):
@@ -25,8 +25,24 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
+                (
+                    "created",
+                    django_extensions.db.fields.CreationDateTimeField(
+                        auto_now_add=True, verbose_name="created"
+                    ),
+                ),
+                (
+                    "modified",
+                    django_extensions.db.fields.ModificationDateTimeField(
+                        auto_now=True, verbose_name="modified"
+                    ),
+                ),
                 ("name", models.CharField(max_length=50)),
             ],
+            options={
+                "get_latest_by": "modified",
+                "abstract": False,
+            },
         ),
         migrations.CreateModel(
             name="Solution",
@@ -90,9 +106,22 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
+                (
+                    "created",
+                    django_extensions.db.fields.CreationDateTimeField(
+                        auto_now_add=True, verbose_name="created"
+                    ),
+                ),
+                (
+                    "modified",
+                    django_extensions.db.fields.ModificationDateTimeField(
+                        auto_now=True, verbose_name="modified"
+                    ),
+                ),
                 ("title", models.CharField(max_length=300)),
-                ("source", models.CharField(max_length=100)),
-                ("link", models.URLField()),
+                ("source", models.CharField(blank=True, max_length=100)),
+                ("author", models.CharField(blank=True, max_length=100)),
+                ("url", models.URLField(blank=True)),
                 (
                     "resource_type",
                     models.CharField(
@@ -111,10 +140,15 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="resources",
-                        to="solution.category",
+                        to="solution.solution",
                     ),
                 ),
             ],
+            options={
+                "get_latest_by": "modified",
+                "abstract": False,
+            },
         ),
         migrations.RunPython(populate_solutions),
+        migrations.RunPython(populate_resources),
     ]
