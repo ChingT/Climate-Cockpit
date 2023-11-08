@@ -22,26 +22,37 @@ export const DashboardGridDiv = styled.div`
   & > div {
     display: flex;
     flex-direction: row;
-    justify-content: space-between; /* Align children with space between */
+    justify-content: space-between;
   }
 
   & > div > div {
     display: flex;
-    flex-direction: row;
-    align-items: center; /* Center align items within the inner div */
-  }
 
-  /* Add styles for left column here */
+    flex-direction: row;
+    align-items: center;
+  }
 
   .left-column {
-    justify-content: flex-start;
-    /* Align content in the left column to the left */
+    justify-content: space-between;
+    width: 60%;
+    padding-right: 0.9%;
   }
 
-  /* Add styles for right column here */
-
   .right-column {
-    justify-content: flex-end; /* Align content in the right column to the right */
+    display: flex;
+    justify-content: flex-end;
+    width: 40%;
+  }
+
+  .innovation {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .money {
+    display: flex;
+
+    justify-content: flex-end;
   }
 `;
 
@@ -49,6 +60,12 @@ export const StyledH2 = styled.h2`
   font-size: 20px;
   font-weight: 600;
   margin-left: 3rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+`;
+export const StyledH3 = styled.h3`
+  font-size: 20px;
+  font-weight: 600;
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
 `;
@@ -64,8 +81,6 @@ export const DashboardCategoriesTotalPoints = styled.div`
   font-size: ${(props) => props.theme.fontSize.equation};
   color: ${(props) => props.theme.fontColors.primary};
   font-weight: bold;
-
-  /* Add red border to all child div elements */
 
   & > div {
     display: flex;
@@ -91,7 +106,9 @@ export const DashboardCategoriesTotalPoints = styled.div`
     color: ${(props) => props.theme.fontColors.solutionColor};
   }
 `;
-
+export const Inland = styled.div`
+  border: 2px solid ${(props) => props.theme.emissionColors.imported};
+`;
 export const Import = styled.div`
   box-sizing: border-box;
   border: 2px solid ${(props) => props.theme.emissionColors.imported};
@@ -107,6 +124,28 @@ export const Removal = styled.div`
   width: 90%;
   margin-left: 3rem;
 `;
+export const Innovation = styled.div`
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+  margin-left: 3rem;
+  box-sizing: border-box;
+  position: relative;
+
+  & > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  & > div > div {
+    display: flex;
+
+    flex-direction: row;
+    align-items: center;
+  }
+`;
+
 export const CircleShapedPoints = styled.div`
   width: 45px;
   height: 45px;
