@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const SolutionListDiv = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`;
+
 export const SolutionContainer = styled.div`
   display: flex;
   flex-direction: column;

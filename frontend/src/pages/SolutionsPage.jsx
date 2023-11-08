@@ -1,6 +1,5 @@
-import SolutionDropDown from "../components/Solution/SolutionDropDown.jsx";
-import SolutionFilter from "../components/SolutionFilter/SolutionFilter.jsx";
 import SolutionDashboard from "../components/Dashboard/SolutionDashboard.jsx";
+import SolutionList from "../components/Solution/SolutionList.jsx";
 import {
   LeftBar,
   Main,
@@ -14,8 +13,7 @@ const SolutionsPage = () => {
         <SolutionDashboard />
       </LeftBar>
       <RightBar>
-        <SolutionFilter />
-        <SolutionDropDown />
+        <SolutionList />
       </RightBar>
     </Main>
   );

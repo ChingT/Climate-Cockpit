@@ -8,6 +8,8 @@ export const StyledImage = styled.img`
 
 export const DropdownLayout = styled.div`
   position: relative;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const DropdownContent = styled.div`

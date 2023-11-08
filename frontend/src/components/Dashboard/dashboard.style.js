@@ -176,5 +176,4 @@ export const RightBar = styled.div`
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  margin-left: 2rem;
 `;
