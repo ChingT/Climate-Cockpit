@@ -20,21 +20,21 @@ export const FollowOrRequestButton = styled.button`
   font-size: 18px;
   font-family: "CabinSketch", serif;
   font-weight: 600;
-  color: black;
+  color: ${(props) => props.theme.fontColors.primary};
 
   ${(props) =>
     props.$follow &&
     css`
       background-image: url(${purple_texture});
       box-shadow: rgba(0, 0, 0, 0.25);
-      color: black;
+      color: ${(props) => props.theme.fontColors.primary};
     `}
   ${(props) =>
     props.$requestStatus &&
     css`
       background-image: url(${light_pink_texture});
       box-shadow: rgba(0, 0, 0, 0.25);
-      color: black;
+      color: ${(props) => props.theme.fontColors.primary};
     `}
 `;
 

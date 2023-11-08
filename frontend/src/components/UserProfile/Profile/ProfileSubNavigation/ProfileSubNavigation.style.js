@@ -43,6 +43,6 @@ export const ProfileSubNavItem = styled.button`
   }
 
   &:hover {
-    border-color: black;
+    border-color: ${(props) => props.theme.colors.primary};
   }
 `;

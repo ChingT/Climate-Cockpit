@@ -90,7 +90,7 @@ export const AvatarImg = styled.img`
   opacity: 0.96;
   height: 64%;
   border-radius: 50%;
-  border: 4px solid #ffffff;
+  border: 4px solid ${(props) => props.theme.colors.secondary};
   -webkit-transition: all 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
   transform: scale(1.6);
@@ -125,7 +125,7 @@ export const EditAvatarImg = styled.img`
   height: 69%;
   min-height: 185px;
   border-radius: 50%;
-  border: 4px solid #ffffff;
+  border: 4px solid ${(props) => props.theme.colors.secondary};
   -webkit-transition: all 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
   transform: scale(1.6);
@@ -141,7 +141,7 @@ export const ProfileHeaderEditContainer = styled.div`
   max-width: ${(props) => props.theme.max_content_width};
   display: flex;
   z-index: 2;
-  background-color: white;
+  background-color: ${(props) => props.theme.backgroundColors.secondary};
 `;
 
 export const EditAvatarContainer = styled.div`
@@ -189,7 +189,7 @@ export const ProfileButton = styled.button`
   font-size: 20px;
   font-family: "CabinSketch", serif;
   font-weight: 600;
-  color: black;
+  color: ${(props) => props.theme.fontColors.primary};
 }
 
   >`;
