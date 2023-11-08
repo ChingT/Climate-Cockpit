@@ -5,18 +5,23 @@ from .models import Solution
 from .serializers import SolutionSerializer
 
 
+class CategorySearchFilter(SearchFilter):
+    search_param = "category"
+    search_description = "Category name"
+
+
 class ListSolutionAPIView(ListAPIView):
     """get: List all solutions.
 
     List all solutions.\
-    You can filter the solutions with the URL search parameters.\
-    For example, to search for solutions with a keyword: /solutions/?search=keyword
+    You can filter the solutions by category.\
+    For example, /solutions/?category=buildings
     """
 
     queryset = Solution.objects.all().order_by("id")
     serializer_class = SolutionSerializer
-    filter_backends = [SearchFilter]
-    search_fields = ["name", "category__name", "text", "progress_text"]
+    filter_backends = [CategorySearchFilter]
+    search_fields = ["category__name"]
 
 
 class RetrieveSolutionAPIView(RetrieveAPIView):
