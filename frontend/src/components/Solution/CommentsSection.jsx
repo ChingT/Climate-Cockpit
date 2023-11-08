@@ -16,6 +16,7 @@ const CommentsSection = ({
   handleCommentChange,
   postComment,
 }) => {
+  console.log(comments);
   return (
     <CommentsContainer>
       <InputContainer>
@@ -26,8 +27,8 @@ const CommentsSection = ({
         />
         <PostButton onClick={() => postComment(commentText)}>POST</PostButton>
       </InputContainer>
-      {comments.map((comment, index) => (
-        <CommentBlock key={index}>
+      {comments.map((comment) => (
+        <CommentBlock key={comment.id}>
           <UserName>{comment.user}</UserName>
           <CommentContent>{comment.content}</CommentContent>
           <Timestamp>{comment.created}</Timestamp>

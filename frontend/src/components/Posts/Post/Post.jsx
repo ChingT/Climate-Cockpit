@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AuthorInfoWrapper,
   Avatar,
@@ -32,21 +32,17 @@ const Post = ({ postData, setPostToShare, setShowCreatePostModal }) => {
   const [comments, setComments] = useState(postData.comments || []);
   const [postIsLiked, setPostIsLiked] = useState(postData.logged_in_user_liked);
   const [amountOfLikes, setAmountOfLikes] = useState(postData.amount_of_likes);
-  const { sendRequest } = useApiRequest();
+  const { sendRequest, data, error, loading } = useApiRequest();
+  const sendRequest2 = useApiRequest();
 
   const handlePostComment = () => {
     if (!commentText.trim()) return;
-    sendRequest("post", `social/posts/${postData.id}/comments/`, {
+
+    sendRequest("post", `social/comments/${postData.id}/`, {
       content: commentText,
-    })
-      .then((response) => {
-        setComments([...comments, response.data]);
-        setCommentText("");
-      })
-      .catch((error) => {
-        console.error("Failed to post comment", error);
-      });
+    });
   };
+
   const handleClickLike = () => {
     sendRequest("post", `social/posts/toggle-like/${postData.id}/`);
     setPostIsLiked(!postIsLiked);
@@ -55,10 +51,34 @@ const Post = ({ postData, setPostToShare, setShowCreatePostModal }) => {
       : setAmountOfLikes(amountOfLikes + 1);
   };
 
+  const getCommentsOfPost = () => {
+    sendRequest2.sendRequest("get", `social/comments/${postData.id}/?limit=3`);
+  };
+
   const sharePost = () => {
     setPostToShare(postData);
     setShowCreatePostModal(true);
   };
+  useEffect(() => {
+    getCommentsOfPost();
+    if (data && !error) {
+      if (data.newComment) {
+        setComments([...comments, data.newComment]);
+        setCommentText("");
+      }
+    } else if (error) {
+      console.error("An error occurred: ", error);
+    }
+  }, [data, error]);
+
+  useEffect(() => {
+    if (sendRequest2.data?.results) {
+      console.log(sendRequest2.data.results);
+      setComments(sendRequest2.data.results);
+    }
+  }, [sendRequest2.data]);
+
+  console.log(sendRequest2.data);
 
   return (
     <PostContainer>
