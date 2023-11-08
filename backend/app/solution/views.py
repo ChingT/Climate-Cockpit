@@ -1,4 +1,4 @@
-from rest_framework.filters import SearchFilter
+from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 from .models import Solution
@@ -13,14 +13,17 @@ class CategorySearchFilter(SearchFilter):
 class ListSolutionAPIView(ListAPIView):
     """get: List all solutions.
 
-    List all solutions.\
-    You can filter the solutions by category.\
-    For example, /solutions/?category=buildings
+    List all solutions with filtering and sorting options.
+    You can also apply filters and sorting to customize the results. For example,
+    - To filter the solutions by category buildings: /solutions/?category=buildings
+    - To list solutions sorted by name alphabetically: /solutions/?ordering=name
+    - To list solutions sorted by impact in descending order: \
+        /solutions/?ordering=-impact
     """
 
     queryset = Solution.objects.all().order_by("id")
     serializer_class = SolutionSerializer
-    filter_backends = [CategorySearchFilter]
+    filter_backends = [CategorySearchFilter, OrderingFilter]
     search_fields = ["category__name"]
 
 
