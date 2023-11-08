@@ -35,7 +35,7 @@ class SolutionSerializer(serializers.ModelSerializer):
         ]
 
 
-class CategorySerializer(serializers.ModelSerializer):
+class ResourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resource
         fields = ["id", "solution", "title", "source", "link", "resource_type"]

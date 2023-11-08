@@ -1,8 +1,8 @@
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 
-from .models import Solution
-from .serializers import SolutionSerializer
+from .models import Category, Solution
+from .serializers import CategorySerializer, SolutionSerializer
 
 
 class CategorySearchFilter(SearchFilter):
@@ -13,7 +13,7 @@ class CategorySearchFilter(SearchFilter):
 class ListSolutionAPIView(ListAPIView):
     """get: List all solutions.
 
-    List all solutions with filtering and sorting options.
+    List all solutions.
     You can also apply filters and sorting to customize the results. For example,
     - To filter the solutions by category buildings: /solutions/?category=buildings
     - To list solutions sorted by name alphabetically: /solutions/?ordering=name
@@ -36,3 +36,24 @@ class RetrieveSolutionAPIView(RetrieveAPIView):
     queryset = Solution.objects.all()
     serializer_class = SolutionSerializer
     lookup_url_kwarg = "solution_id"
+
+
+class ListCategoryAPIView(ListAPIView):
+    """get: List all categories.
+
+    List all categories.
+    """
+
+    queryset = Category.objects.all().order_by("id")
+    serializer_class = CategorySerializer
+
+
+class RetrieveCategoryAPIView(RetrieveAPIView):
+    """get: Retrieve a category.
+
+    Retrieve a category by category ID.
+    """
+
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    lookup_url_kwarg = "category_id"
