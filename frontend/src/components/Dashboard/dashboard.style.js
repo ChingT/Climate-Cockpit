@@ -163,17 +163,26 @@ export const CircleShapedPoints = styled.div`
 
 export const LeftBar = styled.div`
   width: 50.6%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   border-right: 1.2px solid ${theme.colors.solutionPagePrimaryColor};
+  position: sticky;
+  top: 0;
+  height: 100%;
+  overflow-y: auto;
 `;
 export const RightBar = styled.div`
   width: 46%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+
+  .filterDiv {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
 `;

@@ -5,6 +5,7 @@ import {
   Main,
   RightBar,
 } from "../components/Dashboard/dashboard.style.js";
+import SolutionFilter from "../components/SolutionFilter/SolutionFilter.jsx";
 
 const SolutionsPage = () => {
   return (
@@ -13,6 +14,9 @@ const SolutionsPage = () => {
         <SolutionDashboard />
       </LeftBar>
       <RightBar>
+        <div className="filterDiv">
+          <SolutionFilter />
+        </div>
         <SolutionList />
       </RightBar>
     </Main>
