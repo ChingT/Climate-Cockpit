@@ -4,7 +4,7 @@ from django.db import migrations, models
 import django.db.models.deletion
 import django_extensions.db.fields
 
-from fixtures.load_data import populate_solution
+from fixtures.load_data import populate_solutions
 
 
 class Migration(migrations.Migration):
@@ -116,4 +116,5 @@ class Migration(migrations.Migration):
                 ),
             ],
         ),
+        migrations.RunPython(populate_solutions),
     ]
