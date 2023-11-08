@@ -8,13 +8,14 @@ import {
   LevelNames,
   TitleAndBar,
 } from "./Scorecard.style.js";
+import CategoryLabelScoreCard from "./CategoryLabelScoreCard.jsx";
 
 function ScorecardCategory({ category }) {
   return (
     <div>
       <TitleAndBar>
         <CategoryWrap>
-          <CategoryLabel category={category.name} />
+          <CategoryLabelScoreCard category={category.name} />
         </CategoryWrap>
         <BarAndLevel>
           <CategoryBar>

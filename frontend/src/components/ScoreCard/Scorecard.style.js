@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import blue_texture from "../../assets/images/blue_texture.png";
-import green_texture from "../../assets/images/green_texture.png";
-import orange_texture from "../../assets/images/orange_texture.png";
+import blue_texture from "../../assets/score_bar_textures/blue_texture.jpg";
+import purple_texture from "../../assets/score_bar_textures/purple_texture1.jpg";
+import red_texture from "../../assets/score_bar_textures/red_texture1.jpg";
 
 export const ScorecardContainer = styled.div`
   width: 44rem;
@@ -9,7 +9,7 @@ export const ScorecardContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: ${(props) => props.theme.backgroundColors.secondary};
   padding: 24px 20px;
   border-radius: 6px;
   position: absolute;
@@ -54,7 +54,7 @@ export const CategoryPart = styled.div`
   background-position: center;
   border: 2px solid ${(props) => props.theme.ProgressBar.borderColor};
   background-image: ${(props) => {
-    const textures = [null, orange_texture, green_texture, blue_texture];
+    const textures = [null, red_texture, purple_texture, blue_texture];
     return props.$isFilled
       ? `url(${textures[props.$level] || "none"})`
       : "none";
@@ -77,14 +77,14 @@ export const CategoryWrap = styled.div`
 
 export const ScoreIcon = styled.div`
   width: 1rem;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 1.5rem;
   display: flex;
   margin-top: 0.75%;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  color: ${(props) => props.theme.backgroundColors.impactIconSelected};
+  color: ${(props) => props.theme.fontColors.secondary};
 `;
 
 export const FinalContainer = styled.div`
@@ -93,4 +93,19 @@ export const FinalContainer = styled.div`
   flex-direction: row;
   align-items: end;
   justify-content: space-between;
+`;
+
+export const CategoryLabelDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: ${(props) => props.theme.categoryLabels.fontSize};
+  font-weight: 600;
+  background-image: 
+          ${(props) =>
+    props.theme.categoryLabels.default};
+  color: ${(props) => props.theme.categoryLabels.fontColor};
+  width: 85px;
+  height: inherit;
 `;
