@@ -1,5 +1,4 @@
 // Import the styled component
-import SolutionFilter from "../SolutionFilter/SolutionFilter.jsx";
 import SolutionDropDown from "./SolutionDropDown.jsx";
 import { SolutionListDiv } from "./solution.style.js";
 
