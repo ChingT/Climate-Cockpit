@@ -4,29 +4,29 @@ import green_texture from "../../assets/images/green_texture.png";
 import orange_texture from "../../assets/images/orange_texture.png";
 
 export const ScorecardContainer = styled.div`
-  width: 47rem;
+  width: 44rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   background-color: white;
-  padding: 24px;
-  border-radius: 15px;
-  margin-bottom: 5px;
-  position: relative;
+  padding: 24px 20px;
+  border-radius: 6px;
+  position: absolute; 
+  top: 12rem;
+  z-index: 100;
 `;
 
 export const ScoreCardContent = styled.div`
   width: 94%;
-  height: inherit;
-  margin-top: 2%;
+  height: 92%;
 `;
 
 export const CategoryBar = styled.div`
   display: flex;
   width: 98%;
-  height: 35px;
-  margin-bottom: 0.3rem;
+  height: 31px;
+  margin-bottom: 0.2rem;
 `;
 
 export const LevelNames = styled.div`
@@ -91,8 +91,6 @@ export const FinalContainer = styled.div`
   width: inherit;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: end;
   justify-content: space-between;
-  margin-top: 1.3%;
-  margin-bottom: 0.8%;
 `;
