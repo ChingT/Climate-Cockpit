@@ -13,19 +13,19 @@ import SolutionButton from "./SolutionButton.jsx";
 
 const CHECKBOX_API_ENDPOINT = "/api/checkbox-status";
 
-let category = "electricity";
-let name = "Electric Cars";
-let impact = -5;
-let description =
-  "If everybody in Switzerland who owns a car, drove an electric car, annual emissions would be 5 megatons lower. ";
-let progress = 12;
-let progress_description = "of all cars in Switzerland are electric.";
-let number_of_supporters = 2301;
-let button_text = "Yes, I have an electric car";
-
-export default function SolutionDropDown() {
+export default function SolutionDropDown({ solution }) {
   const [isChecked, setIsChecked] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const {
+    category,
+    name,
+    impact,
+    description,
+    progress,
+    progress_description,
+    number_of_supporters,
+    button_text,
+  } = solution;
 
   useEffect(() => {
     const fetchCheckboxStatus = async () => {

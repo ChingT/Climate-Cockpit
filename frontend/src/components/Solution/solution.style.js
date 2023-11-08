@@ -1,5 +1,13 @@
 import styled from "styled-components";
 
+export const SolutionListDiv = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border: 2px solid red;
+`;
+
 export const SolutionContainer = styled.div`
   display: flex;
   flex-direction: column;
