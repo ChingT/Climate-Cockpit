@@ -115,7 +115,7 @@ export const StyledTextArea = styled.textarea`
 `;
 
 export const FriendProfileButtons = styled.div`
-  margin-left: 6rem;
+  margin-left: 5.8rem;
 `;
 
 export const EditAvatarImg = styled.img`

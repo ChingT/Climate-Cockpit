@@ -11,8 +11,8 @@ export const FollowOrRequestButton = styled.button`
   background-image: url(${blue_texture});
   background-size: cover;
   border-radius: 10px;
-  margin-right: 2%;
-  margin-left: 2%;
+  margin-right: 1%;
+  margin-left: 1%;
   box-shadow: rgba(0, 0, 0, 0.25);
   padding: 8px 16px 8px 16px;
   margin-bottom: 1%;
@@ -38,13 +38,16 @@ export const FollowOrRequestButton = styled.button`
     `}
 `;
 
+export const RevokeRequest = styled.p `
+  font-size: 17px;`
+
 export const TickerAndButton = styled.div`
   width: inherit;
   display: flex;
-  padding-left: 2px;
-  padding-right: 2px;
+  padding-left: 0.5px;
+  padding-right: 1px;
   flex-direction: row;
-  font-size: 17px;
+  font-size: 16.5px;
 `;
 export const TickerImage = styled.img`
   height: 50%;

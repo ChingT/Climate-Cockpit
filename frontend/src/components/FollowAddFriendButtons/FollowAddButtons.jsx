@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {
-  FollowOrRequestButton,
+  FollowOrRequestButton, RevokeRequest,
   TickerAndButton,
   TickerImage,
 } from "./FollowAddButtons.style.js";
@@ -53,7 +53,7 @@ function FollowAddButtons({ friendInfo, requestObject }) {
       {requestStatus !== undefined && (
         <FollowOrRequestButton
           $requestStatus={requestStatus}
-          style={{ padding: "8px 12px" }}
+          style={{ padding: "8px 11px" }}
           onMouseOver={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
           onClick={deleteFriendOrRequest}
@@ -67,7 +67,9 @@ function FollowAddButtons({ friendInfo, requestObject }) {
                 Request sent
               </TickerAndButton>
             ) : (
-              "Revoke request"
+                <RevokeRequest>
+              Revoke request
+                  </RevokeRequest>
             ))}
         </FollowOrRequestButton>
       )}
