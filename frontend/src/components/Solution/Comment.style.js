@@ -61,6 +61,18 @@ export const UserName = styled.div`
 export const CommentContent = styled.div`
   margin-bottom: 5px;
 `;
+export const CommentBlock = styled.div`
+  background-color: #f9f9f9; // A light grey background for each comment block
+  padding: 15px; // Some padding to space out the content
+  border-radius: 4px; // Rounded corners for the block
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); // A subtle shadow for depth
+  margin-bottom: 10px; // Space between subsequent comments
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); // A deeper shadow on hover for an interactive effect
+  }
+`;
 
 export const Timestamp = styled.div`
   font-size: 0.8em;
