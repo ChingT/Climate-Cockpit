@@ -1,8 +1,8 @@
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 
-from .models import Category, Solution
-from .serializers import CategorySerializer, SolutionSerializer
+from .models import Category, Resource, Solution
+from .serializers import CategorySerializer, ResourceSerializer, SolutionSerializer
 
 
 class CategorySearchFilter(SearchFilter):
@@ -57,3 +57,24 @@ class RetrieveCategoryAPIView(RetrieveAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     lookup_url_kwarg = "category_id"
+
+
+class ListResourceAPIView(ListAPIView):
+    """get: List all resources.
+
+    List all resources.
+    """
+
+    queryset = Resource.objects.all().order_by("id")
+    serializer_class = ResourceSerializer
+
+
+class RetrieveResourceAPIView(RetrieveAPIView):
+    """get: Retrieve a resource.
+
+    Retrieve a resource by resource ID.
+    """
+
+    queryset = Resource.objects.all()
+    serializer_class = ResourceSerializer
+    lookup_url_kwarg = "resource_id"
