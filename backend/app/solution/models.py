@@ -18,7 +18,7 @@ class Solution(TimeStampedModel):
             "To include impact in text, use: text.replace('{impact}', impact + '%')"
         )
     )
-    text_source = models.URLField(blank=True)
+    text_source = models.URLField(max_length=500, blank=True)
     progress = models.FloatField(blank=True, null=True)
     progress_text = models.TextField(
         help_text=(
@@ -26,7 +26,7 @@ class Solution(TimeStampedModel):
             "progress_text.replace('{progress}', progress + '%')"
         )
     )
-    progress_source = models.URLField(blank=True)
+    progress_source = models.URLField(max_length=500, blank=True)
     button_text = models.CharField(max_length=255)
     icon_name = models.CharField(max_length=255)
 
