@@ -1,5 +1,5 @@
 from rest_framework.filters import OrderingFilter, SearchFilter
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, get_object_or_404
 
 from .models import Category, Resource, Solution
 from .serializers import CategorySerializer, ResourceSerializer, SolutionSerializer
@@ -21,10 +21,11 @@ class ListSolutionAPIView(ListAPIView):
         /solutions/?ordering=-impact
     """
 
-    queryset = Solution.objects.all().order_by("id")
+    queryset = Solution.objects.all()
     serializer_class = SolutionSerializer
     filter_backends = [CategorySearchFilter, OrderingFilter]
-    search_fields = ["category__name"]
+    search_fields = ["=category__name"]
+    ordering = ["id"]
 
 
 class RetrieveSolutionAPIView(RetrieveAPIView):
@@ -48,33 +49,23 @@ class ListCategoryAPIView(ListAPIView):
     serializer_class = CategorySerializer
 
 
-class RetrieveCategoryAPIView(RetrieveAPIView):
-    """get: Retrieve a category.
-
-    Retrieve a category by category ID.
-    """
-
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-    lookup_url_kwarg = "category_id"
+class ResourceTypeSearchFilter(SearchFilter):
+    search_param = "type"
+    search_description = f"Select from {Resource.TypeChoices.labels}"
 
 
 class ListResourceAPIView(ListAPIView):
-    """get: List all resources.
+    """get: List all resources belonged to a solution.
 
-    List all resources.
+    List all resources belonged to a solution by solution ID.
     """
 
-    queryset = Resource.objects.all().order_by("id")
     serializer_class = ResourceSerializer
+    lookup_url_kwarg = "solution_id"
+    filter_backends = [ResourceTypeSearchFilter]
+    search_fields = ["=resource_type"]
 
-
-class RetrieveResourceAPIView(RetrieveAPIView):
-    """get: Retrieve a resource.
-
-    Retrieve a resource by resource ID.
-    """
-
-    queryset = Resource.objects.all()
-    serializer_class = ResourceSerializer
-    lookup_url_kwarg = "resource_id"
+    def get_queryset(self):
+        solution_id = self.kwargs.get(self.lookup_url_kwarg)
+        target_solution = get_object_or_404(Solution, id=solution_id)
+        return Resource.objects.filter(solution=target_solution).order_by("id")
