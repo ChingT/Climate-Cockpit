@@ -14,57 +14,41 @@ import {
 const CommentsSection = ({ postId }) => {
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
-  const { sendRequest, data, error } = useApiRequest();
+  const { sendRequest: sendRequestGet, data: dataGet } = useApiRequest();
+  const { sendRequest: sendRequestPost, data: dataPost } = useApiRequest();
+  const { sendRequest: sendRequestDelete } = useApiRequest();
+  const handleCommentChange = (e) => setCommentText(e.target.value);
 
   useEffect(() => {
-    sendRequest("get", `social/comments/${postId}/?limit=3`);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    sendRequestGet("get", `social/comments/${postId}/?limit=3`);
   }, []);
 
   useEffect(() => {
-    if (data && !error) {
-      if (data.results) {
-        setComments(data.results);
-      }
-      if (data.content) {
-        setComments((prevComments) => [data, ...prevComments]);
-      }
+    if (dataGet !== null) {
+      setComments(dataGet.results);
     }
-  }, [data, error]);
+  }, [dataGet]);
 
-  const handleCommentChange = (e) => {
-    setCommentText(e.target.value);
-  };
-
-  const deleteComment = (commentId) => {
-    sendRequest("delete", `social/comments/comment/${commentId}/`);
-
-    setComments((currentComments) =>
-      currentComments.filter((comment) => comment.id !== commentId)
-    );
-  };
-
-  useEffect(() => {
-    if (data && !error) {
-      if (data.commentDeleted) {
-        setComments((prevComments) =>
-          prevComments.filter((comment) => comment.id !== data.commentDeletedId)
-        );
-      }
-    }
-  }, [data, error]);
-  const postComment = () => {
+  const handlePostButtonClick = () => {
     if (!commentText.trim()) return;
 
-    sendRequest("post", `social/comments/${postId}/`, {
+    sendRequestPost("post", `social/comments/${postId}/`, {
       content: commentText,
     });
-
     setCommentText("");
   };
 
-  const handlePostButtonClick = () => {
-    postComment(commentText);
+  useEffect(() => {
+    if (dataPost !== null) {
+      setComments((currentComments) => [...currentComments, dataPost]);
+    }
+  }, [dataPost]);
+
+  const deleteComment = (commentId) => {
+    sendRequestDelete("delete", `social/comments/comment/${commentId}/`);
+    setComments((currentComments) =>
+      currentComments.filter((comment) => comment.id !== commentId)
+    );
   };
 
   return (
@@ -73,13 +57,13 @@ const CommentsSection = ({ postId }) => {
         <CommentInput
           value={commentText}
           onChange={handleCommentChange}
-          placeholder="Write a comment =)"
+          placeholder="Write a comment..."
         />
-        <PostButton onClick={handlePostButtonClick}>POST</PostButton>
+        <PostButton onClick={handlePostButtonClick}>Send</PostButton>
       </InputContainer>
       {comments.map((comment) => (
         <CommentBlock key={comment.id}>
-          <UserName>{`${comment.user.first_name} ${comment.user.last_name}`}</UserName>{" "}
+          <UserName>{`${comment.user.first_name} ${comment.user.last_name}`}</UserName>
           <CommentContent>{comment.content}</CommentContent>
           <ReactTimeAgo date={Date.parse(comment.created)} locale="en-US" />
           <PostButton onClick={() => deleteComment(comment.id)}>
