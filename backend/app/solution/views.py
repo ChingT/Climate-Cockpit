@@ -14,7 +14,7 @@ class ListSolutionAPIView(ListAPIView):
     """get: List all solutions.
 
     List all solutions.
-    You can also apply filters and sorting to customize the results. For example,
+    You can also apply filter and sorting to customize the results. For example,
     - To filter the solutions by category buildings: /solutions/?category=buildings
     - To list solutions sorted by name alphabetically: /solutions/?ordering=name
     - To list solutions sorted by impact in descending order: \
@@ -58,6 +58,9 @@ class ListResourceAPIView(ListAPIView):
     """get: List all resources belonged to a solution.
 
     List all resources belonged to a solution by solution ID.
+    You can also apply filter to customize the results. For example,
+    - To filter the resources by resources type news: \
+        /resources/<solution_id>/?type=news
     """
 
     serializer_class = ResourceSerializer
