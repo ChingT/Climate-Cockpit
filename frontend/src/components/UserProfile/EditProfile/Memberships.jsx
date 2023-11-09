@@ -8,7 +8,6 @@ import {
   ProfileButton,
   StyledInputHeader,
 } from "../Profile/ProfileHeader.style.js";
-import purple_texture from "../../../assets/images/violet_texture.jpg";
 
 const Memberships = ({ things, setUserData, userData }) => {
   const [newThing, setNewThing] = useState("");
