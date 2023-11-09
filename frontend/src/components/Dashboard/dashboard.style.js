@@ -72,12 +72,6 @@ export const StyledH2 = styled.h2`
   margin-bottom: 0.4rem;
   line-height: 19px;
 `;
-export const StyledH3 = styled.h3`
-  font-size: 20px;
-  font-weight: 600;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-`;
 
 export const StyledP = styled.p`
   line-height: 6px;

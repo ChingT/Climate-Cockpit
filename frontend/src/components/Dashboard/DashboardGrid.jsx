@@ -41,7 +41,6 @@ import {
   Innovation,
   Removal,
   StyledH2,
-  StyledH3,
   StyledP,
 } from "./dashboard.style.js";
 import CircleShapedEmissionPoints from "./CircleShapedEmissionPoints.jsx";
