@@ -36,7 +36,6 @@ const Post = ({
   const userData = useSelector((store) => store.loggedInUser.user);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-
   const [postIsLiked, setPostIsLiked] = useState(postData.logged_in_user_liked);
   const [amountOfLikes, setAmountOfLikes] = useState(postData.amount_of_likes);
   const { sendRequest } = useApiRequest();
