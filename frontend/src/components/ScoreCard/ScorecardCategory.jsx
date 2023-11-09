@@ -1,4 +1,3 @@
-import CategoryLabel from "../Solution/CategoryLabel.jsx";
 import Score from "./Score.jsx";
 import {
   BarAndLevel,
