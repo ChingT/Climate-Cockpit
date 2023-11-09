@@ -1,9 +1,9 @@
 import { useState } from "react";
 import {
   CreatePostModalContainer,
-  TextField,
   CustomImageUploadButton,
   SubmitButton,
+  TextField,
 } from "./CreatePost.style.js";
 import sendIcon from "../../../assets/svgs/send_button.svg";
 import uploadIcon from "../../../assets/svgs/Shape.svg";
