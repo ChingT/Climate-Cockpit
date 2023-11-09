@@ -79,7 +79,7 @@ const theme = {
     profilePageSecondaryColor: "#0077BF",
   },
   fontSize: {
-    equation: "18px",
+    equation: "22px",
     solutionName: "30px",
   },
   fonts: {
