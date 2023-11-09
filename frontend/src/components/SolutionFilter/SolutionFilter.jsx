@@ -17,7 +17,6 @@ export default function SolutionFilter() {
   const [selectedCategory, setSelectedCategory] = useState("");
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
-  const closeDropdown = () => setIsDropdownOpen(false);
 
   const handleSelectChange = (e) => {
     setSelectedCategory(e.target.value);
@@ -65,7 +64,7 @@ export default function SolutionFilter() {
   const SortingDropdown = dropdown(
     "Sorting Options",
     sortingIcon,
-    sortingOptions,
+    sortingOptions
   );
   const StatusDropdown = dropdown("Status Filter", funnelIcon, statusOptions);
 
