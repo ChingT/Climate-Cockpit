@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AuthorInfoWrapper,
   Avatar,
+  BottomButtons,
+  DeleteButton,
   EditButton,
   FooterContainer,
   LikeCount,
@@ -21,16 +23,30 @@ import { useSelector } from "react-redux";
 import ReactTimeAgo from "react-time-ago";
 import useApiRequest from "../../../hooks/useApiRequest.js";
 import MenuDot from "../../../assets/svgs/menu.svg";
+import trash from "../../../assets/images/delete.svg";
 import ModalPost from "./ModalPost.jsx";
 import SharedPost from "./SharedPost.jsx";
 
-const Post = ({ postData, setPostToShare, setShowCreatePostModal }) => {
+const Post = ({
+  postData,
+  setPostToShare,
+  setShowCreatePostModal,
+  setListOfPosts,
+}) => {
   const userData = useSelector((store) => store.loggedInUser.user);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
 
   const [postIsLiked, setPostIsLiked] = useState(postData.logged_in_user_liked);
   const [amountOfLikes, setAmountOfLikes] = useState(postData.amount_of_likes);
   const { sendRequest } = useApiRequest();
+
+  const handleDeletePost = () => {
+    sendRequest("delete", `social/posts/${postData.id}/`);
+    setListOfPosts((current) =>
+      current.filter((post) => post.id !== postData.id),
+    );
+  };
 
   const handleClickLike = () => {
     sendRequest("post", `social/posts/toggle-like/${postData.id}/`);
@@ -88,20 +104,28 @@ const Post = ({ postData, setPostToShare, setShowCreatePostModal }) => {
       </PostImageContainer>
       {postData.shared && <SharedPost postData={postData.shared} />}
       <FooterContainer>
-        <PostActionWrapper>
-          <PostActionButton onClick={handleClickLike}>
-            <img
-              src={likeHeart}
-              alt="like heart"
-              className={postIsLiked ? "liked-post" : null}
-            />
-            {postIsLiked ? "Liked" : "Like"}
-          </PostActionButton>
-          <PostActionButton onClick={sharePost}>
-            <img src={shareArrow} alt="share Icon" />
-            Share
-          </PostActionButton>
-        </PostActionWrapper>
+        <BottomButtons>
+          <PostActionWrapper>
+            <PostActionButton onClick={handleClickLike}>
+              <img
+                src={likeHeart}
+                alt="like heart"
+                className={postIsLiked ? "liked-post" : null}
+              />
+              {postIsLiked ? "Liked" : "Like"}
+            </PostActionButton>
+            <PostActionButton onClick={sharePost}>
+              <img src={shareArrow} alt="share Icon" />
+              Share
+            </PostActionButton>
+          </PostActionWrapper>
+          {userData.id === postData.user.id && (
+            <DeleteButton onClick={handleDeletePost}>
+              <img src={trash} alt="delete post" />
+              <p>Delete</p>
+            </DeleteButton>
+          )}
+        </BottomButtons>
         <LikeCount>{amountOfLikes} likes</LikeCount>
       </FooterContainer>
     </PostContainer>
