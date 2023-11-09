@@ -1,13 +1,11 @@
 // ProgressComponent.jsx
 import { ProgressBar, ProgressContainer } from "./ProgressBar.style.js";
 
-function ProgressComponent({ percentage, progress_description }) {
+function ProgressComponent({ progress_description }) {
   return (
     <ProgressContainer>
-      <ProgressBar $percentage={percentage} />
-      <p>
-        {percentage}% {progress_description}
-      </p>
+      <ProgressBar />
+      <p>{progress_description}</p>
     </ProgressContainer>
   );
 }

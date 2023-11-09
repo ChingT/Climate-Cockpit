@@ -2,7 +2,6 @@ import ImpactIcon from "./ImpactIcon.jsx";
 
 import { useEffect, useState } from "react";
 import supportersIcon from "./../../assets/other_icons/supporters.png";
-import eCarIcon from "./../../assets/solution_icons/eCar.svg";
 import CategoryLabel from "./CategoryLabel.jsx";
 import ProgressComponent from "./ProgressBar.jsx";
 import Resources from "./Resources.jsx";
@@ -20,11 +19,13 @@ export default function SolutionDropDown({ solution }) {
     category,
     name,
     impact,
-    description,
+    text,
     progress,
-    progress_description,
+    progress_text,
     number_of_supporters,
     button_text,
+    icon_name,
+    id,
   } = solution;
 
   useEffect(() => {
@@ -52,6 +53,9 @@ export default function SolutionDropDown({ solution }) {
     setIsVisible(!isVisible);
   };
 
+  const solutionText = text.replace("{impact}", `${impact} megatons per year`);
+  const progressText = progress_text.replace("{progress}", progress);
+
   return (
     <SolutionContainer $visibleOrChecked={isVisible || isChecked}>
       <div className="solutionBar" onClick={handleSolutionDropDown}>
@@ -64,7 +68,7 @@ export default function SolutionDropDown({ solution }) {
             />
           </div>
           <div>
-            <SvgIcon svg_icon={eCarIcon} />
+            <SvgIcon svg_icon={icon_name} />
           </div>
           <div className="solutionName">{name}</div>
         </div>
@@ -75,7 +79,7 @@ export default function SolutionDropDown({ solution }) {
               {number_of_supporters}
             </div>
             <div>
-              <CategoryLabel category={category} />
+              <CategoryLabel category={category.name} />
             </div>
           </div>
           <div>
@@ -88,17 +92,17 @@ export default function SolutionDropDown({ solution }) {
       </div>
       {isVisible && (
         <div className="solutionDetails">
-          <div>{description}</div>
+          <div>{solutionText}</div>
 
           <ProgressComponent
             className="progressBar"
             percentage={progress}
-            progress_description={progress_description}
+            progress_description={progressText}
           />
 
           <div></div>
 
-          <Resources />
+          <Resources solutionId={id} />
 
           <div className="solutionButton">
             <SolutionButton
