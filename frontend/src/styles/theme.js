@@ -37,6 +37,7 @@ const theme = {
     selectedSolution: "green",
   },
   backgroundColors: {
+    loadingSpinner: "rgba(255, 255, 255, 0.5)",
     primary: "rgba(253, 247, 221, 0.2)",
     secondary: "white",
     impactIconUnselected: "black",
