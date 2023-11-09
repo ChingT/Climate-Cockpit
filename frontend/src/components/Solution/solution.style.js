@@ -1,12 +1,16 @@
 import styled from "styled-components";
 
+export const FilterAndList = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const SolutionListDiv = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  height: 100vh; /* Set to the height of the viewport */
-  overflow-y: auto; /* This allows the list to scroll */
+  height: 100vh;
 `;
 
 export const SolutionContainer = styled.div`

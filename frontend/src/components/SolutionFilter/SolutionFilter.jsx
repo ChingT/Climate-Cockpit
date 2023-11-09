@@ -74,7 +74,6 @@ export default function SolutionFilter() {
       <StyledImage src={filterIcon} onClick={toggleDropdown} alt="Filter" />
       {isDropdownOpen && (
         <DropdownContent>
-          <StyledImage src={filterIcon} onClick={closeDropdown} alt="Filter" />
           {CategoryDropdown}
           {SortingDropdown}
           {StatusDropdown}

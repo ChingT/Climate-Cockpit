@@ -14,9 +14,6 @@ const SolutionsPage = () => {
         <SolutionDashboard />
       </LeftBar>
       <RightBar>
-        <div className="filterDiv">
-          <SolutionFilter />
-        </div>
         <SolutionList />
       </RightBar>
     </Main>

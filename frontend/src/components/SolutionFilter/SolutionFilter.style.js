@@ -10,6 +10,8 @@ export const DropdownLayout = styled.div`
   position: relative;
   display: flex;
   justify-content: flex-end;
+  margin-top: 0.5%;
+  margin-bottom: 0.5%;
 `;
 
 export const DropdownContent = styled.div`
@@ -26,7 +28,7 @@ export const DropdownContent = styled.div`
   padding: 10px;
   border-radius: 5px;
   gap: 1.4rem;
-  height: 21rem;
+  height: 19rem;
 `;
 
 export const TitleAndImage = styled.div`
