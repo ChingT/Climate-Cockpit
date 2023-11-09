@@ -1,21 +1,16 @@
 import { useState } from "react";
-import defaultAvatar from "../../../assets/svgs/avatar.svg";
-
+import { useSelector } from "react-redux";
+import MenuDot from "../../../assets/svgs/menu.svg";
+import ProfileLink from "../../ProfileLink/ProfileLink.jsx";
+import ModalPost from "./ModalPost.jsx";
 import {
-  AuthorInfoWrapper,
-  Avatar,
   EditButton,
   PostHeaderWrapper,
   PostImage,
   PostImageContainer,
   PostText,
-  ProfileLinkWrapper,
   SharedPostContainer,
 } from "./Post.style.js";
-import { useSelector } from "react-redux";
-import ReactTimeAgo from "react-time-ago";
-import MenuDot from "../../../assets/svgs/menu.svg";
-import ModalPost from "./ModalPost.jsx";
 
 const SharedPost = ({ postData }) => {
   const userData = useSelector((store) => store.loggedInUser.user);
@@ -24,25 +19,11 @@ const SharedPost = ({ postData }) => {
   return (
     <SharedPostContainer>
       <PostHeaderWrapper>
-        <ProfileLinkWrapper
-          to={`/profile/${
-            postData.user.id !== userData.id ? postData.user.id : ""
-          }`}
-        >
-          <Avatar
-            src={postData.user.avatar || defaultAvatar}
-            className={!postData.user.avatar ? "default" : null}
-          />
-          <AuthorInfoWrapper>
-            <p>{`${postData.user.first_name} ${postData.user.last_name}`}</p>
-            <p className={"date"}>
-              <ReactTimeAgo
-                date={Date.parse(postData.created)}
-                locale="en-US"
-              />
-            </p>
-          </AuthorInfoWrapper>
-        </ProfileLinkWrapper>
+        <ProfileLink
+          user={postData.user}
+          isLoggedInUser={postData.user.id === userData.id}
+          created={postData.created}
+        />
         {userData.id === postData.user.id && (
           <EditButton onClick={() => setModalIsOpen(true)}>
             <img src={MenuDot} />

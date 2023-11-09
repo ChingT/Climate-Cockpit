@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import ReactTimeAgo from "react-time-ago";
 import useApiRequest from "../../../hooks/useApiRequest.js";
+import ProfileLink from "../../ProfileLink/ProfileLink.jsx";
 import {
   CommentBlock,
   CommentContent,
@@ -9,7 +9,6 @@ import {
   CommentsContainer,
   InputContainer,
   PostButton,
-  UserName,
 } from "./Comment.style.js";
 
 const CommentsSection = ({ postId }) => {
@@ -65,9 +64,13 @@ const CommentsSection = ({ postId }) => {
       </InputContainer>
       {comments.map((comment) => (
         <CommentBlock key={comment.id}>
-          <UserName>{`${comment.user.first_name} ${comment.user.last_name}`}</UserName>
+          <ProfileLink
+            user={comment.user}
+            isLoggedInUser={comment.user.id === userData.id}
+            created={comment.created}
+          />
+
           <CommentContent>{comment.content}</CommentContent>
-          <ReactTimeAgo date={Date.parse(comment.created)} locale="en-US" />
           {userData.id === comment.user.id && (
             <PostButton onClick={() => deleteComment(comment.id)}>
               Delete
