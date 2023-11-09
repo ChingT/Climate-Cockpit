@@ -1,5 +1,10 @@
 import Score from "./Score.jsx";
-import { ScorecardContainer, TitleAndBar } from "./Scorecard.style.js";
+import {
+  FinalContainer,
+  ScorecardContainer,
+  ScoreCardContent,
+  TitleAndBar,
+} from "./Scorecard.style.js";
 import ScorecardCategory from "./ScorecardCategory.jsx";
 
 export default function ScoreCard() {
@@ -99,13 +104,17 @@ export default function ScoreCard() {
   );
   return (
     <ScorecardContainer>
-      {categories.map((category) => (
-        <ScorecardCategory key={category.name} category={category} />
-      ))}
-      <TitleAndBar>
-        {summary}
-        <Score score={totalScore} />
-      </TitleAndBar>
+      <ScoreCardContent>
+        {categories.map((category) => (
+          <ScorecardCategory key={category} category={category} />
+        ))}
+        <TitleAndBar>
+          <FinalContainer>
+            {summary}
+            <Score score={totalScore} />
+          </FinalContainer>
+        </TitleAndBar>
+      </ScoreCardContent>
     </ScorecardContainer>
   );
 }

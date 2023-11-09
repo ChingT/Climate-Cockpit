@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import {
   FollowOrRequestButton,
+  RevokeRequest,
+  TickerAndButton,
   TickerImage,
 } from "./FollowAddButtons.style.js";
-import tickerImage from "../../assets/svgs/Ticker.svg";
+import tickerImage from "../../assets/images/CheckMarcIcon.png";
 import useApiRequest from "../../hooks/useApiRequest.js";
 import { setRequests } from "../../store/slices/friendRequests.js";
 import { useDispatch } from "react-redux";
@@ -51,20 +53,22 @@ function FollowAddButtons({ friendInfo, requestObject }) {
       </FollowOrRequestButton>
       {requestStatus !== undefined && (
         <FollowOrRequestButton
+          $requestStatus={requestStatus}
+          style={{ padding: "8px 11px" }}
           onMouseOver={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
           onClick={deleteFriendOrRequest}
         >
           {requestStatus === "A" &&
-            (!deleteRequestHover ? "friend" : "quit friendship")}
+            (!deleteRequestHover ? "Friend" : "Quit friendship")}
           {requestStatus === "P" &&
             (!deleteRequestHover ? (
-              <>
+              <TickerAndButton>
                 <TickerImage src={tickerImage} />
                 Request sent
-              </>
+              </TickerAndButton>
             ) : (
-              "Revoke request"
+              <RevokeRequest>Revoke request</RevokeRequest>
             ))}
         </FollowOrRequestButton>
       )}

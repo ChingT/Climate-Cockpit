@@ -1,16 +1,19 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import BackgroundImage from "../../../assets/images/profile_background.png";
+import BackgroundImage from "../../../assets/images/blue_sky.jpg";
 import avatarImage from "../../../assets/svgs/avatar.svg";
-import { SecondaryButton } from "../../../styles/globalStyles.js";
 import FollowAddButtons from "../../FollowAddFriendButtons/FollowAddButtons.jsx";
 import ProfileData from "./ProfileData/ProfileData.jsx";
 import {
   AvatarImg,
+  FriendProfileButtons,
+  NameAndLocation,
   ProfileBackground,
+  ProfileButton,
   ProfileHeaderContainer,
   ProfileHeaderLeftContainer,
   ProfileHeaderRightContainer,
+  ProfileHeaderTop,
 } from "./ProfileHeader.style.js";
 import ProfileSubNavigation from "./ProfileSubNavigation/ProfileSubNavigation.jsx";
 
@@ -30,25 +33,30 @@ function ProfileHeader({ userdata, profileId, error }) {
       <ProfileHeaderContainer>
         {userdata && (
           <>
-            <ProfileHeaderLeftContainer>
+            <ProfileHeaderLeftContainer bgImage={userdata.avatar}>
               <AvatarImg alt="avatar" src={userdata.avatar || avatarImage} />
-              <h2>{`${userdata.first_name} ${userdata.last_name}`}</h2>
-              <h3>{userdata.location}</h3>
               {userdata.id === currentUser.id ? (
                 <Link to={"/profile/edit"}>
-                  <SecondaryButton>edit profile</SecondaryButton>
+                  <ProfileButton>Edit Profile</ProfileButton>
                 </Link>
               ) : (
-                <FollowAddButtons
-                  friendInfo={userdata}
-                  requestObject={requestObject}
-                />
+                <FriendProfileButtons>
+                  <FollowAddButtons
+                    friendInfo={userdata}
+                    requestObject={requestObject}
+                  />
+                </FriendProfileButtons>
               )}
             </ProfileHeaderLeftContainer>
 
             <ProfileHeaderRightContainer>
+              <ProfileHeaderTop>
+                <NameAndLocation>
+                  <h2>{`${userdata.first_name} ${userdata.last_name}`}</h2>
+                  <h3>{userdata.location}</h3>
+                </NameAndLocation>
+              </ProfileHeaderTop>
               <ProfileData userdata={userdata} />
-              <ProfileSubNavigation userdata={userdata} profileId={profileId} />
             </ProfileHeaderRightContainer>
           </>
         )}
@@ -61,6 +69,7 @@ function ProfileHeader({ userdata, profileId, error }) {
           </div>
         )}
       </ProfileHeaderContainer>
+      <ProfileSubNavigation userdata={userdata} profileId={profileId} />
     </>
   );
 }

@@ -1,3 +1,15 @@
+import pink_texture from "../assets/category_textures/pink_texture_1.png";
+import purple_texture from "../assets/category_textures/purple_texture.png";
+import violet_texture from "../assets/images/violet_texture.jpg";
+import light_green_texture from "../assets/category_textures/light_green_texture.jpg";
+import gray_texture1 from "../assets/category_textures/gray_pencil_texture.png";
+import gray_texture from "../assets/images/paper_texture.jpg";
+import red_texture from "../assets/category_textures/light_red_texture.png";
+import orange_texture from "../assets/category_textures/light_orange_texture.png";
+import dark_green_texture from "../assets/category_textures/dark_green_texture.png";
+import blue_texture from "../assets/images/light_blue_texture.jpg";
+import yellow_texture from "../assets/category_textures/yellow_texture.jpg";
+
 const theme = {
   General: {
     background:
@@ -38,18 +50,18 @@ const theme = {
     solution: "blue",
   },
   categoryLabels: {
-    default: "white",
-    Electricity: "purple",
-    Buildings: "orange",
-    Transport: "violet",
-    Food: "green",
-    Trash: "grey",
-    Industry: "red",
-    Import: "pink",
-    Nature: "lightgreen",
-    Money: "yellow",
-    Innovation: "blue",
-    fontSize: "14px",
+    default: `url(${gray_texture})`,
+    Electricity: `url(${violet_texture})`,
+    Buildings: `url(${orange_texture})`,
+    Transport: `url(${purple_texture})`,
+    Food: `url(${light_green_texture})`,
+    Trash: `url(${gray_texture1})`,
+    Industry: `url(${red_texture})`,
+    Import: `url(${pink_texture})`,
+    Nature: `url(${dark_green_texture})`,
+    Money: `url(${yellow_texture})`,
+    Innovation: `url(${blue_texture})`,
+    fontSize: "16px",
     fontColor: "black",
   },
   fontColors: {
@@ -63,6 +75,7 @@ const theme = {
     removalColor: "green",
     heroPageMainColor: "#545454",
     heroPageSecondaryColor: "#0077BF",
+    profilePageSecondaryColor: "#0077BF",
   },
   fontSize: {
     equation: "18px",
@@ -74,7 +87,7 @@ const theme = {
   breakPoints: {
     md: "min-width:800px",
   },
-  max_content_width: "64rem",
+  max_content_width: "77rem",
   header_height: "96px",
 };
 

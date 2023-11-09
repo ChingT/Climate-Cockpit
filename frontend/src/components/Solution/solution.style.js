@@ -94,11 +94,13 @@ export const CategoryLabelDiv = styled.div`
   justify-content: center;
   border-radius: 10px;
   font-size: ${(props) => props.theme.categoryLabels.fontSize};
-  background-color: ${(props) =>
+  font-weight: 600;
+  background-image: ${(props) =>
     props.theme.categoryLabels[props.$category] ||
     props.theme.categoryLabels.default};
   color: ${(props) => props.theme.categoryLabels.fontColor};
-  width: 80px;
+  width: 85px;
+  height: inherit;
 `;
 
 export const ImpactIconDiv = styled.div`

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { defaultButtonStyles } from "../../../styles/globalStyles.js";
+import { ButtonsStyle } from "../../../styles/buttons.style.js";
 
 export const InputWrapper = styled.div`
   padding: 2.5rem 3.8rem;
@@ -14,10 +14,12 @@ export const InputWrapper = styled.div`
   }
 
   .input-field {
+    font-size: 18px;
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
     width: 100%;
+  }
 
     label {
       opacity: 0.5;
@@ -30,13 +32,13 @@ export const InputWrapper = styled.div`
       border: none;
       font: inherit;
 
-      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      border-bottom: 2px solid rgba(0, 0, 0, 0.2);
       padding-bottom: 1em;
       resize: none;
     }
 
     > button {
-      ${defaultButtonStyles}
+      ${ButtonsStyle}
     }
   }
 
@@ -55,7 +57,7 @@ export const InputWrapper = styled.div`
       }
 
       button {
-        ${defaultButtonStyles}
+        ${ButtonsStyle}
       }
     }
   }

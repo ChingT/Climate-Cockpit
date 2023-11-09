@@ -14,7 +14,7 @@ const PostsPage = () => {
   return (
     <>
       <SearchAndFilterBar />
-      <PostsGrid url={filterStateURLs[filter]} />
+      <PostsGrid url={filterStateURLs[filter]} columnsCount={2} gutter="2rem" />
     </>
   );
 };

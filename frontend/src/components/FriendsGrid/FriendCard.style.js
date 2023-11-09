@@ -59,9 +59,12 @@ export const FriendLocation = styled.p`
 
 export const ButtonsWrapper = styled.div`
   display: flex;
+  flex-direction: row;
+
+  width: 100%;
   justify-content: space-evenly;
   margin-bottom: 1.2rem;
-  gap: 0.8rem;
+  align-items: center;
 
   > button {
     flex: 1;
