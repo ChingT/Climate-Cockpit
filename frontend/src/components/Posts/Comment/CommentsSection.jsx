@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import ReactTimeAgo from "react-time-ago";
 import useApiRequest from "../../../hooks/useApiRequest.js";
 import {
@@ -12,6 +13,7 @@ import {
 } from "./Comment.style.js";
 
 const CommentsSection = ({ postId }) => {
+  const userData = useSelector((store) => store.loggedInUser.user);
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
   const { sendRequest: sendRequestGet, data: dataGet } = useApiRequest();
@@ -66,9 +68,11 @@ const CommentsSection = ({ postId }) => {
           <UserName>{`${comment.user.first_name} ${comment.user.last_name}`}</UserName>
           <CommentContent>{comment.content}</CommentContent>
           <ReactTimeAgo date={Date.parse(comment.created)} locale="en-US" />
-          <PostButton onClick={() => deleteComment(comment.id)}>
-            Delete
-          </PostButton>
+          {userData.id === comment.user.id && (
+            <PostButton onClick={() => deleteComment(comment.id)}>
+              Delete
+            </PostButton>
+          )}
         </CommentBlock>
       ))}
     </CommentsContainer>
