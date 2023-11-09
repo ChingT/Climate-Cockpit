@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import useApiRequest from "../../../hooks/useApiRequest.js";
+import useAutoFetch from "../../../hooks/useAutoFetch.js";
 import ProfileLink from "../../ProfileLink/ProfileLink.jsx";
 import {
   CommentBlock,
@@ -15,20 +16,15 @@ const CommentsSection = ({ postId }) => {
   const userData = useSelector((store) => store.loggedInUser.user);
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
-  const { sendRequest: sendRequestGet, data: dataGet } = useApiRequest();
   const { sendRequest: sendRequestPost, data: dataPost } = useApiRequest();
   const { sendRequest: sendRequestDelete } = useApiRequest();
   const handleCommentChange = (e) => setCommentText(e.target.value);
 
+  const urlToFetch = `social/comments/${postId}/?limit=3`;
+  const { data } = useAutoFetch("get", urlToFetch);
   useEffect(() => {
-    sendRequestGet("get", `social/comments/${postId}/?limit=3`);
-  }, []);
-
-  useEffect(() => {
-    if (dataGet !== null) {
-      setComments(dataGet.results);
-    }
-  }, [dataGet]);
+    if (data !== null) setComments(data.results);
+  }, [data]);
 
   const handlePostButtonClick = () => {
     if (!commentText.trim()) return;
