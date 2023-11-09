@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "post",
     "comment",
     "friend_request",
+    "solution",
 ]
 
 MIDDLEWARE = [

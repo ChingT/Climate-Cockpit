@@ -8,19 +8,19 @@ export const StyledImage = styled.img`
 
 export const DropdownLayout = styled.div`
   position: relative;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const DropdownContent = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
   top: 100%;
-  left: 0;
   width: 17rem;
   background-color: ${(props) => props.theme.backgroundColors.secondary};
-  border: 1px solid
-    ${(props) => props.theme.backgroundColors.impactIconSelected};
+  ${(props) => props.theme.backgroundColors.impactIconSelected};
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   z-index: 1;
   padding: 10px;

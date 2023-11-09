@@ -66,7 +66,7 @@ const FriendRequest = ({ user, requestId, sentRequest }) => {
                 />
               </>
             ) : (
-              <RequestStatusIcon alt="clock" src={clock} noClick />
+              <RequestStatusIcon alt="clock" src={clock} $noClick />
             )}
           </ButtonsWrapper>
         </>

@@ -1,11 +1,11 @@
-import SolutionDropDown from "../components/Solution/SolutionDropDown.jsx";
-import SolutionFilter from "../components/SolutionFilter/SolutionFilter.jsx";
 import SolutionDashboard from "../components/Dashboard/SolutionDashboard.jsx";
+import SolutionList from "../components/Solution/SolutionList.jsx";
 import {
   LeftBar,
   Main,
   RightBar,
 } from "../components/Dashboard/dashboard.style.js";
+import SolutionFilter from "../components/SolutionFilter/SolutionFilter.jsx";
 
 const SolutionsPage = () => {
   return (
@@ -14,8 +14,10 @@ const SolutionsPage = () => {
         <SolutionDashboard />
       </LeftBar>
       <RightBar>
-        <SolutionFilter />
-        <SolutionDropDown />
+        <div className="filterDiv">
+          <SolutionFilter />
+        </div>
+        <SolutionList />
       </RightBar>
     </Main>
   );

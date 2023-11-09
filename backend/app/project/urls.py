@@ -35,6 +35,7 @@ api_urlpatterns = [
     path("users/", include("user.users.urls")),
     path("social/", include(social_urlpatterns)),
     path("auth/", include("registration.urls")),
+    path("solution/", include("solution.urls")),
 ]
 
 urlpatterns = [path("api/", include(api_urlpatterns))]

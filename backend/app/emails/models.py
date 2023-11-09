@@ -41,4 +41,4 @@ class Email(TimeStampedModel):
         self.save()
 
     def __str__(self):
-        return self.subject
+        return f"{self.subject} to {self.to}"

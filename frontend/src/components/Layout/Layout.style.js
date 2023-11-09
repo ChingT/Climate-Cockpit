@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import polarBear from "../../assets/images/polar_bear.png";
 import theme from "../../styles/theme.js";
+import { NavLink } from "react-router-dom";
 
 export const AuthFormContainer = styled.div`
   background: url(${polarBear}) no-repeat center top/cover;
@@ -31,7 +32,7 @@ export const AuthForm = styled.form`
     gap: 2rem;
     @media (${(props) => props.theme.breakPoints.md}) {
       grid-template-columns: repeat(
-        ${(props) => (props.cols ? props.cols : 1)},
+        ${(props) => (props.$cols ? props.$cols : 1)},
         1fr
       );
     }
@@ -51,8 +52,17 @@ export const FormTitle = styled.h2`
   grid-column: 1/-1;
 `;
 
+export const FormTitlePasswordReset = styled.h2`
+  font-size: 2rem;
+  font-weight: 500;
+  max-width: 80%;
+  text-align: center;
+  margin-bottom: 0.5em;
+  grid-column: 1/-1;
+`;
+
 export const InputFieldContainer = styled.div`
-  grid-column: 1 / ${(props) => (props.span ? -1 : "unset")};
+  grid-column: 1 / ${(props) => (props.$span ? -1 : "unset")};
   width: 100%;
 
   label {
@@ -84,6 +94,39 @@ export const InputFieldContainer = styled.div`
   }
 `;
 
+export const InputField = styled.div`
+  grid-column: 1 / ${(props) => (props.$span ? -1 : "unset")};
+  width: 70%;
+
+  label {
+    text-transform: capitalize;
+    color: ${(props) => props.theme.fontColors.heroPageSecondaryColor};
+  }
+
+  .input-wrapper {
+    position: relative;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-style: italic;
+
+    input {
+      border: none;
+      flex: 1 1 18rem;
+      padding: 1rem 0.25rem;
+      font: inherit;
+      background: ${theme.General.background};
+      background-size: 24px 24px;
+
+      &:focus {
+        outline: 2px solid
+          ${(props) => props.theme.backgroundColors.impactIconSelected};
+      }
+    }
+  }
+`;
+
 export const ConfirmationText = styled.p`
   text-align: center;
   line-height: 1.6;
@@ -95,4 +138,14 @@ export const ErrorMessage = styled.p`
   color: red;
   font-size: 16px;
   margin-top: 0.2rem;
+`;
+
+export const ResetNavLink = styled(NavLink)`
+  text-decoration: underline;
+  line-height: 5.5rem;
+
+  &:hover {
+    text-decoration-color: ${(props) => props.theme.ResetPasswordColors.color};
+    color: ${(props) => props.theme.ResetPasswordColors.color};
+  }
 `;
