@@ -34,12 +34,15 @@ import innovation from "../../assets/dashboard_icons/Innovation.png";
 import money from "../../assets/dashboard_icons/Money.png";
 
 import {
+  CustomStyledP,
+  CustomStyledP2,
   DashboardGridDiv,
   Import,
   Innovation,
   Removal,
   StyledH2,
   StyledH3,
+  StyledP,
 } from "./dashboard.style.js";
 import CircleShapedEmissionPoints from "./CircleShapedEmissionPoints.jsx";
 
@@ -99,13 +102,13 @@ export default function DashboardGrid() {
   const additionalMoney = 2;
 
   const standardImageStyle = {
-    width: "3.7vw",
-    height: "3.8vw",
+    width: "3.4vw",
+    height: "3.2vw",
   };
 
   const importImageStyle = {
-    width: "0.575vw",
-    height: "3.8vw",
+    width: "0.55vw",
+    height: "3.2vw",
   };
 
   const renderIcons = (count, imageUrl, customStyle) => {
@@ -118,7 +121,7 @@ export default function DashboardGrid() {
     <>
       <StyledH2>Inland Emissions</StyledH2>
       <DashboardGridDiv>
-        <p>Industry</p>
+        <StyledP>Industry</StyledP>
         <div>
           {renderIcons(
             totalIndustry - reducedIndustry,
@@ -165,7 +168,7 @@ export default function DashboardGrid() {
           )}
         </div>
 
-        <p>Households</p>
+        <StyledP>Households</StyledP>
         <div>
           {renderIcons(
             totalBuildingResidential - reducedBuildingResidential,
@@ -206,10 +209,10 @@ export default function DashboardGrid() {
         </div>
         <div>
           <div className="left-column">
-            <p>Agriculture</p>
+            <CustomStyledP>Agriculture</CustomStyledP>
           </div>
           <div className="right-column">
-            <p>Electricity</p>
+            <CustomStyledP2>Electricity</CustomStyledP2>
           </div>
         </div>
         <div>
@@ -293,7 +296,7 @@ export default function DashboardGrid() {
       <Innovation>
         <div>
           <div className="innovation">
-            <StyledH3>Innovations</StyledH3>
+            <StyledH2 style={{ marginLeft: "0" }}>Innovations</StyledH2>
           </div>
           <div className="money">
             <StyledH2>Money</StyledH2>

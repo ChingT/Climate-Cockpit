@@ -1,11 +1,11 @@
 import { DashboardCategoriesTotalPoints } from "./dashboard.style.js";
 
 export default function TotalPoints({
-  inlandEmissions,
-  importedEmissions,
-  removedEmissions,
-  solutionEmissions,
-  totalEmissions,
+  inlandEmissions = 47,
+  importedEmissions = 71,
+  removedEmissions = -2,
+  solutionEmissions = -5,
+  totalEmissions = 111,
 }) {
   return (
     <DashboardCategoriesTotalPoints>

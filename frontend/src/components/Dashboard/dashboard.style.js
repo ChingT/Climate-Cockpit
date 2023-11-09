@@ -13,6 +13,9 @@ export const Main = styled.div`
 export const DashboardGridDiv = styled.div`
   display: flex;
   width: 90%;
+  padding-top: 1%;
+  padding-right: 1%;
+  padding-left: 1%;
   flex-direction: column;
   margin-left: 3rem;
   box-sizing: border-box;
@@ -20,9 +23,11 @@ export const DashboardGridDiv = styled.div`
   position: relative;
 
   & > div {
+    padding-bottom: 1.5%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 2.1%;
   }
 
   & > div > div {
@@ -33,15 +38,18 @@ export const DashboardGridDiv = styled.div`
   }
 
   .left-column {
-    justify-content: space-between;
     width: 60%;
     padding-right: 0.9%;
+    justify-content: center;
+    gap: 4.1%;
+    margin-left: 2%;
   }
 
   .right-column {
     display: flex;
     justify-content: flex-end;
     width: 40%;
+    padding-right: 2%;
   }
 
   .innovation {
@@ -57,11 +65,12 @@ export const DashboardGridDiv = styled.div`
 `;
 
 export const StyledH2 = styled.h2`
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 23px;
+  font-weight: 500;
   margin-left: 3rem;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 0.4rem;
+  line-height: 19px;
 `;
 export const StyledH3 = styled.h3`
   font-size: 20px;
@@ -70,17 +79,37 @@ export const StyledH3 = styled.h3`
   margin-bottom: 0.5rem;
 `;
 
+export const StyledP = styled.p`
+  line-height: 6px;
+  font-size: 17px;
+  padding-bottom: 0.5%;
+  padding-left: 2.1%;
+`;
+
+export const CustomStyledP = styled.p`
+  line-height: 1px;
+  font-size: 17px;
+  padding-right: 82%;
+`;
+
+export const CustomStyledP2 = styled.p`
+  line-height: 1px;
+  font-size: 17px;
+`;
+
 export const DashboardCategoriesTotalPoints = styled.div`
-  padding-top: 5rem;
+  padding-top: 0.95rem;
+  padding-bottom: 0.25rem;
   display: flex;
   justify-content: space-around;
   flex-direction: row;
-  align-items: center;
-  height: 10vh;
+  align-items: start;
   border-bottom: 1.2px solid ${theme.colors.solutionPagePrimaryColor};
   font-size: ${(props) => props.theme.fontSize.equation};
   color: ${(props) => props.theme.fontColors.primary};
-  font-weight: bold;
+  font-weight: 500;
+  padding-left: 3%;
+  padding-right: 3%;
 
   & > div {
     display: flex;
@@ -115,6 +144,8 @@ export const Import = styled.div`
   position: relative;
   width: 90%;
   margin-left: 3rem;
+  padding-left: 1.6rem;
+  padding-top: 0.2rem;
 `;
 
 export const Removal = styled.div`
@@ -123,6 +154,8 @@ export const Removal = styled.div`
   position: relative;
   width: 90%;
   margin-left: 3rem;
+  padding-left: 1.6rem;
+  padding-top: 0.2rem;
 `;
 export const Innovation = styled.div`
   display: flex;
@@ -147,8 +180,8 @@ export const Innovation = styled.div`
 `;
 
 export const CircleShapedPoints = styled.div`
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   position: absolute;
   top: -1.2rem;
   right: -1.2rem;
