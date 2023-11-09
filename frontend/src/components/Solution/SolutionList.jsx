@@ -1,6 +1,7 @@
 // Import the styled component
 import SolutionDropDown from "./SolutionDropDown.jsx";
-import { SolutionListDiv } from "./solution.style.js";
+import { FilterAndList, SolutionListDiv } from "./solution.style.js";
+import SolutionFilter from "../SolutionFilter/SolutionFilter.jsx";
 
 let solutions = [
   {
@@ -357,9 +358,14 @@ let solutions = [
 function SolutionList() {
   return (
     <SolutionListDiv>
-      {solutions.map((solution, index) => (
-        <SolutionDropDown key={index} solution={solution} />
-      ))}
+      <FilterAndList>
+        <div className="filterDiv">
+          <SolutionFilter />
+        </div>
+        {solutions.map((solution, index) => (
+          <SolutionDropDown key={index} solution={solution} />
+        ))}
+      </FilterAndList>
     </SolutionListDiv>
   );
 }
