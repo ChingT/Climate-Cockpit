@@ -1,4 +1,13 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import ReactTimeAgo from "react-time-ago";
+import defaultAvatar from "../../../assets/svgs/avatar.svg";
+import likeHeart from "../../../assets/svgs/heart_rgb.png";
+import MenuDot from "../../../assets/svgs/menu.svg";
+import shareArrow from "../../../assets/svgs/share.svg";
+import useApiRequest from "../../../hooks/useApiRequest.js";
+import CommentsSection from "../Comment/CommentsSection.jsx";
+import ModalPost from "./ModalPost.jsx";
 import {
   AuthorInfoWrapper,
   Avatar,
@@ -14,16 +23,7 @@ import {
   PostText,
   ProfileLinkWrapper,
 } from "./Post.style.js";
-import likeHeart from "../../../assets/svgs/heart_rgb.png";
-import shareArrow from "../../../assets/svgs/share.svg";
-import defaultAvatar from "../../../assets/svgs/avatar.svg";
-import MenuDot from "../../../assets/svgs/menu.svg";
-import ModalPost from "./ModalPost.jsx";
 import SharedPost from "./SharedPost.jsx";
-import CommentsSection from "../../Solution/CommentsSection.jsx";
-import { useSelector } from "react-redux";
-import ReactTimeAgo from "react-time-ago";
-import useApiRequest from "../../../hooks/useApiRequest.js";
 
 const Post = ({ postData, setPostToShare, setShowCreatePostModal }) => {
   const userData = useSelector((store) => store.loggedInUser.user);

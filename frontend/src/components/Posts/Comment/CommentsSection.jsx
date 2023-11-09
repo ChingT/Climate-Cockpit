@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import ReactTimeAgo from "react-time-ago";
+import useApiRequest from "../../../hooks/useApiRequest.js";
 import {
   CommentBlock,
   CommentContent,
@@ -8,8 +10,6 @@ import {
   PostButton,
   UserName,
 } from "./Comment.style.js";
-import useApiRequest from "../../hooks/useApiRequest.js";
-import ReactTimeAgo from "react-time-ago";
 
 const CommentsSection = ({ postId }) => {
   const [comments, setComments] = useState([]);
@@ -40,23 +40,15 @@ const CommentsSection = ({ postId }) => {
     sendRequest("delete", `social/comments/comment/${commentId}/`);
 
     setComments((currentComments) =>
-      currentComments.filter((comment) => comment.id !== commentId),
+      currentComments.filter((comment) => comment.id !== commentId)
     );
   };
-
-  useEffect(() => {
-    if (error) {
-      console.error("Error deleting the comment:", error);
-    }
-  }, [error]);
 
   useEffect(() => {
     if (data && !error) {
       if (data.commentDeleted) {
         setComments((prevComments) =>
-          prevComments.filter(
-            (comment) => comment.id !== data.commentDeletedId,
-          ),
+          prevComments.filter((comment) => comment.id !== data.commentDeletedId)
         );
       }
     }
@@ -74,8 +66,6 @@ const CommentsSection = ({ postId }) => {
   const handlePostButtonClick = () => {
     postComment(commentText);
   };
-
-  console.log(data);
 
   return (
     <CommentsContainer>
