@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import {
   AuthorInfoWrapper,
   Avatar,
@@ -26,6 +26,8 @@ import MenuDot from "../../../assets/svgs/menu.svg";
 import trash from "../../../assets/images/delete.svg";
 import ModalPost from "./ModalPost.jsx";
 import SharedPost from "./SharedPost.jsx";
+import EditPostModal from "./EditPosModal.jsx";
+
 
 const Post = ({
   postData,
@@ -35,10 +37,12 @@ const Post = ({
 }) => {
   const userData = useSelector((store) => store.loggedInUser.user);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [content, setContent] = useState(postData.content)
 
   const [postIsLiked, setPostIsLiked] = useState(postData.logged_in_user_liked);
   const [amountOfLikes, setAmountOfLikes] = useState(postData.amount_of_likes);
-  const { sendRequest } = useApiRequest();
+  const [editModalIsOpen, setEditModalIsOpen] = useState(false);
+  const { sendRequest, data } = useApiRequest();
 
   const handleDeletePost = () => {
     sendRequest("delete", `social/posts/${postData.id}/`);
@@ -55,10 +59,23 @@ const Post = ({
       : setAmountOfLikes(amountOfLikes + 1);
   };
 
+   const handleEditPost = () => {
+    setEditModalIsOpen(true);
+  };
+
   const sharePost = () => {
     setPostToShare(postData);
     setShowCreatePostModal(true);
   };
+
+const handleSaveEdit = (editedContent) => {
+  let formData = new FormData();
+  formData.append("content", editedContent);
+  console.log(editedContent)
+  sendRequest("patch", `social/posts/${postData.id}/`, formData, true);
+  setContent(editedContent)
+};
+
 
   return (
     <PostContainer>
@@ -82,18 +99,27 @@ const Post = ({
             </p>
           </AuthorInfoWrapper>
         </ProfileLinkWrapper>
-        {userData.id === postData.user.id && (
-          <EditButton onClick={() => setModalIsOpen(true)}>
-            <img src={MenuDot} />
-          </EditButton>
-        )}
-        {modalIsOpen && (
-          <ModalPost postData={postData} onClose={setModalIsOpen} />
+         {userData.id === postData.user.id && (
+          <>
+            <EditButton onClick={handleEditPost}>
+              <img src={MenuDot} />
+            </EditButton>
+            {modalIsOpen && (
+              <ModalPost postData={postData} onClose={() => setModalIsOpen(false)} />
+            )}
+            {editModalIsOpen && (
+              <EditPostModal
+                postData={postData}
+                onClose={() => setEditModalIsOpen(false)}
+                handleSaveEdit={handleSaveEdit}
+              />
+            )}
+          </>
         )}
       </PostHeaderWrapper>
       <PostHeaderWrapper>
         <PostText onClick={() => setModalIsOpen(true)}>
-          {postData.content}
+          {content}
         </PostText>
       </PostHeaderWrapper>
       <PostImageContainer onClick={() => setModalIsOpen(true)}>
