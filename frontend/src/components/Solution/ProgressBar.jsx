@@ -5,9 +5,7 @@ function ProgressComponent({ percentage, progress_description }) {
   return (
     <ProgressContainer>
       <ProgressBar $percentage={percentage} />
-      <p>
-        {percentage}% {progress_description}
-      </p>
+      <p>{progress_description}</p>
     </ProgressContainer>
   );
 }

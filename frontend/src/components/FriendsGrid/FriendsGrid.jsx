@@ -10,6 +10,7 @@ import {
 const FriendsGrid = ({ url }) => {
   const { data, loading } = useAutoFetch("get", url);
   const friendRequests = useSelector((store) => store.friendRequests);
+  const loggedInUserID = useSelector((store) => store.loggedInUser.user?.id);
 
   const checkRequest = (friendID) => {
     return friendRequests.find((request) => request.receiver.id === friendID);
@@ -20,15 +21,17 @@ const FriendsGrid = ({ url }) => {
       {loading && <LoadingSpinner />}
       <FriendsGridContainer>
         {data &&
-          data.results.map((friend, index) => {
-            return (
-              <FriendCard
-                key={index}
-                friendInfo={friend}
-                requestObject={checkRequest(friend.id)}
-              />
-            );
-          })}
+          data.results
+            .filter((friend) => friend.id !== loggedInUserID)
+            .map((friend, index) => {
+              return (
+                <FriendCard
+                  key={index}
+                  friendInfo={friend}
+                  requestObject={checkRequest(friend.id)}
+                />
+              );
+            })}
       </FriendsGridContainer>
     </FindFriendsContainer>
   );

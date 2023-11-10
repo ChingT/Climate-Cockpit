@@ -1,7 +1,11 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import likeHeart from "../../../assets/svgs/heart_rgb.png";
+import shareArrow from "../../../assets/svgs/share.svg";
+import useApiRequest from "../../../hooks/useApiRequest.js";
+import Overlay from "../../Overlay/Overlay.jsx";
+import ProfileLink from "../../ProfileLink/ProfileLink.jsx";
 import {
-  AuthorInfoWrapper,
-  Avatar,
   FooterContainer,
   LikeCount,
   ModalPostContainer,
@@ -12,15 +16,7 @@ import {
   PostImage,
   PostImageContainer,
   PostText,
-  ProfileLinkWrapper,
 } from "./Post.style.js";
-import likeHeart from "../../../assets/svgs/heart_rgb.png";
-import shareArrow from "../../../assets/svgs/share.svg";
-import defaultAvatar from "../../../assets/svgs/avatar.svg";
-import { useSelector } from "react-redux";
-import ReactTimeAgo from "react-time-ago";
-import useApiRequest from "../../../hooks/useApiRequest.js";
-import Overlay from "../../Overlay/Overlay.jsx";
 
 const ModalPost = ({ postData, onClose }) => {
   const userData = useSelector((store) => store.loggedInUser.user);
@@ -50,25 +46,11 @@ const ModalPost = ({ postData, onClose }) => {
         )}
         <PostContentContainer>
           <PostHeaderWrapper>
-            <ProfileLinkWrapper
-              to={`/profile/${
-                postData.user.id !== userData.id ? postData.user.id : ""
-              }`}
-            >
-              <Avatar
-                src={postData.user.avatar || defaultAvatar}
-                className={!postData.user.avatar ? "default" : null}
-              />
-              <AuthorInfoWrapper>
-                <p>{`${postData.user.first_name} ${postData.user.last_name}`}</p>
-                <p className={"date"}>
-                  <ReactTimeAgo
-                    date={Date.parse(postData.created)}
-                    locale="en-US"
-                  />
-                </p>
-              </AuthorInfoWrapper>
-            </ProfileLinkWrapper>
+            <ProfileLink
+              user={postData.user}
+              isLoggedInUser={postData.user.id === userData.id}
+              created={postData.created}
+            />
           </PostHeaderWrapper>
           <PostText>{postData.content}</PostText>
           <FooterContainer>

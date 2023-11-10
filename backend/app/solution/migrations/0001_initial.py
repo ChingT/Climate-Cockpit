@@ -76,7 +76,7 @@ class Migration(migrations.Migration):
                         help_text="To include impact in text, use: text.replace('{impact}', impact + '%')"
                     ),
                 ),
-                ("text_source", models.URLField(blank=True)),
+                ("text_source", models.URLField(blank=True, max_length=500)),
                 ("progress", models.FloatField(blank=True, null=True)),
                 (
                     "progress_text",
@@ -84,9 +84,10 @@ class Migration(migrations.Migration):
                         help_text="To include progress in progress_text, use: progress_text.replace('{progress}', progress + '%')"
                     ),
                 ),
-                ("progress_source", models.URLField(blank=True)),
+                ("progress_source", models.URLField(blank=True, max_length=500)),
                 ("button_text", models.CharField(max_length=255)),
                 ("icon_name", models.CharField(max_length=255)),
+                ("level", models.IntegerField()),
                 (
                     "category",
                     models.ForeignKey(
@@ -97,8 +98,7 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
-                "get_latest_by": "modified",
-                "abstract": False,
+                "unique_together": {("category", "level")},
             },
         ),
         migrations.CreateModel(
@@ -136,9 +136,10 @@ class Migration(migrations.Migration):
                             ("videos", "videos"),
                             ("news", "news"),
                             ("books", "books"),
+                            ("papers", "papers"),
                         ],
                         default="videos",
-                        help_text="Select from ['videos', 'news', 'books']",
+                        help_text="Select from ['videos', 'news', 'books', 'papers']",
                         max_length=10,
                     ),
                 ),

@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import trash from "../../../assets/images/delete.svg";
+import edit_post from "../../../assets/svgs/edit-image.svg";
+import likeHeart from "../../../assets/svgs/heart_rgb.png";
+import shareArrow from "../../../assets/svgs/share.svg";
+import useApiRequest from "../../../hooks/useApiRequest.js";
+import ProfileLink from "../../ProfileLink/ProfileLink.jsx";
+import CommentsSection from "../Comment/CommentsSection.jsx";
+import EditPostModal from "./EditPosModal.jsx";
+import { StyledImg } from "./Modal.styles.js";
+import ModalPost from "./ModalPost.jsx";
 import {
-  AuthorInfoWrapper,
-  Avatar,
   BottomButtons,
   DeleteButton,
   EditButton,
@@ -14,20 +23,8 @@ import {
   PostImage,
   PostImageContainer,
   PostText,
-  ProfileLinkWrapper,
 } from "./Post.style.js";
-import likeHeart from "../../../assets/svgs/heart_rgb.png";
-import shareArrow from "../../../assets/svgs/share.svg";
-import defaultAvatar from "../../../assets/svgs/avatar.svg";
-import { useSelector } from "react-redux";
-import ReactTimeAgo from "react-time-ago";
-import useApiRequest from "../../../hooks/useApiRequest.js";
-import edit_post from "../../../assets/svgs/edit-image.svg";
-import trash from "../../../assets/images/delete.svg";
-import ModalPost from "./ModalPost.jsx";
 import SharedPost from "./SharedPost.jsx";
-import EditPostModal from "./EditPosModal.jsx";
-import { StyledImg } from "./Modal.styles.js";
 
 const Post = ({
   postData,
@@ -48,7 +45,7 @@ const Post = ({
   const handleDeletePost = () => {
     sendRequest("delete", `social/posts/${postData.id}/`);
     setListOfPosts((current) =>
-      current.filter((post) => post.id !== postData.id),
+      current.filter((post) => post.id !== postData.id)
     );
   };
 
@@ -94,25 +91,12 @@ const Post = ({
   return (
     <PostContainer>
       <PostHeaderWrapper>
-        <ProfileLinkWrapper
-          to={`/profile/${
-            postData.user.id !== userData.id ? postData.user.id : ""
-          }`}
-        >
-          <Avatar
-            src={postData.user.avatar || defaultAvatar}
-            className={!postData.user.avatar ? "default" : null}
-          />
-          <AuthorInfoWrapper>
-            <p>{`${postData.user.first_name} ${postData.user.last_name}`}</p>
-            <p className={"date"}>
-              <ReactTimeAgo
-                date={Date.parse(postData.created)}
-                locale="en-US"
-              />
-            </p>
-          </AuthorInfoWrapper>
-        </ProfileLinkWrapper>
+        <ProfileLink
+          user={postData.user}
+          isLoggedInUser={postData.user.id === userData.id}
+          created={postData.created}
+        />
+
         {userData.id === postData.user.id && (
           <>
             <EditButton onClick={handleEditPost}>
@@ -173,6 +157,8 @@ const Post = ({
         </BottomButtons>
         <LikeCount>{amountOfLikes} likes</LikeCount>
       </FooterContainer>
+
+      <CommentsSection postId={postData.id} />
     </PostContainer>
   );
 };

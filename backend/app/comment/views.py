@@ -4,8 +4,8 @@ from rest_framework.generics import (
     RetrieveUpdateDestroyAPIView,
     get_object_or_404,
 )
-from rest_framework.permissions import SAFE_METHODS, IsAuthenticated
-from user.permissions import IsAdmin, IsOwner
+from rest_framework.permissions import SAFE_METHODS, IsAdminUser, IsAuthenticated
+from user.permissions import IsOwner
 
 from .models import Comment
 from .serializers import CommentSerializer
@@ -57,7 +57,9 @@ class RetrieveUpdateDestroyCommentAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = CommentSerializer
     lookup_url_kwarg = "comment_id"
 
-    def get_permission_classes(self):
+    def get_permissions(self):
         if self.request.method in SAFE_METHODS:
-            return [IsAuthenticated]
-        return [IsOwner | IsAdmin]
+            permission_classes = [IsAuthenticated]
+        else:
+            permission_classes = [IsOwner | IsAdminUser]
+        return [permission() for permission in permission_classes]
