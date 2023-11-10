@@ -5,6 +5,7 @@ from .views import (
     ListResourceAPIView,
     ListSolutionAPIView,
     RetrieveSolutionAPIView,
+    ToggleSelectSolution,
 )
 
 urlpatterns = [
@@ -19,5 +20,10 @@ urlpatterns = [
         "resources/<int:solution_id>/",
         ListResourceAPIView.as_view(),
         name="resource-list-solution",
+    ),
+    path(
+        "toggle-select/<int:solution_id>/",
+        ToggleSelectSolution.as_view(),
+        name="scorecard-toggle-select",
     ),
 ]
