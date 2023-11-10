@@ -1,5 +1,6 @@
 import ImpactIcon from "./ImpactIcon.jsx";
 
+import { useState } from "react";
 import supportersIcon from "./../../assets/other_icons/supporters.png";
 import CategoryLabel from "./CategoryLabel.jsx";
 import ProgressComponent from "./ProgressBar.jsx";
@@ -8,8 +9,6 @@ import SvgIcon from "./SvgIcon.jsx";
 import { SolutionContainer } from "./solution.style.js";
 
 import SolutionButton from "./SolutionButton.jsx";
-
-const CHECKBOX_API_ENDPOINT = "/api/checkbox-status";
 
 export default function SolutionDropDown({ solution }) {
   const [isChecked, setIsChecked] = useState(false);
