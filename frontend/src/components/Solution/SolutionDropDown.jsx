@@ -1,6 +1,5 @@
 import ImpactIcon from "./ImpactIcon.jsx";
 
-import { useEffect, useState } from "react";
 import supportersIcon from "./../../assets/other_icons/supporters.png";
 import CategoryLabel from "./CategoryLabel.jsx";
 import ProgressComponent from "./ProgressBar.jsx";
