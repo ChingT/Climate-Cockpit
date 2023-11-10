@@ -87,7 +87,6 @@ export const VideoContainer = styled.div`
   gap: 10px;
   padding: 10px 0;
   overflow-x: scroll;
-  border: 2px solid red;
 `;
 export const Overlay = styled.div`
   position: absolute;

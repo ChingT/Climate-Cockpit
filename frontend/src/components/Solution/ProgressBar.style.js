@@ -7,11 +7,12 @@ export const ProgressContainer = styled.div`
   margin-bottom: 25px;
   padding: 2px;
 
+
 }
 `;
 
 export const ProgressBar = styled.div`
   height: 100%;
-  background-color: ${(props) => props.theme.ProgressBar.backgroundColor};
+  background-image: var(--background-image);
   width: ${(props) => props.$percentage}%;
 `;

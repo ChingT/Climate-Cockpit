@@ -1,4 +1,5 @@
 import ImpactIcon from "./ImpactIcon.jsx";
+import paper_texture from "../../assets/images/paper_texture.jpg";
 
 import { useEffect, useState } from "react";
 import supportersIcon from "./../../assets/other_icons/supporters.png";
@@ -7,7 +8,7 @@ import CategoryLabel from "./CategoryLabel.jsx";
 import ProgressComponent from "./ProgressBar.jsx";
 import Resources from "./Resources.jsx";
 import SvgIcon from "./SvgIcon.jsx";
-import { SolutionContainer } from "./solution.style.js";
+import { CheckboxContainer, SolutionContainer } from "./solution.style.js";
 
 import SolutionButton from "./SolutionButton.jsx";
 
@@ -51,18 +52,22 @@ export default function SolutionDropDown({ solution }) {
   const handleSolutionDropDown = () => {
     setIsVisible(!isVisible);
   };
+  const style = {
+    "--background-image": `url(${paper_texture})`,
+  };
 
   return (
     <SolutionContainer $visibleOrChecked={isVisible || isChecked}>
       <div className="solutionBar" onClick={handleSolutionDropDown}>
         <div className="solutionBarLeft">
-          <div>
+          <CheckboxContainer>
             <input
               type="checkbox"
               checked={isChecked}
               onChange={handleCheckboxChange}
+              className="custom-checkbox"
             />
-          </div>
+          </CheckboxContainer>
           <div>
             <SvgIcon svg_icon={eCarIcon} />
           </div>
@@ -87,9 +92,9 @@ export default function SolutionDropDown({ solution }) {
         </div>
       </div>
       {isVisible && (
-        <div className="solutionDetails">
+        <div className="solutionDetails" style={style}>
           <div>{description}</div>
-
+          <br />
           <ProgressComponent
             className="progressBar"
             percentage={progress}
