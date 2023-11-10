@@ -3,11 +3,11 @@ import { useDispatch } from "react-redux";
 import avatarImage from "../../../assets/svgs/avatar.svg";
 import useApiRequest from "../../../hooks/useApiRequest.js";
 import { loginUser } from "../../../store/slices/loggedInUser.js";
-import { SecondaryButton } from "../../../styles/globalStyles.js";
 import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner.jsx";
 import {
-  AvatarImg,
   EditAvatarContainer,
+  EditAvatarImg,
+  ProfileButton,
 } from "../Profile/ProfileHeader.style.js";
 import { CustomFileInputButton } from "./EditProfile.style.js";
 
@@ -47,18 +47,30 @@ const LeftEditContainer = ({ initialAvatar, handleProfileUpdate }) => {
   return (
     <EditAvatarContainer>
       <div>
-        <AvatarImg
+        <EditAvatarImg
           alt="avatar"
           src={imagePreview || currentAvatar || avatarImage}
         />
         {imagePreview ? (
           <>
-            <button onClick={handleProfileImageUpdate}>upload image</button>
-            <button onClick={() => setImagePreview(undefined)}>cancel</button>
+            <ProfileButton
+              style={{ color: "black" }}
+              onClick={handleProfileImageUpdate}
+            >
+              Upload image
+            </ProfileButton>
+            <ProfileButton
+              style={{ color: "black" }}
+              onClick={() => setImagePreview(undefined)}
+            >
+              Cancel
+            </ProfileButton>
           </>
         ) : (
           <CustomFileInputButton>
-            <SecondaryButton>Choose Image</SecondaryButton>
+            <ProfileButton style={{ color: "black" }}>
+              Choose Image
+            </ProfileButton>
             <input
               type="file"
               id="pictures"
@@ -68,12 +80,12 @@ const LeftEditContainer = ({ initialAvatar, handleProfileUpdate }) => {
           </CustomFileInputButton>
         )}
       </div>
-      <div className={"button-wrapper"}>
-        <p>{error}</p>
-        {loading && <LoadingSpinner />}
-        <button>delete account</button>
-        <button onClick={handleProfileUpdate}>save changes</button>
-      </div>
+      <p>{error}</p>
+      {loading && <LoadingSpinner />}
+      <ProfileButton style={{ color: "black" }}>Delete account</ProfileButton>
+      <ProfileButton style={{ color: "black" }} onClick={handleProfileUpdate}>
+        Save changes
+      </ProfileButton>
     </EditAvatarContainer>
   );
 };

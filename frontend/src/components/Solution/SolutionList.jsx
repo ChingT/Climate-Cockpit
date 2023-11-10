@@ -1,8 +1,9 @@
 // Import the styled component
 import SolutionDropDown from "./SolutionDropDown.jsx";
-import { SolutionListDiv } from "./solution.style.js";
 import useApiRequest from "../../hooks/useApiRequest.js";
 import { useEffect, useState } from "react";
+import { FilterAndList, SolutionListDiv } from "./solution.style.js";
+import SolutionFilter from "../SolutionFilter/SolutionFilter.jsx";
 
 function SolutionList() {
   const { sendRequest, data } = useApiRequest("noAuth");
@@ -21,9 +22,14 @@ function SolutionList() {
 
   return (
     <SolutionListDiv>
-      {solutionList.map((solution, index) => (
-        <SolutionDropDown key={index} solution={solution} />
-      ))}
+      <FilterAndList>
+        <div className="filterDiv">
+          <SolutionFilter />
+        </div>
+        {solutionList.map((solution, index) => (
+          <SolutionDropDown key={index} solution={solution} />
+        ))}
+      </FilterAndList>
     </SolutionListDiv>
   );
 }

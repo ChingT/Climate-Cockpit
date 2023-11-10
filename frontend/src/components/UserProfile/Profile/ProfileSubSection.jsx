@@ -10,9 +10,18 @@ function ProfileSubSection({ userID }) {
   const displayComponent = () => {
     switch (filter) {
       case "posts":
-        return <PostsGrid url={endPoint} inProfile />;
+        return (
+          <PostsGrid url={endPoint} inProfile columnsCount={1} gutter="2rem" />
+        );
       case "likes":
-        return <PostsGrid url={"social/posts/likes"} inProfile />;
+        return (
+          <PostsGrid
+            url={"social/posts/likes"}
+            inProfile
+            columnsCount={1}
+            gutter="2rem"
+          />
+        );
       case "friends":
         return <FriendsGrid url={"social/friends"} />;
       case "followers":
@@ -20,7 +29,9 @@ function ProfileSubSection({ userID }) {
       case "following":
         return <FriendsGrid url={"social/followers/following"} />;
       default:
-        return <PostsGrid url={endPoint} inProfile />;
+        return (
+          <PostsGrid url={endPoint} inProfile columnsCount={1} gutter="2rem" />
+        );
     }
   };
 

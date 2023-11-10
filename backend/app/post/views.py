@@ -11,9 +11,9 @@ from rest_framework.generics import (
     RetrieveUpdateDestroyAPIView,
 )
 from rest_framework.parsers import FormParser, MultiPartParser
-from rest_framework.permissions import SAFE_METHODS, IsAuthenticated
+from rest_framework.permissions import SAFE_METHODS, IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
-from user.permissions import IsAdmin, IsOwner
+from user.permissions import IsOwner
 
 User = get_user_model()
 
@@ -60,10 +60,12 @@ class RetrieveUpdateDestroyPostAPIView(RetrieveUpdateDestroyAPIView):
     lookup_url_kwarg = "post_id"
     parser_classes = (MultiPartParser, FormParser)  # Enable file upload support
 
-    def get_permission_classes(self):
+    def get_permissions(self):
         if self.request.method in SAFE_METHODS:
-            return [IsAuthenticated]
-        return [IsOwner | IsAdmin]
+            permission_classes = [IsAuthenticated]
+        else:
+            permission_classes = [IsOwner | IsAdminUser]
+        return [permission() for permission in permission_classes]
 
 
 class ToggleLikePost(CreateAPIView):

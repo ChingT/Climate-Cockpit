@@ -1,3 +1,15 @@
+import pink_texture from "../assets/category_textures/pink_texture_1.png";
+import purple_texture from "../assets/category_textures/purple_texture.png";
+import violet_texture from "../assets/images/violet_texture.jpg";
+import light_green_texture from "../assets/category_textures/light_green_texture.jpg";
+import gray_texture1 from "../assets/category_textures/gray_pencil_texture.png";
+import gray_texture from "../assets/images/paper_texture.jpg";
+import red_texture from "../assets/category_textures/light_red_texture.png";
+import orange_texture from "../assets/category_textures/light_orange_texture.png";
+import dark_green_texture from "../assets/category_textures/dark_green_texture.png";
+import blue_texture from "../assets/images/light_blue_texture.jpg";
+import yellow_texture from "../assets/category_textures/yellow_texture.jpg";
+
 const theme = {
   General: {
     background:
@@ -38,18 +50,18 @@ const theme = {
     solution: "blue",
   },
   categoryLabels: {
-    default: "white",
-    electricity: "purple",
-    buildings: "orange",
-    transport: "violet",
-    food: "green",
-    trash: "grey",
-    industry: "red",
-    import: "pink",
-    nature: "lightgreen",
-    money: "yellow",
-    innovation: "blue",
-    fontSize: "14px",
+    default: `url(${gray_texture})`,
+    electricity: `url(${violet_texture})`,
+    buildings: `url(${orange_texture})`,
+    transport: `url(${purple_texture})`,
+    food: `url(${light_green_texture})`,
+    trash: `url(${gray_texture1})`,
+    industry: `url(${red_texture})`,
+    import: `url(${pink_texture})`,
+    nature: `url(${dark_green_texture})`,
+    money: `url(${yellow_texture})`,
+    innovation: `url(${blue_texture})`,
+    fontSize: "16px",
     fontColor: "black",
   },
   fontColors: {
@@ -63,9 +75,10 @@ const theme = {
     removalColor: "green",
     heroPageMainColor: "#545454",
     heroPageSecondaryColor: "#0077BF",
+    profilePageSecondaryColor: "#0077BF",
   },
   fontSize: {
-    equation: "18px",
+    equation: "22px",
     solutionName: "30px",
   },
   fonts: {
@@ -74,7 +87,7 @@ const theme = {
   breakPoints: {
     md: "min-width:800px",
   },
-  max_content_width: "64rem",
+  max_content_width: "77rem",
   header_height: "96px",
 };
 

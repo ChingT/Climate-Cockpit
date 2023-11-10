@@ -100,7 +100,7 @@ class RetrieveUpdateDestroyFriendRequestView(RetrieveUpdateDestroyAPIView):
         if self.request.method in ["PUT", "PATCH"]:
             permission_classes += [IsFriendRequestReceiver]
         elif self.request.method in ["DELETE"]:
-            permission_classes += [IsFriendRequestSender]
+            permission_classes += [IsFriendRequestSender | IsFriendRequestReceiver]
         return [permission() for permission in permission_classes]
 
     def perform_update(self, serializer):
