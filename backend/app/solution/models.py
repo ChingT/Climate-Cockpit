@@ -39,6 +39,7 @@ class Resource(TimeStampedModel):
         VIDEOS = "videos", "videos"
         NEWS = "news", "news"
         BOOKS = "books", "books"
+        PAPERS = "papers", "papers"
 
     DEFAULT_TYPE = TypeChoices.VIDEOS
 
