@@ -39,6 +39,17 @@ export const StyledTextarea = styled.textarea`
   border-radius: 4px;
 `;
 
+export const StyledImg = styled.img`
+  width: 1.7rem;
+  height: 1.7rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+`;
+
 export const StyledImagePreview = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
