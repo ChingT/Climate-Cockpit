@@ -2,7 +2,6 @@ import { useState } from "react";
 import {
   AuthorInfoWrapper,
   Avatar,
-  EditButton,
   FooterContainer,
   LikeCount,
   ModalPostContainer,
