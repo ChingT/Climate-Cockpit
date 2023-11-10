@@ -42,7 +42,7 @@ const Post = ({
   const [postIsLiked, setPostIsLiked] = useState(postData.logged_in_user_liked);
   const [amountOfLikes, setAmountOfLikes] = useState(postData.amount_of_likes);
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
-  const { sendRequest, data } = useApiRequest();
+  const { sendRequest } = useApiRequest();
 
   const handleDeletePost = () => {
     sendRequest("delete", `social/posts/${postData.id}/`);
