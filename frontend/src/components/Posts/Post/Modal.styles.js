@@ -1,23 +1,50 @@
 import styled from "styled-components";
 
-export const ModalContainer = styled.div`
-  position: relative;
-  top: 0;
-  left: 0;
+export const CreatePostModalContainer = styled.div`
   width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  min-height: 6rem;
+  max-width: 42rem;
+  background: #ffffff;
+  box-shadow:
+    0px 0px 1px rgba(0, 0, 0, 0.2),
+    0px 10px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+
+  .body-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    padding: 3.5rem;
+
+    .user-avatar {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    `;
+
+export const StyledInput = styled.input`
+  position: relative;
+  width: 100%;
+  height: fit-content;
 `;
 
-export const ModalContent = styled.div`
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
+export const StyledTextarea = styled.textarea`
+  width: 100%;
+  height: 150px;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+export const StyledImagePreview = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
+  grid-column: 2/-1;
 `;
 
 export const CloseButton = styled.button`
