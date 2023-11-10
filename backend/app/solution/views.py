@@ -1,5 +1,13 @@
+from rest_framework import status
 from rest_framework.filters import OrderingFilter, SearchFilter
-from rest_framework.generics import ListAPIView, RetrieveAPIView, get_object_or_404
+from rest_framework.generics import (
+    GenericAPIView,
+    ListAPIView,
+    RetrieveAPIView,
+    get_object_or_404,
+)
+from rest_framework.response import Response
+from scorecard.models import Scorecard
 
 from .models import Category, Resource, Solution
 from .serializers import CategorySerializer, ResourceSerializer, SolutionSerializer
@@ -72,3 +80,29 @@ class ListResourceAPIView(ListAPIView):
         solution_id = self.kwargs.get(self.lookup_url_kwarg)
         target_solution = get_object_or_404(Solution, id=solution_id)
         return Resource.objects.filter(solution=target_solution).order_by("id")
+
+
+class ToggleSelectSolution(GenericAPIView):
+    """Toggle select a solution.
+
+    Toggle select a solution for the logged-in user by solution ID.
+    """
+
+    queryset = Solution
+    serializer_class = SolutionSerializer
+    lookup_url_kwarg = "solution_id"
+
+    def get_scorecard(self):
+        return Scorecard.objects.get_or_create(user=self.request.user)[0]
+
+    def post(self, request, *args, **kwargs):
+        scorecard = self.get_scorecard()
+        solution = self.get_object()
+        selected_solutions = scorecard.selected_solutions
+        if solution in selected_solutions.all():
+            selected_solutions.remove(solution)
+        else:
+            selected_solutions.add(solution)
+
+        serializer = self.get_serializer(solution)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)

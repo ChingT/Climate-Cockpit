@@ -12,10 +12,13 @@ class CategorySerializer(serializers.ModelSerializer):
 class SolutionSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
     number_of_supporters = serializers.SerializerMethodField()
+    selected_by_logged_in_user = serializers.SerializerMethodField()
 
     def get_number_of_supporters(self, instance: Solution):
-        # TODO(ching): fix this  # noqa: TD003
-        pass
+        return instance.scorecards.count()
+
+    def get_selected_by_logged_in_user(self, instance: Solution):
+        return instance.scorecards.filter(user=self.context["request"].user).exists()
 
     class Meta:
         model = Solution
