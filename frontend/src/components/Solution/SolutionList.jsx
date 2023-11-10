@@ -10,7 +10,8 @@ function SolutionList() {
 
   useEffect(() => {
     sendRequest("get", "solution/solutions/?limit=30");
-  }, [sendRequest]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (data) {

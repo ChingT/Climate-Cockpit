@@ -17,81 +17,43 @@ import {
 } from "./Resources.style.js";
 import useApiRequest from "../../hooks/useApiRequest.js";
 
-const booksList = [
-  {
-    title: "Book Title 1",
-    url: "https://www.reuters.com/business/sustainable-business/swiss-could-hit-co2-target-with-156-billion-package-study-2022-09-16/",
-    thumbnail:
-      "https://www.reuters.com/resizer/SKxbWYDjw4FppWrtXQV0dS9pKBw=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/F7HRDCUL7BO3TF74QN56QAXFAI.jpg",
-    author: "Author",
-  },
-  {
-    title: "Book Title 1",
-    url: "https://www.reuters.com/business/sustainable-business/swiss-could-hit-co2-target-with-156-billion-package-study-2022-09-16/",
-    thumbnail:
-      "https://www.reuters.com/resizer/SKxbWYDjw4FppWrtXQV0dS9pKBw=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/F7HRDCUL7BO3TF74QN56QAXFAI.jpg",
-    author: "Author",
-  },
-  {
-    title: "Book Title 1",
-    url: "https://www.reuters.com/business/sustainable-business/swiss-could-hit-co2-target-with-156-billion-package-study-2022-09-16/",
-    thumbnail:
-      "https://www.reuters.com/resizer/SKxbWYDjw4FppWrtXQV0dS9pKBw=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/F7HRDCUL7BO3TF74QN56QAXFAI.jpg",
-    author: "Author",
-  },
-  {
-    title: "Book Title 1",
-    url: "https://www.reuters.com/business/sustainable-business/swiss-could-hit-co2-target-with-156-billion-package-study-2022-09-16/",
-    thumbnail:
-      "https://www.reuters.com/resizer/SKxbWYDjw4FppWrtXQV0dS9pKBw=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/F7HRDCUL7BO3TF74QN56QAXFAI.jpg",
-    author: "Author",
-  },
-];
-
-const newsList = [
-  {
-    title: "News Title 1",
-    url: "https://www.reuters.com/business/sustainable-business/swiss-could-hit-co2-target-with-156-billion-package-study-2022-09-16/",
-    thumbnail:
-      "https://www.reuters.com/resizer/SKxbWYDjw4FppWrtXQV0dS9pKBw=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/F7HRDCUL7BO3TF74QN56QAXFAI.jpg",
-    description: "This is a description for News 1.",
-  },
-  {
-    title: "News Title 2",
-    url: "https://www.reuters.com/business/sustainable-business/swiss-could-hit-co2-target-with-156-billion-package-study-2022-09-16/",
-    thumbnail:
-      "https://www.reuters.com/resizer/SKxbWYDjw4FppWrtXQV0dS9pKBw=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/F7HRDCUL7BO3TF74QN56QAXFAI.jpg",
-    description: "This is a description for News 2.",
-  },
-  {
-    title: "News Title 3",
-    url: "https://www.reuters.com/business/sustainable-business/swiss-could-hit-co2-target-with-156-billion-package-study-2022-09-16/",
-    thumbnail:
-      "https://www.reuters.com/resizer/SKxbWYDjw4FppWrtXQV0dS9pKBw=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/F7HRDCUL7BO3TF74QN56QAXFAI.jpg",
-    description: "This is a description for News 3.",
-  },
-  {
-    title: "News Title 4",
-    url: "https://www.reuters.com/business/sustainable-business/swiss-could-hit-co2-target-with-156-billion-package-study-2022-09-16/",
-    thumbnail:
-      "https://www.reuters.com/resizer/SKxbWYDjw4FppWrtXQV0dS9pKBw=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/F7HRDCUL7BO3TF74QN56QAXFAI.jpg",
-    description: "This is a description for News 4.",
-  },
-];
-
 function Resources({ solutionId }) {
-  const [activeTab, setActiveTab] = useState("Videos");
   const [modalVideo, setModalVideo] = useState(null);
   const { sendRequest, data } = useApiRequest("noAuth");
   const [videosList, setVideosList] = useState([]);
+  const [booksList, setBooksList] = useState([]);
+  const [newsList, setNewsList] = useState([]);
+  const [activeTab, setActiveTab] = useState("Videos");
 
   useEffect(() => {
-    sendRequest("get", `solution/resources/${solutionId}`);
-  }, [sendRequest, solutionId]);
+    const fetchData = (type) => {
+      sendRequest("get", `solution/resources/${solutionId}?type=${type}`);
+    };
+
+    if (activeTab === "Videos") {
+      fetchData("videos");
+    } else if (activeTab === "News") {
+      fetchData("news");
+    } else if (activeTab === "Books") {
+      fetchData("books");
+    }
+  }, [activeTab]);
 
   useEffect(() => {
     if (data) {
-      setVideosList(data.results);
+      switch (activeTab) {
+        case "Videos":
+          setVideosList(data.results);
+          break;
+        case "News":
+          setNewsList(data.results);
+          break;
+        case "Books":
+          setBooksList(data.results);
+          break;
+        default:
+          console.warn("Unhandled tab or no data available");
+      }
     }
   }, [data]);
 
