@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import {
   AuthorInfoWrapper,
   Avatar,
@@ -28,16 +28,17 @@ import ModalPost from "./ModalPost.jsx";
 import SharedPost from "./SharedPost.jsx";
 import EditPostModal from "./EditPosModal.jsx";
 
-
 const Post = ({
   postData,
   setPostToShare,
   setShowCreatePostModal,
   setListOfPosts,
+  listOfPosts,
 }) => {
   const userData = useSelector((store) => store.loggedInUser.user);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [content, setContent] = useState(postData.content)
+  const [content, setContent] = useState(postData.content);
+  const [postImages, setPostImages] = useState([...postData.images]);
 
   const [postIsLiked, setPostIsLiked] = useState(postData.logged_in_user_liked);
   const [amountOfLikes, setAmountOfLikes] = useState(postData.amount_of_likes);
@@ -59,7 +60,7 @@ const Post = ({
       : setAmountOfLikes(amountOfLikes + 1);
   };
 
-   const handleEditPost = () => {
+  const handleEditPost = () => {
     setEditModalIsOpen(true);
   };
 
@@ -68,14 +69,32 @@ const Post = ({
     setShowCreatePostModal(true);
   };
 
-const handleSaveEdit = (editedContent) => {
-  let formData = new FormData();
-  formData.append("content", editedContent);
-  console.log(editedContent)
-  sendRequest("patch", `social/posts/${postData.id}/`, formData, true);
-  setContent(editedContent)
-};
+  const handleSaveEdit = (editedContent, editedImages) => {
+    let formData = new FormData();
+    formData.append("content", editedContent);
+    editedImages.forEach((image) => {
+      console.log(image instanceof File);
+      if (image instanceof File) {
+        formData.append(`images`, image);
+      } else if (typeof image === "string") {
+        formData.append(`images`, image);
+      }
+    });
 
+    sendRequest("patch", `social/posts/${postData.id}/`, formData, true);
+    setContent(editedContent);
+    setPostImages(editedImages);
+    console.log(editedImages);
+    setListOfPosts((current) =>
+      current.map((post) =>
+        post.id === postData.id
+          ? { ...post, content: editedContent, images: editedImages }
+          : post,
+      ),
+    );
+  };
+
+  useEffect(() => {}, [postImages]);
 
   return (
     <PostContainer>
@@ -99,16 +118,20 @@ const handleSaveEdit = (editedContent) => {
             </p>
           </AuthorInfoWrapper>
         </ProfileLinkWrapper>
-         {userData.id === postData.user.id && (
+        {userData.id === postData.user.id && (
           <>
             <EditButton onClick={handleEditPost}>
               <img src={MenuDot} />
             </EditButton>
             {modalIsOpen && (
-              <ModalPost postData={postData} onClose={() => setModalIsOpen(false)} />
+              <ModalPost
+                postData={postData}
+                onClose={() => setModalIsOpen(false)}
+              />
             )}
             {editModalIsOpen && (
               <EditPostModal
+                avatar={postData.user.avatar}
                 postData={postData}
                 onClose={() => setEditModalIsOpen(false)}
                 handleSaveEdit={handleSaveEdit}
@@ -118,9 +141,7 @@ const handleSaveEdit = (editedContent) => {
         )}
       </PostHeaderWrapper>
       <PostHeaderWrapper>
-        <PostText onClick={() => setModalIsOpen(true)}>
-          {content}
-        </PostText>
+        <PostText onClick={() => setModalIsOpen(true)}>{content}</PostText>
       </PostHeaderWrapper>
       <PostImageContainer onClick={() => setModalIsOpen(true)}>
         {postData.images.map((image) => (

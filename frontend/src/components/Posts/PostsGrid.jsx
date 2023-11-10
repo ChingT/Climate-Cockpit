@@ -43,6 +43,7 @@ const PostsGrid = ({ url, inProfile, columnsCount, gutter }) => {
               <Post
                 key={post.id}
                 setListOfPosts={setListOfPosts}
+                listOfPosts={listOfPosts}
                 postData={post}
                 setPostToShare={setPostToShare}
                 setShowCreatePostModal={setShowCreatePostModal}

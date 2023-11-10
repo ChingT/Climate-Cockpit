@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import {
   CreatePostModalContainer,
   CustomImageUploadButton,
@@ -11,7 +11,12 @@ import Overlay from "../../Overlay/Overlay.jsx";
 import useApiRequest from "../../../hooks/useApiRequest.js";
 import SharedPost from "../Post/SharedPost.jsx";
 
-const CreatePostModal = ({ setModalIsOpen, userData, postToShare, setListOfPosts }) => {
+const CreatePostModal = ({
+  setModalIsOpen,
+  userData,
+  postToShare,
+  setListOfPosts,
+}) => {
   const [content, setContent] = useState();
   const [imageToUpload, setImageToUpload] = useState([]);
   const [error, setError] = useState(undefined);
@@ -48,7 +53,7 @@ const CreatePostModal = ({ setModalIsOpen, userData, postToShare, setListOfPosts
     });
     sendRequest("post", "social/posts/", formdata, true);
   };
-    useEffect(() => {
+  useEffect(() => {
     if (data !== null) {
       setListOfPosts((prevState) => [data, ...prevState]);
       setModalIsOpen(false);
