@@ -37,6 +37,7 @@ function Resources({ solutionId }) {
     } else if (activeTab === "Books") {
       fetchData("books");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
   useEffect(() => {
@@ -55,6 +56,7 @@ function Resources({ solutionId }) {
           console.warn("Unhandled tab or no data available");
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   const openModalWithVideo = (videoUrl) => {
