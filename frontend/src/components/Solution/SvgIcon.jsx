@@ -3,7 +3,7 @@ import NoOil from "../../assets/solution_icons/NoOil.svg";
 import GreenBuilding from "../../assets/solution_icons/GreenBuilding.svg";
 import CleanElectricity from "../../assets/solution_icons/CleanElectricity.svg";
 import RenewableElectricity from "../../assets/solution_icons/RenewableElectricity.svg";
-import SolarPanel from "../../assets/solution_icons/SolarPanel.svg";
+import SolarPanels from "../../assets/solution_icons/SolarPanel.svg";
 import Vegetarian from "../../assets/solution_icons/Vegetarian.svg";
 import NoCow from "../../assets/solution_icons/NoCow.svg";
 import Vegan from "../../assets/solution_icons/Vegan.svg";
@@ -16,7 +16,7 @@ import ClimateScore_green from "../../assets/solution_icons/ClimateScore_green.s
 import FollowInnovation from "../../assets/solution_icons/FollowInnovation.svg";
 import SupportInnovation from "../../assets/solution_icons/SupportInnovation.svg";
 import InnovateYourself from "../../assets/solution_icons/InnovateYourself.svg";
-import NoFossilInvestment from "../../assets/solution_icons/NoFossilInvestment.svg";
+import NoFossilInvestments from "../../assets/solution_icons/NoFossilInvestment.svg";
 import GreenFinance from "../../assets/solution_icons/GreenFinance.svg";
 import GreenTransition from "../../assets/solution_icons/GreenTransition.svg";
 import ProtectEcosystems from "../../assets/solution_icons/ProtectEcosystems.svg";
@@ -28,13 +28,15 @@ import Bicycle from "../../assets/solution_icons/Bicycle.svg";
 import Recycling from "../../assets/solution_icons/Recycling.svg";
 import Compost from "../../assets/solution_icons/Compost.svg";
 import ZeroWaste from "../../assets/solution_icons/ZeroWaste.svg";
+import NoGas from "../../assets/solution_icons/NoGas.svg";
 
 const ICONS = {
   NoOil,
+  NoGas,
   GreenBuilding,
   CleanElectricity,
   RenewableElectricity,
-  SolarPanel,
+  SolarPanels,
   Vegetarian,
   NoCow,
   Vegan,
@@ -47,7 +49,7 @@ const ICONS = {
   FollowInnovation,
   SupportInnovation,
   InnovateYourself,
-  NoFossilInvestment,
+  NoFossilInvestments,
   GreenFinance,
   GreenTransition,
   ProtectEcosystems,
@@ -66,9 +68,7 @@ function SvgIcon({ svg_icon, altText }) {
 
   return (
     <SvgIconDiv>
-      {IconSrc ? (
-        <img src={IconSrc} alt={altText || svg_icon || "SVG Icon"} />
-      ) : null}
+      <img src={IconSrc} alt={altText || svg_icon || "SVG Icon"} />
     </SvgIconDiv>
   );
 }
