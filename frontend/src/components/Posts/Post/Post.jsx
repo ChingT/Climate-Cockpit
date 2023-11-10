@@ -22,11 +22,12 @@ import defaultAvatar from "../../../assets/svgs/avatar.svg";
 import { useSelector } from "react-redux";
 import ReactTimeAgo from "react-time-ago";
 import useApiRequest from "../../../hooks/useApiRequest.js";
-import MenuDot from "../../../assets/svgs/menu.svg";
+import edit_post from "../../../assets/svgs/edit-image.svg";
 import trash from "../../../assets/images/delete.svg";
 import ModalPost from "./ModalPost.jsx";
 import SharedPost from "./SharedPost.jsx";
 import EditPostModal from "./EditPosModal.jsx";
+import { StyledImg } from "./Modal.styles.js";
 
 const Post = ({
   postData,
@@ -71,26 +72,21 @@ const Post = ({
   const handleSaveEdit = (editedContent, editedImages) => {
     let formData = new FormData();
     formData.append("content", editedContent);
+    console.log(editedImages);
     editedImages.forEach((image) => {
-      console.log(image instanceof File);
-      if (image instanceof File) {
-        formData.append(`images`, image);
-      } else if (typeof image === "string") {
-        formData.append(`images`, image);
-      }
+      formData.append(`images`, image.file);
     });
 
     sendRequest("patch", `social/posts/${postData.id}/`, formData, true);
     setContent(editedContent);
     setPostImages(editedImages);
-    console.log(editedImages);
-    setListOfPosts((current) =>
-      current.map((post) =>
-        post.id === postData.id
-          ? { ...post, content: editedContent, images: editedImages }
-          : post,
-      ),
-    );
+    // setListOfPosts((current) =>
+    //   current.map((post) =>
+    //     post.id === postData.id
+    //       ? { ...post, content: editedContent, images: editedImages }
+    //       : post,
+    //   ),
+    // );
   };
 
   useEffect(() => {}, [postImages]);
@@ -120,7 +116,7 @@ const Post = ({
         {userData.id === postData.user.id && (
           <>
             <EditButton onClick={handleEditPost}>
-              <img src={MenuDot} />
+              <StyledImg src={edit_post} />
             </EditButton>
             {modalIsOpen && (
               <ModalPost
@@ -143,8 +139,12 @@ const Post = ({
         <PostText onClick={() => setModalIsOpen(true)}>{content}</PostText>
       </PostHeaderWrapper>
       <PostImageContainer onClick={() => setModalIsOpen(true)}>
-        {postData.images.map((image) => (
-          <PostImage key={image.id} src={image.image} alt={image.image} />
+        {postImages.map((image) => (
+          <PostImage
+            key={image.id}
+            src={image.image ? image.image : image.blob}
+            alt={image.image}
+          />
         ))}
       </PostImageContainer>
       {postData.shared && <SharedPost postData={postData.shared} />}

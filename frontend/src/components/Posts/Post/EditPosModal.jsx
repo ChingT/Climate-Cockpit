@@ -11,21 +11,27 @@ import Overlay from "../../Overlay/Overlay.jsx";
 
 const EditPostModal = ({ postData, onClose, handleSaveEdit, avatar }) => {
   const [editedContent, setEditedContent] = useState(postData.content);
-  const [editedImages, setEditedImages] = useState([...postData.images]);
-
-  useEffect(() => {
-    setEditedContent(postData.content);
-    setEditedImages([...postData.images]);
-  }, [postData]);
+  const [editedImages, setEditedImages] = useState([]);
+  //
+  // useEffect(() => {
+  //   setEditedContent(postData.content);
+  //   setEditedImages([...postData.images]);
+  // }, [postData]);
 
   const handleImageUpload = (e) => {
     const imagesFromUpload = Array.from(e.target.files);
 
     if (imagesFromUpload.length + editedImages.length > 4) {
       console.error("You can only upload 4 images per post");
-      return;
+    } else {
+      imagesFromUpload.map((image, index) => {
+        const imageBlob = URL.createObjectURL(image);
+        setEditedImages((prevState) => [
+          ...prevState,
+          { blob: imageBlob, index, file: image },
+        ]);
+      });
     }
-    setEditedImages((prevImages) => [...prevImages, ...imagesFromUpload]);
   };
 
   const removeImage = (clickedIndex) => {
@@ -36,7 +42,6 @@ const EditPostModal = ({ postData, onClose, handleSaveEdit, avatar }) => {
 
   const handleSave = () => {
     handleSaveEdit(editedContent, editedImages);
-    console.log(editedImages);
     onClose();
   };
 

@@ -21,7 +21,6 @@ import defaultAvatar from "../../../assets/svgs/avatar.svg";
 import { useSelector } from "react-redux";
 import ReactTimeAgo from "react-time-ago";
 import useApiRequest from "../../../hooks/useApiRequest.js";
-import MenuDot from "../../../assets/svgs/menu.svg";
 import Overlay from "../../Overlay/Overlay.jsx";
 
 const ModalPost = ({ postData, onClose }) => {
@@ -71,11 +70,6 @@ const ModalPost = ({ postData, onClose }) => {
                 </p>
               </AuthorInfoWrapper>
             </ProfileLinkWrapper>
-            {userData.id === postData.user.id && (
-              <EditButton>
-                <img src={MenuDot} />
-              </EditButton>
-            )}
           </PostHeaderWrapper>
           <PostText>{postData.content}</PostText>
           <FooterContainer>
