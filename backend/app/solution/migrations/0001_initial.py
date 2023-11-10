@@ -87,6 +87,7 @@ class Migration(migrations.Migration):
                 ("progress_source", models.URLField(blank=True, max_length=500)),
                 ("button_text", models.CharField(max_length=255)),
                 ("icon_name", models.CharField(max_length=255)),
+                ("level", models.IntegerField()),
                 (
                     "category",
                     models.ForeignKey(
@@ -97,8 +98,7 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
-                "get_latest_by": "modified",
-                "abstract": False,
+                "unique_together": {("category", "level")},
             },
         ),
         migrations.CreateModel(

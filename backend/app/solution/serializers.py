@@ -6,7 +6,7 @@ from .models import Category, Resource, Solution
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ["id", "name"]
+        fields = "__all__"
 
 
 class SolutionSerializer(serializers.ModelSerializer):
@@ -19,23 +19,10 @@ class SolutionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Solution
-        fields = [
-            "id",
-            "name",
-            "category",
-            "impact",
-            "text",
-            "text_source",
-            "progress",
-            "progress_text",
-            "progress_source",
-            "button_text",
-            "icon_name",
-            "number_of_supporters",
-        ]
+        fields = "__all__"
 
 
 class ResourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resource
-        fields = ["id", "solution", "title", "source", "url", "resource_type"]
+        fields = "__all__"
