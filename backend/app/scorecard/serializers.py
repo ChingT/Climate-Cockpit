@@ -9,5 +9,5 @@ class ScorecardSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Scorecard
-        fields = "__all__"
+        fields = ["user", "selected_solutions"]
         read_only_fields = ["user"]
