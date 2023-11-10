@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "comment",
     "friend_request",
     "solution",
+    "scorecard",
 ]
 
 MIDDLEWARE = [
