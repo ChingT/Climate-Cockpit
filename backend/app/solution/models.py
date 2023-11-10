@@ -29,6 +29,10 @@ class Solution(TimeStampedModel):
     progress_source = models.URLField(max_length=500, blank=True)
     button_text = models.CharField(max_length=255)
     icon_name = models.CharField(max_length=255)
+    level = models.IntegerField()
+
+    class Meta:
+        unique_together = ["category", "level"]
 
     def __str__(self):
         return f"Solution: {self.name}"
