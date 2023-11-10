@@ -1,5 +1,5 @@
 import logoutImage from "../../assets/svgs/icon_logout.svg";
-import { ActionsWrapper, ActionContainer } from "./Navigation.style.js";
+import { ActionContainer, ActionsWrapper } from "./Navigation.style.js";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../store/slices/loggedInUser.js";

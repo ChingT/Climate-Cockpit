@@ -71,6 +71,9 @@ export const PostActionButton = styled.button`
   display: flex;
   gap: 1rem;
   font-family: inherit;
+  &:hover {
+    transform: scale(1.2);
+  }
 
   img {
     filter: saturate(0) brightness(1.35);
@@ -81,12 +84,35 @@ export const PostActionButton = styled.button`
       filter: none;
     }
   }
-
-  &:hover img {
-    transform: scale(1.2);
-  }
 `;
 
+export const DeleteButton = styled.button`
+  background: none;
+  border: none;
+  display: flex;
+  gap: 0.7rem;
+  font-family: inherit;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1%;
+  &:hover {
+    transform: scale(1.2);
+  }
+
+  img {
+    filter: saturate(0) brightness(1.35);
+    width: 1.5rem;
+    height: 1.5rem;
+    transition: transform 200ms ease;
+`;
+export const BottomButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 9%;
+  cursor: pointer;
+`;
 export const LikeCount = styled.p`
   opacity: 50%;
 `;

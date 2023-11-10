@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import likeHeart from "../../../assets/svgs/heart_rgb.png";
-import MenuDot from "../../../assets/svgs/menu.svg";
 import shareArrow from "../../../assets/svgs/share.svg";
 import useApiRequest from "../../../hooks/useApiRequest.js";
 import Overlay from "../../Overlay/Overlay.jsx";
 import ProfileLink from "../../ProfileLink/ProfileLink.jsx";
 import {
-  EditButton,
   FooterContainer,
   LikeCount,
   ModalPostContainer,
@@ -53,11 +51,6 @@ const ModalPost = ({ postData, onClose }) => {
               isLoggedInUser={postData.user.id === userData.id}
               created={postData.created}
             />
-            {userData.id === postData.user.id && (
-              <EditButton>
-                <img src={MenuDot} />
-              </EditButton>
-            )}
           </PostHeaderWrapper>
           <PostText>{postData.content}</PostText>
           <FooterContainer>
