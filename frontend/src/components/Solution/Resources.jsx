@@ -140,7 +140,7 @@ function Resources({ solutionId }) {
                 </BookNews>
                 <VideoTitle>{news.title}</VideoTitle>
               </a>
-              <VideoDescription>{news.description}</VideoDescription>
+              <VideoDescription>{news.source}</VideoDescription>
             </div>
           ))}
         </VideoContainer>
@@ -156,7 +156,7 @@ function Resources({ solutionId }) {
                 )}
                 <VideoTitle>{book.title}</VideoTitle>
               </a>
-              <VideoDescription>{book.author}</VideoDescription>
+              <VideoDescription>{book.source}</VideoDescription>
             </div>
           ))}
         </VideoContainer>
