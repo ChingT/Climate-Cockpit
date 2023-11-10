@@ -28,19 +28,6 @@ export default function SolutionDropDown({ solution }) {
     id,
   } = solution;
 
-  useEffect(() => {
-    const fetchCheckboxStatus = async () => {
-      try {
-        const response = await fetch(CHECKBOX_API_ENDPOINT);
-        const data = await response.json();
-        setIsChecked(data.isChecked);
-      } catch (error) {
-        console.error("Failed to fetch checkbox status:", error);
-      }
-    };
-    fetchCheckboxStatus();
-  }, []);
-
   const handleCheckboxChange = (event) => {
     const newCheckedStatus = event.target.checked;
     setIsChecked(newCheckedStatus);
