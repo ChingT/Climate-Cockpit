@@ -1,5 +1,8 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
+
+User = get_user_model()
 
 
 class Category(TimeStampedModel):
@@ -36,6 +39,16 @@ class Solution(TimeStampedModel):
 
     def __str__(self):
         return f"Solution: {self.name}"
+
+
+class UserSelection(TimeStampedModel):
+    user = models.OneToOneField(User, models.CASCADE, related_name="user_selections")
+    selected_solutions = models.ManyToManyField(
+        Solution, related_name="user_selections", blank=True
+    )
+
+    def __str__(self):
+        return f"UserSelection from {self.user}"
 
 
 class Resource(TimeStampedModel):
