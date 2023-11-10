@@ -82,7 +82,7 @@ const newsList = [
 function Resources({ solutionId }) {
   const [activeTab, setActiveTab] = useState("Videos");
   const [modalVideo, setModalVideo] = useState(null);
-  const { sendRequest, data, error, loading } = useApiRequest("noAuth");
+  const { sendRequest, data } = useApiRequest("noAuth");
   const [videosList, setVideosList] = useState([]);
 
   useEffect(() => {

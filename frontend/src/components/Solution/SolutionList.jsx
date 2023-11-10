@@ -5,7 +5,7 @@ import useApiRequest from "../../hooks/useApiRequest.js";
 import { useEffect, useState } from "react";
 
 function SolutionList() {
-  const { sendRequest, data, error, loading } = useApiRequest("noAuth");
+  const { sendRequest, data } = useApiRequest("noAuth");
   const [solutionList, setSolutionList] = useState([]);
 
   useEffect(() => {
