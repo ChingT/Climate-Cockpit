@@ -33,7 +33,6 @@ const Post = ({
   setPostToShare,
   setShowCreatePostModal,
   setListOfPosts,
-  listOfPosts,
 }) => {
   const userData = useSelector((store) => store.loggedInUser.user);
   const [modalIsOpen, setModalIsOpen] = useState(false);
