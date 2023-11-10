@@ -10,7 +10,7 @@ function SolutionList() {
 
   useEffect(() => {
     sendRequest("get", "solution/solutions/?limit=30");
-  }, []);
+  }, [sendRequest]);
 
   useEffect(() => {
     if (data) {

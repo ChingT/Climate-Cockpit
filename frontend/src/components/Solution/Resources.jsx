@@ -87,7 +87,7 @@ function Resources({ solutionId }) {
 
   useEffect(() => {
     sendRequest("get", `solution/resources/${solutionId}`);
-  }, []);
+  }, [sendRequest, solutionId]);
 
   useEffect(() => {
     if (data) {
