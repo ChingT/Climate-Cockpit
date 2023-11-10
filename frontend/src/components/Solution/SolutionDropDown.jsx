@@ -1,8 +1,7 @@
 import ImpactIcon from "./ImpactIcon.jsx";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import supportersIcon from "./../../assets/other_icons/supporters.png";
-import eCarIcon from "./../../assets/solution_icons/eCar.svg";
 import CategoryLabel from "./CategoryLabel.jsx";
 import ProgressComponent from "./ProgressBar.jsx";
 import Resources from "./Resources.jsx";
@@ -11,8 +10,6 @@ import { SolutionContainer } from "./solution.style.js";
 
 import SolutionButton from "./SolutionButton.jsx";
 
-const CHECKBOX_API_ENDPOINT = "/api/checkbox-status";
-
 export default function SolutionDropDown({ solution }) {
   const [isChecked, setIsChecked] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -20,25 +17,14 @@ export default function SolutionDropDown({ solution }) {
     category,
     name,
     impact,
-    description,
+    text,
     progress,
-    progress_description,
+    progress_text,
     number_of_supporters,
     button_text,
+    icon_name,
+    id,
   } = solution;
-
-  useEffect(() => {
-    const fetchCheckboxStatus = async () => {
-      try {
-        const response = await fetch(CHECKBOX_API_ENDPOINT);
-        const data = await response.json();
-        setIsChecked(data.isChecked);
-      } catch (error) {
-        console.error("Failed to fetch checkbox status:", error);
-      }
-    };
-    fetchCheckboxStatus();
-  }, []);
 
   const handleCheckboxChange = (event) => {
     const newCheckedStatus = event.target.checked;
@@ -52,6 +38,9 @@ export default function SolutionDropDown({ solution }) {
     setIsVisible(!isVisible);
   };
 
+  const solutionText = text.replace("{impact}", `${impact} megatons per year`);
+  const progressText = progress_text.replace("{progress}", progress);
+
   return (
     <SolutionContainer $visibleOrChecked={isVisible || isChecked}>
       <div className="solutionBar" onClick={handleSolutionDropDown}>
@@ -64,7 +53,7 @@ export default function SolutionDropDown({ solution }) {
             />
           </div>
           <div>
-            <SvgIcon svg_icon={eCarIcon} />
+            <SvgIcon svg_icon={icon_name} />
           </div>
           <div className="solutionName">{name}</div>
         </div>
@@ -75,7 +64,7 @@ export default function SolutionDropDown({ solution }) {
               {number_of_supporters}
             </div>
             <div>
-              <CategoryLabel category={category} />
+              <CategoryLabel category={category.name} />
             </div>
           </div>
           <div>
@@ -88,17 +77,17 @@ export default function SolutionDropDown({ solution }) {
       </div>
       {isVisible && (
         <div className="solutionDetails">
-          <div>{description}</div>
+          <div>{solutionText}</div>
 
           <ProgressComponent
             className="progressBar"
             percentage={progress}
-            progress_description={progress_description}
+            progress_description={progressText}
           />
 
           <div></div>
 
-          <Resources />
+          <Resources solutionId={id} />
 
           <div className="solutionButton">
             <SolutionButton
