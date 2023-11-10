@@ -1,7 +1,7 @@
 import { ImpactIconDiv } from "./solution.style.js";
 
 function ImpactIcon({ impact, visibleOrChecked }) {
-  let impactNumber = impact;
+  let impactNumber = -impact;
   if (impact == null) {
     impactNumber = "?";
   }
