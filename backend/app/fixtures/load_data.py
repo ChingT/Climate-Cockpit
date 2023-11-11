@@ -8,6 +8,7 @@ from rest_framework.generics import get_object_or_404
 def populate_solutions(apps: AppConfig, schema_editor):
     Category = apps.get_model("solution", "Category")  # noqa: N806
     Solution = apps.get_model("solution", "Solution")  # noqa: N806
+    SelectionLogic = apps.get_model("solution", "SelectionLogic")  # noqa: N806
 
     csv_file_path = Path("fixtures/source/solutions_content.csv")
     with Path.open(csv_file_path, encoding="utf-8") as csv_file:
@@ -15,6 +16,10 @@ def populate_solutions(apps: AppConfig, schema_editor):
         for row in csv_reader:
             data = dict(**row)
             data["category"], _ = Category.objects.get_or_create(name=data["category"])
+            data["selection_logic"], _ = SelectionLogic.objects.get_or_create(
+                description=data["selection_logic"]
+            )
+
             for field_name in row:
                 if not data[field_name]:
                     del data[field_name]

@@ -4,13 +4,19 @@ from rest_framework.generics import (
     GenericAPIView,
     ListAPIView,
     RetrieveAPIView,
+    RetrieveDestroyAPIView,
     get_object_or_404,
 )
+from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
-from scorecard.models import Scorecard
 
-from .models import Category, Resource, Solution
-from .serializers import CategorySerializer, ResourceSerializer, SolutionSerializer
+from .models import Category, Resource, Solution, UserSelection
+from .serializers import (
+    CategorySerializer,
+    ResourceSerializer,
+    SolutionSerializer,
+    UserSelectionSerializer,
+)
 
 
 class CategorySearchFilter(SearchFilter):
@@ -88,17 +94,14 @@ class ToggleSelectSolution(GenericAPIView):
     Toggle select a solution for the logged-in user by solution ID.
     """
 
-    queryset = Solution
+    queryset = Solution.objects.all()
     serializer_class = SolutionSerializer
     lookup_url_kwarg = "solution_id"
 
-    def get_scorecard(self):
-        return Scorecard.objects.get_or_create(user=self.request.user)[0]
-
     def post(self, request, *args, **kwargs):
-        scorecard = self.get_scorecard()
+        user_selection, _ = UserSelection.objects.get_or_create(user=self.request.user)
         solution = self.get_object()
-        selected_solutions = scorecard.selected_solutions
+        selected_solutions = user_selection.selected_solutions
         if solution in selected_solutions.all():
             selected_solutions.remove(solution)
         else:
@@ -106,3 +109,36 @@ class ToggleSelectSolution(GenericAPIView):
 
         serializer = self.get_serializer(solution)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class ListUserSelectionAPIView(ListAPIView):
+    """get: List all user selections.
+
+    List all user selections. Only admin users can perform this operation.
+    """
+
+    queryset = UserSelection.objects.all().order_by("-created")
+    serializer_class = UserSelectionSerializer
+    permission_classes = [IsAdminUser]
+
+
+class RetrieveDestroyUserSelectionAPIView(RetrieveDestroyAPIView):
+    """get: Retrieve the user selections.
+
+    Retrieve the user selections of the logged-in user. \
+    If the user selections doesn't exist, create one.
+
+    delete: Delete the user selections.
+
+    Delete the user selections of the logged-in user.
+    """
+
+    serializer_class = UserSelectionSerializer
+
+    def get_object(self):
+        return get_object_or_404(UserSelection, user=self.request.user)
+
+    def retrieve(self, request, *args, **kwargs):
+        instance, _ = UserSelection.objects.get_or_create(user=self.request.user)
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)

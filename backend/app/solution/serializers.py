@@ -1,12 +1,28 @@
+from django.db.models import Max, Sum
 from rest_framework import serializers
+from utils import generate_aggregate
 
-from .models import Category, Resource, Solution
+from .models import Category, Resource, Solution, UserSelection
 
 
 class CategorySerializer(serializers.ModelSerializer):
+    impact_from_logged_in_user = serializers.SerializerMethodField()
+    level_from_logged_in_user = serializers.SerializerMethodField()
+
+    def get_impact_from_logged_in_user(self, instance):
+        return generate_aggregate(self.get_selected_solutions(instance), Sum("impact"))
+
+    def get_level_from_logged_in_user(self, instance):
+        return generate_aggregate(self.get_selected_solutions(instance), Max("level"))
+
     class Meta:
         model = Category
         fields = "__all__"
+
+    def get_selected_solutions(self, instance):
+        current_user = self.context["request"].user
+        user_selection, _ = UserSelection.objects.get_or_create(user=current_user)
+        return user_selection.selected_solutions.filter(category=instance)
 
 
 class SolutionSerializer(serializers.ModelSerializer):
@@ -15,14 +31,23 @@ class SolutionSerializer(serializers.ModelSerializer):
     selected_by_logged_in_user = serializers.SerializerMethodField()
 
     def get_number_of_supporters(self, instance: Solution):
-        return instance.scorecards.count()
+        return instance.user_selections.count()
 
     def get_selected_by_logged_in_user(self, instance: Solution):
-        return instance.scorecards.filter(user=self.context["request"].user).exists()
+        return instance.user_selections.filter(
+            user=self.context["request"].user
+        ).exists()
 
     class Meta:
         model = Solution
         fields = "__all__"
+
+
+class UserSelectionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserSelection
+        fields = ["user", "selected_solutions"]
+        read_only_fields = ["user", "selected_solutions"]
 
 
 class ResourceSerializer(serializers.ModelSerializer):
