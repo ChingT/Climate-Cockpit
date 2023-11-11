@@ -12,6 +12,13 @@ class Category(TimeStampedModel):
         return f"Category: {self.name}"
 
 
+class SelectionLogic(models.Model):
+    description = models.CharField(max_length=255, unique=True)
+
+    def __str__(self):
+        return self.description
+
+
 class Solution(TimeStampedModel):
     name = models.CharField(max_length=255)
     category = models.ForeignKey(Category, models.PROTECT, related_name="solutions")
@@ -33,6 +40,9 @@ class Solution(TimeStampedModel):
     button_text = models.CharField(max_length=255)
     icon_name = models.CharField(max_length=255)
     level = models.IntegerField()
+    selection_logic = models.ForeignKey(
+        SelectionLogic, models.PROTECT, related_name="solutions"
+    )
 
     class Meta:
         unique_together = ["category", "level"]
