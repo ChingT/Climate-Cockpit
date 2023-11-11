@@ -1,4 +1,6 @@
-import { useState } from "react";
+// SolutionFilter.jsx
+
+import React, { useState } from "react";
 import funnelIcon from "../../assets/images/filtering_categories.png";
 import sortingIcon from "../../assets/images/sorting_categories.png";
 import filterIcon from "../../assets/other_icons/filter.svg";
@@ -12,14 +14,19 @@ import {
   TitleAndImage,
 } from "./SolutionFilter.style.js";
 
-export default function SolutionFilter() {
+export default function SolutionFilter({ onSortChange }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   const handleSelectChange = (e) => {
-    setSelectedCategory(e.target.value);
+    const selectedOption = e.target.value;
+    setSelectedCategory(selectedOption);
+    if (onSortChange) {
+      onSortChange(selectedOption);
+    }
+
     setIsDropdownOpen(false);
   };
 
@@ -36,6 +43,7 @@ export default function SolutionFilter() {
     "Transport",
     "Trash",
   ];
+
   const sortingOptions = ["Impact", "Alphabetically", "Number of Supporters"];
   const statusOptions = ["Open", "Done"];
 
@@ -61,11 +69,7 @@ export default function SolutionFilter() {
   };
 
   const CategoryDropdown = dropdown("Category Filter", funnelIcon, categories);
-  const SortingDropdown = dropdown(
-    "Sorting Options",
-    sortingIcon,
-    sortingOptions,
-  );
+  const SortingDropdown = dropdown("Sorting Options", sortingIcon, sortingOptions);
   const StatusDropdown = dropdown("Status Filter", funnelIcon, statusOptions);
 
   return (
