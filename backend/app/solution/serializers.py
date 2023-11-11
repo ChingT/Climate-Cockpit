@@ -8,12 +8,16 @@ from .models import Category, Resource, Solution, UserSelection
 class CategorySerializer(serializers.ModelSerializer):
     impact_from_logged_in_user = serializers.SerializerMethodField()
     level_from_logged_in_user = serializers.SerializerMethodField()
+    solution_names = serializers.SerializerMethodField()
 
     def get_impact_from_logged_in_user(self, instance):
         return generate_aggregate(self.get_selected_solutions(instance), Sum("impact"))
 
     def get_level_from_logged_in_user(self, instance):
         return generate_aggregate(self.get_selected_solutions(instance), Max("level"))
+
+    def get_solution_names(self, instance):
+        return instance.solutions.values_list("name", flat=True)
 
     class Meta:
         model = Category
