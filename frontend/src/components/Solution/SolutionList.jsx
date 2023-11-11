@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SolutionDropDown from "./SolutionDropDown.jsx";
 import useApiRequest from "../../hooks/useApiRequest.js";
 import { FilterAndList, SolutionListDiv } from "./solution.style.js";

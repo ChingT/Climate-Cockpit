@@ -1,6 +1,4 @@
-// SolutionFilter.jsx
-
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import funnelIcon from "../../assets/images/filtering_categories.png";
 import sortingIcon from "../../assets/images/sorting_categories.png";
 import filterIcon from "../../assets/other_icons/filter.svg";
@@ -13,35 +11,33 @@ import {
   StyledImage,
   TitleAndImage,
 } from "./SolutionFilter.style.js";
+import useApiRequest from "../../hooks/useApiRequest.js";
 
 export default function SolutionFilter({ onSortChange }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
+  const { sendRequest, data } = useApiRequest("noAuth");
+
+  useEffect(() => {
+    sendRequest("get", "/solution/categories/");
+  }, []);
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   const handleSelectChange = (e) => {
     const selectedOption = e.target.value;
-    setSelectedCategory(selectedOption);
+    setSelectedOption(selectedOption);
     if (onSortChange) {
       onSortChange(selectedOption);
     }
 
     setIsDropdownOpen(false);
   };
-
   const categories = [
-    "All",
-    "Buildings",
-    "Electricity",
-    "Food",
-    "Import",
-    "Industry",
-    "Innovation",
-    "Money",
-    "Nature",
-    "Transport",
-    "Trash",
+    "all categories",
+    ...(data && data.results
+      ? data.results.map((category) => category.name)
+      : []),
   ];
 
   const sortingOptions = ["Impact", "Alphabetically", "Number of Supporters"];
@@ -61,7 +57,7 @@ export default function SolutionFilter({ onSortChange }) {
             <h3>{title}</h3>
           </TitleAndImage>
         </ContainerTop>
-        <DropdownSelect value={selectedCategory} onChange={handleSelectChange}>
+        <DropdownSelect value={selectedOption} onChange={handleSelectChange}>
           {dropdownOptions}
         </DropdownSelect>
       </DropdownSort>
@@ -69,7 +65,11 @@ export default function SolutionFilter({ onSortChange }) {
   };
 
   const CategoryDropdown = dropdown("Category Filter", funnelIcon, categories);
-  const SortingDropdown = dropdown("Sorting Options", sortingIcon, sortingOptions);
+  const SortingDropdown = dropdown(
+    "Sorting Options",
+    sortingIcon,
+    sortingOptions,
+  );
   const StatusDropdown = dropdown("Status Filter", funnelIcon, statusOptions);
 
   return (
