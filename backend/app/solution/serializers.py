@@ -2,7 +2,7 @@ from django.db.models import Max, Sum
 from rest_framework import serializers
 from utils import generate_aggregate
 
-from .models import Category, Resource, Solution, UserSelection
+from .solutions.models import Category, Resource, Solution, UserSelection
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -47,14 +47,14 @@ class SolutionSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class ResourceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Resource
+        fields = "__all__"
+
+
 class UserSelectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserSelection
         fields = ["user", "selected_solutions"]
         read_only_fields = ["user", "selected_solutions"]
-
-
-class ResourceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Resource
-        fields = "__all__"

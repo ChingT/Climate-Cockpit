@@ -1,16 +1,31 @@
 import csv
 from pathlib import Path
 
-from django.apps import AppConfig
+from django.core.management.base import BaseCommand
 from rest_framework.generics import get_object_or_404
+from solution.solution_logic.models import SelectionRule, SolutionLogic
+from solution.solutions.models import Category, Resource, Solution
 
 source_root = Path("fixtures/source")
 
 
-def populate_solutions(apps: AppConfig, schema_editor):
-    Category = apps.get_model("solution", "Category")  # noqa: N806
-    Solution = apps.get_model("solution", "Solution")  # noqa: N806
+class Command(BaseCommand):
+    help = "Import solution data from CSV files."  # noqa: A003
 
+    def handle(self, *args, **options):
+        populate_solutions()
+        self.stdout.write(self.style.SUCCESS("Successfully imported solution data"))
+
+        populate_resources()
+        self.stdout.write(self.style.SUCCESS("Successfully imported resource data"))
+
+        populate_solution_logics()
+        self.stdout.write(
+            self.style.SUCCESS("Successfully imported solution_logics data")
+        )
+
+
+def populate_solutions():
     csv_file_path = source_root / "solution_content.csv"
     with Path.open(csv_file_path, encoding="utf-8") as csv_file:
         csv_reader = csv.DictReader(csv_file)
@@ -25,10 +40,7 @@ def populate_solutions(apps: AppConfig, schema_editor):
             Solution.objects.create(**data)
 
 
-def populate_resources(apps: AppConfig, schema_editor):
-    Solution = apps.get_model("solution", "Solution")  # noqa: N806
-    Resource = apps.get_model("solution", "Resource")  # noqa: N806
-
+def populate_resources():
     resources_types = ["videos", "news", "books", "papers"]
     for resources_type in resources_types:
         csv_file_path = source_root / f"resource/{resources_type}.csv"
@@ -45,11 +57,7 @@ def populate_resources(apps: AppConfig, schema_editor):
                 Resource.objects.create(**data)
 
 
-def populate_solution_logics(apps: AppConfig, schema_editor):
-    Solution = apps.get_model("solution", "Solution")  # noqa: N806
-    SelectionRule = apps.get_model("solution", "SelectionRule")  # noqa: N806
-    SolutionLogic = apps.get_model("solution", "SolutionLogic")  # noqa: N806
-
+def populate_solution_logics():
     csv_file_path = source_root / "solution_logic.csv"
     with Path.open(csv_file_path, encoding="utf-8") as csv_file:
         csv_reader = csv.DictReader(csv_file)

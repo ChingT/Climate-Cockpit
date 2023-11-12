@@ -15,13 +15,14 @@ from rest_framework.generics import (
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 
-from .models import Category, Resource, SelectionLogic, Solution, UserSelection
 from .serializers import (
     CategorySerializer,
     ResourceSerializer,
     SolutionSerializer,
     UserSelectionSerializer,
 )
+from .solution_logic.models import SelectionRule
+from .solutions.models import Category, Resource, Solution, UserSelection
 
 if TYPE_CHECKING:
     from django.db.models.query import QuerySet
@@ -109,12 +110,12 @@ class ToggleSelectSolution(GenericAPIView):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.selection_logic = {
-            "exclusive": self.get_selection_logic(
+        self.selection_rules = {
+            "exclusive": self.get_selection_rule(
                 "If selected, others solutions in category are deselected"
             ),
-            "no_car": self.get_selection_logic('If selected, "No Car" is deselected'),
-            "electric_car": self.get_selection_logic(
+            "no_car": self.get_selection_rule('If selected, "No Car" is deselected'),
+            "electric_car": self.get_selection_rule(
                 'If selected, "Electric Car" is deselected'
             ),
         }
@@ -138,25 +139,26 @@ class ToggleSelectSolution(GenericAPIView):
         # Remove the other solutions in the same category that are exclusive
         to_remove = Q(
             category=new_solution.category,
-            selection_logic=self.selection_logic["exclusive"],
+            solution_logic__selection_rule=self.selection_rules["exclusive"],
         )
 
+        selection_rule = new_solution.solution_logic.selection_rule
         # If the new solution is exclusive, remove other solutions in the same category
-        if new_solution.selection_logic == self.selection_logic["exclusive"]:
+        if selection_rule == self.selection_rules["exclusive"]:
             to_remove |= Q(category=new_solution.category)
         # If the new solution has specific deselection logic, apply additional filters
-        elif new_solution.selection_logic == self.selection_logic["no_car"]:
+        elif selection_rule == self.selection_rules["no_car"]:
             to_remove |= Q(name="No Car")
-        elif new_solution.selection_logic == self.selection_logic["electric_car"]:
+        elif selection_rule == self.selection_rules["electric_car"]:
             to_remove |= Q(name="Electric Car")
 
         selected_solutions.remove(*selected_solutions.filter(to_remove))
         selected_solutions.add(new_solution)
 
-    def get_selection_logic(self, description):
+    def get_selection_rule(self, description):
         try:
-            return SelectionLogic.objects.get(description=description)
-        except SelectionLogic.DoesNotExist:
+            return SelectionRule.objects.get(description=description)
+        except SelectionRule.DoesNotExist:
             return None
 
 
