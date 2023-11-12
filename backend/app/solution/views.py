@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from django.db.models import Q
 from rest_framework import status
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import (
@@ -105,6 +106,19 @@ class ToggleSelectSolution(GenericAPIView):
     lookup_url_kwarg = "solution_id"
     serializer_class = UserSelectionSerializer
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.selection_logic = {
+            "exclusive": self.get_selection_logic(
+                "If selected, others solutions in category are deselected"
+            ),
+            "no_car": self.get_selection_logic('If selected, "No Car" is deselected'),
+            "electric_car": self.get_selection_logic(
+                'If selected, "Electric Car" is deselected'
+            ),
+        }
+
     def post(self, request, *args, **kwargs):
         user_selection, _ = UserSelection.objects.get_or_create(user=self.request.user)
         solution = self.get_object()
@@ -115,53 +129,33 @@ class ToggleSelectSolution(GenericAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def toggle_select_solution(
-        self, selected_solutions: QuerySet[Solution], solution: Solution
+        self, selected_solutions: QuerySet[Solution], new_solution: Solution
     ):
-        if solution in selected_solutions.all():
-            selected_solutions.remove(solution)
+        if new_solution in selected_solutions.all():
+            selected_solutions.remove(new_solution)
             return
 
-        selected_same_category = selected_solutions.filter(category=solution.category)
-        if solution.selection_logic == self.selection_logic_exclusive:
-            selected_solutions.remove(*list(selected_same_category))
-        elif solution.selection_logic == self.selection_logic_no_car:
-            selected_solutions.remove(*list(selected_solutions.filter(name="No Car")))
-        elif solution.selection_logic == self.selection_logic_electric_car:
-            selected_solutions.remove(
-                *list(selected_solutions.filter(name="Electric Car"))
-            )
-
-        selected_same_category_exclusive = selected_same_category.filter(
-            selection_logic=self.selection_logic_exclusive
+        # Remove the other solutions in the same category that are exclusive
+        to_remove = Q(
+            category=new_solution.category,
+            selection_logic=self.selection_logic["exclusive"],
         )
-        selected_solutions.remove(*list(selected_same_category_exclusive))
 
-        selected_solutions.add(solution)
+        # If the new solution is exclusive, remove other solutions in the same category
+        if new_solution.selection_logic == self.selection_logic["exclusive"]:
+            to_remove |= Q(category=new_solution.category)
+        # If the new solution has specific deselection logic, apply additional filters
+        elif new_solution.selection_logic == self.selection_logic["no_car"]:
+            to_remove |= Q(name="No Car")
+        elif new_solution.selection_logic == self.selection_logic["electric_car"]:
+            to_remove |= Q(name="Electric Car")
 
-    @property
-    def selection_logic_exclusive(self):
+        selected_solutions.remove(*selected_solutions.filter(to_remove))
+        selected_solutions.add(new_solution)
+
+    def get_selection_logic(self, description):
         try:
-            return SelectionLogic.objects.get(
-                description="If selected, others solutions in category are deselected"
-            )
-        except SelectionLogic.DoesNotExist:
-            return None
-
-    @property
-    def selection_logic_no_car(self):
-        try:
-            return SelectionLogic.objects.get(
-                description='If selected, "No Car" is deselected'
-            )
-        except SelectionLogic.DoesNotExist:
-            return None
-
-    @property
-    def selection_logic_electric_car(self):
-        try:
-            return SelectionLogic.objects.get(
-                description='If selected, "Electric Car" is deselected'
-            )
+            return SelectionLogic.objects.get(description=description)
         except SelectionLogic.DoesNotExist:
             return None
 
