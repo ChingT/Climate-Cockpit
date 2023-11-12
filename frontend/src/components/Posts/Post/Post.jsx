@@ -45,7 +45,7 @@ const Post = ({
   const handleDeletePost = () => {
     sendRequest("delete", `social/posts/${postData.id}/`);
     setListOfPosts((current) =>
-      current.filter((post) => post.id !== postData.id)
+      current.filter((post) => post.id !== postData.id),
     );
   };
 

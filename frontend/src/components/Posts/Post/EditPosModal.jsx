@@ -1,22 +1,21 @@
 import { useState } from "react";
 import {
-  CloseButton,
+  BrowseAndRemove,
+  CreatePostModalContainer,
+  LeftPart,
+  RemoveButton,
+  RightPart,
   SaveButton,
-  StyledTextarea,
   StyledImagePreview,
   StyledInput,
-  CreatePostModalContainer,
+  StyledLabel,
+  StyledTextarea,
 } from "./Modal.styles.js";
 import Overlay from "../../Overlay/Overlay.jsx";
 
 const EditPostModal = ({ postData, onClose, handleSaveEdit, avatar }) => {
   const [editedContent, setEditedContent] = useState(postData.content);
   const [editedImages, setEditedImages] = useState([]);
-  //
-  // useEffect(() => {
-  //   setEditedContent(postData.content);
-  //   setEditedImages([...postData.images]);
-  // }, [postData]);
 
   const handleImageUpload = (e) => {
     const imagesFromUpload = Array.from(e.target.files);
@@ -49,29 +48,43 @@ const EditPostModal = ({ postData, onClose, handleSaveEdit, avatar }) => {
     <Overlay onClose={onClose}>
       <CreatePostModalContainer>
         <div className={"body-container"}>
-          <img className={"user-avatar"} src={avatar} />
-          <StyledTextarea
-            value={editedContent}
-            onChange={(e) => setEditedContent(e.target.value)}
-          />
-          <StyledInput
-            type="file"
-            multiple
-            accept="image/*"
-            onChange={handleImageUpload}
-          />
-          {editedImages.map((image, index) => (
-            <StyledImagePreview key={index}>
-              <button onClick={() => removeImage(index)}>Remove</button>
-              <img
-                className={"user-avatar"}
-                src={image instanceof File ? URL.createObjectURL(image) : image}
-                alt={`Image ${index}`}
-              />
-            </StyledImagePreview>
-          ))}
-          <SaveButton onClick={handleSave}>Save</SaveButton>
-          <CloseButton onClick={onClose}>Close</CloseButton>
+          <LeftPart>
+            <img className={"user-avatar"} src={avatar} />
+            <StyledTextarea
+              value={editedContent}
+              onChange={(e) => setEditedContent(e.target.value)}
+            />
+          </LeftPart>
+          <RightPart>
+            <BrowseAndRemove>
+              <>
+                <StyledLabel htmlFor="fileInput">Browse</StyledLabel>
+                <StyledInput
+                  id="fileInput"
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                />
+              </>
+              {editedImages.map((image, index) => (
+                <StyledImagePreview key={index}>
+                  <RemoveButton onClick={() => removeImage(index)}>
+                    Remove
+                  </RemoveButton>
+                  <img
+                    className={"user-avatar"}
+                    style={{ paddingTop: "1rem" }}
+                    src={
+                      image instanceof File ? URL.createObjectURL(image) : image
+                    }
+                    alt={`Image ${index}`}
+                  />
+                </StyledImagePreview>
+              ))}
+            </BrowseAndRemove>
+            <SaveButton onClick={handleSave}>Save</SaveButton>
+          </RightPart>
         </div>
       </CreatePostModalContainer>
     </Overlay>
