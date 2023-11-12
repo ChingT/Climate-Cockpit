@@ -124,6 +124,12 @@ class ToggleSelectSolution(GenericAPIView):
         selected_same_category = selected_solutions.filter(category=solution.category)
         if solution.selection_logic == self.selection_logic_exclusive:
             selected_solutions.remove(*list(selected_same_category))
+        elif solution.selection_logic == self.selection_logic_no_car:
+            selected_solutions.remove(*list(selected_solutions.filter(name="No Car")))
+        elif solution.selection_logic == self.selection_logic_electric_car:
+            selected_solutions.remove(
+                *list(selected_solutions.filter(name="Electric Car"))
+            )
 
         selected_same_category_exclusive = selected_same_category.filter(
             selection_logic=self.selection_logic_exclusive
@@ -134,9 +140,30 @@ class ToggleSelectSolution(GenericAPIView):
 
     @property
     def selection_logic_exclusive(self):
-        return SelectionLogic.objects.get(
-            description="If selected, others solutions in category are deselected"
-        )
+        try:
+            return SelectionLogic.objects.get(
+                description="If selected, others solutions in category are deselected"
+            )
+        except SelectionLogic.DoesNotExist:
+            return None
+
+    @property
+    def selection_logic_no_car(self):
+        try:
+            return SelectionLogic.objects.get(
+                description='If selected, "No Car" is deselected'
+            )
+        except SelectionLogic.DoesNotExist:
+            return None
+
+    @property
+    def selection_logic_electric_car(self):
+        try:
+            return SelectionLogic.objects.get(
+                description='If selected, "Electric Car" is deselected'
+            )
+        except SelectionLogic.DoesNotExist:
+            return None
 
 
 class ListUserSelectionAPIView(ListAPIView):
