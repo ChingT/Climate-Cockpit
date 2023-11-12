@@ -28,7 +28,7 @@ const theme = {
     borderColor: "black",
   },
   colors: {
-    primary: "333",
+    primary: "black",
     secondary: "white",
     lightGray: "#aaa",
     lightGrayBorder: "#ddd",
