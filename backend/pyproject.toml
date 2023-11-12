@@ -1,6 +1,6 @@
 [tool.ruff]
 line-length = 88
-extend-exclude = ["*/migrations/*", "*/project/*", "manage.py"]
+extend-exclude = ["*/project/*", "manage.py"]
 
 
 [tool.ruff.lint]
