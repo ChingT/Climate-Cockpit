@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 from rest_framework import status
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import (
@@ -10,13 +14,16 @@ from rest_framework.generics import (
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 
-from .models import Category, Resource, Solution, UserSelection
+from .models import Category, Resource, SelectionLogic, Solution, UserSelection
 from .serializers import (
     CategorySerializer,
     ResourceSerializer,
     SolutionSerializer,
     UserSelectionSerializer,
 )
+
+if TYPE_CHECKING:
+    from django.db.models.query import QuerySet
 
 
 class CategorySearchFilter(SearchFilter):
@@ -95,20 +102,41 @@ class ToggleSelectSolution(GenericAPIView):
     """
 
     queryset = Solution.objects.all()
-    serializer_class = SolutionSerializer
     lookup_url_kwarg = "solution_id"
+    serializer_class = UserSelectionSerializer
 
     def post(self, request, *args, **kwargs):
         user_selection, _ = UserSelection.objects.get_or_create(user=self.request.user)
         solution = self.get_object()
         selected_solutions = user_selection.selected_solutions
+        self.toggle_select_solution(selected_solutions, solution)
+
+        serializer = self.get_serializer(user_selection)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def toggle_select_solution(
+        self, selected_solutions: QuerySet[Solution], solution: Solution
+    ):
         if solution in selected_solutions.all():
             selected_solutions.remove(solution)
-        else:
-            selected_solutions.add(solution)
+            return
 
-        serializer = self.get_serializer(solution)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        selected_same_category = selected_solutions.filter(category=solution.category)
+        if solution.selection_logic == self.selection_logic_exclusive:
+            selected_solutions.remove(*list(selected_same_category))
+
+        selected_same_category_exclusive = selected_same_category.filter(
+            selection_logic=self.selection_logic_exclusive
+        )
+        selected_solutions.remove(*list(selected_same_category_exclusive))
+
+        selected_solutions.add(solution)
+
+    @property
+    def selection_logic_exclusive(self):
+        return SelectionLogic.objects.get(
+            description="If selected, others solutions in category are deselected"
+        )
 
 
 class ListUserSelectionAPIView(ListAPIView):
