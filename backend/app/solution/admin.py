@@ -1,9 +1,11 @@
 from django.contrib import admin
 
-from .models import Category, Resource, SelectionLogic, Solution, UserSelection
+from .solution_logic.models import SelectionLogic
+from .solutions.models import Category, Resource, Solution, UserSelection
 
 admin.site.register(Category)
-admin.site.register(SelectionLogic)
 admin.site.register(Solution)
 admin.site.register(UserSelection)
 admin.site.register(Resource)
+
+admin.site.register(SelectionLogic)
