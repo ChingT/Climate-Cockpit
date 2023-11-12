@@ -4,12 +4,14 @@ from pathlib import Path
 from django.apps import AppConfig
 from rest_framework.generics import get_object_or_404
 
+source_root = Path("fixtures/source")
+
 
 def populate_solutions(apps: AppConfig, schema_editor):
     Category = apps.get_model("solution", "Category")  # noqa: N806
     Solution = apps.get_model("solution", "Solution")  # noqa: N806
 
-    csv_file_path = Path("fixtures/source/solution_content.csv")
+    csv_file_path = source_root / "solution_content.csv"
     with Path.open(csv_file_path, encoding="utf-8") as csv_file:
         csv_reader = csv.DictReader(csv_file)
         for row in csv_reader:
@@ -29,7 +31,7 @@ def populate_resources(apps: AppConfig, schema_editor):
 
     resources_types = ["videos", "news", "books", "papers"]
     for resources_type in resources_types:
-        csv_file_path = Path("fixtures/source/resource") / f"{resources_type}.csv"
+        csv_file_path = source_root / f"resource/{resources_type}.csv"
         with Path.open(csv_file_path, encoding="utf-8") as csv_file:
             csv_reader = csv.DictReader(csv_file)
             for row in csv_reader:
@@ -41,3 +43,20 @@ def populate_resources(apps: AppConfig, schema_editor):
                 data["solution"] = get_object_or_404(Solution, name=data["solution"])
                 data["resource_type"] = resources_type
                 Resource.objects.create(**data)
+
+
+def populate_solution_logics(apps: AppConfig, schema_editor):
+    Solution = apps.get_model("solution", "Solution")  # noqa: N806
+    SelectionRule = apps.get_model("solution", "SelectionRule")  # noqa: N806
+    SolutionLogic = apps.get_model("solution", "SolutionLogic")  # noqa: N806
+
+    csv_file_path = source_root / "solution_logic.csv"
+    with Path.open(csv_file_path, encoding="utf-8") as csv_file:
+        csv_reader = csv.DictReader(csv_file)
+        for row in csv_reader:
+            data = dict(**row)
+            data["solution"] = get_object_or_404(Solution, name=data["solution"])
+            data["selection_rule"], _ = SelectionRule.objects.get_or_create(
+                description=data["selection_rule"]
+            )
+            SolutionLogic.objects.create(**data)

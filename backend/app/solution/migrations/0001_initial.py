@@ -46,21 +46,6 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name="SelectionLogic",
-            fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                ("description", models.CharField(max_length=255, unique=True)),
-            ],
-        ),
-        migrations.CreateModel(
             name="Solution",
             fields=[
                 (

@@ -21,7 +21,7 @@ from .serializers import (
     SolutionSerializer,
     UserSelectionSerializer,
 )
-from .solution_logic.models import SelectionLogic
+from .solution_logic.models import SelectionRule
 from .solutions.models import Category, Resource, Solution, UserSelection
 
 if TYPE_CHECKING:
@@ -156,8 +156,8 @@ class ToggleSelectSolution(GenericAPIView):
 
     def get_selection_logic(self, description):
         try:
-            return SelectionLogic.objects.get(description=description)
-        except SelectionLogic.DoesNotExist:
+            return SelectionRule.objects.get(description=description)
+        except SelectionRule.DoesNotExist:
             return None
 
 
