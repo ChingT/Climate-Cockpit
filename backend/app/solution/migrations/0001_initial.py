@@ -4,7 +4,6 @@ import django.db.models.deletion
 import django_extensions.db.fields
 from django.conf import settings
 from django.db import migrations, models
-from fixtures.load_data import populate_resources, populate_solutions
 
 
 class Migration(migrations.Migration):
@@ -119,14 +118,6 @@ class Migration(migrations.Migration):
                         to="solution.category",
                     ),
                 ),
-                (
-                    "selection_logic",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.PROTECT,
-                        related_name="solutions",
-                        to="solution.selectionlogic",
-                    ),
-                ),
             ],
             options={
                 "unique_together": {("category", "level")},
@@ -234,6 +225,4 @@ class Migration(migrations.Migration):
                 "abstract": False,
             },
         ),
-        migrations.RunPython(populate_solutions),
-        migrations.RunPython(populate_resources),
     ]
