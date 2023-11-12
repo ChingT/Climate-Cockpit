@@ -8,8 +8,10 @@ import SvgIcon from "./SvgIcon.jsx";
 import { SolutionContainer } from "./solution.style.js";
 
 import SolutionButton from "./SolutionButton.jsx";
+import useApiRequest from "../../hooks/useApiRequest.js";
 
 export default function SolutionDropDown({ solution, isSelected }) {
+  const { sendRequest: toggleSelection } = useApiRequest("noAuth");
   const [isChecked, setIsChecked] = useState(isSelected);
   const [isVisible, setIsVisible] = useState(false);
   const {
@@ -25,16 +27,22 @@ export default function SolutionDropDown({ solution, isSelected }) {
     id,
   } = solution;
 
+  const handleToggleSelection = () => {
+    toggleSelection("post", `/solution/toggle-select/${id}/`);
+  };
+
   useEffect(() => {
     setIsChecked(isSelected);
   }, [isSelected]);
 
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
+    handleToggleSelection();
   };
 
   const handleButtonSelectionChange = (isSelected) => {
     setIsChecked(isSelected);
+    handleToggleSelection();
   };
   const handleSolutionDropDown = () => {
     setIsVisible(!isVisible);

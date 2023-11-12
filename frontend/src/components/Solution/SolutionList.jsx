@@ -11,7 +11,6 @@ function SolutionList() {
     useApiRequest("noAuth");
   const [solutionList, setSolutionList] = useState([]);
   const [selectedList, setSelectedList] = useState([1, 9]);
-  console.log(selectedList);
   useEffect(() => {
     getSolutionData("get", "solution/solutions/?limit=30");
     // eslint-disable-next-line react-hooks/exhaustive-deps
