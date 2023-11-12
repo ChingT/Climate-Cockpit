@@ -9,7 +9,7 @@ def populate_solutions(apps: AppConfig, schema_editor):
     Category = apps.get_model("solution", "Category")  # noqa: N806
     Solution = apps.get_model("solution", "Solution")  # noqa: N806
 
-    csv_file_path = Path("fixtures/source/solutions_content.csv")
+    csv_file_path = Path("fixtures/source/solution_content.csv")
     with Path.open(csv_file_path, encoding="utf-8") as csv_file:
         csv_reader = csv.DictReader(csv_file)
         for row in csv_reader:
