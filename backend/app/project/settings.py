@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "friend_request",
     "solution",
 ]
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
