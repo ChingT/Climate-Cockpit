@@ -14,7 +14,7 @@ const Memberships = ({ things, setUserData, userData }) => {
 
   const submitNewThing = (e) => {
     e.preventDefault();
-    if (newThing.length > 0) {
+    if (newThing.length > 0 && things.length < 6) {
       setUserData({ ...userData, memberships: [...things, newThing] });
       setNewThing("");
     }
