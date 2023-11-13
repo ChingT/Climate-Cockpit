@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import gray_texture from "../../assets/images/paper_texture.jpg";
 
 export const StyledImage = styled.img`
   width: auto;
@@ -16,13 +17,13 @@ export const DropdownLayout = styled.div`
 
 export const DropdownContent = styled.div`
   position: absolute;
-  display: flex;
+  background-color: white;
+  background: conic-gradient(from 90deg at 1.1px 1.1px, #f3f3e4 25%, rgb(217, 217, 217) 0);  display: flex;
+  background-size: 24px 24px;
   flex-direction: column;
   align-items: flex-end;
   top: 100%;
   width: 17rem;
-  background-color: ${(props) => props.theme.backgroundColors.secondary};
-  ${(props) => props.theme.backgroundColors.impactIconSelected};
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   z-index: 1;
   padding: 10px;
@@ -38,6 +39,7 @@ export const TitleAndImage = styled.div`
   gap: 1rem;
   margin-bottom: 0.5rem;
 
+
   img {
     height: 20px;
     width: auto;
@@ -50,7 +52,7 @@ export const DropdownSelect = styled.select`
   margin-top: 0px;
   border: 1px solid ${(props) => props.theme.backgroundColors.lightGrayBorder};
   border-radius: 5px;
-  background-color: white;
+  background-size: 24px 24px;
 `;
 
 export const DropdownSort = styled.div`
