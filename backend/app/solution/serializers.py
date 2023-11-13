@@ -25,8 +25,8 @@ class CategorySerializer(serializers.ModelSerializer):
 
     def get_selected_solutions(self, instance):
         current_user = self.context["request"].user
-        user_selection, _ = UserSelection.objects.get_or_create(user=current_user)
-        return user_selection.selected_solutions.filter(category=instance)
+        selected_solutions = current_user.user_selections.selected_solutions
+        return selected_solutions.filter(category=instance)
 
 
 class SolutionSerializer(serializers.ModelSerializer):
