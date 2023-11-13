@@ -8,6 +8,7 @@ function SolutionList() {
   const { sendRequest, data } = useApiRequest("noAuth");
   const [solutionList, setSolutionList] = useState([]);
   const [selectedSortOption, setSelectedSortOption] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
     let endpoint = "solution/solutions/?limit=30";
@@ -20,11 +21,19 @@ function SolutionList() {
       endpoint += "&ordering=-impact";
     }
 
+    if (selectedCategory !== "all categories") {
+      endpoint += `&category=${selectedCategory}`;
+    }
+
     sendRequest("get", endpoint);
-  }, [selectedSortOption]);
+  }, [selectedSortOption, selectedCategory]);
 
   const handleSortChange = (sortOption) => {
     setSelectedSortOption(sortOption);
+  };
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
   };
 
   useEffect(() => {
@@ -37,7 +46,10 @@ function SolutionList() {
     <SolutionListDiv>
       <FilterAndList>
         <div className="filterDiv">
-          <SolutionFilter onSortChange={handleSortChange} />
+          <SolutionFilter
+            onSortChange={handleSortChange}
+            onCategoryChange={handleCategoryChange}
+          />
         </div>
         {solutionList.map((solution, index) => (
           <SolutionDropDown key={index} solution={solution} />
