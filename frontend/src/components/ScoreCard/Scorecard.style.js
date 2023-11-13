@@ -14,7 +14,7 @@ export const ScorecardContainer = styled.div`
   border-radius: 6px;
   position: absolute;
   top: 12rem;
-`
+`;
 
 export const ScoreCardContent = styled.div`
   width: 94%;
