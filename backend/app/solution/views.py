@@ -9,7 +9,6 @@ from rest_framework.generics import (
     GenericAPIView,
     ListAPIView,
     RetrieveAPIView,
-    RetrieveDestroyAPIView,
     get_object_or_404,
 )
 from rest_framework.permissions import IsAdminUser
@@ -125,7 +124,7 @@ class ToggleSelectSolution(GenericAPIView):
         }
 
     def post(self, request, *args, **kwargs):
-        user_selection, _ = UserSelection.objects.get_or_create(user=self.request.user)
+        user_selection = self.request.user.user_selections
         solution = self.get_object()
         selected_solutions = user_selection.selected_solutions
         self.toggle_select_solution(selected_solutions, solution)
@@ -177,23 +176,16 @@ class ListUserSelectionAPIView(ListAPIView):
     permission_classes = [IsAdminUser]
 
 
-class RetrieveDestroyUserSelectionAPIView(RetrieveDestroyAPIView):
+class RetrieveDestroyUserSelectionAPIView(RetrieveAPIView):
     """get: Retrieve the user selections.
 
     Retrieve the user selections of the logged-in user. \
     If the user selections doesn't exist, create one.
-
-    delete: Delete the user selections.
-
-    Delete the user selections of the logged-in user.
     """
 
     serializer_class = UserSelectionSerializer
 
-    def get_object(self):
-        return get_object_or_404(UserSelection, user=self.request.user)
-
     def retrieve(self, request, *args, **kwargs):
-        instance, _ = UserSelection.objects.get_or_create(user=self.request.user)
-        serializer = self.get_serializer(instance)
+        user_selections = self.request.user.user_selections
+        serializer = self.get_serializer(user_selections)
         return Response(serializer.data)
