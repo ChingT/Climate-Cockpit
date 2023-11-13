@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import gray_texture from "../../assets/images/paper_texture.jpg";
 
 export const StyledImage = styled.img`
   width: auto;
