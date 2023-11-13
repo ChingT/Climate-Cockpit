@@ -1,6 +1,11 @@
 from django.contrib import admin
 
-from .solution_logic.models import SelectionRule
+from .solution_logic.models import (
+    DashboardGroup,
+    DashboardItem,
+    SelectionRule,
+    SolutionLogic,
+)
 from .solutions.models import Category, Resource, Solution, UserSelection
 
 admin.site.register(Category)
@@ -9,3 +14,6 @@ admin.site.register(UserSelection)
 admin.site.register(Resource)
 
 admin.site.register(SelectionRule)
+admin.site.register(DashboardGroup)
+admin.site.register(DashboardItem)
+admin.site.register(SolutionLogic)
