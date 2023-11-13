@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   BookNews,
   BookThumbnail,
@@ -15,50 +15,92 @@ import {
   VideoInfoContainer,
   VideoTitle,
 } from "./Resources.style.js";
-import useApiRequest from "../../hooks/useApiRequest.js";
 
-function Resources({ solutionId }) {
-  const [modalVideo, setModalVideo] = useState(null);
-  const { sendRequest, data } = useApiRequest("noAuth");
-  const [videosList, setVideosList] = useState([]);
-  const [booksList, setBooksList] = useState([]);
-  const [newsList, setNewsList] = useState([]);
+function Resources() {
   const [activeTab, setActiveTab] = useState("Videos");
-
-  useEffect(() => {
-    const fetchData = (type) => {
-      sendRequest("get", `solution/resources/${solutionId}?type=${type}`);
-    };
-
-    if (activeTab === "Videos") {
-      fetchData("videos");
-    } else if (activeTab === "News") {
-      fetchData("news");
-    } else if (activeTab === "Books") {
-      fetchData("books");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab]);
-
-  useEffect(() => {
-    if (data) {
-      switch (activeTab) {
-        case "Videos":
-          setVideosList(data.results);
-          break;
-        case "News":
-          setNewsList(data.results);
-          break;
-        case "Books":
-          setBooksList(data.results);
-          break;
-        default:
-          console.warn("Unhandled tab or no data available");
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
-
+  const [modalVideo, setModalVideo] = useState(null);
+  const newsList = [
+    {
+      title: "News Title 1",
+      url: "https://www.reuters.com/business/sustainable-business/swiss-could-hit-co2-target-with-156-billion-package-study-2022-09-16/",
+      thumbnail:
+        "https://www.reuters.com/resizer/SKxbWYDjw4FppWrtXQV0dS9pKBw=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/F7HRDCUL7BO3TF74QN56QAXFAI.jpg",
+      description: "This is a description for News 1.",
+    },
+    {
+      title: "News Title 2",
+      url: "https://www.reuters.com/business/sustainable-business/swiss-could-hit-co2-target-with-156-billion-package-study-2022-09-16/",
+      thumbnail:
+        "https://www.reuters.com/resizer/SKxbWYDjw4FppWrtXQV0dS9pKBw=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/F7HRDCUL7BO3TF74QN56QAXFAI.jpg",
+      description: "This is a description for News 2.",
+    },
+    {
+      title: "News Title 3",
+      url: "https://www.reuters.com/business/sustainable-business/swiss-could-hit-co2-target-with-156-billion-package-study-2022-09-16/",
+      thumbnail:
+        "https://www.reuters.com/resizer/SKxbWYDjw4FppWrtXQV0dS9pKBw=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/F7HRDCUL7BO3TF74QN56QAXFAI.jpg",
+      description: "This is a description for News 3.",
+    },
+    {
+      title: "News Title 4",
+      url: "https://www.reuters.com/business/sustainable-business/swiss-could-hit-co2-target-with-156-billion-package-study-2022-09-16/",
+      thumbnail:
+        "https://www.reuters.com/resizer/SKxbWYDjw4FppWrtXQV0dS9pKBw=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/F7HRDCUL7BO3TF74QN56QAXFAI.jpg",
+      description: "This is a description for News 4.",
+    },
+  ];
+  const videoList = [
+    {
+      url: "https://www.youtube.com/embed/J3Zsj4Lfs_o",
+      title: "Saving lives through clean cookstoves",
+      source: "TEDx",
+    },
+    {
+      url: "https://www.youtube.com/embed/scoikYF4ni0",
+      title: "Take Back Cooking: A Solution to Climate Change",
+      source: "TEDx",
+    },
+    {
+      url: "https://www.youtube.com/embed/E5pi93CemD4",
+      title: "Zero waste cooking",
+      source: "TEDx",
+    },
+    {
+      url: "https://www.youtube.com/embed/hX2aZUav-54",
+      title: "It’s Time To Break Up With Our Gas Stoves",
+      source: "Climate Town",
+    },
+  ];
+  const booksList = [
+    {
+      title: "Book Title 1",
+      url: "https://www.reuters.com/business/sustainable-business/swiss-could-hit-co2-target-with-156-billion-package-study-2022-09-16/",
+      thumbnail:
+        "https://www.reuters.com/resizer/SKxbWYDjw4FppWrtXQV0dS9pKBw=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/F7HRDCUL7BO3TF74QN56QAXFAI.jpg",
+      author: "Author",
+    },
+    {
+      title: "Book Title 1",
+      url: "https://www.reuters.com/business/sustainable-business/swiss-could-hit-co2-target-with-156-billion-package-study-2022-09-16/",
+      thumbnail:
+        "https://www.reuters.com/resizer/SKxbWYDjw4FppWrtXQV0dS9pKBw=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/F7HRDCUL7BO3TF74QN56QAXFAI.jpg",
+      author: "Author",
+    },
+    {
+      title: "Book Title 1",
+      url: "https://www.reuters.com/business/sustainable-business/swiss-could-hit-co2-target-with-156-billion-package-study-2022-09-16/",
+      thumbnail:
+        "https://www.reuters.com/resizer/SKxbWYDjw4FppWrtXQV0dS9pKBw=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/F7HRDCUL7BO3TF74QN56QAXFAI.jpg",
+      author: "Author",
+    },
+    {
+      title: "Book Title 1",
+      url: "https://www.reuters.com/business/sustainable-business/swiss-could-hit-co2-target-with-156-billion-package-study-2022-09-16/",
+      thumbnail:
+        "https://www.reuters.com/resizer/SKxbWYDjw4FppWrtXQV0dS9pKBw=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/F7HRDCUL7BO3TF74QN56QAXFAI.jpg",
+      author: "Author",
+    },
+  ];
   const openModalWithVideo = (videoUrl) => {
     setModalVideo(videoUrl);
   };
@@ -109,7 +151,7 @@ function Resources({ solutionId }) {
 
       {activeTab === "Videos" && (
         <VideoContainer>
-          {videosList.map((video, index) => (
+          {videoList.map((video, index) => (
             <VideoInfoContainer key={index}>
               <Video onClick={() => openModalWithVideo(video.url)}>
                 <iframe
@@ -142,7 +184,7 @@ function Resources({ solutionId }) {
                 </BookNews>
                 <VideoTitle>{news.title}</VideoTitle>
               </a>
-              <VideoDescription>{news.source}</VideoDescription>
+              <VideoDescription>{news.description}</VideoDescription>
             </div>
           ))}
         </VideoContainer>
@@ -158,7 +200,7 @@ function Resources({ solutionId }) {
                 )}
                 <VideoTitle>{book.title}</VideoTitle>
               </a>
-              <VideoDescription>{book.source}</VideoDescription>
+              <VideoDescription>{book.author}</VideoDescription>
             </div>
           ))}
         </VideoContainer>

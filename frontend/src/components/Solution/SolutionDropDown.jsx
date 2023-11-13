@@ -1,14 +1,18 @@
 import ImpactIcon from "./ImpactIcon.jsx";
+import paper_texture from "../../assets/images/paper_texture.jpg";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import supportersIcon from "./../../assets/other_icons/supporters.png";
+import eCarIcon from "./../../assets/solution_icons/eCar.svg";
 import CategoryLabel from "./CategoryLabel.jsx";
 import ProgressComponent from "./ProgressBar.jsx";
 import Resources from "./Resources.jsx";
 import SvgIcon from "./SvgIcon.jsx";
-import { SolutionContainer } from "./solution.style.js";
+import { CheckboxContainer, SolutionContainer } from "./solution.style.js";
 
 import SolutionButton from "./SolutionButton.jsx";
+
+const CHECKBOX_API_ENDPOINT = "/api/checkbox-status";
 
 export default function SolutionDropDown({ solution }) {
   const [isChecked, setIsChecked] = useState(false);
@@ -17,14 +21,25 @@ export default function SolutionDropDown({ solution }) {
     category,
     name,
     impact,
-    text,
+    description,
     progress,
-    progress_text,
+    progress_description,
     number_of_supporters,
     button_text,
-    icon_name,
-    id,
   } = solution;
+
+  useEffect(() => {
+    const fetchCheckboxStatus = async () => {
+      try {
+        const response = await fetch(CHECKBOX_API_ENDPOINT);
+        const data = await response.json();
+        setIsChecked(data.isChecked);
+      } catch (error) {
+        console.error("Failed to fetch checkbox status:", error);
+      }
+    };
+    fetchCheckboxStatus();
+  }, []);
 
   const handleCheckboxChange = (event) => {
     const newCheckedStatus = event.target.checked;
@@ -37,23 +52,24 @@ export default function SolutionDropDown({ solution }) {
   const handleSolutionDropDown = () => {
     setIsVisible(!isVisible);
   };
-
-  const solutionText = text.replace("{impact}", `${impact} megatons per year`);
-  const progressText = progress_text.replace("{progress}", progress);
+  const style = {
+    "--background-image": `url(${paper_texture})`,
+  };
 
   return (
     <SolutionContainer $visibleOrChecked={isVisible || isChecked}>
       <div className="solutionBar" onClick={handleSolutionDropDown}>
         <div className="solutionBarLeft">
-          <div>
+          <CheckboxContainer>
             <input
               type="checkbox"
               checked={isChecked}
               onChange={handleCheckboxChange}
+              className="custom-checkbox"
             />
-          </div>
+          </CheckboxContainer>
           <div>
-            <SvgIcon svg_icon={icon_name} />
+            <SvgIcon svg_icon={eCarIcon} />
           </div>
           <div className="solutionName">{name}</div>
         </div>
@@ -64,7 +80,7 @@ export default function SolutionDropDown({ solution }) {
               {number_of_supporters}
             </div>
             <div>
-              <CategoryLabel category={category.name} />
+              <CategoryLabel category={category} />
             </div>
           </div>
           <div>
@@ -76,18 +92,18 @@ export default function SolutionDropDown({ solution }) {
         </div>
       </div>
       {isVisible && (
-        <div className="solutionDetails">
-          <div>{solutionText}</div>
-
+        <div className="solutionDetails" style={style}>
+          <div>{description}</div>
+          <br />
           <ProgressComponent
             className="progressBar"
             percentage={progress}
-            progress_description={progressText}
+            progress_description={progress_description}
           />
 
           <div></div>
 
-          <Resources solutionId={id} />
+          <Resources />
 
           <div className="solutionButton">
             <SolutionButton
