@@ -44,7 +44,7 @@ export default function ScoreCard() {
         <TitleAndBar>
           <FinalContainer>
             {summary}
-            <Score score={totalScore} />
+            <Score score={-totalScore} />
           </FinalContainer>
         </TitleAndBar>
       </ScoreCardContent>

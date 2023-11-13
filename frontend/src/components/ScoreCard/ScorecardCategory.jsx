@@ -10,7 +10,6 @@ import {
 import CategoryLabelScoreCard from "./CategoryLabelScoreCard.jsx";
 
 function ScorecardCategory({ category }) {
-  console.log(category)
   return (
     <div>
       <TitleAndBar>
@@ -39,7 +38,7 @@ function ScorecardCategory({ category }) {
             )}
           </LevelNames>
         </BarAndLevel>
-        <Score score={category.impact_from_logged_in_user} />
+<Score score={-category.impact_from_logged_in_user} />
       </TitleAndBar>
     </div>
   );
