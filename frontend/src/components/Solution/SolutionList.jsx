@@ -43,17 +43,22 @@ function SolutionList() {
   };
 
   const handleStatusChange = (statusOption) => {
-    if (statusOption === "Done" || statusOption === "Open") {
-      const filteredSolutions = data.results.filter((solution) =>
-        statusOption === "Done"
-          ? solution.selected_by_logged_in_user
-          : !solution.selected_by_logged_in_user,
-      );
-      setSolutionList(filteredSolutions);
-    } else {
-      setSolutionList(data.results);
-    }
-  };
+  let filteredSolutions;
+
+  if (statusOption === "All") {
+    filteredSolutions = data.results;
+  } else if (statusOption === "Selected" || statusOption === "Non-selected") {
+    filteredSolutions = data.results.filter((solution) =>
+      statusOption === "Selected"
+        ? solution.selected_by_logged_in_user
+        : !solution.selected_by_logged_in_user,
+    );
+  } else {
+    filteredSolutions = data.results;
+  }
+  setSolutionList(filteredSolutions);
+};
+
 
   useEffect(() => {
     if (data) {

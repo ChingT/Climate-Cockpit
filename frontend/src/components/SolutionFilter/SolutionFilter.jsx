@@ -53,7 +53,7 @@ export default function SolutionFilter({
   const handleStatusChange = (e) => {
     const statusOption = e.target.value;
     setSelectedStatus(
-      statusOption === "Open" ? "!selected_by_logged_in_user" : "Done",
+      statusOption === "Non-selected" ? "!selected_by_logged_in_user" : "Selected",
     );
     if (onStatusChange) {
       onStatusChange(statusOption);
@@ -69,7 +69,7 @@ export default function SolutionFilter({
   ];
 
   const sortingOptions = ["Impact", "Alphabetically", "Number of Supporters"];
-  const statusOptions = ["Open", "Done"];
+  const statusOptions = ["All", "Non-selected", "Selected"];
 
   const dropdown = (title, icon, options, handleChange) => {
     const dropdownOptions = options.map((option) => (
