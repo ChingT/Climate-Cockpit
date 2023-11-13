@@ -43,22 +43,21 @@ function SolutionList() {
   };
 
   const handleStatusChange = (statusOption) => {
-  let filteredSolutions;
+    let filteredSolutions;
 
-  if (statusOption === "All") {
-    filteredSolutions = data.results;
-  } else if (statusOption === "Selected" || statusOption === "Non-selected") {
-    filteredSolutions = data.results.filter((solution) =>
-      statusOption === "Selected"
-        ? solution.selected_by_logged_in_user
-        : !solution.selected_by_logged_in_user,
-    );
-  } else {
-    filteredSolutions = data.results;
-  }
-  setSolutionList(filteredSolutions);
-};
-
+    if (statusOption === "All") {
+      filteredSolutions = data.results;
+    } else if (statusOption === "Selected" || statusOption === "Non-selected") {
+      filteredSolutions = data.results.filter((solution) =>
+        statusOption === "Selected"
+          ? solution.selected_by_logged_in_user
+          : !solution.selected_by_logged_in_user,
+      );
+    } else {
+      filteredSolutions = data.results;
+    }
+    setSolutionList(filteredSolutions);
+  };
 
   useEffect(() => {
     if (data) {

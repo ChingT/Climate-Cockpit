@@ -53,7 +53,9 @@ export default function SolutionFilter({
   const handleStatusChange = (e) => {
     const statusOption = e.target.value;
     setSelectedStatus(
-      statusOption === "Non-selected" ? "!selected_by_logged_in_user" : "Selected",
+      statusOption === "Non-selected"
+        ? "!selected_by_logged_in_user"
+        : "Selected",
     );
     if (onStatusChange) {
       onStatusChange(statusOption);
@@ -61,14 +63,15 @@ export default function SolutionFilter({
     toggleDropdown();
   };
 
-const categories = [
-  "All categories",
-  ...(data && data.results
-    ? data.results.map((category) =>
-        category.name.charAt(0).toUpperCase() + category.name.slice(1)
-      )
-    : []),
-];
+  const categories = [
+    "All categories",
+    ...(data && data.results
+      ? data.results.map(
+          (category) =>
+            category.name.charAt(0).toUpperCase() + category.name.slice(1),
+        )
+      : []),
+  ];
 
   const sortingOptions = ["Impact", "Alphabetically", "Number of Supporters"];
   const statusOptions = ["All", "Non-selected", "Selected"];
