@@ -32,7 +32,7 @@ function SolutionList() {
     if (selectedStatus === "Done") {
       endpoint += `&selected_by_logged_in_user=true`;
     }
-    sendRequest("get", endpoint);
+  sendRequest("get", endpoint);
   }, [selectedSortOption, selectedCategory, selectedStatus]);
 
   const handleSortChange = (sortOption) => {
