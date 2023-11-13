@@ -1,4 +1,5 @@
 import csv
+import json
 from pathlib import Path
 
 from django.core.management.base import BaseCommand
@@ -6,7 +7,7 @@ from rest_framework.generics import get_object_or_404
 from solution.solution_logic.models import SelectionRule, SolutionLogic
 from solution.solutions.models import Category, Resource, Solution
 
-source_root = Path("fixtures/source")
+source_root = Path("solution/management/commands/source")
 
 
 class Command(BaseCommand):
@@ -63,8 +64,15 @@ def populate_solution_logics():
         csv_reader = csv.DictReader(csv_file)
         for row in csv_reader:
             data = dict(**row)
+            for field_name in row:
+                if not data[field_name]:
+                    del data[field_name]
+
             data["solution"] = get_object_or_404(Solution, name=data["solution"])
             data["selection_rule"], _ = SelectionRule.objects.get_or_create(
                 description=data["selection_rule"]
             )
+            if "impact_detail" in data:
+                data["impact_detail"] = json.loads(data["impact_detail"])
+
             SolutionLogic.objects.create(**data)
