@@ -71,6 +71,7 @@ export const PostActionButton = styled.button`
   display: flex;
   gap: 1rem;
   font-family: inherit;
+
   &:hover {
     transform: scale(1.2);
   }

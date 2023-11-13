@@ -33,6 +33,7 @@ const theme = {
     lightGray: "#aaa",
     lightGrayBorder: "#ddd",
     solutionPagePrimaryColor: "#0077BF",
+    editPostBorderColor: "#0077BF",
     unselectedSolution: "red",
     selectedSolution: "green",
   },
