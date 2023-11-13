@@ -46,11 +46,12 @@ class SolutionLogic(models.Model):
     selection_rule = models.ForeignKey(
         SelectionRule, models.PROTECT, related_name="solution_logics"
     )
-    impact_detail = models.JSONField(max_length=30, default=dict, blank=True)
+    impact_detail = models.JSONField(max_length=30, default=dict, blank=True, null=True)
     impact_type = models.CharField(
         max_length=20,
         choices=ImpactTypeChoices.choices,
         help_text=f"Select from {ImpactTypeChoices.choices}",
+        blank=True,
     )
 
     def __str__(self):
