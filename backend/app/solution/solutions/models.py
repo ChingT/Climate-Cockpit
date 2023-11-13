@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django_extensions.db.models import TimeStampedModel
 
 User = get_user_model()
@@ -74,3 +76,9 @@ class UserSelection(TimeStampedModel):
 
     def __str__(self):
         return f"UserSelection from {self.user}"
+
+
+@receiver(post_save, sender=User)
+def create_user_selection(sender, instance, created, **kwargs):
+    if created:
+        UserSelection.objects.create(user=instance)
