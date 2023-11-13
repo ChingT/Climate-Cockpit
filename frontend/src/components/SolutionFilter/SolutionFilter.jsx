@@ -1,5 +1,3 @@
-// SolutionFilter.jsx
-
 import { useEffect, useState } from "react";
 import funnelIcon from "../../assets/images/filtering_categories.png";
 import sortingIcon from "../../assets/images/sorting_categories.png";
@@ -29,6 +27,7 @@ export default function SolutionFilter({
 
   useEffect(() => {
     sendRequest("get", "/solution/categories/");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
@@ -54,7 +53,7 @@ export default function SolutionFilter({
   const handleStatusChange = (e) => {
     const statusOption = e.target.value;
     setSelectedStatus(
-      statusOption === "Done" ? "selected_by_logged_in_user" : "",
+      statusOption === "Open" ? "!selected_by_logged_in_user" : "Done",
     );
     if (onStatusChange) {
       onStatusChange(statusOption);

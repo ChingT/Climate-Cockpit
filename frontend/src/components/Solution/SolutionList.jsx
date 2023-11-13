@@ -9,34 +9,34 @@ function SolutionList() {
   const [solutionList, setSolutionList] = useState([]);
   const [selectedSortOption, setSelectedSortOption] =
     useState("Alphabetically");
-  const [selectedCategory, setSelectedCategory] = useState("all categories");
-  const [selectedStatus, setSelectedStatus] = useState("");
+  const [selectedCategory, setSelectedCategory] =
+      useState("all categories");
 
   useEffect(() => {
     let endpoint = "solution/solutions/?limit=30";
 
     if (selectedSortOption === "Alphabetically") {
       endpoint += "&ordering=name";
-    } else if (selectedSortOption === "Number of Supporters") {
-      endpoint += "&ordering=-number_of_supporters";
     } else if (selectedSortOption === "Impact") {
       endpoint += "&ordering=-impact";
     }
-
     if (selectedCategory !== "all categories") {
       endpoint += `&category=${selectedCategory}`;
-    } else {
-      setSelectedStatus("");
     }
 
-    if (selectedStatus === "Done") {
-      endpoint += `&selected_by_logged_in_user=true`;
-    }
-  sendRequest("get", endpoint);
-  }, [selectedSortOption, selectedCategory, selectedStatus]);
+    sendRequest("get", endpoint);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedSortOption, selectedCategory]);
 
   const handleSortChange = (sortOption) => {
-    setSelectedSortOption(sortOption);
+    if (sortOption === "Number of Supporters") {
+      const sortedSolutions = data.results.slice().sort((a, b) => {
+        return b.number_of_supporters - a.number_of_supporters;
+      });
+      setSolutionList(sortedSolutions);
+    } else {
+      setSelectedSortOption(sortOption);
+    }
   };
 
   const handleCategoryChange = (category) => {
@@ -44,7 +44,16 @@ function SolutionList() {
   };
 
   const handleStatusChange = (statusOption) => {
-    setSelectedStatus(statusOption);
+    if (statusOption === "Done" || statusOption === "Open") {
+      const filteredSolutions = data.results.filter((solution) =>
+        statusOption === "Done"
+          ? solution.selected_by_logged_in_user
+          : !solution.selected_by_logged_in_user,
+      );
+      setSolutionList(filteredSolutions);
+    } else {
+      setSolutionList(data.results);
+    }
   };
 
   useEffect(() => {
