@@ -60,7 +60,6 @@ export default function SolutionDropDown({
 
   const solutionText = text.replace("{impact}", `${impact} megatons per year`);
   const progressText = progress_text.replace("{progress}", progress);
-  console.log(isSelected);
 
   return (
     <SolutionContainer $visibleOrChecked={isVisible || isChecked}>
