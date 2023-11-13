@@ -10,7 +10,10 @@ function SolutionList() {
   const { sendRequest: getSelectedData, data: selectedData } =
     useApiRequest("noAuth");
   const [solutionList, setSolutionList] = useState([]);
-  const [selectedList, setSelectedList] = useState([1, 9]);
+  const [selectedList, setSelectedList] = useState([]);
+  const handleSelectedListChange = (newSelectedList) => {
+    setSelectedList(newSelectedList);
+  };
   useEffect(() => {
     getSolutionData("get", "solution/solutions/?limit=30");
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -44,6 +47,7 @@ function SolutionList() {
             key={solution.id}
             solution={solution}
             isSelected={selectedList.includes(solution.id)}
+            onSelectedListChange={handleSelectedListChange}
           />
         ))}
       </FilterAndList>

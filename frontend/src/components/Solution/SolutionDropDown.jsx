@@ -10,8 +10,12 @@ import { SolutionContainer } from "./solution.style.js";
 import SolutionButton from "./SolutionButton.jsx";
 import useApiRequest from "../../hooks/useApiRequest.js";
 
-export default function SolutionDropDown({ solution, isSelected }) {
-  const { sendRequest: toggleSelection } = useApiRequest("noAuth");
+export default function SolutionDropDown({
+  solution,
+  isSelected,
+  onSelectedListChange,
+}) {
+  const { sendRequest: toggleSelection, data } = useApiRequest("noAuth");
   const [isChecked, setIsChecked] = useState(isSelected);
   const [isVisible, setIsVisible] = useState(false);
   const {
@@ -34,6 +38,12 @@ export default function SolutionDropDown({ solution, isSelected }) {
   useEffect(() => {
     setIsChecked(isSelected);
   }, [isSelected]);
+
+  useEffect(() => {
+    if (data && data.selected_solutions) {
+      onSelectedListChange(data.selected_solutions);
+    }
+  }, [data, onSelectedListChange]);
 
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
