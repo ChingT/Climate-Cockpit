@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import gray_texture from "../../../assets/category_textures/gray_pencil_texture.png";
-import red_texture from "../../../assets/category_textures/light_red_texture.png";
 import paper_texture from "../../../assets/images/paper_texture.jpg";
 
 export const CreatePostModalContainer = styled.div`
@@ -36,13 +34,25 @@ export const LeftPart = styled.div`
   gap: 1.7rem;
 `;
 
+export const AvatarAndName = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.2rem;
+
+  h3 {
+    font-size: 18px;
+  }
+`;
+
 export const RightPart = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  justify-content: space-between;
+  justify-content: start;
   width: 20%;
-  height: 20rem;
+  gap: 0.5rem;
+  height: 13rem;
 `;
 
 export const BrowseAndRemove = styled.div`
@@ -56,18 +66,23 @@ export const StyledLabel = styled.label`
   margin-right: 1%;
   margin-left: 1%;
   padding: 8px 16px 8px 16px;
-  margin-bottom: 1%;
+  margin-bottom: 5%;
   font-size: 16.5px;
   font-family: "CabinSketch", serif;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url(${gray_texture});
+  background: conic-gradient(
+    from 90deg at 1.1px 1.1px,
+    #f3f3e4 25%,
+    rgb(217, 217, 217) 0
+  );
   color: black;
   height: 2.4rem;
   border-radius: 10px;
   cursor: pointer;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
 `;
 
 export const StyledInput = styled.input`
@@ -110,29 +125,31 @@ export const StyledImg = styled.img`
 `;
 
 const buttonStyles = `
+background: conic-gradient(
+    from 90deg at 1.1px 1.1px,
+    #f3f3e4 25%,
+    rgb(217, 217, 217) 0
+  );
   width: 6rem;
   border-radius: 10px;
   margin-right: 1%;
   margin-left: 1%;
-  box-shadow: rgba(0, 0, 0, 0.25);
+box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);\`;
   padding: 8px 16px 8px 16px;
   margin-bottom: 1%;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 15.5px;
   font-family: "CabinSketch", serif;
   font-weight: 600;
 `;
 
 export const SaveButton = styled.button`
   ${buttonStyles}
-  background-image: url(${red_texture});
-  background-size: cover;
   color: ${(props) => props.theme.fontColors.primary};
 `;
 
 export const RemoveButton = styled.button`
   ${buttonStyles}
-  background-image: url(${red_texture});
   display: flex;
   height: 2.45rem;
   flex-direction: column;

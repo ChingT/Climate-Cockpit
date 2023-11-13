@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  AvatarAndName,
   BrowseAndRemove,
   CreatePostModalContainer,
   LeftPart,
@@ -49,7 +50,12 @@ const EditPostModal = ({ postData, onClose, handleSaveEdit, avatar }) => {
       <CreatePostModalContainer>
         <div className={"body-container"}>
           <LeftPart>
-            <img className={"user-avatar"} src={avatar} />
+            <AvatarAndName>
+              <img className={"user-avatar"} src={avatar} />
+              <h3>
+                {postData.user.first_name} {postData.user.last_name}
+              </h3>
+            </AvatarAndName>
             <StyledTextarea
               value={editedContent}
               onChange={(e) => setEditedContent(e.target.value)}
