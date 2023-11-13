@@ -7,7 +7,8 @@ import SolutionFilter from "../SolutionFilter/SolutionFilter.jsx";
 function SolutionList() {
   const { sendRequest, data } = useApiRequest("noAuth");
   const [solutionList, setSolutionList] = useState([]);
-  const [selectedSortOption, setSelectedSortOption] = useState("Alphabetically");
+  const [selectedSortOption, setSelectedSortOption] =
+    useState("Alphabetically");
   const [selectedCategory, setSelectedCategory] = useState("all categories");
   const [selectedStatus, setSelectedStatus] = useState("");
 
@@ -31,7 +32,6 @@ function SolutionList() {
     if (selectedStatus === "Done") {
       endpoint += `&selected_by_logged_in_user=true`;
     }
-    console.log(endpoint)
     sendRequest("get", endpoint);
   }, [selectedSortOption, selectedCategory, selectedStatus]);
 

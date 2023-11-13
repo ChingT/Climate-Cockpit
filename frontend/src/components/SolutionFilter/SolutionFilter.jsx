@@ -21,7 +21,8 @@ export default function SolutionFilter({
   onStatusChange,
 }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedSortOption, setSelectedSortOption] = useState("Alphabetically");
+  const [selectedSortOption, setSelectedSortOption] =
+    useState("Alphabetically");
   const [selectedCategory, setSelectedCategory] = useState("all categories");
   const [selectedStatus, setSelectedStatus] = useState("");
   const { sendRequest, data } = useApiRequest("noAuth");
@@ -52,7 +53,9 @@ export default function SolutionFilter({
 
   const handleStatusChange = (e) => {
     const statusOption = e.target.value;
-    setSelectedStatus(statusOption === "Done" ? "selected_by_logged_in_user" : "");
+    setSelectedStatus(
+      statusOption === "Done" ? "selected_by_logged_in_user" : "",
+    );
     if (onStatusChange) {
       onStatusChange(statusOption);
     }
@@ -61,7 +64,9 @@ export default function SolutionFilter({
 
   const categories = [
     "all categories",
-    ...(data && data.results ? data.results.map((category) => category.name) : []),
+    ...(data && data.results
+      ? data.results.map((category) => category.name)
+      : []),
   ];
 
   const sortingOptions = ["Impact", "Alphabetically", "Number of Supporters"];
@@ -101,19 +106,19 @@ export default function SolutionFilter({
     "Sorting Options",
     sortingIcon,
     sortingOptions,
-    handleSortChange
+    handleSortChange,
   );
   const CategoryDropdown = dropdown(
     "Category Filter",
     funnelIcon,
     categories,
-    handleCategoryChange
+    handleCategoryChange,
   );
   const StatusDropdown = dropdown(
     "Status Filter",
     funnelIcon,
     statusOptions,
-    handleStatusChange
+    handleStatusChange,
   );
 
   return (
