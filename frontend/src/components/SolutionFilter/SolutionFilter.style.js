@@ -16,7 +16,12 @@ export const DropdownLayout = styled.div`
 
 export const DropdownContent = styled.div`
   position: absolute;
-  background: conic-gradient(from 90deg at 1.1px 1.1px, #f3f3e4 25%, rgb(217, 217, 217) 0);  display: flex;
+  background: conic-gradient(
+    from 90deg at 1.1px 1.1px,
+    #f3f3e4 25%,
+    rgb(217, 217, 217) 0
+  );
+  display: flex;
   background-size: 24px 24px;
   flex-direction: column;
   align-items: flex-end;
@@ -36,7 +41,6 @@ export const TitleAndImage = styled.div`
   flex-direction: row;
   gap: 1rem;
   margin-bottom: 0.5rem;
-
 
   img {
     height: 20px;

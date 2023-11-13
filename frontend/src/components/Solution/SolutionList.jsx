@@ -7,8 +7,9 @@ import SolutionFilter from "../SolutionFilter/SolutionFilter.jsx";
 function SolutionList() {
   const { sendRequest, data } = useApiRequest("noAuth");
   const [solutionList, setSolutionList] = useState([]);
-  const [selectedSortOption, setSelectedSortOption] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedSortOption, setSelectedSortOption] = useState("Alphabetically");
+  const [selectedCategory, setSelectedCategory] = useState("all categories");
+  const [selectedStatus, setSelectedStatus] = useState("");
 
   useEffect(() => {
     let endpoint = "solution/solutions/?limit=30";
@@ -23,10 +24,16 @@ function SolutionList() {
 
     if (selectedCategory !== "all categories") {
       endpoint += `&category=${selectedCategory}`;
+    } else {
+      setSelectedStatus("");
     }
 
+    if (selectedStatus === "Done") {
+      endpoint += `&selected_by_logged_in_user=true`;
+    }
+    console.log(endpoint)
     sendRequest("get", endpoint);
-  }, [selectedSortOption, selectedCategory]);
+  }, [selectedSortOption, selectedCategory, selectedStatus]);
 
   const handleSortChange = (sortOption) => {
     setSelectedSortOption(sortOption);
@@ -34,6 +41,10 @@ function SolutionList() {
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
+  };
+
+  const handleStatusChange = (statusOption) => {
+    setSelectedStatus(statusOption);
   };
 
   useEffect(() => {
@@ -49,6 +60,7 @@ function SolutionList() {
           <SolutionFilter
             onSortChange={handleSortChange}
             onCategoryChange={handleCategoryChange}
+            onStatusChange={handleStatusChange}
           />
         </div>
         {solutionList.map((solution, index) => (
