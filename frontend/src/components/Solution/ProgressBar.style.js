@@ -6,9 +6,6 @@ export const ProgressContainer = styled.div`
   border: 2px solid ${(props) => props.theme.ProgressBar.borderColor};
   margin-bottom: 25px;
   padding: 2px;
-
-
-}
 `;
 
 export const ProgressBar = styled.div`

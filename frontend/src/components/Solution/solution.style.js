@@ -32,8 +32,6 @@ export const SolutionContainer = styled.div`
         : "rgba(255, 255, 255, 0.5)"};
     border-radius: 10px;
     padding: 5px;
-
-
   }
 
   .solutionBarLeft {
@@ -83,15 +81,15 @@ export const SolutionContainer = styled.div`
     background-repeat: no-repeat;
     background-position: center;
   }
-}
 
-.solutionButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
+  .solutionButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
 `;
+
 export const CheckboxContainer = styled.div`
   .custom-checkbox {
     -webkit-appearance: none;
