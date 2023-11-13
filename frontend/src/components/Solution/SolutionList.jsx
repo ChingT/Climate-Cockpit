@@ -9,8 +9,7 @@ function SolutionList() {
   const [solutionList, setSolutionList] = useState([]);
   const [selectedSortOption, setSelectedSortOption] =
     useState("Alphabetically");
-  const [selectedCategory, setSelectedCategory] =
-      useState("all categories");
+  const [selectedCategory, setSelectedCategory] = useState("all categories");
 
   useEffect(() => {
     let endpoint = "solution/solutions/?limit=30";
