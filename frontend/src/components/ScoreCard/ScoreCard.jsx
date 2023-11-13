@@ -6,9 +6,12 @@ import {
   TitleAndBar,
 } from "./Scorecard.style.js";
 import ScorecardCategory from "./ScorecardCategory.jsx";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
+import useApiRequest from "../../hooks/useApiRequest.js";
 
 export default function ScoreCard() {
   // TODO: fetch categories and totalScore from api
+  const { loading } = useApiRequest();
   const totalScore = -34;
   const categories = [
     {
@@ -103,18 +106,21 @@ export default function ScoreCard() {
     </>
   );
   return (
-    <ScorecardContainer>
-      <ScoreCardContent>
-        {categories.map((category, i) => (
-          <ScorecardCategory key={i} category={category} />
-        ))}
-        <TitleAndBar>
-          <FinalContainer>
-            {summary}
-            <Score score={totalScore} />
-          </FinalContainer>
-        </TitleAndBar>
-      </ScoreCardContent>
-    </ScorecardContainer>
+    <>
+      {loading && <LoadingSpinner />}
+      <ScorecardContainer>
+        <ScoreCardContent>
+          {categories.map((category, i) => (
+            <ScorecardCategory key={i} category={category} />
+          ))}
+          <TitleAndBar>
+            <FinalContainer>
+              {summary}
+              <Score score={totalScore} />
+            </FinalContainer>
+          </TitleAndBar>
+        </ScoreCardContent>
+      </ScorecardContainer>
+    </>
   );
 }

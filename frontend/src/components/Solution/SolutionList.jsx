@@ -3,9 +3,10 @@ import useApiRequest from "../../hooks/useApiRequest.js";
 import SolutionFilter from "../SolutionFilter/SolutionFilter.jsx";
 import SolutionDropDown from "./SolutionDropDown.jsx";
 import { FilterAndList, SolutionListDiv } from "./solution.style.js";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 
 function SolutionList() {
-  const { sendRequest, data } = useApiRequest("noAuth");
+  const { sendRequest, data, loading } = useApiRequest("noAuth");
   const [solutionList, setSolutionList] = useState([]);
 
   useEffect(() => {
@@ -20,16 +21,21 @@ function SolutionList() {
   }, [data]);
 
   return (
-    <SolutionListDiv>
-      <FilterAndList>
-        <div className="filterDiv">
-          <SolutionFilter />
-        </div>
-        {solutionList.map((solution, index) => (
-          <SolutionDropDown key={index} solution={solution} />
-        ))}
-      </FilterAndList>
-    </SolutionListDiv>
+    <>
+      {loading && <LoadingSpinner />}
+      <SolutionListDiv>
+        <FilterAndList>
+          {!loading && (
+            <div className="filterDiv">
+              <SolutionFilter />
+            </div>
+          )}
+          {solutionList.map((solution, index) => (
+            <SolutionDropDown key={index} solution={solution} />
+          ))}
+        </FilterAndList>
+      </SolutionListDiv>
+    </>
   );
 }
 
