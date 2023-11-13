@@ -1,6 +1,6 @@
 // ProgressComponent.jsx
-import { ProgressBar, ProgressContainer } from "./ProgressBar.style.js";
 import blue_texture from "../../assets/images/blue_texture.png";
+import { ProgressBar, ProgressContainer } from "./ProgressBar.style.js";
 
 function ProgressComponent({ percentage, progress_description }) {
   const style = {
@@ -10,7 +10,7 @@ function ProgressComponent({ percentage, progress_description }) {
     <ProgressContainer>
       <ProgressBar $percentage={percentage} style={style} />
       <br />
-      {percentage}% {progress_description}
+      {progress_description}
     </ProgressContainer>
   );
 }

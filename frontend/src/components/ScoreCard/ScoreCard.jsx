@@ -105,8 +105,8 @@ export default function ScoreCard() {
   return (
     <ScorecardContainer>
       <ScoreCardContent>
-        {categories.map((category) => (
-          <ScorecardCategory key={category} category={category} />
+        {categories.map((category, i) => (
+          <ScorecardCategory key={i} category={category} />
         ))}
         <TitleAndBar>
           <FinalContainer>

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import red_texture from "../../../assets/category_textures/light_red_texture.png";
 import paper_texture from "../../../assets/images/paper_texture.jpg";
 
 export const CreatePostModalContainer = styled.div`
@@ -7,8 +6,9 @@ export const CreatePostModalContainer = styled.div`
   min-height: 15rem;
   min-width: 39rem;
   max-width: 42rem;
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2),
-  0px 10px 20px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0px 0px 1px rgba(0, 0, 0, 0.2),
+    0px 10px 20px rgba(0, 0, 0, 0.05);
   border-radius: 4px;
 
   .body-container {
@@ -16,13 +16,14 @@ export const CreatePostModalContainer = styled.div`
     flex-direction: row;
     gap: 2rem;
     padding: 3rem;
+  }
 
-    .user-avatar {
-      width: 3.5rem;
-      height: 3.5rem;
-      border-radius: 50%;
-      object-fit: cover;
-    }
+  .user-avatar {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 `;
 
 export const LeftPart = styled.div`
@@ -58,6 +59,7 @@ export const BrowseAndRemove = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 export const StyledLabel = styled.label`
   width: 6rem;
   border: 1.5px solid lightgray;
@@ -142,12 +144,12 @@ box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);\`;
 `;
 
 export const SaveButton = styled.button`
-  ${buttonStyles} // background-image: url(${red_texture});
+  ${buttonStyles}
   color: ${(props) => props.theme.fontColors.primary};
 `;
 
 export const RemoveButton = styled.button`
-  ${buttonStyles} // background-image: url(${red_texture});
+  ${buttonStyles}
   display: flex;
   height: 2.45rem;
   flex-direction: column;
