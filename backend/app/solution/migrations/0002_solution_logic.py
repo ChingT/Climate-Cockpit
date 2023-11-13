@@ -119,9 +119,8 @@ class Migration(migrations.Migration):
                 ),
                 ("name", models.CharField(max_length=100, unique=True)),
                 ("initial_amount", models.IntegerField()),
-                ("changed_amount", models.IntegerField(default=0)),
                 ("icon_name_initial", models.CharField(blank=True, max_length=255)),
-                ("icon_name_removed", models.CharField(blank=True, max_length=255)),
+                ("icon_name_altered", models.CharField(blank=True, max_length=255)),
                 (
                     "group",
                     models.ForeignKey(

@@ -24,12 +24,11 @@ class DashboardGroup(models.Model):
 class DashboardItem(TimeStampedModel):
     name = models.CharField(max_length=100, unique=True)
     initial_amount = models.IntegerField()
-    changed_amount = models.IntegerField(default=0)
     group = models.ForeignKey(
         DashboardGroup, models.PROTECT, related_name="dashboard_icons"
     )
     icon_name_initial = models.CharField(max_length=255, blank=True)
-    icon_name_removed = models.CharField(max_length=255, blank=True)
+    icon_name_altered = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return self.name
