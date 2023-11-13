@@ -61,12 +61,14 @@ export default function SolutionFilter({
     toggleDropdown();
   };
 
-  const categories = [
-    "all categories",
-    ...(data && data.results
-      ? data.results.map((category) => category.name)
-      : []),
-  ];
+const categories = [
+  "All categories",
+  ...(data && data.results
+    ? data.results.map((category) =>
+        category.name.charAt(0).toUpperCase() + category.name.slice(1)
+      )
+    : []),
+];
 
   const sortingOptions = ["Impact", "Alphabetically", "Number of Supporters"];
   const statusOptions = ["All", "Non-selected", "Selected"];

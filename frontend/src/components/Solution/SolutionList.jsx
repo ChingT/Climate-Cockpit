@@ -9,7 +9,7 @@ function SolutionList() {
   const [solutionList, setSolutionList] = useState([]);
   const [selectedSortOption, setSelectedSortOption] =
     useState("Alphabetically");
-  const [selectedCategory, setSelectedCategory] = useState("all categories");
+  const [selectedCategory, setSelectedCategory] = useState("All categories");
 
   useEffect(() => {
     let endpoint = "solution/solutions/?limit=30";
@@ -19,7 +19,7 @@ function SolutionList() {
     } else if (selectedSortOption === "Impact") {
       endpoint += "&ordering=-impact";
     }
-    if (selectedCategory !== "all categories") {
+    if (selectedCategory !== "All categories") {
       endpoint += `&category=${selectedCategory}`;
     }
 
