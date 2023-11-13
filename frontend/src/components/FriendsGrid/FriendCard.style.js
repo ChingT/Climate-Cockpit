@@ -138,7 +138,7 @@ export const Memberships = styled.div`
   width: 50%;
   height: 100%;
   display: flex;
-  gap: 1rem; 
+  gap: 1rem;
   z-index: 1;
   align-items: center;
   justify-content: start;
@@ -161,7 +161,7 @@ export const ReadMoreButton = styled.button`
   background: none;
   padding: 0;
   cursor: pointer;
-  text-decoration: underline; 
+  text-decoration: underline;
   font-size: inherit;
   color: inherit;
 `;

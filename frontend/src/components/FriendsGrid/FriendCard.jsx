@@ -6,25 +6,27 @@ import {
   LikedThingsContainer,
 } from "../UserProfile/Profile/ProfileData/ProfileData.style.js";
 import {
-    ButtonsWrapper,
-    FriendAbout,
-    FriendAvatar,
-    FriendCardContainer,
-    FriendCardHeader,
-    FriendLocation,
-    FriendName,
-    Memberships,
-    NameLocation, ReadMoreButton,
-    RightBar,
-    RightBottom,
-    RightTop,
+  ButtonsWrapper,
+  FriendAbout,
+  FriendAvatar,
+  FriendCardContainer,
+  FriendCardHeader,
+  FriendLocation,
+  FriendName,
+  Memberships,
+  NameLocation,
+  ReadMoreButton,
+  RightBar,
+  RightBottom,
+  RightTop,
 } from "./FriendCard.style.js";
 
 const MAX_CHARACTERS = 90;
 const MIN_FONT_SIZE = 18;
 
 const FriendCard = ({ friendInfo, requestObject }) => {
-  const hasMemberships = friendInfo.memberships && friendInfo.memberships.length > 0;
+  const hasMemberships =
+    friendInfo.memberships && friendInfo.memberships.length > 0;
   const [showFullAbout, setShowFullAbout] = useState(false);
 
   const handleReadMoreClick = () => {
@@ -33,7 +35,8 @@ const FriendCard = ({ friendInfo, requestObject }) => {
 
   const aboutMeText = showFullAbout
     ? friendInfo.about_me
-    : friendInfo.about_me.slice(0, MAX_CHARACTERS) + (friendInfo.about_me.length > MAX_CHARACTERS ? "..." : "");
+    : friendInfo.about_me.slice(0, MAX_CHARACTERS) +
+      (friendInfo.about_me.length > MAX_CHARACTERS ? "..." : "");
 
   return (
     <FriendCardContainer>
@@ -72,21 +75,21 @@ const FriendCard = ({ friendInfo, requestObject }) => {
             </LikedThingsContainer>
           </Memberships>
           <FriendAbout
-  fontSize={
-    friendInfo.about_me.length < 15
-      ? `${MIN_FONT_SIZE}px`
-      : hasMemberships
-      ? "1rem"
-      : "1.5rem"
-  }
->
-  {aboutMeText}
-  {friendInfo.about_me.length > MAX_CHARACTERS && (
-    <ReadMoreButton onClick={handleReadMoreClick}>
-      {showFullAbout ? "read less" : "read more"}
-    </ReadMoreButton>
-  )}
-</FriendAbout>
+            fontSize={
+              friendInfo.about_me.length < 15
+                ? `${MIN_FONT_SIZE}px`
+                : hasMemberships
+                ? "1rem"
+                : "1.5rem"
+            }
+          >
+            {aboutMeText}
+            {friendInfo.about_me.length > MAX_CHARACTERS && (
+              <ReadMoreButton onClick={handleReadMoreClick}>
+                {showFullAbout ? "read less" : "read more"}
+              </ReadMoreButton>
+            )}
+          </FriendAbout>
         </RightBottom>
       </RightBar>
     </FriendCardContainer>
