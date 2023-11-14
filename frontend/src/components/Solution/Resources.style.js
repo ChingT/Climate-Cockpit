@@ -16,6 +16,7 @@ export const Video = styled.div`
     transform: scale(1.05);
   }
 `;
+
 export const BookNews = styled.div`
   width: 200px;
   height: 120px;
@@ -32,11 +33,8 @@ export const BookNews = styled.div`
     transform: scale(1.05);
   }
 `;
+
 export const NewsThumbnail = styled.img`
-  max-width: 100%;
-  max-height: 100px;
-`;
-export const BookThumbnail = styled.img`
   max-width: 100%;
   max-height: 100px;
 `;
@@ -87,8 +85,8 @@ export const VideoContainer = styled.div`
   gap: 10px;
   padding: 10px 0;
   overflow-x: scroll;
-  border: 2px solid red;
 `;
+
 export const Overlay = styled.div`
   position: absolute;
   top: 0;

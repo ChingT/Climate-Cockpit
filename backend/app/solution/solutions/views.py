@@ -48,6 +48,7 @@ class ListSolutionAPIView(ListAPIView):
     filter_backends = [CategorySearchFilter, OrderingFilter]
     search_fields = ["=category__name"]
     ordering = ["id"]
+    permission_classes = []
 
 
 class RetrieveSolutionAPIView(RetrieveAPIView):
@@ -59,6 +60,7 @@ class RetrieveSolutionAPIView(RetrieveAPIView):
     queryset = Solution.objects.all()
     serializer_class = SolutionSerializer
     lookup_url_kwarg = "solution_id"
+    permission_classes = []
 
 
 class ListCategoryAPIView(ListAPIView):
@@ -69,6 +71,7 @@ class ListCategoryAPIView(ListAPIView):
 
     queryset = Category.objects.all().order_by("id")
     serializer_class = CategorySerializer
+    permission_classes = []
 
 
 class ResourceTypeSearchFilter(SearchFilter):
@@ -89,6 +92,7 @@ class ListResourceAPIView(ListAPIView):
     lookup_url_kwarg = "solution_id"
     filter_backends = [ResourceTypeSearchFilter]
     search_fields = ["=resource_type"]
+    permission_classes = []
 
     def get_queryset(self):
         solution_id = self.kwargs.get(self.lookup_url_kwarg)

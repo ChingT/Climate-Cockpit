@@ -24,6 +24,7 @@ const PostsGrid = ({ url, inProfile, columnsCount, gutter }) => {
     }
   }, [data]);
 
+  if (loading) return <LoadingSpinner />;
   return (
     <MainContainer>
       <Masonry columnsCount={columnsCount} gutter={gutter}>
@@ -35,7 +36,6 @@ const PostsGrid = ({ url, inProfile, columnsCount, gutter }) => {
             modalIsOpen={showCreatePostModal}
           />
         )}
-        {loading && <LoadingSpinner />}
         {error && <p>{error.message}</p>}
         {data &&
           listOfPosts.map((post) => {

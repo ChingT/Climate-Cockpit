@@ -17,7 +17,7 @@ export const FollowOrRequestButton = styled.button`
   padding: 8px 16px 8px 16px;
   margin-bottom: 1%;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 0.9rem;
   font-family: "CabinSketch", serif;
   font-weight: 600;
   color: ${(props) => props.theme.fontColors.primary};
@@ -39,7 +39,7 @@ export const FollowOrRequestButton = styled.button`
 `;
 
 export const RevokeRequest = styled.p`
-  font-size: 17px;
+  font-size: 0.9rem;
 `;
 
 export const TickerAndButton = styled.div`
@@ -48,7 +48,7 @@ export const TickerAndButton = styled.div`
   padding-left: 0.5px;
   padding-right: 1px;
   flex-direction: row;
-  font-size: 16.5px;
+  font-size: 0.85rem;
 `;
 export const TickerImage = styled.img`
   height: 50%;
