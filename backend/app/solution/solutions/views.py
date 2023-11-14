@@ -13,10 +13,10 @@ from rest_framework.generics import (
 )
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
+from solution.solution_logic.models import SelectionRule
 
-from .solution_logic.models import SelectionRule
-from .solutions.models import Category, Resource, Solution, UserSelection
-from .solutions.serializers import (
+from .models import Category, Resource, Solution, UserSelection
+from .serializers import (
     CategorySerializer,
     ResourceSerializer,
     SolutionSerializer,
@@ -172,7 +172,7 @@ class ListUserSelectionAPIView(ListAPIView):
     permission_classes = [IsAdminUser]
 
 
-class RetrieveDestroyUserSelectionAPIView(RetrieveAPIView):
+class RetrieveUserSelectionAPIView(RetrieveAPIView):
     """get: Retrieve the user selections.
 
     Retrieve the user selections of the logged-in user. \
