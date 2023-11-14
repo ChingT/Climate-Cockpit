@@ -7,6 +7,7 @@ from rest_framework.generics import get_object_or_404
 from solution.solution_logic.models import (
     DashboardGroup,
     DashboardItem,
+    ImpactDetail,
     SelectionRule,
     SolutionLogic,
 )
@@ -90,14 +91,20 @@ def populate_solution_logics():
         for row in csv_reader:
             data = dict(**row)
             for field_name in row:
-                if not data[field_name]:
+                if not data[field_name] or field_name == "impact_detail":
                     del data[field_name]
 
             data["solution"] = get_object_or_404(Solution, name=data["solution"])
             data["selection_rule"], _ = SelectionRule.objects.get_or_create(
                 description=data["selection_rule"]
             )
-            if "impact_detail" in data:
-                data["impact_detail"] = json.loads(data["impact_detail"])
+            solution_logic = SolutionLogic.objects.create(**data)
 
-            SolutionLogic.objects.create(**data)
+            if row["impact_detail"]:
+                impact_details = json.loads(row["impact_detail"])
+                for group_name, amount in impact_details.items():
+                    dashboard_item = DashboardItem.objects.get(name=group_name)
+                    impact_detail, _ = ImpactDetail.objects.get_or_create(
+                        dashboard_item=dashboard_item, amount=amount
+                    )
+                    solution_logic.impact_detail.add(impact_detail)

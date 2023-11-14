@@ -3,6 +3,7 @@ from django.contrib import admin
 from .solution_logic.models import (
     DashboardGroup,
     DashboardItem,
+    ImpactDetail,
     SelectionRule,
     SolutionLogic,
 )
@@ -16,4 +17,5 @@ admin.site.register(Resource)
 admin.site.register(SelectionRule)
 admin.site.register(DashboardGroup)
 admin.site.register(DashboardItem)
+admin.site.register(ImpactDetail)
 admin.site.register(SolutionLogic)

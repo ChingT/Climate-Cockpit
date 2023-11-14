@@ -34,6 +34,19 @@ class DashboardItem(TimeStampedModel):
         return self.name
 
 
+class ImpactDetail(models.Model):
+    dashboard_item = models.ForeignKey(
+        DashboardItem, models.PROTECT, related_name="impact_detail"
+    )
+    amount = models.IntegerField()
+
+    class Meta:
+        unique_together = ["dashboard_item", "amount"]
+
+    def __str__(self):
+        return f"{self.dashboard_item.name}: {self.amount}"
+
+
 class SolutionLogic(models.Model):
     class ImpactTypeChoices(models.TextChoices):
         REDUCTION = "reduction", "reduction"
@@ -45,7 +58,9 @@ class SolutionLogic(models.Model):
     selection_rule = models.ForeignKey(
         SelectionRule, models.PROTECT, related_name="solution_logics"
     )
-    impact_detail = models.JSONField(max_length=30, default=dict, blank=True, null=True)
+    impact_detail = models.ManyToManyField(
+        ImpactDetail, related_name="solution_logic", blank=True
+    )
     impact_type = models.CharField(
         max_length=20,
         choices=ImpactTypeChoices.choices,
