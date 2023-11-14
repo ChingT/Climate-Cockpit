@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import useApiRequest from "../../hooks/useApiRequest.js";
 import {
   BookNews,
-  BookThumbnail,
   CloseButton,
   Container,
   ModalContent,
@@ -19,7 +18,6 @@ import {
 
 function Resources({ solutionId }) {
   const [modalVideo, setModalVideo] = useState(null);
-  const [booksList, setBooksList] = useState([]);
   const [newsList, setNewsList] = useState([]);
   const [activeTab, setActiveTab] = useState("Videos");
 
@@ -35,8 +33,6 @@ function Resources({ solutionId }) {
       fetchData("videos");
     } else if (activeTab === "News") {
       fetchData("news");
-    } else if (activeTab === "Books") {
-      fetchData("books");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
@@ -50,9 +46,6 @@ function Resources({ solutionId }) {
           break;
         case "News":
           setNewsList(data.results);
-          break;
-        case "Books":
-          setBooksList(data.results);
           break;
         default:
           console.warn("Unhandled tab or no data available");
@@ -85,12 +78,6 @@ function Resources({ solutionId }) {
           $isActive={activeTab === "News"}
         >
           News
-        </Tab>
-        <Tab
-          onClick={() => setActiveTab("Books")}
-          $isActive={activeTab === "Books"}
-        >
-          Books
         </Tab>
       </Container>
       <SimpleModal $show={!!modalVideo} onClick={closeModal}>
@@ -145,22 +132,6 @@ function Resources({ solutionId }) {
                 <VideoTitle>{news.title}</VideoTitle>
               </a>
               <VideoDescription>{news.source}</VideoDescription>
-            </div>
-          ))}
-        </VideoContainer>
-      )}
-
-      {activeTab === "Books" && (
-        <VideoContainer>
-          {booksList.map((book, index) => (
-            <div key={index}>
-              <a href={book.url} target="_blank" rel="noreferrer noopener">
-                {book.thumbnail && (
-                  <BookThumbnail src={book.thumbnail} alt={book.title} />
-                )}
-                <VideoTitle>{book.title}</VideoTitle>
-              </a>
-              <VideoDescription>{book.source}</VideoDescription>
             </div>
           ))}
         </VideoContainer>
