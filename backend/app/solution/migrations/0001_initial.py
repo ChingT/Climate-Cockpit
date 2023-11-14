@@ -70,6 +70,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("name", models.CharField(max_length=255)),
+                ("shorter_name", models.CharField(max_length=255)),
                 ("impact", models.FloatField(blank=True, null=True)),
                 (
                     "text",

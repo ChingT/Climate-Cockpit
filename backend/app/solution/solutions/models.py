@@ -16,6 +16,7 @@ class Category(TimeStampedModel):
 
 class Solution(TimeStampedModel):
     name = models.CharField(max_length=255)
+    shorter_name = models.CharField(max_length=255)
     category = models.ForeignKey(Category, models.PROTECT, related_name="solutions")
     impact = models.FloatField(blank=True, null=True)
     text = models.TextField(
