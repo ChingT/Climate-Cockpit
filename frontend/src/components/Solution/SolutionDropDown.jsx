@@ -43,6 +43,7 @@ export default function SolutionDropDown({
     if (data && data.selected_solutions) {
       onSelectedListChange(data.selected_solutions);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   const handleCheckboxChange = (event) => {
