@@ -54,6 +54,7 @@ export const LikedThingsContainer = styled.ul`
   column-gap: 0.5rem;
   list-style: none;
   margin-right: 4%;
+  z-index: 1;
 
   h3 {
     font-size: 1.3rem;
@@ -65,7 +66,7 @@ export const LikedThingsContainer = styled.ul`
 
   li {
     border-radius: 999px;
-    font-size: 0.875rem;
+    font-size: 0.85rem;
     padding: 0.5rem 0.7rem;
     text-transform: capitalize;
     display: flex;
@@ -85,6 +86,7 @@ export const LikedThingsContainer = styled.ul`
 
 export const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  width: 50%;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
 `;
