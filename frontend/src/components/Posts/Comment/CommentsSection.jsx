@@ -37,7 +37,7 @@ const CommentsSection = ({ postId }) => {
 
   useEffect(() => {
     if (dataPost !== null) {
-      setComments((currentComments) => [...currentComments, dataPost]);
+      setComments((currentComments) => [dataPost, ...currentComments]);
     }
   }, [dataPost]);
 
