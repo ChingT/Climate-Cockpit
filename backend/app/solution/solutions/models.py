@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django_extensions.db.models import TimeStampedModel
 
 User = get_user_model()
@@ -14,6 +16,7 @@ class Category(TimeStampedModel):
 
 class Solution(TimeStampedModel):
     name = models.CharField(max_length=255)
+    shorter_name = models.CharField(max_length=255)
     category = models.ForeignKey(Category, models.PROTECT, related_name="solutions")
     impact = models.FloatField(blank=True, null=True)
     text = models.TextField(
@@ -45,8 +48,6 @@ class Resource(TimeStampedModel):
     class TypeChoices(models.TextChoices):
         VIDEOS = "videos", "videos"
         NEWS = "news", "news"
-        BOOKS = "books", "books"
-        PAPERS = "papers", "papers"
 
     DEFAULT_TYPE = TypeChoices.VIDEOS
 
@@ -56,7 +57,7 @@ class Resource(TimeStampedModel):
     author = models.CharField(max_length=100, blank=True)
     url = models.URLField(blank=True)
     resource_type = models.CharField(
-        max_length=10,
+        max_length=20,
         choices=TypeChoices.choices,
         default=DEFAULT_TYPE,
         help_text=f"Select from {TypeChoices.labels}",
@@ -74,3 +75,9 @@ class UserSelection(TimeStampedModel):
 
     def __str__(self):
         return f"UserSelection from {self.user}"
+
+
+@receiver(post_save, sender=User)
+def create_user_selection(sender, instance, created, **kwargs):
+    if created:
+        UserSelection.objects.create(user=instance)
