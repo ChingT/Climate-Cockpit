@@ -2,7 +2,7 @@ from django.db.models import Max, Sum
 from rest_framework import serializers
 from utils import generate_aggregate
 
-from .solutions.models import Category, Resource, Solution, UserSelection
+from .models import Category, Resource, Solution, UserSelection
 
 
 class CategorySerializer(serializers.ModelSerializer):
