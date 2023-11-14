@@ -39,11 +39,6 @@ export const NewsThumbnail = styled.img`
   max-height: 100px;
 `;
 
-export const BookThumbnail = styled.img`
-  max-width: 100%;
-  max-height: 100px;
-`;
-
 export const VideoInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
