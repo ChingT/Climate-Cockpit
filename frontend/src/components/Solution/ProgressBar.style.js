@@ -6,12 +6,10 @@ export const ProgressContainer = styled.div`
   border: 2px solid ${(props) => props.theme.ProgressBar.borderColor};
   margin-bottom: 25px;
   padding: 2px;
-
-}
 `;
 
 export const ProgressBar = styled.div`
   height: 100%;
-  background-color: ${(props) => props.theme.ProgressBar.backgroundColor};
+  background-image: var(--background-image);
   width: ${(props) => props.$percentage}%;
 `;

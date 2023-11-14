@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import useApiRequest from "../../hooks/useApiRequest.js";
 import {
   BookNews,
   BookThumbnail,
@@ -15,15 +16,15 @@ import {
   VideoInfoContainer,
   VideoTitle,
 } from "./Resources.style.js";
-import useApiRequest from "../../hooks/useApiRequest.js";
 
 function Resources({ solutionId }) {
   const [modalVideo, setModalVideo] = useState(null);
-  const { sendRequest, data } = useApiRequest("noAuth");
-  const [videosList, setVideosList] = useState([]);
   const [booksList, setBooksList] = useState([]);
   const [newsList, setNewsList] = useState([]);
   const [activeTab, setActiveTab] = useState("Videos");
+
+  const { sendRequest, data } = useApiRequest("noAuth");
+  const [videosList, setVideosList] = useState([]);
 
   useEffect(() => {
     const fetchData = (type) => {
@@ -42,6 +43,7 @@ function Resources({ solutionId }) {
 
   useEffect(() => {
     if (data) {
+      setVideosList(data.results);
       switch (activeTab) {
         case "Videos":
           setVideosList(data.results);

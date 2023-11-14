@@ -3,7 +3,7 @@ from django.db.models import Q, Sum
 from friend_request.models import FriendRequest, get_friends, is_friend
 from post.models import Post
 from rest_framework import serializers
-from solution.models import UserSelection
+from solution.solutions.models import UserSelection
 from utils import generate_aggregate
 
 User = get_user_model()

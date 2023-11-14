@@ -1,3 +1,8 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+from django.db.models import Q
 from rest_framework import status
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import (
@@ -10,13 +15,17 @@ from rest_framework.generics import (
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 
-from .models import Category, Resource, Solution, UserSelection
 from .serializers import (
     CategorySerializer,
     ResourceSerializer,
     SolutionSerializer,
     UserSelectionSerializer,
 )
+from .solution_logic.models import SelectionRule
+from .solutions.models import Category, Resource, Solution, UserSelection
+
+if TYPE_CHECKING:
+    from django.db.models.query import QuerySet
 
 
 class CategorySearchFilter(SearchFilter):
@@ -40,6 +49,7 @@ class ListSolutionAPIView(ListAPIView):
     filter_backends = [CategorySearchFilter, OrderingFilter]
     search_fields = ["=category__name"]
     ordering = ["id"]
+    permission_classes = []
 
 
 class RetrieveSolutionAPIView(RetrieveAPIView):
@@ -51,6 +61,7 @@ class RetrieveSolutionAPIView(RetrieveAPIView):
     queryset = Solution.objects.all()
     serializer_class = SolutionSerializer
     lookup_url_kwarg = "solution_id"
+    permission_classes = []
 
 
 class ListCategoryAPIView(ListAPIView):
@@ -61,6 +72,7 @@ class ListCategoryAPIView(ListAPIView):
 
     queryset = Category.objects.all().order_by("id")
     serializer_class = CategorySerializer
+    permission_classes = []
 
 
 class ResourceTypeSearchFilter(SearchFilter):
@@ -81,6 +93,7 @@ class ListResourceAPIView(ListAPIView):
     lookup_url_kwarg = "solution_id"
     filter_backends = [ResourceTypeSearchFilter]
     search_fields = ["=resource_type"]
+    permission_classes = []
 
     def get_queryset(self):
         solution_id = self.kwargs.get(self.lookup_url_kwarg)
@@ -95,20 +108,62 @@ class ToggleSelectSolution(GenericAPIView):
     """
 
     queryset = Solution.objects.all()
-    serializer_class = SolutionSerializer
     lookup_url_kwarg = "solution_id"
+    serializer_class = UserSelectionSerializer
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.selection_rules = {
+            "exclusive": self.get_selection_rule(
+                "If selected, others solutions in category are deselected"
+            ),
+            "no_car": self.get_selection_rule('If selected, "No Car" is deselected'),
+            "electric_car": self.get_selection_rule(
+                'If selected, "Electric Car" is deselected'
+            ),
+        }
 
     def post(self, request, *args, **kwargs):
         user_selection, _ = UserSelection.objects.get_or_create(user=self.request.user)
         solution = self.get_object()
         selected_solutions = user_selection.selected_solutions
-        if solution in selected_solutions.all():
-            selected_solutions.remove(solution)
-        else:
-            selected_solutions.add(solution)
+        self.toggle_select_solution(selected_solutions, solution)
 
-        serializer = self.get_serializer(solution)
+        serializer = self.get_serializer(user_selection)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def toggle_select_solution(
+        self, selected_solutions: QuerySet[Solution], new_solution: Solution
+    ):
+        if new_solution in selected_solutions.all():
+            selected_solutions.remove(new_solution)
+            return
+
+        # Remove the other solutions in the same category that are exclusive
+        to_remove = Q(
+            category=new_solution.category,
+            solution_logic__selection_rule=self.selection_rules["exclusive"],
+        )
+
+        selection_rule = new_solution.solution_logic.selection_rule
+        # If the new solution is exclusive, remove other solutions in the same category
+        if selection_rule == self.selection_rules["exclusive"]:
+            to_remove |= Q(category=new_solution.category)
+        # If the new solution has specific deselection logic, apply additional filters
+        elif selection_rule == self.selection_rules["no_car"]:
+            to_remove |= Q(name="No Car")
+        elif selection_rule == self.selection_rules["electric_car"]:
+            to_remove |= Q(name="Electric Car")
+
+        selected_solutions.remove(*selected_solutions.filter(to_remove))
+        selected_solutions.add(new_solution)
+
+    def get_selection_rule(self, description):
+        try:
+            return SelectionRule.objects.get(description=description)
+        except SelectionRule.DoesNotExist:
+            return None
 
 
 class ListUserSelectionAPIView(ListAPIView):

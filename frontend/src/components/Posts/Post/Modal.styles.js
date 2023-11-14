@@ -1,42 +1,116 @@
 import styled from "styled-components";
+import paper_texture from "../../../assets/images/paper_texture.jpg";
 
 export const CreatePostModalContainer = styled.div`
-  width: 100%;
-  min-height: 6rem;
+  background-image: url(${paper_texture});
+  min-height: 15rem;
+  min-width: 39rem;
   max-width: 42rem;
-  background: #ffffff;
   box-shadow:
     0px 0px 1px rgba(0, 0, 0, 0.2),
     0px 10px 20px rgba(0, 0, 0, 0.05);
   border-radius: 4px;
 
   .body-container {
-    display: grid;
-    grid-template-columns: auto 1fr;
+    display: flex;
+    flex-direction: row;
     gap: 2rem;
-    padding: 3.5rem;
+    padding: 3rem;
+  }
 
-    .user-avatar {
-      width: 3.5rem;
-      height: 3.5rem;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    `;
+  .user-avatar {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+`;
+
+export const LeftPart = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 100%;
+  gap: 1.7rem;
+`;
+
+export const AvatarAndName = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.2rem;
+
+  h3 {
+    font-size: 18px;
+  }
+`;
+
+export const RightPart = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: start;
+  width: 20%;
+  gap: 0.5rem;
+  height: 13rem;
+`;
+
+export const BrowseAndRemove = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const StyledLabel = styled.label`
+  width: 6rem;
+  border: 1.5px solid lightgray;
+  margin-right: 1%;
+  margin-left: 1%;
+  padding: 8px 16px 8px 16px;
+  margin-bottom: 5%;
+  font-size: 16.5px;
+  font-family: "CabinSketch", serif;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: conic-gradient(
+    from 90deg at 1.1px 1.1px,
+    #f3f3e4 25%,
+    rgb(217, 217, 217) 0
+  );
+  color: black;
+  height: 2.4rem;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+`;
 
 export const StyledInput = styled.input`
-  position: relative;
-  width: 100%;
-  height: fit-content;
+  display: none;
 `;
 
 export const StyledTextarea = styled.textarea`
   width: 100%;
-  height: 150px;
+  height: 13rem;
+  background: conic-gradient(
+    from 90deg at 1.1px 1.1px,
+    #f3f3e4 25%,
+    rgb(217, 217, 217) 0
+  );
+  background-size: 24px 24px;
   padding: 8px;
   margin-bottom: 10px;
+  font-size: 16px;
+  font-family: "CabinSketch", serif;
+  font-weight: 500;
   border: 1px solid #ccc;
   border-radius: 4px;
+  outline: none;
+
+  &:focus {
+    outline: 1.5px solid
+      ${(props) => props.theme.fontColors.profilePageSecondaryColor};
+  }
 `;
 
 export const StyledImg = styled.img`
@@ -50,28 +124,45 @@ export const StyledImg = styled.img`
   }
 `;
 
-export const StyledImagePreview = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  width: 100%;
-  grid-column: 2/-1;
-`;
-
-export const CloseButton = styled.button`
-  background: #ccc;
-  border: none;
-  padding: 8px;
-  margin-right: 8px;
-  border-radius: 4px;
+const buttonStyles = `
+background: conic-gradient(
+    from 90deg at 1.1px 1.1px,
+    #f3f3e4 25%,
+    rgb(217, 217, 217) 0
+  );
+  width: 6rem;
+  border-radius: 10px;
+  margin-right: 1%;
+  margin-left: 1%;
+box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);\`;
+  padding: 8px 16px 8px 16px;
+  margin-bottom: 1%;
   cursor: pointer;
+  font-size: 15.5px;
+  font-family: "CabinSketch", serif;
+  font-weight: 600;
 `;
 
 export const SaveButton = styled.button`
-  background: #4caf50;
-  color: white;
-  border: none;
-  padding: 8px;
-  border-radius: 4px;
-  cursor: pointer;
+  ${buttonStyles}
+  color: ${(props) => props.theme.fontColors.primary};
+`;
+
+export const RemoveButton = styled.button`
+  ${buttonStyles}
+  display: flex;
+  height: 2.45rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  color: ${(props) => props.theme.fontColors.primary};
+`;
+
+export const StyledImagePreview = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
 `;

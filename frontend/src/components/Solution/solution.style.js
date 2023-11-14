@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import checkbox_checked from "../../assets/other_icons/checkbox_checked.png";
+import checkbox_unchecked from "../../assets/other_icons/checkbox_unchecked.png";
 
 export const FilterAndList = styled.div`
   display: flex;
@@ -17,16 +19,17 @@ export const SolutionContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-bottom: 7px;
 
   .solutionBar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 3px solid black;
+    border: 3px solid #333;
     background-color: ${(props) =>
       props.$visibleOrChecked
-        ? props.theme.backgroundColors.selectedSolutionBar
-        : "transparent"};
+        ? "rgba(173, 216, 230, 0.7)"
+        : "rgba(255, 255, 255, 0.5)"};
     border-radius: 10px;
     padding: 5px;
   }
@@ -42,6 +45,7 @@ export const SolutionContainer = styled.div`
     font-size: ${(props) => props.theme.fontSize.solutionName};
     margin: 10px;
     font-weight: bold;
+    color: #555;
   }
 
   .solutionBarRight {
@@ -67,13 +71,15 @@ export const SolutionContainer = styled.div`
   }
 
   .solutionDetails {
-    border: 3px solid black;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    justify-content: space-between;
     gap: 10px;
     padding: 20px;
+    background-image: var(--background-image);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 
   .solutionButton {
@@ -81,6 +87,25 @@ export const SolutionContainer = styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
+  }
+`;
+
+export const CheckboxContainer = styled.div`
+  .custom-checkbox {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    width: 26px;
+    height: 26px;
+    border: none;
+    background: url(${checkbox_unchecked}) no-repeat center center;
+    background-size: 26px 26px;
+
+    &:checked {
+      background: url(${checkbox_checked}) no-repeat center center;
+      background-size: 26px 26px;
+    }
   }
 `;
 
