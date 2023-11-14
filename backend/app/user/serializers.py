@@ -69,7 +69,7 @@ class UserSerializer(serializers.ModelSerializer):
         return instance.followees.count()
 
     def get_total_impact(self, instance: User):
-        selected_solutions = instance.user_selection.selected_solutions.all()
+        selected_solutions = instance.user_selections.selected_solutions.all()
         return generate_aggregate(selected_solutions, Sum("impact"))
 
     class Meta:
