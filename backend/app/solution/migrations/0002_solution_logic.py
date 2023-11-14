@@ -56,6 +56,15 @@ class Migration(migrations.Migration):
                 ),
                 ("name", models.CharField(max_length=100, unique=True)),
                 ("initial_amount", models.IntegerField()),
+                (
+                    "altered_type",
+                    models.CharField(
+                        blank=True,
+                        choices=[("reduction", "reduction"), ("addition", "addition")],
+                        help_text="Select from ['reduction', 'addition']",
+                        max_length=20,
+                    ),
+                ),
                 ("icon_name_initial", models.CharField(blank=True, max_length=255)),
                 ("icon_name_altered", models.CharField(blank=True, max_length=255)),
                 (
@@ -123,18 +132,6 @@ class Migration(migrations.Migration):
                         primary_key=True,
                         serialize=False,
                         verbose_name="ID",
-                    ),
-                ),
-                (
-                    "impact_type",
-                    models.CharField(
-                        blank=True,
-                        choices=[("reduction", "reduction"), ("addition", "addition")],
-                        help_text=(
-                            "Select from [('reduction', 'reduction'), "
-                            "('addition', 'addition')]"
-                        ),
-                        max_length=20,
                     ),
                 ),
                 (
