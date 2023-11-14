@@ -43,7 +43,7 @@ export default function SolutionDropDown({
     if (data && data.selected_solutions) {
       onSelectedListChange(data.selected_solutions);
     }
-  }, [data, onSelectedListChange]);
+  }, [data]);
 
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
