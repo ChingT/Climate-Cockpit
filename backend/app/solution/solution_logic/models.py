@@ -22,8 +22,19 @@ class DashboardGroup(models.Model):
 
 
 class DashboardItem(TimeStampedModel):
+    class AlteredTypeChoices(models.TextChoices):
+        REDUCTION = "reduction", "reduction"
+        ADDITION = "addition", "addition"
+
     name = models.CharField(max_length=100, unique=True)
     initial_amount = models.IntegerField()
+    altered_type = models.CharField(
+        max_length=20,
+        choices=AlteredTypeChoices.choices,
+        help_text=f"Select from {AlteredTypeChoices.labels}",
+        blank=True,
+    )
+
     group = models.ForeignKey(
         DashboardGroup, models.PROTECT, related_name="dashboard_icons"
     )
@@ -31,7 +42,7 @@ class DashboardItem(TimeStampedModel):
     icon_name_altered = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
-        return self.name
+        return f"[{self.group}] {self.name}"
 
 
 class ImpactDetail(models.Model):
@@ -48,10 +59,6 @@ class ImpactDetail(models.Model):
 
 
 class SolutionLogic(models.Model):
-    class ImpactTypeChoices(models.TextChoices):
-        REDUCTION = "reduction", "reduction"
-        ADDITION = "addition", "addition"
-
     solution = models.OneToOneField(
         Solution, models.CASCADE, related_name="solution_logic"
     )
@@ -60,12 +67,6 @@ class SolutionLogic(models.Model):
     )
     impact_detail = models.ManyToManyField(
         ImpactDetail, related_name="solution_logic", blank=True
-    )
-    impact_type = models.CharField(
-        max_length=20,
-        choices=ImpactTypeChoices.choices,
-        help_text=f"Select from {ImpactTypeChoices.choices}",
-        blank=True,
     )
 
     def __str__(self):

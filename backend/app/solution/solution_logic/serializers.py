@@ -31,7 +31,7 @@ class DashboardItemSerializer(serializers.ModelSerializer):
         This method calculates a combined queryset of impact details of the selected
         solutins where the dashboard_item matches the provided instance.
         """
-        impact_details = DashboardItem.objects.none()
+        impact_details = ImpactDetail.objects.none()
 
         selected_solutions = self.get_selected_solutions()
         for solution in selected_solutions:
