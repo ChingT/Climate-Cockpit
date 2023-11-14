@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useApiRequest from "../../hooks/useApiRequest.js";
+import useAutoFetch from "../../hooks/useAutoFetch.js";
 import {
   BookNews,
   BookThumbnail,
@@ -23,27 +23,18 @@ function Resources({ solutionId }) {
   const [newsList, setNewsList] = useState([]);
   const [activeTab, setActiveTab] = useState("Videos");
 
-  const { sendRequest, data } = useApiRequest("noAuth");
+  const { data } = useAutoFetch(
+    "get",
+    `solution/resources/${solutionId}?type=${activeTab.toLocaleLowerCase()}`,
+    undefined,
+    activeTab,
+    "noAuth"
+  );
+
   const [videosList, setVideosList] = useState([]);
 
   useEffect(() => {
-    const fetchData = (type) => {
-      sendRequest("get", `solution/resources/${solutionId}?type=${type}`);
-    };
-
-    if (activeTab === "Videos") {
-      fetchData("videos");
-    } else if (activeTab === "News") {
-      fetchData("news");
-    } else if (activeTab === "Books") {
-      fetchData("books");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab]);
-
-  useEffect(() => {
     if (data) {
-      setVideosList(data.results);
       switch (activeTab) {
         case "Videos":
           setVideosList(data.results);

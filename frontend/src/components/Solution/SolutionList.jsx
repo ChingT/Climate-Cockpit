@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
-import useApiRequest from "../../hooks/useApiRequest.js";
+import useAutoFetch from "../../hooks/useAutoFetch.js";
 import SolutionFilter from "../SolutionFilter/SolutionFilter.jsx";
 import SolutionDropDown from "./SolutionDropDown.jsx";
 import { FilterAndList, SolutionListDiv } from "./solution.style.js";
 
 function SolutionList() {
-  const { sendRequest, data } = useApiRequest("noAuth");
+  const { data } = useAutoFetch(
+    "get",
+    "solution/solutions/?limit=30",
+    undefined,
+    undefined,
+    "noAuth"
+  );
   const [allSolutions, setAllSolutions] = useState([]);
   const [solutionList, setSolutionList] = useState([]);
   const [selectedSortOption, setSelectedSortOption] = useState("Default");
   const [selectedCategory, setSelectedCategory] = useState("All categories");
   const [selectedStatus, setSelectedStatus] = useState("All");
-
-  useEffect(() => {
-    sendRequest("get", "solution/solutions/?limit=30");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     if (data !== null) setAllSolutions(data.results);
