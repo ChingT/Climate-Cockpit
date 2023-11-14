@@ -1,5 +1,4 @@
 
-
 import openai
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -85,38 +84,57 @@ class ListCreateBotCommentAPIView(ListCreateAPIView):
         return Comment.objects.filter(post=target_post).order_by("-created")
 
 
-
     def perform_create(self, serializer):
-        # Save user's comment
         post_id = self.kwargs.get(self.lookup_url_kwarg)
         target_post = get_object_or_404(Post, id=post_id)
         user_comment = serializer.save(user=self.request.user, post=target_post)
 
-        # Generate GPT bot comment based on user's comment
-        # Replace 'text' with the correct field name, e.g., 'content'
-        gpt_bot_comment_text = self.create_gpt_comment(target_post, user_comment.content)
+        # list of all gptbots
+        bot_usernames = ['gpt_bot', 'gpt_bot2', 'gpt_bot3']
+        for bot_username in bot_usernames:
+            # Получение или создание пользователя бота
+            bot_user, _ = get_user_model().objects.get_or_create(username=bot_username)
 
-        # Ensure there is a GPT bot user
-        gpt_bot_user = get_user_model().objects.get_or_create(username='gpt_bot')[0]
+            # if user following gpt?
+            if bot_user.followers.filter(id=self.request.user.id).exists():
+                # generatin gpt comment based on user comment
+                bot_comment_text = self.create_bot_comment(bot_username, target_post, user_comment.content)
 
-        # Save GPT bot comment
-        if gpt_bot_comment_text:
-            Comment.objects.create(user=gpt_bot_user, post=target_post, content=gpt_bot_comment_text)
+                # save gpt comment
+                if bot_comment_text:
+                    Comment.objects.create(user=bot_user, post=target_post, content=bot_comment_text)
 
-    def create_gpt_comment(self, post, user_comment_text):
+    def create_bot_comment(self, bot_username, post, user_comment_text):
 
-        messages_history = [{"role": "system", "content": " You are a motivator AI, named MotivAItor. Your role is to encourage and support people in their efforts to address climate challenges. When someone posts about their struggles or achievements in tackling climate change, you will respond with cheerful, supportive, and motivating comments. Your responses should be positive, uplifting, and focused on empowering the person to continue their efforts. Be creative in your encouragement, and remember to acknowledge their efforts and progress. Here are some examples of how you might respond:Post: I just planted ten trees this weekend but sometimes feel it's not enough to make a difference.Response: That's amazing! Every tree counts and your effort is truly making a difference. Remember, big changes start with small steps. Keep up the great work!Post: Feeling overwhelmed by all the negative news about climate change.Response: It's natural to feel that way. But remember, every positive action you take contributes to a better future. Stay strong and focused on the good you can do. Together, we can make a difference!"}]
+        user_message = {"role": "user", "content": user_comment_text}
+        if bot_username == 'gpt_bot':
+            # logic for gpt_bot
+            messages_history = [
+                {"role": "system", "content": "You are a motivator AI, named MotivAItor. Your role is to encourage and support people in their efforts to address climate challenges. Respond with cheerful, supportive, and motivating comments. Empower me to continue their efforts. Be creative in your encouragement. Answer me very shortly and cool!" },
+            user_message]
 
-        user_message = {"role": "user", "content": f" {user_comment_text}"}
-        messages_history.append(user_message)
+            return self.create_specific_bot_comment(post, user_comment_text, 'motivator', messages_history)
+        elif bot_username == 'gpt_bot2':
+            messages_history = [{"role": "system", "content": "You are a fact-checking AI, named FactChecker. Your role is to verify and provide accurate information about Earth's climate. Your task is to check its accuracy and provide a well-informed, evidence-based response. Your responses should be factual, informative, and neutral. You should reference credible sources and data to back up your points. Be concise and clear in your explanations, and help dispel myths or misinformation about climate change. Answer me very shortly and cool!"},
+                                user_message]
+            return self.create_specific_bot_comment(post, user_comment_text, 'informative', messages_history)
+        elif bot_username == 'gpt_bot3':
+            messages_history = [{"role": "system", "content": "You are an active climate advocate AI, named EcoChampion. Your role is to inspire and educate me about the importance of taking action against climate change. When i send you info about my doubts, questions, or actions related to climate change, you will respond with informative, inspiring, and action-oriented comments. Your responses should be optimistic, empowering, and filled with practical advice. Encourage sustainable practices, praise environmental efforts, and offer insights into how individual actions contribute to broader climate goals. Answer me veryshortly and cool!"},
+                                user_message]
+            return self.create_specific_bot_comment(post, user_comment_text, 'supportive', messages_history)
+
+
+
+    def create_specific_bot_comment(self, post, user_comment_text, bot_type, messages_history):
         try:
+            #  API GPT-3 call logic
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages=messages_history
             )
             bot_message = {"role": "assistant", "content": response.choices[0].message['content']}
             messages_history.append(bot_message)
+
             return bot_message['content']
         except Exception as e:
             return str(e)
-

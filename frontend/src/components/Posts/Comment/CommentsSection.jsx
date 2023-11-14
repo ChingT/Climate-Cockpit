@@ -29,9 +29,14 @@ const CommentsSection = ({ postId }) => {
   const handlePostButtonClick = () => {
     if (!commentText.trim()) return;
 
-    sendRequestPost("post", `social/comments/${postId}/`, {
-      content: commentText,
-    });
+    sendRequestPost(
+      "post",
+      `
+social/comments/bot-comment/${postId}/`,
+      {
+        content: commentText,
+      },
+    );
     setCommentText("");
   };
 
@@ -44,7 +49,7 @@ const CommentsSection = ({ postId }) => {
   const deleteComment = (commentId) => {
     sendRequestDelete("delete", `social/comments/comment/${commentId}/`);
     setComments((currentComments) =>
-      currentComments.filter((comment) => comment.id !== commentId)
+      currentComments.filter((comment) => comment.id !== commentId),
     );
   };
 

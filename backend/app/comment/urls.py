@@ -12,6 +12,6 @@ urlpatterns = [
     path(
         "bot-comment/<int:post_id>/",
         ListCreateBotCommentAPIView.as_view(),
-        name="comment-detail",
+        name="bot-comment-create",
     ),
 ]
