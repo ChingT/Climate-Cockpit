@@ -90,7 +90,7 @@ class ListCreateBotCommentAPIView(ListCreateAPIView):
         user_comment = serializer.save(user=self.request.user, post=target_post)
 
         # list of all gptbots
-        bot_usernames = ['gpt_bot', 'gpt_bot2', 'gpt_bot3']
+        bot_usernames = ["gpt_bot", "gpt_bot2", "gpt_bot3"]
         for bot_username in bot_usernames:
             # Получение или создание пользователя бота
             bot_user, _ = get_user_model().objects.get_or_create(username=bot_username)
@@ -107,21 +107,21 @@ class ListCreateBotCommentAPIView(ListCreateAPIView):
     def create_bot_comment(self, bot_username, post, user_comment_text):
 
         user_message = {"role": "user", "content": user_comment_text}
-        if bot_username == 'gpt_bot':
+        if bot_username == "gpt_bot":
             # logic for gpt_bot
             messages_history = [
-                {"role": "system", "content": "You are a motivator AI, named MotivAItor. Your role is to encourage and support people in their efforts to address climate challenges. Respond with cheerful, supportive, and motivating comments. Empower me to continue their efforts. Be creative in your encouragement. Answer me very shortly and cool!" },
+                {"role": "system", "content": "You are a motivator AI, named MotivAItor. Support  efforts to address climate challenges. Empower me to continue their efforts. Be creative in your encouragement. Answer me very shortly and cool!" },
             user_message]
 
-            return self.create_specific_bot_comment(post, user_comment_text, 'motivator', messages_history)
-        elif bot_username == 'gpt_bot2':
-            messages_history = [{"role": "system", "content": "You are a fact-checking AI, named FactChecker. Your role is to verify and provide accurate information about Earth's climate. Your task is to check its accuracy and provide a well-informed, evidence-based response. Your responses should be factual, informative, and neutral. You should reference credible sources and data to back up your points. Be concise and clear in your explanations, and help dispel myths or misinformation about climate change. Answer me very shortly and cool!"},
+            return self.create_specific_bot_comment(post, user_comment_text, "motivator", messages_history)
+        elif bot_username == "gpt_bot2":
+            messages_history = [{"role": "system", "content": "You are a fact-checking AI, named FactChecker. Your role is to verify and provide accurate information about Earths climate, and help dispel myths. Answer me very shortly and cool!"},
                                 user_message]
-            return self.create_specific_bot_comment(post, user_comment_text, 'informative', messages_history)
-        elif bot_username == 'gpt_bot3':
-            messages_history = [{"role": "system", "content": "You are an active climate advocate AI, named EcoChampion. Your role is to inspire and educate me about the importance of taking action against climate change. When i send you info about my doubts, questions, or actions related to climate change, you will respond with informative, inspiring, and action-oriented comments. Your responses should be optimistic, empowering, and filled with practical advice. Encourage sustainable practices, praise environmental efforts, and offer insights into how individual actions contribute to broader climate goals. Answer me veryshortly and cool!"},
+            return self.create_specific_bot_comment(post, user_comment_text, "informative", messages_history)
+        elif bot_username == "gpt_bot3":
+            messages_history = [{"role": "system", "content": "You are an active climate revolutionist AI, named EcoChampion. Your role is to inpirate for protecting our Climate. Answer me veryshortly and cool!"},
                                 user_message]
-            return self.create_specific_bot_comment(post, user_comment_text, 'supportive', messages_history)
+            return self.create_specific_bot_comment(post, user_comment_text, "supportive", messages_history)
 
 
 
@@ -132,9 +132,9 @@ class ListCreateBotCommentAPIView(ListCreateAPIView):
                 model="gpt-3.5-turbo",
                 messages=messages_history
             )
-            bot_message = {"role": "assistant", "content": response.choices[0].message['content']}
+            bot_message = {"role": "assistant", "content": response.choices[0].message["content"]}
             messages_history.append(bot_message)
 
-            return bot_message['content']
+            return bot_message["content"]
         except Exception as e:
             return str(e)
