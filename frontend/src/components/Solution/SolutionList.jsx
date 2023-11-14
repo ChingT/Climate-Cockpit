@@ -1,41 +1,81 @@
 import { useEffect, useState } from "react";
-import useApiRequest from "../../hooks/useApiRequest.js";
+import useAutoFetch from "../../hooks/useAutoFetch.js";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 import SolutionFilter from "../SolutionFilter/SolutionFilter.jsx";
 import SolutionDropDown from "./SolutionDropDown.jsx";
 import { FilterAndList, SolutionListDiv } from "./solution.style.js";
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 
 function SolutionList() {
-  const { sendRequest, data, loading } = useApiRequest("noAuth");
+  const { data, loading } = useAutoFetch(
+    "get",
+    "solution/solutions/?limit=30",
+    undefined,
+    undefined,
+    "noAuth"
+  );
+
+  const [allSolutions, setAllSolutions] = useState([]);
   const [solutionList, setSolutionList] = useState([]);
+  const [selectedSortOption, setSelectedSortOption] = useState("Default");
+  const [selectedCategory, setSelectedCategory] = useState("All categories");
+  const [selectedStatus, setSelectedStatus] = useState("All");
 
   useEffect(() => {
-    sendRequest("get", "solution/solutions/?limit=30");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (data) {
-      setSolutionList(data.results);
-    }
+    if (data !== null) setAllSolutions(data.results);
   }, [data]);
 
+  useEffect(() => {
+    let finalSolutions = allSolutions.slice();
+
+    if (selectedCategory !== "All categories") {
+      finalSolutions = finalSolutions.filter(
+        (solution) => solution.category.name === selectedCategory
+      );
+    }
+
+    if (selectedStatus === "Selected") {
+      finalSolutions = finalSolutions.filter(
+        (solution) => solution.selected_by_logged_in_user
+      );
+    } else if (selectedStatus === "Non-selected") {
+      finalSolutions = finalSolutions.filter(
+        (solution) => !solution.selected_by_logged_in_user
+      );
+    }
+
+    if (selectedSortOption === "Default") {
+      finalSolutions.sort((a, b) => a.id - b.id);
+    } else if (selectedSortOption === "Alphabetically") {
+      finalSolutions.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (selectedSortOption === "Impact") {
+      finalSolutions.sort((a, b) => b.impact - a.impact);
+    } else if (selectedSortOption === "Number of Supporters") {
+      finalSolutions.sort(
+        (a, b) => b.number_of_supporters - a.number_of_supporters
+      );
+    }
+    setSolutionList(finalSolutions);
+  }, [allSolutions, selectedCategory, selectedSortOption, selectedStatus]);
+
+  if (loading) return <LoadingSpinner />;
   return (
-    <>
-      {loading && <LoadingSpinner />}
-      <SolutionListDiv>
-        <FilterAndList>
-          {!loading && (
-            <div className="filterDiv">
-              <SolutionFilter />
-            </div>
-          )}
-          {solutionList.map((solution, index) => (
-            <SolutionDropDown key={index} solution={solution} />
-          ))}
-        </FilterAndList>
-      </SolutionListDiv>
-    </>
+    <SolutionListDiv>
+      <FilterAndList>
+        <div className="filterDiv">
+          <SolutionFilter
+            selectedSortOption={selectedSortOption}
+            setSelectedSortOption={setSelectedSortOption}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            selectedStatus={selectedStatus}
+            setSelectedStatus={setSelectedStatus}
+          />
+        </div>
+        {solutionList.map((solution, index) => (
+          <SolutionDropDown key={index} solution={solution} />
+        ))}
+      </FilterAndList>
+    </SolutionListDiv>
   );
 }
 
