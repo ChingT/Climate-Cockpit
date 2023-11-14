@@ -44,6 +44,7 @@ const LeftEditContainer = ({ initialAvatar, handleProfileUpdate }) => {
     }
   }, [data, dispatch]);
 
+  if (loading) return <LoadingSpinner />;
   return (
     <EditAvatarContainer>
       <div>
@@ -81,7 +82,6 @@ const LeftEditContainer = ({ initialAvatar, handleProfileUpdate }) => {
         )}
       </div>
       <p>{error}</p>
-      {loading && <LoadingSpinner />}
       <ProfileButton style={{ color: "black" }}>Delete account</ProfileButton>
       <ProfileButton style={{ color: "black" }} onClick={handleProfileUpdate}>
         Save changes

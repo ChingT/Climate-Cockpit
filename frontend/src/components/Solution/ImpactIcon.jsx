@@ -5,6 +5,7 @@ function ImpactIcon({ impact, visibleOrChecked }) {
   if (impact == null) {
     impactNumber = "?";
   }
+
   return (
     <ImpactIconDiv $visibleOrChecked={visibleOrChecked}>
       <div>{impactNumber}</div>

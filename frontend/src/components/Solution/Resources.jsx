@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import useAutoFetch from "../../hooks/useAutoFetch.js";
 import {
   BookNews,
-  BookThumbnail,
   CloseButton,
   Container,
   ModalContent,
@@ -15,30 +15,21 @@ import {
   VideoInfoContainer,
   VideoTitle,
 } from "./Resources.style.js";
-import useApiRequest from "../../hooks/useApiRequest.js";
 
 function Resources({ solutionId }) {
   const [modalVideo, setModalVideo] = useState(null);
-  const { sendRequest, data } = useApiRequest("noAuth");
-  const [videosList, setVideosList] = useState([]);
-  const [booksList, setBooksList] = useState([]);
   const [newsList, setNewsList] = useState([]);
   const [activeTab, setActiveTab] = useState("Videos");
 
-  useEffect(() => {
-    const fetchData = (type) => {
-      sendRequest("get", `solution/resources/${solutionId}?type=${type}`);
-    };
+  const { data } = useAutoFetch(
+    "get",
+    `solution/resources/${solutionId}?type=${activeTab.toLocaleLowerCase()}`,
+    undefined,
+    activeTab,
+    "noAuth"
+  );
 
-    if (activeTab === "Videos") {
-      fetchData("videos");
-    } else if (activeTab === "News") {
-      fetchData("news");
-    } else if (activeTab === "Books") {
-      fetchData("books");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab]);
+  const [videosList, setVideosList] = useState([]);
 
   useEffect(() => {
     if (data) {
@@ -48,9 +39,6 @@ function Resources({ solutionId }) {
           break;
         case "News":
           setNewsList(data.results);
-          break;
-        case "Books":
-          setBooksList(data.results);
           break;
         default:
           console.warn("Unhandled tab or no data available");
@@ -83,12 +71,6 @@ function Resources({ solutionId }) {
           $isActive={activeTab === "News"}
         >
           News
-        </Tab>
-        <Tab
-          onClick={() => setActiveTab("Books")}
-          $isActive={activeTab === "Books"}
-        >
-          Books
         </Tab>
       </Container>
       <SimpleModal $show={!!modalVideo} onClick={closeModal}>
@@ -143,22 +125,6 @@ function Resources({ solutionId }) {
                 <VideoTitle>{news.title}</VideoTitle>
               </a>
               <VideoDescription>{news.source}</VideoDescription>
-            </div>
-          ))}
-        </VideoContainer>
-      )}
-
-      {activeTab === "Books" && (
-        <VideoContainer>
-          {booksList.map((book, index) => (
-            <div key={index}>
-              <a href={book.url} target="_blank" rel="noreferrer noopener">
-                {book.thumbnail && (
-                  <BookThumbnail src={book.thumbnail} alt={book.title} />
-                )}
-                <VideoTitle>{book.title}</VideoTitle>
-              </a>
-              <VideoDescription>{book.source}</VideoDescription>
             </div>
           ))}
         </VideoContainer>

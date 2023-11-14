@@ -1,3 +1,4 @@
+import paper_texture from "../../assets/images/paper_texture.jpg";
 import ImpactIcon from "./ImpactIcon.jsx";
 import { useEffect, useState } from "react";
 import supportersIcon from "./../../assets/other_icons/supporters.png";
@@ -5,7 +6,7 @@ import CategoryLabel from "./CategoryLabel.jsx";
 import ProgressComponent from "./ProgressBar.jsx";
 import Resources from "./Resources.jsx";
 import SvgIcon from "./SvgIcon.jsx";
-import { SolutionContainer } from "./solution.style.js";
+import { CheckboxContainer, SolutionContainer } from "./solution.style.js";
 
 import SolutionButton from "./SolutionButton.jsx";
 import useApiRequest from "../../hooks/useApiRequest.js";
@@ -58,6 +59,9 @@ export default function SolutionDropDown({
   const handleSolutionDropDown = () => {
     setIsVisible(!isVisible);
   };
+  const style = {
+    "--background-image": `url(${paper_texture})`,
+  };
 
   const solutionText = text.replace("{impact}", `${impact} megatons per year`);
   const progressText = progress_text.replace("{progress}", progress);
@@ -66,13 +70,14 @@ export default function SolutionDropDown({
     <SolutionContainer $visibleOrChecked={isVisible || isChecked}>
       <div className="solutionBar" onClick={handleSolutionDropDown}>
         <div className="solutionBarLeft">
-          <div>
+          <CheckboxContainer>
             <input
               type="checkbox"
               checked={isChecked}
               onChange={handleCheckboxChange}
+              className="custom-checkbox"
             />
-          </div>
+          </CheckboxContainer>
           <div>
             <SvgIcon svg_icon={icon_name} />
           </div>
@@ -97,9 +102,9 @@ export default function SolutionDropDown({
         </div>
       </div>
       {isVisible && (
-        <div className="solutionDetails">
+        <div className="solutionDetails" style={style}>
           <div>{solutionText}</div>
-
+          <br />
           <ProgressComponent
             className="progressBar"
             percentage={progress}

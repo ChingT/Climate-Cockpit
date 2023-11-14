@@ -33,7 +33,7 @@ function ProfileHeader({ userdata, profileId, error }) {
       <ProfileHeaderContainer>
         {userdata && (
           <>
-            <ProfileHeaderLeftContainer bgImage={userdata.avatar}>
+            <ProfileHeaderLeftContainer>
               <AvatarImg alt="avatar" src={userdata.avatar || avatarImage} />
               {userdata.id === currentUser.id ? (
                 <Link to={"/profile/edit"}>

@@ -2,7 +2,7 @@ from django.db.models import Max, Sum
 from rest_framework import serializers
 from utils import generate_aggregate
 
-from .solutions.models import Category, Resource, Solution, UserSelection
+from .models import Category, Resource, Solution, UserSelection
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -25,8 +25,10 @@ class CategorySerializer(serializers.ModelSerializer):
 
     def get_selected_solutions(self, instance):
         current_user = self.context["request"].user
-        user_selection, _ = UserSelection.objects.get_or_create(user=current_user)
-        return user_selection.selected_solutions.filter(category=instance)
+        if current_user.is_authenticated:
+            selected_solutions = current_user.user_selections.selected_solutions
+            return selected_solutions.filter(category=instance)
+        return Solution.objects.none()
 
 
 class SolutionSerializer(serializers.ModelSerializer):
@@ -38,9 +40,10 @@ class SolutionSerializer(serializers.ModelSerializer):
         return instance.user_selections.count()
 
     def get_selected_by_logged_in_user(self, instance: Solution):
-        return instance.user_selections.filter(
-            user=self.context["request"].user
-        ).exists()
+        current_user = self.context["request"].user
+        if current_user.is_authenticated:
+            return instance.user_selections.filter(user=current_user).exists()
+        return False
 
     class Meta:
         model = Solution
