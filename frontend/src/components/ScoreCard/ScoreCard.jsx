@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useAutoFetch from "../../hooks/useAutoFetch.js";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 import Score from "./Score.jsx";
 import {
   FinalContainer,
@@ -11,9 +12,8 @@ import ScorecardCategory from "./ScorecardCategory.jsx";
 
 export default function ScoreCard() {
   const [categories, setCategories] = useState([]);
-
   // TODO: fetch categories and totalScore from api
-  const { data } = useAutoFetch("get", "solution/categories/");
+  const { data, loading } = useAutoFetch("get", "solution/categories/");
 
   useEffect(() => {
     if (data !== null) setCategories(data.results);
@@ -30,19 +30,22 @@ export default function ScoreCard() {
       <>Switzerland's emissions would be {-totalScore} lower.</>
     </>
   );
+  if (loading) return <LoadingSpinner />;
   return (
-    <ScorecardContainer>
-      <ScoreCardContent>
-        {categories.map((category, i) => (
-          <ScorecardCategory key={i} category={category} />
-        ))}
-        <TitleAndBar>
-          <FinalContainer>
-            {summary}
-            <Score score={-totalScore} />
-          </FinalContainer>
-        </TitleAndBar>
-      </ScoreCardContent>
-    </ScorecardContainer>
+    <>
+      <ScorecardContainer>
+        <ScoreCardContent>
+          {categories.map((category, i) => (
+            <ScorecardCategory key={i} category={category} />
+          ))}
+          <TitleAndBar>
+            <FinalContainer>
+              {summary}
+              <Score score={totalScore} />
+            </FinalContainer>
+          </TitleAndBar>
+        </ScoreCardContent>
+      </ScorecardContainer>
+    </>
   );
 }

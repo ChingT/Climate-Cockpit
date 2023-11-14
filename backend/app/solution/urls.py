@@ -1,12 +1,15 @@
 from django.urls import path
-
-from .views import (
+from solution.solution_logic.views import (
+    ListDashboardGroupAPIView,
+    ListDashboardItemAPIView,
+)
+from solution.solutions.views import (
     ListCategoryAPIView,
     ListResourceAPIView,
     ListSolutionAPIView,
     ListUserSelectionAPIView,
-    RetrieveDestroyUserSelectionAPIView,
     RetrieveSolutionAPIView,
+    RetrieveUserSelectionAPIView,
     ToggleSelectSolution,
 )
 
@@ -35,7 +38,17 @@ urlpatterns = [
     ),
     path(
         "user-selections/",
-        RetrieveDestroyUserSelectionAPIView.as_view(),
+        RetrieveUserSelectionAPIView.as_view(),
         name="user-selections-detail",
+    ),
+    path(
+        "dashboard-items/",
+        ListDashboardItemAPIView.as_view(),
+        name="dashboard-item-list",
+    ),
+    path(
+        "dashboard-groups/",
+        ListDashboardGroupAPIView.as_view(),
+        name="dashboard-group-list",
     ),
 ]

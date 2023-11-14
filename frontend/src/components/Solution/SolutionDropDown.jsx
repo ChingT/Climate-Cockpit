@@ -1,7 +1,6 @@
 import paper_texture from "../../assets/images/paper_texture.jpg";
 import ImpactIcon from "./ImpactIcon.jsx";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import supportersIcon from "./../../assets/other_icons/supporters.png";
 import CategoryLabel from "./CategoryLabel.jsx";
 import ProgressComponent from "./ProgressBar.jsx";
@@ -10,9 +9,15 @@ import SvgIcon from "./SvgIcon.jsx";
 import { CheckboxContainer, SolutionContainer } from "./solution.style.js";
 
 import SolutionButton from "./SolutionButton.jsx";
+import useApiRequest from "../../hooks/useApiRequest.js";
 
-export default function SolutionDropDown({ solution }) {
-  const [isChecked, setIsChecked] = useState(false);
+export default function SolutionDropDown({
+  solution,
+  isSelected,
+  onSelectedListChange,
+}) {
+  const { sendRequest: toggleSelection, data } = useApiRequest("noAuth");
+  const [isChecked, setIsChecked] = useState(isSelected);
   const [isVisible, setIsVisible] = useState(false);
   const {
     category,
@@ -27,13 +32,29 @@ export default function SolutionDropDown({ solution }) {
     id,
   } = solution;
 
+  const handleToggleSelection = () => {
+    toggleSelection("post", `/solution/toggle-select/${id}/`);
+  };
+
+  useEffect(() => {
+    setIsChecked(isSelected);
+  }, [isSelected]);
+
+  useEffect(() => {
+    if (data && data.selected_solutions) {
+      onSelectedListChange(data.selected_solutions);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
   const handleCheckboxChange = (event) => {
-    const newCheckedStatus = event.target.checked;
-    setIsChecked(newCheckedStatus);
+    setIsChecked(event.target.checked);
+    handleToggleSelection();
   };
 
   const handleButtonSelectionChange = (isSelected) => {
     setIsChecked(isSelected);
+    handleToggleSelection();
   };
   const handleSolutionDropDown = () => {
     setIsVisible(!isVisible);
@@ -46,8 +67,8 @@ export default function SolutionDropDown({ solution }) {
   const progressText = progress_text.replace("{progress}", progress);
 
   return (
-    <SolutionContainer $visibleOrChecked={isVisible || isChecked}>
-      <div className="solutionBar" onClick={handleSolutionDropDown}>
+    <SolutionContainer $isChecked={isChecked}>
+      <div className="solutionBar" onDoubleClick={handleSolutionDropDown}>
         <div className="solutionBarLeft">
           <CheckboxContainer>
             <input

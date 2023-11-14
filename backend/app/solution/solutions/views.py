@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from django.contrib.auth import get_user_model
 from django.db.models import Q
 from rest_framework import status
 from rest_framework.filters import OrderingFilter, SearchFilter
@@ -9,23 +10,25 @@ from rest_framework.generics import (
     GenericAPIView,
     ListAPIView,
     RetrieveAPIView,
-    RetrieveDestroyAPIView,
     get_object_or_404,
 )
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
+from solution.solution_logic.models import SelectionRule
 
+from .models import Category, Resource, Solution, UserSelection
 from .serializers import (
     CategorySerializer,
     ResourceSerializer,
     SolutionSerializer,
     UserSelectionSerializer,
 )
-from .solution_logic.models import SelectionRule
-from .solutions.models import Category, Resource, Solution, UserSelection
 
 if TYPE_CHECKING:
     from django.db.models.query import QuerySet
+
+
+User = get_user_model()
 
 
 class CategorySearchFilter(SearchFilter):
@@ -125,7 +128,7 @@ class ToggleSelectSolution(GenericAPIView):
         }
 
     def post(self, request, *args, **kwargs):
-        user_selection, _ = UserSelection.objects.get_or_create(user=self.request.user)
+        user_selection = self.request.user.user_selections
         solution = self.get_object()
         selected_solutions = user_selection.selected_solutions
         self.toggle_select_solution(selected_solutions, solution)
@@ -169,31 +172,36 @@ class ToggleSelectSolution(GenericAPIView):
 class ListUserSelectionAPIView(ListAPIView):
     """get: List all user selections.
 
-    List all user selections. Only admin users can perform this operation.
+    Returns a list of UserSelection instances. \
+    If a user doesn't have a UserSelection instance, create one. \
+    This operation is restricted to admin users.
     """
 
     queryset = UserSelection.objects.all().order_by("-created")
     serializer_class = UserSelectionSerializer
     permission_classes = [IsAdminUser]
 
+    def get(self, request, *args, **kwargs):
+        users_no_user_selections = User.objects.filter(user_selections__isnull=True)
+        user_selections_to_create = [
+            UserSelection(user=user) for user in users_no_user_selections
+        ]
+        UserSelection.objects.bulk_create(
+            user_selections_to_create, ignore_conflicts=True
+        )
+        return super().get(request, *args, **kwargs)
 
-class RetrieveDestroyUserSelectionAPIView(RetrieveDestroyAPIView):
+
+class RetrieveUserSelectionAPIView(RetrieveAPIView):
     """get: Retrieve the user selections.
 
     Retrieve the user selections of the logged-in user. \
     If the user selections doesn't exist, create one.
-
-    delete: Delete the user selections.
-
-    Delete the user selections of the logged-in user.
     """
 
     serializer_class = UserSelectionSerializer
 
-    def get_object(self):
-        return get_object_or_404(UserSelection, user=self.request.user)
-
     def retrieve(self, request, *args, **kwargs):
-        instance, _ = UserSelection.objects.get_or_create(user=self.request.user)
-        serializer = self.get_serializer(instance)
+        user_selections = self.request.user.user_selections
+        serializer = self.get_serializer(user_selections)
         return Response(serializer.data)

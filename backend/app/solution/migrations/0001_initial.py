@@ -70,6 +70,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("name", models.CharField(max_length=255)),
+                ("shorter_name", models.CharField(max_length=255)),
                 ("impact", models.FloatField(blank=True, null=True)),
                 (
                     "text",
@@ -181,19 +182,14 @@ class Migration(migrations.Migration):
                 ("title", models.CharField(max_length=300)),
                 ("source", models.CharField(blank=True, max_length=100)),
                 ("author", models.CharField(blank=True, max_length=100)),
-                ("url", models.URLField(blank=True)),
+                ("url", models.URLField(blank=True, max_length=500)),
                 (
                     "resource_type",
                     models.CharField(
-                        choices=[
-                            ("videos", "videos"),
-                            ("news", "news"),
-                            ("books", "books"),
-                            ("papers", "papers"),
-                        ],
+                        choices=[("videos", "videos"), ("news", "news")],
                         default="videos",
-                        help_text="Select from ['videos', 'news', 'books', 'papers']",
-                        max_length=10,
+                        help_text="Select from ['videos', 'news']",
+                        max_length=20,
                     ),
                 ),
                 (

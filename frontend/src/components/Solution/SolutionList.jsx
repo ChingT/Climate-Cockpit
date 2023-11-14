@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
 import useAutoFetch from "../../hooks/useAutoFetch.js";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 import SolutionFilter from "../SolutionFilter/SolutionFilter.jsx";
 import SolutionDropDown from "./SolutionDropDown.jsx";
 import { FilterAndList, SolutionListDiv } from "./solution.style.js";
 
 function SolutionList() {
-  const { data } = useAutoFetch(
+  const [allSolutions, setAllSolutions] = useState([]);
+  const [solutionList, setSolutionList] = useState([]);
+  const [selectedSortOption, setSelectedSortOption] = useState("Default");
+  const [selectedCategory, setSelectedCategory] = useState("All categories");
+  const [selectedStatus, setSelectedStatus] = useState("All");
+
+  const { data, loading } = useAutoFetch(
     "get",
     "solution/solutions/?limit=30",
     undefined,
     undefined,
     "noAuth"
   );
-  const [allSolutions, setAllSolutions] = useState([]);
-  const [solutionList, setSolutionList] = useState([]);
-  const [selectedSortOption, setSelectedSortOption] = useState("Default");
-  const [selectedCategory, setSelectedCategory] = useState("All categories");
-  const [selectedStatus, setSelectedStatus] = useState("All");
 
   useEffect(() => {
     if (data !== null) setAllSolutions(data.results);
@@ -55,6 +57,21 @@ function SolutionList() {
     setSolutionList(finalSolutions);
   }, [allSolutions, selectedCategory, selectedSortOption, selectedStatus]);
 
+  const [selectedList, setSelectedList] = useState([]);
+  const { data: selectedData } = useAutoFetch(
+    "get",
+    "/solution/user-selections/"
+  );
+  useEffect(() => {
+    if (selectedData) {
+      setSelectedList(selectedData.selected_solutions);
+    }
+  }, [selectedData]);
+  const handleSelectedListChange = (newSelectedList) => {
+    setSelectedList(newSelectedList);
+  };
+
+  if (loading) return <LoadingSpinner />;
   return (
     <SolutionListDiv>
       <FilterAndList>
@@ -68,8 +85,13 @@ function SolutionList() {
             setSelectedStatus={setSelectedStatus}
           />
         </div>
-        {solutionList.map((solution, index) => (
-          <SolutionDropDown key={index} solution={solution} />
+        {solutionList.map((solution) => (
+          <SolutionDropDown
+            key={solution.id}
+            solution={solution}
+            isSelected={selectedList.includes(solution.id)}
+            onSelectedListChange={handleSelectedListChange}
+          />
         ))}
       </FilterAndList>
     </SolutionListDiv>
