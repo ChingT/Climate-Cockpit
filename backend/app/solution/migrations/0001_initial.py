@@ -185,15 +185,10 @@ class Migration(migrations.Migration):
                 (
                     "resource_type",
                     models.CharField(
-                        choices=[
-                            ("videos", "videos"),
-                            ("news", "news"),
-                            ("books", "books"),
-                            ("papers", "papers"),
-                        ],
+                        choices=[("videos", "videos"), ("news", "news")],
                         default="videos",
-                        help_text="Select from ['videos', 'news', 'books', 'papers']",
-                        max_length=10,
+                        help_text="Select from ['videos', 'news']",
+                        max_length=20,
                     ),
                 ),
                 (

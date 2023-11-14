@@ -49,7 +49,7 @@ def populate_solutions():
 
 
 def populate_resources():
-    resources_types = ["videos", "news", "books", "papers"]
+    resources_types = ["videos", "news"]
     for resources_type in resources_types:
         csv_file_path = source_root / f"resource/{resources_type}.csv"
         with Path.open(csv_file_path, encoding="utf-8") as csv_file:
