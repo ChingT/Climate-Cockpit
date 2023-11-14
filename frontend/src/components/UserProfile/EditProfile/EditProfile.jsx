@@ -63,6 +63,7 @@ function EditProfile() {
     }
   }, [data, dispatch]);
 
+  if (loading) return <LoadingSpinner />;
   return (
     <>
       <ProfileBackground
@@ -70,67 +71,61 @@ function EditProfile() {
         alt="Background"
       ></ProfileBackground>
       <ProfileHeaderEditContainer>
-        {loading ? (
-          <LoadingSpinner />
-        ) : (
-          <>
-            <ProfileHeaderLeftContainer>
-              <LeftEditContainer
-                initialAvatar={data?.avatar}
-                handleProfileUpdate={handleProfileUpdate}
-              />
-            </ProfileHeaderLeftContainer>
-            <ProfileHeaderRightContainer>
-              <InputWrapper>
-                <form>
-                  {Object.keys(inputFields).map((field) => {
-                    return (
-                      <div className={"input-field"} key={field}>
-                        <LabelStyle>{inputFields[field].label}</LabelStyle>
-                        {field !== "about_me" ? (
-                          <StyledInputHeader
-                            type={inputFields[field].type}
-                            value={
-                              userData[field] === undefined
-                                ? inputFields[field].value
-                                : userData[field]
-                            }
-                            id={field}
-                            onChange={handleInput}
-                          />
-                        ) : (
-                          <StyledTextArea
-                            name="Text1"
-                            cols="40"
-                            rows="5"
-                            value={
-                              userData[field] === undefined
-                                ? inputFields[field].value
-                                : userData[field]
-                            }
-                            id={field}
-                            onChange={handleInput}
-                          />
-                        )}
-                      </div>
-                    );
-                  })}
-                </form>
-                <Memberships
-                  things={userData.memberships}
-                  setUserData={setUserData}
-                  userData={userData}
-                />
-                {changesSaved && (
-                  <SavedChangesMessage>
-                    <CheckMark src={CheckMarkIcon} />
-                    changes saved!
-                  </SavedChangesMessage>
-                )}
-              </InputWrapper>
-            </ProfileHeaderRightContainer>
-          </>
-        )}
+        <ProfileHeaderLeftContainer>
+          <LeftEditContainer
+            initialAvatar={data?.avatar}
+            handleProfileUpdate={handleProfileUpdate}
+          />
+        </ProfileHeaderLeftContainer>
+        <ProfileHeaderRightContainer>
+          <InputWrapper>
+            <form>
+              {Object.keys(inputFields).map((field) => {
+                return (
+                  <div className={"input-field"} key={field}>
+                    <LabelStyle>{inputFields[field].label}</LabelStyle>
+                    {field !== "about_me" ? (
+                      <StyledInputHeader
+                        type={inputFields[field].type}
+                        value={
+                          userData[field] === undefined
+                            ? inputFields[field].value
+                            : userData[field]
+                        }
+                        id={field}
+                        onChange={handleInput}
+                      />
+                    ) : (
+                      <StyledTextArea
+                        name="Text1"
+                        cols="40"
+                        rows="5"
+                        value={
+                          userData[field] === undefined
+                            ? inputFields[field].value
+                            : userData[field]
+                        }
+                        id={field}
+                        onChange={handleInput}
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </form>
+            <Memberships
+              things={userData.memberships}
+              setUserData={setUserData}
+              userData={userData}
+            />
+            {changesSaved && (
+              <SavedChangesMessage>
+                <CheckMark src={CheckMarkIcon} />
+                changes saved!
+              </SavedChangesMessage>
+            )}
+          </InputWrapper>
+        </ProfileHeaderRightContainer>
       </ProfileHeaderEditContainer>
     </>
   );
