@@ -67,7 +67,7 @@ export const StyledLabel = styled.label`
   margin-left: 1%;
   padding: 8px 16px 8px 16px;
   margin-bottom: 5%;
-  font-size: 16.5px;
+  font-size: 15px;
   font-family: "CabinSketch", serif;
   font-weight: 700;
   display: flex;
@@ -138,13 +138,13 @@ box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);\`;
   padding: 8px 16px 8px 16px;
   margin-bottom: 1%;
   cursor: pointer;
-  font-size: 15.5px;
+  font-size: 14.5px;
   font-family: "CabinSketch", serif;
   font-weight: 600;
 `;
 
 export const SaveButton = styled.button`
-  ${buttonStyles}
+  ${buttonStyles};
   color: ${(props) => props.theme.fontColors.primary};
 `;
 

@@ -11,6 +11,7 @@ import {
   InputContainer,
   PostButton,
 } from "./Comment.style.js";
+import {SaveButton} from "../Post/Modal.styles.js";
 
 const CommentsSection = ({ postId }) => {
   const userData = useSelector((store) => store.loggedInUser.user);
@@ -56,7 +57,7 @@ const CommentsSection = ({ postId }) => {
           onChange={handleCommentChange}
           placeholder="Write a comment..."
         />
-        <PostButton onClick={handlePostButtonClick}>Send</PostButton>
+        <SaveButton onClick={handlePostButtonClick}>Send</SaveButton>
       </InputContainer>
       {comments.map((comment) => (
         <CommentBlock key={comment.id}>

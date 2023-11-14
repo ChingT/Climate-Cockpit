@@ -2,17 +2,19 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { CardWithShadowStyles } from "../../styles/globalStyles.js";
 import BackgroundImage from "../../assets/images/light_pink_texture.png";
+import paper_texture from "../../assets/images/paper_texture.jpg";
 
 export const FindFriendsContainer = styled.div`
   display: flex;
   width: 98%;
   padding: 0;
-  margin: 0;
+  margin-left: 11rem;
+  margin-top: 2rem;
 `;
 export const FriendsGridContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 36rem);
-  grid-auto-rows: 22rem;
+  grid-template-columns: repeat(3, 33rem);
+  grid-auto-rows: 23rem;
 
   width: 50%;
   grid-row-gap: 2.5rem;
@@ -94,11 +96,11 @@ export const FriendCardHeader = styled(Link)`
 `;
 
 export const FriendAvatar = styled.img`
-  width: 18rem;
-  height: 24rem;
+  width: 16rem;
+  height: 22rem;
   object-fit: cover;
-  margin-right: 5.5rem;
-  margin-top: -2.5rem;
+  margin-right: 5.7rem;
+  margin-top: -1rem;
   border-radius: 50%;
   border-top: none;
   z-index: 1;
@@ -150,10 +152,30 @@ export const FriendAbout = styled.p`
   line-height: 1.7;
   text-align: end;
   margin-bottom: 1.2rem;
-  width: 46%;
+  width: 43%;
   z-index: 1;
-  margin-left: 10%;
-  margin-top: 5%;
+  margin-left: 13%;
+  margin-top: 10%;
+`;
+
+export const PopUp = styled.div`
+  position: relative;
+  padding: 1rem;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  background-image: url(${paper_texture});
+  box-shadow:
+    0px 0px 1px rgba(0, 0, 0, 0.2),
+    0px 10px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  z-index: 10;
+
+  min-width: 12rem;
+  min-height: 14rem;
+  max-width: 30rem;
+  max-height: 40rem;
 `;
 
 export const ReadMoreButton = styled.button`
