@@ -10,7 +10,7 @@ function SolutionList() {
     "solution/solutions/?limit=30",
     undefined,
     undefined,
-    "noAuth"
+    "noAuth",
   );
   const [allSolutions, setAllSolutions] = useState([]);
   const [solutionList, setSolutionList] = useState([]);
@@ -27,17 +27,17 @@ function SolutionList() {
 
     if (selectedCategory !== "All categories") {
       finalSolutions = finalSolutions.filter(
-        (solution) => solution.category.name === selectedCategory
+        (solution) => solution.category.name === selectedCategory,
       );
     }
 
     if (selectedStatus === "Selected") {
       finalSolutions = finalSolutions.filter(
-        (solution) => solution.selected_by_logged_in_user
+        (solution) => solution.selected_by_logged_in_user,
       );
     } else if (selectedStatus === "Non-selected") {
       finalSolutions = finalSolutions.filter(
-        (solution) => !solution.selected_by_logged_in_user
+        (solution) => !solution.selected_by_logged_in_user,
       );
     }
 
@@ -49,7 +49,7 @@ function SolutionList() {
       finalSolutions.sort((a, b) => b.impact - a.impact);
     } else if (selectedSortOption === "Number of Supporters") {
       finalSolutions.sort(
-        (a, b) => b.number_of_supporters - a.number_of_supporters
+        (a, b) => b.number_of_supporters - a.number_of_supporters,
       );
     }
     setSolutionList(finalSolutions);
