@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from django.contrib.auth import get_user_model
 from django.db.models import Q
 from rest_framework import status
 from rest_framework.filters import OrderingFilter, SearchFilter
@@ -25,6 +26,9 @@ from .serializers import (
 
 if TYPE_CHECKING:
     from django.db.models.query import QuerySet
+
+
+User = get_user_model()
 
 
 class CategorySearchFilter(SearchFilter):
@@ -168,12 +172,24 @@ class ToggleSelectSolution(GenericAPIView):
 class ListUserSelectionAPIView(ListAPIView):
     """get: List all user selections.
 
-    List all user selections. Only admin users can perform this operation.
+    Returns a list of UserSelection instances. \
+    If a user doesn't have a UserSelection instance, create one. \
+    This operation is restricted to admin users.
     """
 
     queryset = UserSelection.objects.all().order_by("-created")
     serializer_class = UserSelectionSerializer
     permission_classes = [IsAdminUser]
+
+    def get(self, request, *args, **kwargs):
+        users_no_user_selections = User.objects.filter(user_selections__isnull=True)
+        user_selections_to_create = [
+            UserSelection(user=user) for user in users_no_user_selections
+        ]
+        UserSelection.objects.bulk_create(
+            user_selections_to_create, ignore_conflicts=True
+        )
+        return super().get(request, *args, **kwargs)
 
 
 class RetrieveUserSelectionAPIView(RetrieveAPIView):
