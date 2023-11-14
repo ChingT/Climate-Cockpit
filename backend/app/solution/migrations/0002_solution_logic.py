@@ -31,69 +31,6 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name="SelectionRule",
-            fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                ("description", models.CharField(max_length=255, unique=True)),
-            ],
-        ),
-        migrations.CreateModel(
-            name="SolutionLogic",
-            fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                (
-                    "impact_detail",
-                    models.JSONField(
-                        blank=True, default=dict, max_length=30, null=True
-                    ),
-                ),
-                (
-                    "impact_type",
-                    models.CharField(
-                        blank=True,
-                        choices=[("reduction", "reduction"), ("addition", "addition")],
-                        help_text=(
-                            "Select from [('reduction', 'reduction'), "
-                            "('addition', 'addition')]"
-                        ),
-                        max_length=20,
-                    ),
-                ),
-                (
-                    "selection_rule",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.PROTECT,
-                        related_name="solution_logics",
-                        to="solution.selectionrule",
-                    ),
-                ),
-                (
-                    "solution",
-                    models.OneToOneField(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        related_name="solution_logic",
-                        to="solution.solution",
-                    ),
-                ),
-            ],
-        ),
-        migrations.CreateModel(
             name="DashboardItem",
             fields=[
                 (
@@ -134,5 +71,96 @@ class Migration(migrations.Migration):
                 "get_latest_by": "modified",
                 "abstract": False,
             },
+        ),
+        migrations.CreateModel(
+            name="ImpactDetail",
+            fields=[
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("amount", models.IntegerField()),
+                (
+                    "dashboard_item",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="impact_detail",
+                        to="solution.dashboarditem",
+                    ),
+                ),
+            ],
+            options={
+                "unique_together": {("dashboard_item", "amount")},
+            },
+        ),
+        migrations.CreateModel(
+            name="SelectionRule",
+            fields=[
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("description", models.CharField(max_length=255, unique=True)),
+            ],
+        ),
+        migrations.CreateModel(
+            name="SolutionLogic",
+            fields=[
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "impact_type",
+                    models.CharField(
+                        blank=True,
+                        choices=[("reduction", "reduction"), ("addition", "addition")],
+                        help_text=(
+                            "Select from [('reduction', 'reduction'), "
+                            "('addition', 'addition')]"
+                        ),
+                        max_length=20,
+                    ),
+                ),
+                (
+                    "impact_detail",
+                    models.ManyToManyField(
+                        blank=True,
+                        related_name="solution_logic",
+                        to="solution.impactdetail",
+                    ),
+                ),
+                (
+                    "selection_rule",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="solution_logics",
+                        to="solution.selectionrule",
+                    ),
+                ),
+                (
+                    "solution",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="solution_logic",
+                        to="solution.solution",
+                    ),
+                ),
+            ],
         ),
     ]
