@@ -27,7 +27,7 @@ export const SolutionContainer = styled.div`
     align-items: center;
     border: 3px solid #333;
     background-color: ${(props) =>
-      props.$visibleOrChecked
+      props.$isChecked
         ? "rgba(173, 216, 230, 0.7)"
         : "rgba(255, 255, 255, 0.5)"};
     border-radius: 10px;
@@ -137,7 +137,7 @@ export const ImpactIconDiv = styled.div`
   align-items: center;
   justify-content: center;
   background-color: ${(props) =>
-    props.$visibleOrChecked
+    props.$isChecked
       ? props.theme.backgroundColors.impactIconSelected
       : props.theme.backgroundColors.impactIconUnselected};
   color: ${(props) => props.theme.fontColors.impactIcon};

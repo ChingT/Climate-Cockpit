@@ -67,8 +67,8 @@ export default function SolutionDropDown({
   const progressText = progress_text.replace("{progress}", progress);
 
   return (
-    <SolutionContainer $visibleOrChecked={isVisible || isChecked}>
-      <div className="solutionBar" onClick={handleSolutionDropDown}>
+    <SolutionContainer $isChecked={isChecked}>
+      <div className="solutionBar" onDoubleClick={handleSolutionDropDown}>
         <div className="solutionBarLeft">
           <CheckboxContainer>
             <input
