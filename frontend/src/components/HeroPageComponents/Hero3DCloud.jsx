@@ -125,12 +125,6 @@ const Hero3DCloud = () => {
           t;
     }
 
-    function onContainerMouseWheel(event) {
-      event = event ? event : window.event;
-      d = d - (event.detail ? event.detail * -5 : event.wheelDelta / 8);
-      updateView();
-    }
-
     function update() {
       for (let j = 0; j < layers.length; j++) {
         const layer = layers[j];
