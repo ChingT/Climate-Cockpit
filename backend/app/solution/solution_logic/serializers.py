@@ -43,4 +43,6 @@ class DashboardItemSerializer(serializers.ModelSerializer):
 
     def get_selected_solutions(self) -> QuerySet[Solution]:
         current_user = self.context["request"].user
-        return current_user.user_selections.selected_solutions.all()
+        if current_user.is_authenticated:
+            return current_user.user_selections.selected_solutions.all()
+        return Solution.objects.none()

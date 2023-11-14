@@ -12,6 +12,7 @@ class ListDashboardItemAPIView(ListAPIView):
 
     queryset = DashboardItem.objects.all().order_by("group", "id")
     serializer_class = DashboardItemSerializer
+    permission_classes = []
 
 
 class ListDashboardGroupAPIView(ListAPIView):
@@ -22,3 +23,4 @@ class ListDashboardGroupAPIView(ListAPIView):
 
     queryset = DashboardGroup.objects.all().order_by("id")
     serializer_class = DashboardGroupSerializer
+    permission_classes = []
