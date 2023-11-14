@@ -3,14 +3,13 @@ from solution.solution_logic.views import (
     ListDashboardGroupAPIView,
     ListDashboardItemAPIView,
 )
-
-from .views import (
+from solution.solutions.views import (
     ListCategoryAPIView,
     ListResourceAPIView,
     ListSolutionAPIView,
     ListUserSelectionAPIView,
-    RetrieveDestroyUserSelectionAPIView,
     RetrieveSolutionAPIView,
+    RetrieveUserSelectionAPIView,
     ToggleSelectSolution,
 )
 
@@ -39,7 +38,7 @@ urlpatterns = [
     ),
     path(
         "user-selections/",
-        RetrieveDestroyUserSelectionAPIView.as_view(),
+        RetrieveUserSelectionAPIView.as_view(),
         name="user-selections-detail",
     ),
     path(
