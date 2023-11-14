@@ -14,14 +14,14 @@ from rest_framework.generics import (
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 
-from .serializers import (
+from .solution_logic.models import SelectionRule
+from .solutions.models import Category, Resource, Solution, UserSelection
+from .solutions.serializers import (
     CategorySerializer,
     ResourceSerializer,
     SolutionSerializer,
     UserSelectionSerializer,
 )
-from .solution_logic.models import SelectionRule
-from .solutions.models import Category, Resource, Solution, UserSelection
 
 if TYPE_CHECKING:
     from django.db.models.query import QuerySet
