@@ -28,4 +28,4 @@ Electric Car,"If selected, ""No Car"" is deselected","{""car"": 5}",reduction
 No Car,"If selected, ""Electric Car"" is deselected","{""car"": 10}",reduction
 Recycling,Can be combined with other solutions,,
 Composting,Can be combined with other solutions,,
-Zero Waste,Can be combined with other solutions,"{""trash"": 1}",reduction
+Zero Waste,Can be combined with other solutions,"{""residential_trash"": 1}",reduction
