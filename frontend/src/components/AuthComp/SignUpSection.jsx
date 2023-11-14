@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
+  AlreadyHaveAnAccountNavLink,
   AuthForm,
   AuthFormContainer,
   ErrorMessage,
@@ -49,10 +50,16 @@ function SignUpSection() {
               style={{ marginBottom: "5rem" }}
               onClick={handleSignUpClick}
             >
-              Sign up
+              Sign Up
             </ButtonsStyle>
           </div>
         </AuthForm>
+        <AlreadyHaveAnAccountNavLink
+          to="/signin"
+          style={{ marginTop: "-5rem", marginBottom: "1rem" }}
+        >
+          Already have an account? Sign in →
+        </AlreadyHaveAnAccountNavLink>
       </AuthFormContainer>
     </>
   );

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/header_icons/logo.png";
 import avatarImage from "../../assets/svgs/avatar.svg";
 import MenuDot from "../../assets/svgs/menu_dots.svg";
@@ -11,7 +11,6 @@ import posts_text from "../../assets/header_icons/posts_text.png";
 import find_friends_text from "../../assets/header_icons/find_friends_text.png";
 import solutions from "../../assets/header_icons/solutions.png";
 import profile from "../../assets/header_icons/profile.png";
-import social from "../../assets/header_icons/social.png";
 import useAutoFetch from "../../hooks/useAutoFetch.js";
 import { setRequests } from "../../store/slices/friendRequests.js";
 import FriendsRequestsContainer from "./FriendsRequests/FriendsRequestsContainer.jsx";
@@ -27,7 +26,6 @@ import {
   NotificationButton,
   PostsTextImage,
   ProfileWrapper,
-  SocialWrapper,
   SolutionWrapper,
   StyledImage,
   TextImage,
@@ -47,7 +45,9 @@ const Navigation = () => {
   const [sentRequests, setSentRequests] = useState([]);
   const [receivedRequests, setReceivedRequests] = useState([]);
   const requestsCount = sentRequests.length + receivedRequests.length;
-
+  const location = useLocation();
+  const isLoginPage = location.pathname === "/signin";
+  const isSignUpPage = location.pathname === "/signup";
   useEffect(() => {
     dispatch(setRequests(data?.results));
   }, [data, dispatch]);
@@ -71,34 +71,22 @@ const Navigation = () => {
     <HeaderContainer>
       <ContainerLeft>
         <LogoWrapper to="/">
-          <img src={logo}></img>
+          <img src={logo} alt="Logo" />
         </LogoWrapper>
         <SolutionWrapper to="/solutions">
-          <img src={solutions}></img>
+          <img src={solutions} alt="Solutions" />
         </SolutionWrapper>
         {loggedInUser ? (
           <>
             <ProfileWrapper to="/profile">
-              <img src={profile}></img>
+              <img src={profile} alt="Profile" />
             </ProfileWrapper>
           </>
         ) : (
-          <ProfileWrapper to="/signup">
-            <img src={profile}></img>
+          <ProfileWrapper to="/signin">
+            <img src={profile} alt="Profile" />
           </ProfileWrapper>
         )}
-        {loggedInUser ? (
-          <>
-            <SocialWrapper to="/posts">
-              <img src={social}></img>
-            </SocialWrapper>
-          </>
-        ) : (
-          <SocialWrapper to="/signup">
-            <img src={social}></img>
-          </SocialWrapper>
-        )}
-
         <nav>
           {loggedInUser ? (
             <>
@@ -156,12 +144,30 @@ const Navigation = () => {
           </>
         ) : (
           <div>
-            <Link to="/signup">
-              <ButtonsStyle>Sign Up</ButtonsStyle>
-            </Link>
-            <Link to="/signin">
-              <ButtonsStyle>Log In</ButtonsStyle>
-            </Link>
+            {isLoginPage && (
+              <>
+                <Link to="/signup">
+                  <ButtonsStyle>Sign Up</ButtonsStyle>
+                </Link>
+              </>
+            )}
+            {isSignUpPage && (
+              <>
+                <Link to="/signin">
+                  <ButtonsStyle>Sign In</ButtonsStyle>
+                </Link>
+              </>
+            )}
+            {!isLoginPage && !isSignUpPage && (
+              <>
+                <Link to="/signup">
+                  <ButtonsStyle>Sign Up</ButtonsStyle>
+                </Link>
+                <Link to="/signin">
+                  <ButtonsStyle>Sign In</ButtonsStyle>
+                </Link>
+              </>
+            )}
           </div>
         )}
       </nav>

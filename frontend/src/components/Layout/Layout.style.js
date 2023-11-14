@@ -8,6 +8,7 @@ export const AuthFormContainer = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
@@ -142,7 +143,17 @@ export const ErrorMessage = styled.p`
 
 export const ResetNavLink = styled(NavLink)`
   text-decoration: underline;
-  line-height: 5.5rem;
+
+  &:hover {
+    text-decoration-color: ${(props) => props.theme.ResetPasswordColors.color};
+    color: ${(props) => props.theme.ResetPasswordColors.color};
+  }
+`;
+
+export const AlreadyHaveAnAccountNavLink = styled(NavLink)`
+  text-decoration: underline;
+  line-height: 1.4rem;
+  text-align: center;
 
   &:hover {
     text-decoration-color: ${(props) => props.theme.ResetPasswordColors.color};

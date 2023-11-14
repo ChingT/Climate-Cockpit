@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../store/slices/loggedInUser.js";
 import { useDispatch } from "react-redux";
 import {
+  AlreadyHaveAnAccountNavLink,
   AuthForm,
   AuthFormContainer,
   ErrorMessage,
@@ -33,7 +34,7 @@ function SignInSection() {
       dispatch(loginUser({ user: data.user, accessToken: data.access }));
       localStorage.setItem("user", JSON.stringify(data.user));
       localStorage.setItem("auth-token", data.access);
-      navigate("/posts");
+      navigate("/profile");
     }
   }, [data, dispatch, navigate]);
 
@@ -65,16 +66,25 @@ function SignInSection() {
                   id="password"
                 />
               </div>
+              <ResetNavLink to="/password-reset/">
+                Forgot password?
+              </ResetNavLink>
               {error?.password && <ErrorMessage>{error.password}</ErrorMessage>}
             </InputFieldContainer>
             {error?.detail && <p className={"error-message"}>{error.detail}</p>}
           </div>
           <div className={"form-footer"}>
             <ButtonsStyle style={{ marginTop: "2.5rem" }} onClick={handleLogin}>
-              Sign in
+              Sign In
             </ButtonsStyle>
           </div>
-          <ResetNavLink to="/password-reset/">Forgot password?</ResetNavLink>
+          <AlreadyHaveAnAccountNavLink
+            style={{ marginTop: "2rem" }}
+            to="/signup"
+          >
+            New to Climate Cockpit?
+            <br /> Create an account →
+          </AlreadyHaveAnAccountNavLink>
         </AuthForm>
       </AuthFormContainer>
     </>
