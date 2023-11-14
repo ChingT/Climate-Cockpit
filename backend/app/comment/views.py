@@ -92,12 +92,11 @@ class ListCreateBotCommentAPIView(ListCreateAPIView):
         # list of all gptbots
         bot_usernames = ["gpt_bot", "gpt_bot2", "gpt_bot3"]
         for bot_username in bot_usernames:
-            # Получение или создание пользователя бота
             bot_user, _ = get_user_model().objects.get_or_create(username=bot_username)
 
             # if user following gpt?
             if bot_user.followers.filter(id=self.request.user.id).exists():
-                # generatin gpt comment based on user comment
+                # generation gpt comment based on user comment
                 bot_comment_text = self.create_bot_comment(bot_username, target_post, user_comment.content)
 
                 # save gpt comment
@@ -110,16 +109,16 @@ class ListCreateBotCommentAPIView(ListCreateAPIView):
         if bot_username == "gpt_bot":
             # logic for gpt_bot
             messages_history = [
-                {"role": "system", "content": "You are a motivator AI, named MotivAItor. Support  efforts to address climate challenges. Empower me to continue their efforts. Be creative in your encouragement. Answer me very shortly and cool!" },
+                {"role": "system", "content": "You are a motivator AI, named MotivAItor. Support  efforts to address climate challenges. Empower me to continue their efforts. Be creative in your encouragement. Answer me very shortly and cool!" },# noqa: E501
             user_message]
 
             return self.create_specific_bot_comment(post, user_comment_text, "motivator", messages_history)
         elif bot_username == "gpt_bot2":
-            messages_history = [{"role": "system", "content": "You are a fact-checking AI, named FactChecker. Your role is to verify and provide accurate information about Earths climate, and help dispel myths. Answer me very shortly and cool!"},
+            messages_history = [{"role": "system", "content": "You are a fact-checking AI, named FactChecker. Your role is to verify and provide accurate information about Earths climate, and help dispel myths. Answer me very shortly and cool!"},# noqa: E501
                                 user_message]
             return self.create_specific_bot_comment(post, user_comment_text, "informative", messages_history)
         elif bot_username == "gpt_bot3":
-            messages_history = [{"role": "system", "content": "You are an active climate revolutionist AI, named EcoChampion. Your role is to inpirate for protecting our Climate. Answer me veryshortly and cool!"},
+            messages_history = [{"role": "system", "content": "You are an active climate revolutionist AI, named EcoChampion. Your role is to inpirate for protecting our Climate. Answer me veryshortly and cool!"},# noqa: E501
                                 user_message]
             return self.create_specific_bot_comment(post, user_comment_text, "supportive", messages_history)
 
