@@ -1,4 +1,3 @@
-
 import openai
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -69,7 +68,6 @@ class RetrieveUpdateDestroyCommentAPIView(RetrieveUpdateDestroyAPIView):
         return [permission() for permission in permission_classes]
 
 
-
 # set API key OpenAI
 openai.api_key = settings.OPENAI_API_KEY
 
@@ -82,7 +80,6 @@ class ListCreateBotCommentAPIView(ListCreateAPIView):
         post_id = self.kwargs.get(self.lookup_url_kwarg)
         target_post = get_object_or_404(Post, id=post_id)
         return Comment.objects.filter(post=target_post).order_by("-created")
-
 
     def perform_create(self, serializer):
         post_id = self.kwargs.get(self.lookup_url_kwarg)
@@ -109,20 +106,24 @@ class ListCreateBotCommentAPIView(ListCreateAPIView):
         if bot_username == "gpt_bot":
             # logic for gpt_bot
             messages_history = [
-                {"role": "system", "content": "You are a motivator AI, named MotivAItor. Support  efforts to address climate challenges. Empower me to continue their efforts. Be creative in your encouragement. Answer me very shortly and cool!" },# noqa: E501
-            user_message]
+                {"role": "system",
+                 "content": "You are a motivator AI, named MotivAItor. Support  efforts to address climate challenges. Empower me to continue their efforts. Be creative in your encouragement. Answer me very shortly and cool!"},
+
+                user_message]
 
             return self.create_specific_bot_comment(post, user_comment_text, "motivator", messages_history)
         elif bot_username == "gpt_bot2":
-            messages_history = [{"role": "system", "content": "You are a fact-checking AI, named FactChecker. Your role is to verify and provide accurate information about Earths climate, and help dispel myths. Answer me very shortly and cool!"},# noqa: E501
+            messages_history = [{"role": "system",
+                                 "content": "You are a fact-checking AI, named FactChecker. Your role is to verify and provide accurate information about Earths climate, and help dispel myths. Answer me very shortly and cool!"},
+
                                 user_message]
             return self.create_specific_bot_comment(post, user_comment_text, "informative", messages_history)
         elif bot_username == "gpt_bot3":
-            messages_history = [{"role": "system", "content": "You are an active climate revolutionist AI, named EcoChampion. Your role is to inpirate for protecting our Climate. Answer me veryshortly and cool!"},# noqa: E501
+            messages_history = [{"role": "system",
+                                 "content": "You are an active climate revolutionist AI, named EcoChampion. Your role is to inpirate for protecting our Climate. Answer me veryshortly and cool!"},
+
                                 user_message]
             return self.create_specific_bot_comment(post, user_comment_text, "supportive", messages_history)
-
-
 
     def create_specific_bot_comment(self, post, user_comment_text, bot_type, messages_history):
         try:
