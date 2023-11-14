@@ -3,7 +3,6 @@ from django.db.models import Q, Sum
 from friend_request.models import FriendRequest, get_friends, is_friend
 from post.models import Post
 from rest_framework import serializers
-from solution.solutions.models import UserSelection
 from utils import generate_aggregate
 
 User = get_user_model()
@@ -70,8 +69,7 @@ class UserSerializer(serializers.ModelSerializer):
         return instance.followees.count()
 
     def get_total_impact(self, instance: User):
-        user_selection, _ = UserSelection.objects.get_or_create(user=instance)
-        selected_solutions = user_selection.selected_solutions.all()
+        selected_solutions = instance.user_selections.selected_solutions.all()
         return generate_aggregate(selected_solutions, Sum("impact"))
 
     class Meta:
