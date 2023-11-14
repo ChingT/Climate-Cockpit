@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
+  AlreadyHaveAnAccountNavLink,
   AuthForm,
   AuthFormContainer,
   ErrorMessage,
@@ -50,6 +51,13 @@ export default function PasswordResetRequest() {
             Send password reset email
           </ButtonsStyle>
         </div>
+        <AlreadyHaveAnAccountNavLink
+          to="/password-reset-validation"
+          style={{ marginTop: "-5rem" }}
+        >
+          Got validation code already? <br />
+          Validate here →
+        </AlreadyHaveAnAccountNavLink>
       </AuthForm>
     </AuthFormContainer>
   );

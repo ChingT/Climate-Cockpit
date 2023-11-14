@@ -50,12 +50,16 @@ function SignUpSection() {
               style={{ marginBottom: "5rem" }}
               onClick={handleSignUpClick}
             >
-              Sign up
+              Sign Up
             </ButtonsStyle>
           </div>
-          <AlreadyHaveAnAccountNavLink to="/signin/">Already have an account?</AlreadyHaveAnAccountNavLink>
-
         </AuthForm>
+        <AlreadyHaveAnAccountNavLink
+          to="/signin"
+          style={{ marginTop: "-5rem", marginBottom: "1rem" }}
+        >
+          Already have an account? Sign in →
+        </AlreadyHaveAnAccountNavLink>
       </AuthFormContainer>
     </>
   );

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/header_icons/logo.png";
 import avatarImage from "../../assets/svgs/avatar.svg";
 import MenuDot from "../../assets/svgs/menu_dots.svg";
@@ -45,7 +45,9 @@ const Navigation = () => {
   const [sentRequests, setSentRequests] = useState([]);
   const [receivedRequests, setReceivedRequests] = useState([]);
   const requestsCount = sentRequests.length + receivedRequests.length;
-
+  const location = useLocation();
+  const isLoginPage = location.pathname === "/signin";
+  const isSignUpPage = location.pathname === "/signup";
   useEffect(() => {
     dispatch(setRequests(data?.results));
   }, [data, dispatch]);
@@ -69,20 +71,20 @@ const Navigation = () => {
     <HeaderContainer>
       <ContainerLeft>
         <LogoWrapper to="/">
-          <img src={logo}></img>
+          <img src={logo} alt="Logo" />
         </LogoWrapper>
         <SolutionWrapper to="/solutions">
-          <img src={solutions}></img>
+          <img src={solutions} alt="Solutions" />
         </SolutionWrapper>
         {loggedInUser ? (
           <>
             <ProfileWrapper to="/profile">
-              <img src={profile}></img>
+              <img src={profile} alt="Profile" />
             </ProfileWrapper>
           </>
         ) : (
-          <ProfileWrapper to="/signup">
-            <img src={profile}></img>
+          <ProfileWrapper to="/signin">
+            <img src={profile} alt="Profile" />
           </ProfileWrapper>
         )}
         <nav>
@@ -142,12 +144,30 @@ const Navigation = () => {
           </>
         ) : (
           <div>
-            <Link to="/signup">
-              <ButtonsStyle>Sign Up</ButtonsStyle>
-            </Link>
-            <Link to="/signin">
-              <ButtonsStyle>Log In</ButtonsStyle>
-            </Link>
+            {isLoginPage && (
+              <>
+                <Link to="/signup">
+                  <ButtonsStyle>Sign Up</ButtonsStyle>
+                </Link>
+              </>
+            )}
+            {isSignUpPage && (
+              <>
+                <Link to="/signin">
+                  <ButtonsStyle>Sign In</ButtonsStyle>
+                </Link>
+              </>
+            )}
+            {!isLoginPage && !isSignUpPage && (
+              <>
+                <Link to="/signup">
+                  <ButtonsStyle>Sign Up</ButtonsStyle>
+                </Link>
+                <Link to="/signin">
+                  <ButtonsStyle>Sign In</ButtonsStyle>
+                </Link>
+              </>
+            )}
           </div>
         )}
       </nav>
