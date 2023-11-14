@@ -149,3 +149,13 @@ export const ResetNavLink = styled(NavLink)`
     color: ${(props) => props.theme.ResetPasswordColors.color};
   }
 `;
+
+export const AlreadyHaveAnAccountNavLink = styled(NavLink)`
+  text-decoration: underline;
+  line-height: 1rem;
+
+  &:hover {
+    text-decoration-color: ${(props) => props.theme.ResetPasswordColors.color};
+    color: ${(props) => props.theme.ResetPasswordColors.color};
+  }
+`;
