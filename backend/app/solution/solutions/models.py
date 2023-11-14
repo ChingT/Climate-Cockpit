@@ -47,8 +47,6 @@ class Resource(TimeStampedModel):
     class TypeChoices(models.TextChoices):
         VIDEOS = "videos", "videos"
         NEWS = "news", "news"
-        BOOKS = "books", "books"
-        PAPERS = "papers", "papers"
 
     DEFAULT_TYPE = TypeChoices.VIDEOS
 
@@ -58,7 +56,7 @@ class Resource(TimeStampedModel):
     author = models.CharField(max_length=100, blank=True)
     url = models.URLField(blank=True)
     resource_type = models.CharField(
-        max_length=10,
+        max_length=20,
         choices=TypeChoices.choices,
         default=DEFAULT_TYPE,
         help_text=f"Select from {TypeChoices.labels}",
