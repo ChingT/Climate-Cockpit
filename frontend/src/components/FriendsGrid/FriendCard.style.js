@@ -94,10 +94,10 @@ export const FriendCardHeader = styled(Link)`
 `;
 
 export const FriendAvatar = styled.img`
-  width: 19rem;
+  width: 18rem;
   height: 24rem;
   object-fit: cover;
-  margin-right: 6rem;
+  margin-right: 5.5rem;
   margin-top: -2.5rem;
   border-radius: 50%;
   border-top: none;
@@ -164,4 +164,5 @@ export const ReadMoreButton = styled.button`
   text-decoration: underline;
   font-size: inherit;
   color: inherit;
+  font-family: inherit;
 `;
