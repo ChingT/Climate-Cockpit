@@ -55,7 +55,8 @@ class Resource(TimeStampedModel):
     title = models.CharField(max_length=300)
     source = models.CharField(max_length=100, blank=True)
     author = models.CharField(max_length=100, blank=True)
-    url = models.URLField(blank=True)
+    url = models.URLField(max_length=500, blank=True)
+
     resource_type = models.CharField(
         max_length=20,
         choices=TypeChoices.choices,
