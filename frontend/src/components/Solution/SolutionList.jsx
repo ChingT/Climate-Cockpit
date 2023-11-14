@@ -1,78 +1,70 @@
 import { useEffect, useState } from "react";
-import SolutionDropDown from "./SolutionDropDown.jsx";
 import useApiRequest from "../../hooks/useApiRequest.js";
-import { FilterAndList, SolutionListDiv } from "./solution.style.js";
 import SolutionFilter from "../SolutionFilter/SolutionFilter.jsx";
+import SolutionDropDown from "./SolutionDropDown.jsx";
+import { FilterAndList, SolutionListDiv } from "./solution.style.js";
 
 function SolutionList() {
   const { sendRequest, data } = useApiRequest("noAuth");
+  const [allSolutions, setAllSolutions] = useState([]);
   const [solutionList, setSolutionList] = useState([]);
-  const [selectedSortOption, setSelectedSortOption] =
-    useState("Alphabetically");
+  const [selectedSortOption, setSelectedSortOption] = useState("Default");
   const [selectedCategory, setSelectedCategory] = useState("All categories");
+  const [selectedStatus, setSelectedStatus] = useState("All");
 
   useEffect(() => {
-    let endpoint = "solution/solutions/?limit=30";
-
-    if (selectedSortOption === "Alphabetically") {
-      endpoint += "&ordering=name";
-    } else if (selectedSortOption === "Impact") {
-      endpoint += "&ordering=-impact";
-    }
-    if (selectedCategory !== "All categories") {
-      endpoint += `&category=${selectedCategory}`;
-    }
-
-    sendRequest("get", endpoint);
+    sendRequest("get", "solution/solutions/?limit=30");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedSortOption, selectedCategory]);
-
-  const handleSortChange = (sortOption) => {
-    if (sortOption === "Number of Supporters") {
-      const sortedSolutions = data.results.slice().sort((a, b) => {
-        return b.number_of_supporters - a.number_of_supporters;
-      });
-      setSolutionList(sortedSolutions);
-    } else {
-      setSelectedSortOption(sortOption);
-    }
-  };
-
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-  };
-
-  const handleStatusChange = (statusOption) => {
-    let filteredSolutions;
-
-    if (statusOption === "All") {
-      filteredSolutions = data.results;
-    } else if (statusOption === "Selected" || statusOption === "Non-selected") {
-      filteredSolutions = data.results.filter((solution) =>
-        statusOption === "Selected"
-          ? solution.selected_by_logged_in_user
-          : !solution.selected_by_logged_in_user,
-      );
-    } else {
-      filteredSolutions = data.results;
-    }
-    setSolutionList(filteredSolutions);
-  };
+  }, []);
 
   useEffect(() => {
-    if (data) {
-      setSolutionList(data.results);
-    }
+    if (data !== null) setAllSolutions(data.results);
   }, [data]);
+
+  useEffect(() => {
+    let finalSolutions = allSolutions.slice();
+
+    if (selectedCategory !== "All categories") {
+      finalSolutions = finalSolutions.filter(
+        (solution) => solution.category.name === selectedCategory
+      );
+    }
+
+    if (selectedStatus === "Selected") {
+      finalSolutions = finalSolutions.filter(
+        (solution) => solution.selected_by_logged_in_user
+      );
+    } else if (selectedStatus === "Non-selected") {
+      finalSolutions = finalSolutions.filter(
+        (solution) => !solution.selected_by_logged_in_user
+      );
+    }
+
+    if (selectedSortOption === "Default") {
+      finalSolutions.sort((a, b) => a.id - b.id);
+    } else if (selectedSortOption === "Alphabetically") {
+      finalSolutions.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (selectedSortOption === "Impact") {
+      finalSolutions.sort((a, b) => b.impact - a.impact);
+    } else if (selectedSortOption === "Number of Supporters") {
+      finalSolutions.sort(
+        (a, b) => b.number_of_supporters - a.number_of_supporters
+      );
+    }
+    setSolutionList(finalSolutions);
+  }, [allSolutions, selectedCategory, selectedSortOption, selectedStatus]);
 
   return (
     <SolutionListDiv>
       <FilterAndList>
         <div className="filterDiv">
           <SolutionFilter
-            onSortChange={handleSortChange}
-            onCategoryChange={handleCategoryChange}
-            onStatusChange={handleStatusChange}
+            selectedSortOption={selectedSortOption}
+            setSelectedSortOption={setSelectedSortOption}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            selectedStatus={selectedStatus}
+            setSelectedStatus={setSelectedStatus}
           />
         </div>
         {solutionList.map((solution, index) => (

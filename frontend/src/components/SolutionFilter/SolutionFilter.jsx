@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import funnelIcon from "../../assets/images/filtering_categories.png";
 import sortingIcon from "../../assets/images/sorting_categories.png";
 import filterIcon from "../../assets/other_icons/filter.svg";
+import useApiRequest from "../../hooks/useApiRequest.js";
 import {
   ContainerTop,
   DropdownContent,
@@ -11,77 +12,64 @@ import {
   StyledImage,
   TitleAndImage,
 } from "./SolutionFilter.style.js";
-import useApiRequest from "../../hooks/useApiRequest.js";
 
 export default function SolutionFilter({
-  onSortChange,
-  onCategoryChange,
-  onStatusChange,
+  selectedSortOption,
+  setSelectedSortOption,
+  selectedCategory,
+  setSelectedCategory,
+  selectedStatus,
+  setSelectedStatus,
 }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedSortOption, setSelectedSortOption] =
-    useState("Alphabetically");
-  const [selectedCategory, setSelectedCategory] = useState("all categories");
-  const [selectedStatus, setSelectedStatus] = useState("");
   const { sendRequest, data } = useApiRequest("noAuth");
+  const [categories, setCategories] = useState([]);
+
+  const sortingOptions = [
+    "Default",
+    "Impact",
+    "Alphabetically",
+    "Number of Supporters",
+  ];
+  const statusOptions = ["All", "Non-selected", "Selected"];
 
   useEffect(() => {
     sendRequest("get", "/solution/categories/");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (data !== null)
+      setCategories([
+        "All categories",
+        ...data.results.map((category) => category.name),
+      ]);
+  }, [data]);
+
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   const handleSortChange = (e) => {
-    const sortOption = e.target.value;
-    setSelectedSortOption(sortOption);
-    if (onSortChange) {
-      onSortChange(sortOption);
-    }
+    setSelectedSortOption(e.target.value);
     toggleDropdown();
   };
 
   const handleCategoryChange = (e) => {
-    const category = e.target.value;
-    setSelectedCategory(category);
-    if (onCategoryChange) {
-      onCategoryChange(category);
-    }
+    setSelectedCategory(e.target.value);
     toggleDropdown();
   };
 
   const handleStatusChange = (e) => {
-    const statusOption = e.target.value;
-    setSelectedStatus(
-      statusOption === "Non-selected"
-        ? "!selected_by_logged_in_user"
-        : "Selected",
-    );
-    if (onStatusChange) {
-      onStatusChange(statusOption);
-    }
+    setSelectedStatus(e.target.value);
     toggleDropdown();
   };
 
-  const categories = [
-    "All categories",
-    ...(data && data.results
-      ? data.results.map(
-          (category) =>
-            category.name.charAt(0).toUpperCase() + category.name.slice(1),
-        )
-      : []),
-  ];
-
-  const sortingOptions = ["Impact", "Alphabetically", "Number of Supporters"];
-  const statusOptions = ["All", "Non-selected", "Selected"];
-
-  const dropdown = (title, icon, options, handleChange) => {
+  const dropdown = (title, icon, options, handleChange, value) => {
     const dropdownOptions = options.map((option) => (
       <option key={option} value={option}>
-        {option}
+        {option.charAt(0).toUpperCase() + option.slice(1)}
       </option>
     ));
+
     return (
       <DropdownSort>
         <ContainerTop>
@@ -90,16 +78,7 @@ export default function SolutionFilter({
             <h3>{title}</h3>
           </TitleAndImage>
         </ContainerTop>
-        <DropdownSelect
-          value={
-            handleChange === handleSortChange
-              ? selectedSortOption
-              : handleChange === handleCategoryChange
-              ? selectedCategory
-              : selectedStatus
-          }
-          onChange={handleChange}
-        >
+        <DropdownSelect value={value} onChange={handleChange}>
           {dropdownOptions}
         </DropdownSelect>
       </DropdownSort>
@@ -111,18 +90,21 @@ export default function SolutionFilter({
     sortingIcon,
     sortingOptions,
     handleSortChange,
+    selectedSortOption
   );
   const CategoryDropdown = dropdown(
     "Category Filter",
     funnelIcon,
     categories,
     handleCategoryChange,
+    selectedCategory
   );
   const StatusDropdown = dropdown(
     "Status Filter",
     funnelIcon,
     statusOptions,
     handleStatusChange,
+    selectedStatus
   );
 
   return (
