@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import useAutoFetch from "../../hooks/useAutoFetch.js";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 import SolutionFilter from "../SolutionFilter/SolutionFilter.jsx";
 import SolutionDropDown from "./SolutionDropDown.jsx";
 import { FilterAndList, SolutionListDiv } from "./solution.style.js";
 
 function SolutionList() {
-  const { data } = useAutoFetch(
+  const { data, loading } = useAutoFetch(
     "get",
     "solution/solutions/?limit=30",
     undefined,
     undefined,
     "noAuth"
   );
+
   const [allSolutions, setAllSolutions] = useState([]);
   const [solutionList, setSolutionList] = useState([]);
   const [selectedSortOption, setSelectedSortOption] = useState("Default");
@@ -55,6 +57,7 @@ function SolutionList() {
     setSolutionList(finalSolutions);
   }, [allSolutions, selectedCategory, selectedSortOption, selectedStatus]);
 
+  if (loading) return <LoadingSpinner />;
   return (
     <SolutionListDiv>
       <FilterAndList>
