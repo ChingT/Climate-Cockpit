@@ -1,32 +1,27 @@
+import { useEffect, useState } from "react";
+import useAutoFetch from "../../hooks/useAutoFetch.js";
 import Score from "./Score.jsx";
 import {
   FinalContainer,
-  ScorecardContainer,
   ScoreCardContent,
+  ScorecardContainer,
   TitleAndBar,
 } from "./Scorecard.style.js";
 import ScorecardCategory from "./ScorecardCategory.jsx";
-import { useEffect, useState } from "react";
-import useApiRequest from "../../hooks/useApiRequest.js";
 
 export default function ScoreCard() {
-  const { sendRequest, data } = useApiRequest("noAuth");
   const [categories, setCategories] = useState([]);
 
   // TODO: fetch categories and totalScore from api
-  useEffect(() => {
-    sendRequest("get", "/solution/categories/");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { data } = useAutoFetch("get", "solution/categories/");
 
   useEffect(() => {
-    if (data) {
-      setCategories(data.results);
-    }
+    if (data !== null) setCategories(data.results);
   }, [data]);
+
   const totalScore = categories.reduce(
     (sum, category) => sum + category.impact_from_logged_in_user,
-    0,
+    0
   );
 
   const summary = (

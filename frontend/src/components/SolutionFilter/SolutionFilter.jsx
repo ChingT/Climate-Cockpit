@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import funnelIcon from "../../assets/images/filtering_categories.png";
 import sortingIcon from "../../assets/images/sorting_categories.png";
 import filterIcon from "../../assets/other_icons/filter.svg";
-import useApiRequest from "../../hooks/useApiRequest.js";
+import useAutoFetch from "../../hooks/useAutoFetch.js";
 import {
   ContainerTop,
   DropdownContent,
@@ -22,7 +22,14 @@ export default function SolutionFilter({
   setSelectedStatus,
 }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { sendRequest, data } = useApiRequest("noAuth");
+  const { data } = useAutoFetch(
+    "get",
+    "solution/categories/",
+    undefined,
+    undefined,
+    "noAuth"
+  );
+
   const [categories, setCategories] = useState([]);
 
   const sortingOptions = [
@@ -32,11 +39,6 @@ export default function SolutionFilter({
     "Number of Supporters",
   ];
   const statusOptions = ["All", "Non-selected", "Selected"];
-
-  useEffect(() => {
-    sendRequest("get", "/solution/categories/");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     if (data !== null)
