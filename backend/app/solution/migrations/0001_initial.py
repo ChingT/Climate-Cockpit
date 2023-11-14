@@ -182,7 +182,7 @@ class Migration(migrations.Migration):
                 ("title", models.CharField(max_length=300)),
                 ("source", models.CharField(blank=True, max_length=100)),
                 ("author", models.CharField(blank=True, max_length=100)),
-                ("url", models.URLField(blank=True)),
+                ("url", models.URLField(blank=True, max_length=500)),
                 (
                     "resource_type",
                     models.CharField(
