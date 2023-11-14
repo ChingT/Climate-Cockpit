@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../store/slices/loggedInUser.js";
 import { useDispatch } from "react-redux";
 import {
+  AlreadyHaveAnAccountNavLink,
   AuthForm,
   AuthFormContainer,
   ErrorMessage,
@@ -75,6 +76,7 @@ function SignInSection() {
             </ButtonsStyle>
           </div>
           <ResetNavLink to="/password-reset/">Forgot password?</ResetNavLink>
+            <AlreadyHaveAnAccountNavLink to="/signup/">Don't have an account?</AlreadyHaveAnAccountNavLink>
         </AuthForm>
       </AuthFormContainer>
     </>

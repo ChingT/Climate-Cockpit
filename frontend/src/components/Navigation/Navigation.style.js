@@ -103,14 +103,6 @@ export const ProfileWrapper = styled(Link)`
   }
 `;
 
-export const SocialWrapper = styled(Link)`
-  img {
-    height: 20px;
-    width: 79px;
-    margin-right: 3.7rem;
-  }
-`;
-
 export const MenuContainer = styled.div`
   position: relative;
 

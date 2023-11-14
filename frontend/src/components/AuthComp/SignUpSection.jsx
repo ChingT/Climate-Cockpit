@@ -53,7 +53,7 @@ function SignUpSection() {
               Sign up
             </ButtonsStyle>
           </div>
-          <AlreadyHaveAnAccountNavLink to="/signin/">Already have account?</AlreadyHaveAnAccountNavLink>
+          <AlreadyHaveAnAccountNavLink to="/signin/">Already have an account?</AlreadyHaveAnAccountNavLink>
 
         </AuthForm>
       </AuthFormContainer>

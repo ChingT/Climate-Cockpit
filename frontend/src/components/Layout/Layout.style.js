@@ -142,7 +142,8 @@ export const ErrorMessage = styled.p`
 
 export const ResetNavLink = styled(NavLink)`
   text-decoration: underline;
-  line-height: 5.5rem;
+  line-height: 3rem;
+  margin-top: 1.2rem;
 
   &:hover {
     text-decoration-color: ${(props) => props.theme.ResetPasswordColors.color};
