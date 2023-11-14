@@ -11,7 +11,6 @@ import posts_text from "../../assets/header_icons/posts_text.png";
 import find_friends_text from "../../assets/header_icons/find_friends_text.png";
 import solutions from "../../assets/header_icons/solutions.png";
 import profile from "../../assets/header_icons/profile.png";
-import social from "../../assets/header_icons/social.png";
 import useAutoFetch from "../../hooks/useAutoFetch.js";
 import { setRequests } from "../../store/slices/friendRequests.js";
 import FriendsRequestsContainer from "./FriendsRequests/FriendsRequestsContainer.jsx";
@@ -27,7 +26,6 @@ import {
   NotificationButton,
   PostsTextImage,
   ProfileWrapper,
-  SocialWrapper,
   SolutionWrapper,
   StyledImage,
   TextImage,
@@ -87,18 +85,6 @@ const Navigation = () => {
             <img src={profile}></img>
           </ProfileWrapper>
         )}
-        {loggedInUser ? (
-          <>
-            <SocialWrapper to="/posts">
-              <img src={social}></img>
-            </SocialWrapper>
-          </>
-        ) : (
-          <SocialWrapper to="/signup">
-            <img src={social}></img>
-          </SocialWrapper>
-        )}
-
         <nav>
           {loggedInUser ? (
             <>

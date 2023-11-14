@@ -99,6 +99,7 @@ export const ProfileWrapper = styled(Link)`
   img {
     height: 20px;
     width: 91px;
+    margin-right: 19rem;
   }
 `;
 
