@@ -24,6 +24,7 @@ services:
     env_file:
       - ./envs/base.env
       - ./envs/dev.env
+      - ./envs/.env
     depends_on:
       - postgres
       - app
