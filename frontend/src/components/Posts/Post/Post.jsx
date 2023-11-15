@@ -17,7 +17,8 @@ import {
   CommentImg,
   DeleteButton,
   EditButton,
-  FooterContainer, LeftButtons,
+  FooterContainer,
+  LeftButtons,
   LikeCount,
   PostActionButton,
   PostActionWrapper,
@@ -25,7 +26,8 @@ import {
   PostHeaderWrapper,
   PostImage,
   PostImageContainer,
-  PostText, RightButtons,
+  PostText,
+  RightButtons,
 } from "./Post.style.js";
 import SharedPost from "./SharedPost.jsx";
 
@@ -139,23 +141,22 @@ const Post = ({
       <FooterContainer>
         <BottomButtons>
           <LeftButtons>
-          <PostActionWrapper>
-            <PostActionButton onClick={handleClickLike}>
-              <img
-                src={likeHeart}
-                alt="like heart"
-                className={postIsLiked ? "liked-post" : null}
-              />
-              {postIsLiked ? "Liked" : "Like"}
-            </PostActionButton>
-            <PostActionButton onClick={sharePost}>
-              <img src={shareArrow} alt="share Icon" />
-              Share
-            </PostActionButton>
-          </PostActionWrapper>
-            </LeftButtons>
-          <RightButtons>
-            </RightButtons>
+            <PostActionWrapper>
+              <PostActionButton onClick={handleClickLike}>
+                <img
+                  src={likeHeart}
+                  alt="like heart"
+                  className={postIsLiked ? "liked-post" : null}
+                />
+                {postIsLiked ? "Liked" : "Like"}
+              </PostActionButton>
+              <PostActionButton onClick={sharePost}>
+                <img src={shareArrow} alt="share Icon" />
+                Share
+              </PostActionButton>
+            </PostActionWrapper>
+          </LeftButtons>
+          <RightButtons></RightButtons>
         </BottomButtons>
 
         {userData.id !== postData.user.id && (
@@ -165,12 +166,12 @@ const Post = ({
             <CommentImg src={comments} alt="Show/Hide Comments" /> Comments
           </CommentContainer>
         )}
-         {userData.id === postData.user.id && (
-            <DeleteButton onClick={handleDeletePost}>
-              <img src={trash} alt="delete post" />
-              <p>Delete</p>
-            </DeleteButton>
-          )}
+        {userData.id === postData.user.id && (
+          <DeleteButton onClick={handleDeletePost}>
+            <img src={trash} alt="delete post" />
+            <p>Delete</p>
+          </DeleteButton>
+        )}
         <LikeCount>{amountOfLikes}&nbsp; likes</LikeCount>
       </FooterContainer>
       {userData.id !== postData.user.id && areCommentsVisible && (

@@ -30,7 +30,8 @@ export const DeleteSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: end;
-  margin-right: 0.8vw;`
+  margin-right: 0.8vw;
+`;
 
 export const PostButton = styled.button`
   border: none;
@@ -43,7 +44,7 @@ export const PostButton = styled.button`
   font-family: inherit;
   cursor: pointer;
   margin-top: 3%;
-  
+
   &:hover {
     transform: scale(1.2);
   }
@@ -78,14 +79,14 @@ export const CommentBlock = styled.div`
   margin-bottom: 5%; // Space between subsequent comments
   transition: box-shadow 0.3s ease;
 
-
   &:hover {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); // A deeper shadow on hover for an interactive effect
   }
 `;
 
-export const StyledImg = styled.img `
+export const StyledImg = styled.img`
   width: 2rem;
   height: 1.5rem;
   margin-left: 1.5%;
-  filter: saturate(0) brightness(1.35) opacity(0.8);`
+  filter: saturate(0) brightness(1.35) opacity(0.8);
+`;

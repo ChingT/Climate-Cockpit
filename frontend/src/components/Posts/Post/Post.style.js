@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 import { CardWithShadowStyles } from "../../../styles/globalStyles.js";
 import paper_texture from "../../../assets/images/paper_texture.jpg";
 
-
 export const PostContainer = styled(CardWithShadowStyles)`
   display: flex;
   background-image: url(${paper_texture});
@@ -19,8 +18,12 @@ export const SharedPostContainer = styled(PostContainer)`
   padding: 1 0 0 1rem;
   border-radius: 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background: conic-gradient(from 90deg at 1.1px 1.1px, #f3f3e4 25%, rgb(217, 217, 217) 0);
-    background-size: 24px 24px;
+  background: conic-gradient(
+    from 90deg at 1.1px 1.1px,
+    #f3f3e4 25%,
+    rgb(217, 217, 217) 0
+  );
+  background-size: 24px 24px;
   grid-column: 1/-1;
 `;
 
@@ -147,12 +150,14 @@ export const BottomButtons = styled.div`
 export const LeftButtons = styled.div`
   display: flex;
   flex-direction: row;
-  width: 25%;`
+  width: 25%;
+`;
 
 export const RightButtons = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: end;`
+  align-items: end;
+`;
 
 export const LikeCount = styled.p`
   opacity: 90%;

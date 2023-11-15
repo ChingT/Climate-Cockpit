@@ -8,7 +8,7 @@ export const SearchBarContainer = styled.div`
   height: 23px;
   -webkit-background-clip: padding-box; /* for Safari */
   background-clip: padding-box; /* for Firefox 4+, Opera, Chrome */
-  
+
   :focus {
     outline: none;
   }
@@ -30,10 +30,10 @@ export const ContainerWrapperLeft = styled.form`
   justify-content: start;
   outline-style: none;
   margin-bottom: 1%;
-    &:hover {
+  &:hover {
     outline-style: solid;
     outline-color: black;
-    outline-width: 1px; 
+    outline-width: 1px;
   }
 `;
 export const SearchIcon = styled.img`

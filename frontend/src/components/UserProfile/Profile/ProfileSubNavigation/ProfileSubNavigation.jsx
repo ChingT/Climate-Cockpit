@@ -19,23 +19,24 @@ function ProfileSubNavigation({ userdata, profileId }) {
         <ProfileSubNavItem
           $filterActive={activeFilter === "posts"}
           onClick={() => handleProfileFilter("posts")}
-        >
-        </ProfileSubNavItem>
+        ></ProfileSubNavItem>
       ) : (
-        ["posts", "likes", "friends", "followers", "following"].map((filter) => (
-          <ProfileSubNavItem
-            key={filter}
-            $filterActive={filter === activeFilter}
-            onClick={() => handleProfileFilter(filter)}
-          >
-            <span className="nav-item-text">{filter}</span>
-            <span className="nav-item-counter">
-              {userdata[`amount_of_${filter}`] === undefined
-                ? userdata[`amount_${filter}`]
-                : userdata[`amount_of_${filter}`]}
-            </span>
-          </ProfileSubNavItem>
-        ))
+        ["posts", "likes", "friends", "followers", "following"].map(
+          (filter) => (
+            <ProfileSubNavItem
+              key={filter}
+              $filterActive={filter === activeFilter}
+              onClick={() => handleProfileFilter(filter)}
+            >
+              <span className="nav-item-text">{filter}</span>
+              <span className="nav-item-counter">
+                {userdata[`amount_of_${filter}`] === undefined
+                  ? userdata[`amount_${filter}`]
+                  : userdata[`amount_of_${filter}`]}
+              </span>
+            </ProfileSubNavItem>
+          ),
+        )
       )}
     </SubSectionNavContainer>
   );
