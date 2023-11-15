@@ -9,67 +9,75 @@ export const InputContainer = styled.div`
 
 export const CommentInput = styled.input`
   flex-grow: 1;
+  line-height: 28px;
+  background: conic-gradient(
+    from 90deg at 1.1px 1.1px,
+    #f3f3e4 25%,
+    rgb(217, 217, 217) 0
+  );
+  background-size: 24px 24px;
   padding: 10px;
-  border: 1px solid #e1e1e1;
+  border: 1px solid darkgray;
+  font-size: 16px;
+  font-family: "CabinSketch", serif;
+  font-weight: 500;
+  outline-style: none;
   border-radius: 4px;
   margin-right: 10px;
 `;
 
 export const PostButton = styled.button`
-  background-color: #ff7f00;
-  color: white;
-  padding: 10px 20px;
   border: none;
-  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: transparent;
+  gap: 0.5rem;
+  font-family: inherit;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-
+  
   &:hover {
-    background-color: #e67300;
+    transform: scale(1.2);
+  }
+  img {
+    filter: saturate(0) brightness(1.35);
+    width: 1.5rem;
+    height: 1.5rem;
+    transition: transform 200ms ease;
   }
 `;
 
 export const CommentsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
+  background: none;
   width: 100%;
   padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 `;
 
-export const Comment = styled.div`
-  background-color: #fff;
-  padding: 10px;
-  border-bottom: 1px solid #e1e1e1;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-
-  &:hover {
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  }
-`;
-
-export const UserName = styled.div`
-  font-weight: bold;
-  margin-bottom: 5px;
-`;
-
 export const CommentContent = styled.div`
-  margin-bottom: 5px;
+  margin-top: 3%;
+  font-size: 16px;
 `;
+
 export const CommentBlock = styled.div`
   background-color: #f9f9f9; // A light grey background for each comment block
   padding: 15px; // Some padding to space out the content
   border-radius: 4px; // Rounded corners for the block
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); // A subtle shadow for depth
-  margin-bottom: 10px; // Space between subsequent comments
+  margin-bottom: 5%; // Space between subsequent comments
   transition: box-shadow 0.3s ease;
+
 
   &:hover {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); // A deeper shadow on hover for an interactive effect
   }
 `;
+
+export const StyledImg = styled.img `
+  width: 2rem;
+  height: 1.5rem;
+  margin-left: 1.5%;
+  filter: saturate(0) brightness(1.35) opacity(0.8);`

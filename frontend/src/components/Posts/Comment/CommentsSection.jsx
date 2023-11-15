@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import send_icon from "../../../assets/images/send.png"
+import trash from "../../../assets/images/delete-folder.png"
 import useApiRequest from "../../../hooks/useApiRequest.js";
 import useAutoFetch from "../../../hooks/useAutoFetch.js";
 import ProfileLink from "../../ProfileLink/ProfileLink.jsx";
@@ -9,9 +11,8 @@ import {
   CommentInput,
   CommentsContainer,
   InputContainer,
-  PostButton,
+  PostButton, StyledImg,
 } from "./Comment.style.js";
-import {SaveButton} from "../Post/Modal.styles.js";
 
 const CommentsSection = ({ postId }) => {
   const userData = useSelector((store) => store.loggedInUser.user);
@@ -57,7 +58,11 @@ const CommentsSection = ({ postId }) => {
           onChange={handleCommentChange}
           placeholder="Write a comment..."
         />
-        <SaveButton onClick={handlePostButtonClick}>Send</SaveButton>
+        <StyledImg
+  src={send_icon}
+  alt="Send"
+  onClick={handlePostButtonClick}
+/>
       </InputContainer>
       {comments.map((comment) => (
         <CommentBlock key={comment.id}>
@@ -70,7 +75,8 @@ const CommentsSection = ({ postId }) => {
           <CommentContent>{comment.content}</CommentContent>
           {userData.id === comment.user.id && (
             <PostButton onClick={() => deleteComment(comment.id)}>
-              Delete
+              <img src={trash} alt="delete post" />
+              <p>Delete</p>
             </PostButton>
           )}
         </CommentBlock>
