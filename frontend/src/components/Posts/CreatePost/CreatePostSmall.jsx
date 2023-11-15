@@ -7,7 +7,7 @@ import defaultAvatar from "../../../assets/svgs/avatar.svg";
 
 import { useSelector } from "react-redux";
 import CreatePostModal from "./CreatePostModal.jsx";
-import {SaveButton} from "../Post/Modal.styles.js";
+import newPost from "../../../assets/images/new.png"
 
 const CreatePostSmall = ({
   postToShare,
@@ -23,9 +23,8 @@ const CreatePostSmall = ({
         <WrapperDiv onClick={() => setModalIsOpen(true)}>
           <Avatar src={userData.avatar || defaultAvatar} />
           <p>What's on your mind, {userData.first_name}?</p>
-          <SaveButton style = {{width: "6rem"}}>
-            New Post
-          </SaveButton>
+<img src={newPost} alt="New Post" style={{ width: "2.5rem", height: "2.5rem",
+  filter: "saturate(0.1) brightness(1.35)", cursor: "pointer"}} />
         </WrapperDiv>
       )}
       {modalIsOpen && (

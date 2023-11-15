@@ -8,7 +8,11 @@ import uploadIcon from "../../../assets/svgs/Shape.svg";
 import Overlay from "../../Overlay/Overlay.jsx";
 import useApiRequest from "../../../hooks/useApiRequest.js";
 import SharedPost from "../Post/SharedPost.jsx";
-import {AvatarAndName, SaveButton, StyledTextarea} from "../Post/Modal.styles.js";
+import {
+  AvatarAndName,
+  SaveButton,
+  StyledTextarea,
+} from "../Post/Modal.styles.js";
 
 const CreatePostModal = ({
   setModalIsOpen,
@@ -70,26 +74,26 @@ const CreatePostModal = ({
       <CreatePostModalContainer>
         <div className={"body-container"}>
           <AvatarAndTextField>
-          <AvatarAndName>
+            <AvatarAndName>
               <img className={"user-avatar"} src={userData.avatar} />
               <h3>
                 {userData.first_name} {userData.last_name}
               </h3>
             </AvatarAndName>
-          <StyledTextarea
-              style = {{width: "90%", marginLeft: "15%"}}
-            className={"content-input"}
-            id="content"
-            cols="40"
-            rows="2"
-            name="content"
-            value={content}
-            placeholder={`What's on your mind ${
-              userData.first_name && `, ${userData.first_name}`
-            }?`}
-            onChange={(e) => setContent(e.target.value)}
-          />
-            </AvatarAndTextField>
+            <StyledTextarea
+              style={{ width: "90%", marginLeft: "15%" }}
+              className={"content-input"}
+              id="content"
+              cols="40"
+              rows="2"
+              name="content"
+              value={content}
+              placeholder={`What's on your mind ${
+                userData.first_name && `, ${userData.first_name}`
+              }?`}
+              onChange={(e) => setContent(e.target.value)}
+            />
+          </AvatarAndTextField>
           {postToShare && <SharedPost postData={postToShare} />}
           <div className={"image-preview-container"}>
             {imageToUpload &&

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {defaultButtonStyles} from "../../../styles/globalStyles.js";
+import { defaultButtonStyles } from "../../../styles/globalStyles.js";
 import paper_texture from "../../../assets/images/paper_texture.jpg";
 
 export const CreatePostModalContainer = styled.div`
@@ -11,7 +11,6 @@ export const CreatePostModalContainer = styled.div`
     0px 0px 1px rgba(0, 0, 0, 0.2),
     0px 10px 20px rgba(0, 0, 0, 0.05);
   border-radius: 4px;
-  
 
   .body-container {
     display: grid;
@@ -78,18 +77,7 @@ export const CreatePostModalContainer = styled.div`
 export const AvatarAndTextField = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;`
-
-
-export const TextField = styled.textarea`
-  width: 100%;
-  border: none;
-  outline: none;
-  font: inherit;
-  line-height: 2.2;
-  background: conic-gradient(from 90deg at 1.1px 1.1px, #f3f3e4 25%, rgb(217, 217, 217) 0);
-  background-size: 24px 24px;  
-  resize: none;
+  gap: 1.5rem;
 `;
 
 export const CustomImageUploadButton = styled.div`
@@ -115,13 +103,13 @@ export const CustomImageUploadButton = styled.div`
 `;
 
 export const SubmitButton = styled.button`
-    ${defaultButtonStyles}
+  ${defaultButtonStyles}
 `;
 
 export const CreatePostCardContainer = styled.div`
   width: 100%;
   min-height: 6rem;
-  background: #ffffff;
+  background-image: url(${paper_texture});
   box-shadow:
     0px 0px 1px rgba(0, 0, 0, 0.2),
     0px 10px 20px rgba(0, 0, 0, 0.05);
