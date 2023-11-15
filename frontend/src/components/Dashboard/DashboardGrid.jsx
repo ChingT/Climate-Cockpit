@@ -44,61 +44,39 @@ import {
   StyledP,
 } from "./dashboard.style.js";
 import CircleShapedEmissionPoints from "./CircleShapedEmissionPoints.jsx";
+import useAutoFetch from "../../hooks/useAutoFetch.js";
+import { useEffect, useState } from "react";
 
-export default function DashboardGrid() {
-  const totalIndustry = 10;
-  const reducedIndustry = 0;
+export default function DashboardGrid({ listChanged, setEmissionEquation }) {
+  const [dashboardItems, setDashboardItems] = useState([]);
+  const inlandSolutionScore = dashboardItems
+    .slice(0, 14)
+    .reduce((total, item) => total + (item?.altered_amout || 0), 0);
+  const importSolutionScore = dashboardItems[14]?.altered_amout;
+  const removedScore =
+    dashboardItems[15]?.initial_amount + dashboardItems[15]?.altered_amout;
+  const emissionEquation = {
+    inland: 47,
+    imports: 71,
+    solution: inlandSolutionScore + importSolutionScore,
+    removed: removedScore,
+    total: 47 + 71 - importSolutionScore - inlandSolutionScore - removedScore,
+  };
+  useEffect(() => {
+    setEmissionEquation(emissionEquation);
+  }, [dashboardItems, setEmissionEquation]);
 
-  const totalBuildingCommercial = 4;
-  const reducedBuildingCommercial = 0;
+  const { data } = useAutoFetch(
+    "get",
+    "solution/dashboard-items/?limit=18",
+    undefined,
+    listChanged,
+    "noAuth",
+  );
 
-  const totalTrucks = 3;
-  const reducedTrucks = 0;
-
-  const totalFreightPlanes = 1;
-  const reducedFreightPlanes = 0;
-
-  const totalTrashIndustry = 2;
-  const reducedTrashIndustry = 0;
-
-  const totalBuildingResidential = 8;
-  const reducedBuildingResidential = 0;
-
-  const totalPassengerPlanes = 1;
-  const reducedPassengerPlanes = 0;
-
-  const totalTrashHouseholds = 1;
-  const reducedTrashHouseholds = 0;
-
-  const totalCars = 10;
-  const reducedCars = 0;
-
-  const totalCowMilk = 2;
-  const reducedCowMilk = 0;
-
-  const totalCowMeat = 2;
-  const reducedCowMeat = 0;
-
-  const totalOtherMeat = 1;
-  const reducedOtherMeat = 0;
-
-  const totalPlants = 1;
-  const reducedPlants = 0;
-
-  const totalElectricity = 1;
-  const reducedElectricity = 0;
-
-  const totalImports = 71;
-  const reducedImports = 11;
-
-  const totalRemoval = 2;
-  const additionalRemoval = 4;
-
-  const totalInnovation = 0;
-  const additionalInnovation = 3;
-
-  const totalMoney = 1;
-  const additionalMoney = 2;
+  useEffect(() => {
+    if (data && data.results) setDashboardItems(data.results);
+  }, [data]);
 
   const standardImageStyle = {
     width: "3.4vw",
@@ -123,45 +101,62 @@ export default function DashboardGrid() {
         <StyledP>Industry</StyledP>
         <div>
           {renderIcons(
-            totalIndustry - reducedIndustry,
+            dashboardItems[0]?.initial_amount -
+              dashboardItems[0]?.altered_amout,
             industry,
             standardImageStyle,
           )}
-          {renderIcons(reducedIndustry, industryBlue, standardImageStyle)}
+          {renderIcons(
+            dashboardItems[0]?.altered_amout,
+            industryBlue,
+            standardImageStyle,
+          )}
         </div>
         <div>
           {renderIcons(
-            totalBuildingCommercial - reducedBuildingCommercial,
+            dashboardItems[1]?.initial_amount -
+              dashboardItems[1]?.altered_amout,
             buildingIndustry,
             standardImageStyle,
           )}
           {renderIcons(
-            reducedBuildingCommercial,
+            dashboardItems[1]?.altered_amout,
             buildingIndustryBlue,
             standardImageStyle,
           )}
 
-          {renderIcons(totalTrucks - reducedTrucks, Trucks, standardImageStyle)}
-          {renderIcons(reducedTrucks, TrucksBlue, standardImageStyle)}
+          {renderIcons(
+            dashboardItems[2]?.initial_amount -
+              dashboardItems[2]?.altered_amout,
+            Trucks,
+            standardImageStyle,
+          )}
+          {renderIcons(
+            dashboardItems[2]?.altered_amout,
+            TrucksBlue,
+            standardImageStyle,
+          )}
 
           {renderIcons(
-            totalFreightPlanes - reducedFreightPlanes,
+            dashboardItems[3]?.initial_amount -
+              dashboardItems[3]?.altered_amout,
             freightPlanes,
             standardImageStyle,
           )}
           {renderIcons(
-            reducedFreightPlanes,
+            dashboardItems[3]?.altered_amout,
             freightPlanesBlue,
             standardImageStyle,
           )}
 
           {renderIcons(
-            totalTrashIndustry - reducedTrashIndustry,
+            dashboardItems[4]?.initial_amount -
+              dashboardItems[4]?.altered_amout,
             trashIndustry,
             standardImageStyle,
           )}
           {renderIcons(
-            reducedTrashIndustry,
+            dashboardItems[4]?.altered_amout,
             trashIndustryBlue,
             standardImageStyle,
           )}
@@ -170,41 +165,53 @@ export default function DashboardGrid() {
         <StyledP>Households</StyledP>
         <div>
           {renderIcons(
-            totalBuildingResidential - reducedBuildingResidential,
+            dashboardItems[5]?.initial_amount -
+              dashboardItems[5]?.altered_amout,
             buildingResidentialIcon,
             standardImageStyle,
           )}
           {renderIcons(
-            reducedBuildingResidential,
+            dashboardItems[5]?.altered_amout,
             buildingResidentialIconBlue,
             standardImageStyle,
           )}
 
           {renderIcons(
-            totalPassengerPlanes - reducedPassengerPlanes,
+            dashboardItems[6]?.initial_amount -
+              dashboardItems[6]?.altered_amout,
             passengerPlaneIcon,
             standardImageStyle,
           )}
           {renderIcons(
-            reducedPassengerPlanes,
+            dashboardItems[6]?.altered_amout,
             passengerPlaneIconBlue,
             standardImageStyle,
           )}
 
           {renderIcons(
-            totalTrashHouseholds - reducedTrashHouseholds,
+            dashboardItems[7]?.initial_amount -
+              dashboardItems[7]?.altered_amout,
             trashHouseholdsIcon,
             standardImageStyle,
           )}
           {renderIcons(
-            reducedTrashHouseholds,
+            dashboardItems[7]?.altered_amout,
             trashHouseholdsIconBlue,
             standardImageStyle,
           )}
         </div>
         <div>
-          {renderIcons(totalCars - reducedCars, carIcon, standardImageStyle)}
-          {renderIcons(reducedCars, carIconBlue, standardImageStyle)}
+          {renderIcons(
+            dashboardItems[8]?.initial_amount -
+              dashboardItems[8]?.altered_amout,
+            carIcon,
+            standardImageStyle,
+          )}
+          {renderIcons(
+            dashboardItems[8]?.altered_amout,
+            carIconBlue,
+            standardImageStyle,
+          )}
         </div>
         <div>
           <div className="left-column">
@@ -217,48 +224,76 @@ export default function DashboardGrid() {
         <div>
           <div className="left-column">
             {renderIcons(
-              totalCowMeat - reducedCowMeat,
+              dashboardItems[10]?.initial_amount -
+                dashboardItems[10]?.altered_amout,
               cowMeatIcon,
               standardImageStyle,
             )}
-            {renderIcons(reducedCowMeat, cowMeatIconBlue, standardImageStyle)}
             {renderIcons(
-              totalCowMilk - reducedCowMilk,
+              dashboardItems[10]?.altered_amout,
+              cowMeatIconBlue,
+              standardImageStyle,
+            )}
+            {renderIcons(
+              dashboardItems[9]?.initial_amount -
+                dashboardItems[9]?.altered_amout,
               cowMilkIcon,
               standardImageStyle,
             )}
-            {renderIcons(reducedCowMilk, cowMilkIconBlue, standardImageStyle)}
             {renderIcons(
-              totalOtherMeat - reducedOtherMeat,
+              dashboardItems[9]?.altered_amout,
+              cowMilkIconBlue,
+              standardImageStyle,
+            )}
+            {renderIcons(
+              dashboardItems[11]?.initial_amount -
+                dashboardItems[11]?.altered_amout,
               otherMeatIcon,
               standardImageStyle,
             )}
             {renderIcons(
-              reducedOtherMeat,
+              dashboardItems[11]?.altered_amout,
               otherMeatIconBlue,
               standardImageStyle,
             )}
             {renderIcons(
-              totalPlants - reducedPlants,
+              dashboardItems[12]?.initial_amount -
+                dashboardItems[12]?.altered_amout,
               plantsIcon,
               standardImageStyle,
             )}
-            {renderIcons(reducedPlants, plantsIconBlue, standardImageStyle)}
+            {renderIcons(
+              dashboardItems[12]?.altered_amout,
+              plantsIconBlue,
+              standardImageStyle,
+            )}
           </div>
           <div className="right-column">
             {renderIcons(
-              totalElectricity - reducedElectricity,
+              dashboardItems[13]?.initial_amount -
+                dashboardItems[13]?.altered_amout,
               electricityIcon,
               standardImageStyle,
             )}
             {renderIcons(
-              reducedElectricity,
+              dashboardItems[13]?.altered_amout,
               electricityIconBlue,
               standardImageStyle,
             )}
-            <CircleShapedEmissionPoints
-              data={{ type: "inland", total_number: 47 }}
-            />
+            <div>
+              <CircleShapedEmissionPoints
+                data={{ type: "inland", total_number: 47, offset: "-1.2rem" }}
+              />
+              {inlandSolutionScore !== 0 ? (
+                <CircleShapedEmissionPoints
+                  data={{
+                    offset: "1.5rem",
+                    type: "solution",
+                    total_number: -inlandSolutionScore,
+                  }}
+                />
+              ) : null}
+            </div>
           </div>
         </div>
       </DashboardGridDiv>
@@ -266,58 +301,78 @@ export default function DashboardGrid() {
       <StyledH2>Imports</StyledH2>
       <Import>
         <img src={importPrimary} key={1} style={standardImageStyle} />
-
         {/*For the importSecondary importSecondaryBlue I want a different imageStyle*/}
         {renderIcons(
-          totalImports - reducedImports,
+          dashboardItems[14]?.initial_amount -
+            dashboardItems[14]?.altered_amout,
           importSecondary,
           importImageStyle,
         )}
-        {renderIcons(reducedImports, importSecondaryBlue, importImageStyle)}
+        {renderIcons(
+          dashboardItems[14]?.altered_amout,
+          importSecondaryBlue,
+          importImageStyle,
+        )}
         <CircleShapedEmissionPoints
-          data={{ type: "imported", total_number: 71 }}
+          data={{ type: "imported", total_number: 71, offset: "-1.2rem" }}
         />
+
+        {importSolutionScore !== 0 ? (
+          <CircleShapedEmissionPoints
+            data={{
+              offset: "1.5rem",
+              type: "solution",
+              total_number: -importSolutionScore,
+            }}
+          />
+        ) : null}
       </Import>
 
       <StyledH2>Removal</StyledH2>
       <Removal>
         <div className="left-column">
           {renderIcons(
-            totalRemoval + additionalRemoval,
+            dashboardItems[15]?.initial_amount +
+              dashboardItems[15]?.altered_amout,
             removalIcon,
             standardImageStyle,
           )}
           <CircleShapedEmissionPoints
-            data={{ type: "removed", total_number: -2 }}
+            data={{
+              offset: "-1.2rem",
+              type: "removed",
+              total_number: -removedScore,
+            }}
           />
         </div>
       </Removal>
       <Innovation>
         <div>
           <div className="innovation">
-            <StyledH2 style={{ marginLeft: "0" }}>Innovations</StyledH2>
+            {dashboardItems[16]?.altered_amout !== 0 && (
+              <StyledH2 style={{ marginLeft: "0" }}>Innovations</StyledH2>
+            )}
           </div>
           <div className="money">
-            <StyledH2>Money</StyledH2>
+            {dashboardItems[16]?.altered_amout !== 0 && (
+              <StyledH2>Money</StyledH2>
+            )}
           </div>
         </div>
         <div>
           <div className="innovation">
             {renderIcons(
-              totalInnovation + additionalInnovation,
+              dashboardItems[16]?.initial_amount +
+                dashboardItems[16]?.altered_amout,
               innovation,
               standardImageStyle,
             )}
           </div>
           <div className="money">
             {renderIcons(
-              totalMoney + additionalMoney,
+              dashboardItems[17]?.initial_amount +
+                dashboardItems[17]?.altered_amout,
               money,
-              standardImageStyle,
-            )}
-            {renderIcons(
-              reducedElectricity,
-              electricityIconBlue,
               standardImageStyle,
             )}
           </div>

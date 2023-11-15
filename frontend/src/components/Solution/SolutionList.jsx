@@ -5,7 +5,7 @@ import SolutionFilter from "../SolutionFilter/SolutionFilter.jsx";
 import SolutionDropDown from "./SolutionDropDown.jsx";
 import { FilterAndList, SolutionListDiv } from "./solution.style.js";
 
-function SolutionList() {
+function SolutionList({ setListChanged, listChanged }) {
   const [allSolutions, setAllSolutions] = useState([]);
   const [solutionList, setSolutionList] = useState([]);
   const [selectedSortOption, setSelectedSortOption] = useState("Default");
@@ -17,7 +17,7 @@ function SolutionList() {
     "solution/solutions/?limit=30",
     undefined,
     undefined,
-    "noAuth"
+    "noAuth",
   );
 
   useEffect(() => {
@@ -29,17 +29,17 @@ function SolutionList() {
 
     if (selectedCategory !== "All categories") {
       finalSolutions = finalSolutions.filter(
-        (solution) => solution.category.name === selectedCategory
+        (solution) => solution.category.name === selectedCategory,
       );
     }
 
     if (selectedStatus === "Selected") {
       finalSolutions = finalSolutions.filter(
-        (solution) => solution.selected_by_logged_in_user
+        (solution) => solution.selected_by_logged_in_user,
       );
     } else if (selectedStatus === "Non-selected") {
       finalSolutions = finalSolutions.filter(
-        (solution) => !solution.selected_by_logged_in_user
+        (solution) => !solution.selected_by_logged_in_user,
       );
     }
 
@@ -51,7 +51,7 @@ function SolutionList() {
       finalSolutions.sort((a, b) => b.impact - a.impact);
     } else if (selectedSortOption === "Number of Supporters") {
       finalSolutions.sort(
-        (a, b) => b.number_of_supporters - a.number_of_supporters
+        (a, b) => b.number_of_supporters - a.number_of_supporters,
       );
     }
     setSolutionList(finalSolutions);
@@ -60,7 +60,7 @@ function SolutionList() {
   const [selectedList, setSelectedList] = useState([]);
   const { data: selectedData } = useAutoFetch(
     "get",
-    "/solution/user-selections/"
+    "/solution/user-selections/",
   );
   useEffect(() => {
     if (selectedData) {
@@ -68,6 +68,7 @@ function SolutionList() {
     }
   }, [selectedData]);
   const handleSelectedListChange = (newSelectedList) => {
+    setListChanged(!listChanged);
     setSelectedList(newSelectedList);
   };
 
