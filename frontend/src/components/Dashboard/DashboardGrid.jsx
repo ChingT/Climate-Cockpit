@@ -64,6 +64,7 @@ export default function DashboardGrid({ listChanged, setEmissionEquation }) {
   };
   useEffect(() => {
     setEmissionEquation(emissionEquation);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dashboardItems, setEmissionEquation]);
 
   const { data } = useAutoFetch(
@@ -76,6 +77,7 @@ export default function DashboardGrid({ listChanged, setEmissionEquation }) {
 
   useEffect(() => {
     if (data && data.results) setDashboardItems(data.results);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   const standardImageStyle = {
