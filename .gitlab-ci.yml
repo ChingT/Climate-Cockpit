@@ -50,11 +50,6 @@ deploy:
     - master
   script:
     - export CI_REGISTRY_IMAGE="$CI_REGISTRY_IMAGE"
-    - export DEFAULT_FROM_EMAIL="$DEFAULT_FROM_EMAIL"
-    - export EMAIL_HOST="$EMAIL_HOST"
-    - export EMAIL_HOST_USER="$EMAIL_HOST_USER"
-    - export EMAIL_HOST_PASSWORD="$EMAIL_HOST_PASSWORD"
-
     - docker compose -p climate_cockpit -f docker-compose.deploy.yml pull
     - docker compose -p climate_cockpit -f docker-compose.deploy.yml down
       --remove-orphans
