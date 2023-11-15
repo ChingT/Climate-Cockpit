@@ -21,7 +21,7 @@ export default function ScoreCard() {
 
   const totalScore = categories.reduce(
     (sum, category) => sum + category.impact_from_logged_in_user,
-    0
+    0,
   );
 
   const summary = (
