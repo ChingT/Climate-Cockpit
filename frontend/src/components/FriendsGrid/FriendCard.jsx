@@ -39,17 +39,16 @@ const MIN_FONT_SIZE = 18;
 const FriendCard = ({ friendInfo, requestObject }) => {
   const hasMemberships =
     friendInfo.memberships && friendInfo.memberships.length > 0;
-  const [showFullAbout, setShowFullAbout] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleReadMoreClick = () => {
     setIsPopupOpen(!isPopupOpen);
   };
 
-  const aboutMeText = showFullAbout
-    ? friendInfo.about_me
-    : friendInfo.about_me.slice(0, MAX_CHARACTERS) +
-      (friendInfo.about_me.length > MAX_CHARACTERS ? "..." : "");
+ const showFullAbout =
+  friendInfo.about_me.length > MAX_CHARACTERS
+    ? friendInfo.about_me.slice(0, MAX_CHARACTERS) + "..."
+    : friendInfo.about_me;
 
   return (
     <FriendCardContainer>
@@ -96,7 +95,7 @@ const FriendCard = ({ friendInfo, requestObject }) => {
                 : "1.5rem"
             }
           >
-            {aboutMeText}
+            {showFullAbout}
             {friendInfo.about_me.length > MAX_CHARACTERS && (
               <ReadMoreButton onClick={handleReadMoreClick}>
                 {showFullAbout ? "read less" : "read more"}
