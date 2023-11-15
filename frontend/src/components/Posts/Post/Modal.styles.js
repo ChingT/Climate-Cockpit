@@ -103,19 +103,19 @@ export const StyledTextarea = styled.textarea`
   font-size: 16px;
   font-family: "CabinSketch", serif;
   font-weight: 500;
-  border: 1px solid #ccc;
+  border: 1px solid darkgray;
   border-radius: 4px;
   outline: none;
 
   &:focus {
-    outline: 1.5px solid
-      ${(props) => props.theme.fontColors.profilePageSecondaryColor};
+    outline: 1.5px solid darkgray;
   }
 `;
 
 export const StyledImg = styled.img`
   width: 1.7rem;
-  height: 1.7rem;
+  filter: saturate(0.2) brightness(1.35);
+  height: 1.6rem;
   cursor: pointer;
   transition: transform 0.3s ease;
 

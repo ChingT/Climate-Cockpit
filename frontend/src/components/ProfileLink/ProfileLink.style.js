@@ -5,7 +5,10 @@ export const AuthorInfoWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.27rem;
+  margin-top: 2%;
+  font-size: 17px;
+  font-weight: 500;
 
   .date {
     opacity: 50%;
@@ -13,8 +16,8 @@ export const AuthorInfoWrapper = styled.div`
 `;
 
 export const Avatar = styled.img`
-  width: 3rem;
-  height: 3rem;
+  width: 4rem;
+  height: 4rem;
   aspect-ratio: 1/1;
   border-radius: 50%;
   object-fit: cover;

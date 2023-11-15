@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import trash from "../../../assets/images/delete.svg";
-import edit_post from "../../../assets/svgs/edit-image.svg";
-import likeHeart from "../../../assets/svgs/heart_rgb.png";
-import shareArrow from "../../../assets/svgs/share.svg";
+import trash from "../../../assets/images/delete-folder.png";
+import edit_post from "../../../assets/images/write-message.png";
+import comments from "../../../assets/images/message.png";
+import likeHeart from "../../../assets/images/like.png";
+import shareArrow from "../../../assets/images/shortcut.png";
 import useApiRequest from "../../../hooks/useApiRequest.js";
 import ProfileLink from "../../ProfileLink/ProfileLink.jsx";
 import CommentsSection from "../Comment/CommentsSection.jsx";
@@ -12,9 +13,11 @@ import { StyledImg } from "./Modal.styles.js";
 import ModalPost from "./ModalPost.jsx";
 import {
   BottomButtons,
+  CommentContainer,
+  CommentImg,
   DeleteButton,
   EditButton,
-  FooterContainer,
+  FooterContainer, LeftButtons,
   LikeCount,
   PostActionButton,
   PostActionWrapper,
@@ -22,7 +25,7 @@ import {
   PostHeaderWrapper,
   PostImage,
   PostImageContainer,
-  PostText,
+  PostText, RightButtons,
 } from "./Post.style.js";
 import SharedPost from "./SharedPost.jsx";
 
@@ -40,6 +43,7 @@ const Post = ({
   const [postIsLiked, setPostIsLiked] = useState(postData.logged_in_user_liked);
   const [amountOfLikes, setAmountOfLikes] = useState(postData.amount_of_likes);
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
+  const [areCommentsVisible, setAreCommentsVisible] = useState(false);
   const { sendRequest } = useApiRequest();
 
   const handleDeletePost = () => {
@@ -134,6 +138,7 @@ const Post = ({
       {postData.shared && <SharedPost postData={postData.shared} />}
       <FooterContainer>
         <BottomButtons>
+          <LeftButtons>
           <PostActionWrapper>
             <PostActionButton onClick={handleClickLike}>
               <img
@@ -148,17 +153,31 @@ const Post = ({
               Share
             </PostActionButton>
           </PostActionWrapper>
-          {userData.id === postData.user.id && (
+            </LeftButtons>
+          <RightButtons>
+            </RightButtons>
+        </BottomButtons>
+
+        {userData.id !== postData.user.id && (
+          <CommentContainer
+            onClick={() => setAreCommentsVisible(!areCommentsVisible)}
+          >
+            <CommentImg src={comments} alt="Show/Hide Comments" /> Comments
+          </CommentContainer>
+        )}
+         {userData.id === postData.user.id && (
             <DeleteButton onClick={handleDeletePost}>
               <img src={trash} alt="delete post" />
               <p>Delete</p>
             </DeleteButton>
           )}
-        </BottomButtons>
-        <LikeCount>{amountOfLikes} likes</LikeCount>
+        <LikeCount>{amountOfLikes}&nbsp; likes</LikeCount>
       </FooterContainer>
-
-      <CommentsSection postId={postData.id} />
+      {userData.id !== postData.user.id && areCommentsVisible && (
+        <CommentContainer>
+          <CommentsSection postId={postData.id} />
+        </CommentContainer>
+      )}
     </PostContainer>
   );
 };

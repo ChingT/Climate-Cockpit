@@ -1,11 +1,14 @@
 import styled, { css } from "styled-components";
 import { CardWithShadowStyles } from "../../../styles/globalStyles.js";
+import paper_texture from "../../../assets/images/paper_texture.jpg";
+
 
 export const PostContainer = styled(CardWithShadowStyles)`
   display: flex;
+  background-image: url(${paper_texture});
   flex-direction: column;
-  padding: 1.8rem;
-  gap: 1.25rem;
+  padding: 2rem;
+  gap: 1.5rem;
   font-size: 0.875rem;
   height: unset;
   max-width: 58rem;
@@ -13,10 +16,11 @@ export const PostContainer = styled(CardWithShadowStyles)`
 `;
 
 export const SharedPostContainer = styled(PostContainer)`
-  padding: 0 0 0 1rem;
-  box-shadow: none;
+  padding: 1 0 0 1rem;
   border-radius: 0;
-  border-left: 1px solid ${(props) => props.theme.colors.lightGrayBorder};
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background: conic-gradient(from 90deg at 1.1px 1.1px, #f3f3e4 25%, rgb(217, 217, 217) 0);
+    background-size: 24px 24px;
   grid-column: 1/-1;
 `;
 
@@ -31,8 +35,9 @@ export const EditButton = styled.button`
 `;
 
 export const PostText = styled.p`
-  font-size: 1rem;
+  font-size: 16px;
   cursor: pointer;
+  margin-top: 0.5%;
 `;
 
 export const PostImageContainer = styled.div`
@@ -56,6 +61,7 @@ export const PostImage = styled.img`
 
 export const FooterContainer = styled.div`
   display: flex;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
 `;
@@ -65,10 +71,30 @@ export const PostActionWrapper = styled.div`
   gap: 2rem;
 `;
 
+export const CommentImg = styled.img`
+  filter: saturate(0) brightness(1.35);
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: transform 200ms ease;
+  cursor: pointer;
+`;
+
+export const CommentContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-right: 3%;
+`;
+
 export const PostActionButton = styled.button`
   background: none;
   border: none;
   display: flex;
+  flex-direction: row;
+  align-items: center;
   gap: 1rem;
   font-family: inherit;
 
@@ -78,7 +104,8 @@ export const PostActionButton = styled.button`
 
   img {
     filter: saturate(0) brightness(1.35);
-    width: 1.3rem;
+    width: 1.5rem;
+    height: 1.5rem;
     transition: transform 200ms ease;
 
     &.liked-post {
@@ -94,9 +121,9 @@ export const DeleteButton = styled.button`
   gap: 0.7rem;
   font-family: inherit;
   flex-direction: row;
+  margin-left: 1%;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1%;
   &:hover {
     transform: scale(1.2);
   }
@@ -112,10 +139,29 @@ export const BottomButtons = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 9%;
+  width: 70%;
   cursor: pointer;
+  justify-content: space-between;
 `;
+
+export const LeftButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 25%;`
+
+export const RightButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: end;`
+
 export const LikeCount = styled.p`
-  opacity: 50%;
+  opacity: 90%;
+  font-size: 15px;
+  width: 9%;
+  color: black;
+  display: flex;
+  align-items: end;
+  font-family: inherit;
 `;
 
 export const PostContentContainer = styled.div``;
