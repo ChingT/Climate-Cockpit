@@ -57,7 +57,7 @@ const Hero3DCloud = () => {
       div.className = "cloudBase";
       let x = -50 - 0.2 * 512;
       let y = 90;
-      let z = 56 - 0.1 * 512;
+      let z = 106 - 0.1 * 512;
       const t = `translateX( ${x}px ) translateY( ${y}px ) translateZ( ${z}px )`;
       div.style.webkitTransform =
         div.style.MozTransform =
