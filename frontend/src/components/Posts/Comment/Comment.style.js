@@ -26,22 +26,29 @@ export const CommentInput = styled.input`
   margin-right: 10px;
 `;
 
+export const DeleteSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin-right: 0.8vw;`
+
 export const PostButton = styled.button`
   border: none;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: end;
   background-color: transparent;
   gap: 0.5rem;
   font-family: inherit;
   cursor: pointer;
+  margin-top: 3%;
   
   &:hover {
     transform: scale(1.2);
   }
   img {
-    filter: saturate(0) brightness(1.35);
+    filter: saturate(0.25) brightness(1.35);
     width: 1.5rem;
     height: 1.5rem;
     transition: transform 200ms ease;
@@ -60,6 +67,7 @@ export const CommentsContainer = styled.div`
 export const CommentContent = styled.div`
   margin-top: 3%;
   font-size: 16px;
+  margin-left: 1.4%;
 `;
 
 export const CommentBlock = styled.div`

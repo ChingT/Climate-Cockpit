@@ -9,7 +9,7 @@ import {
   CommentBlock,
   CommentContent,
   CommentInput,
-  CommentsContainer,
+  CommentsContainer, DeleteSection,
   InputContainer,
   PostButton, StyledImg,
 } from "./Comment.style.js";
@@ -73,12 +73,14 @@ const CommentsSection = ({ postId }) => {
           />
 
           <CommentContent>{comment.content}</CommentContent>
+          <DeleteSection>
           {userData.id === comment.user.id && (
             <PostButton onClick={() => deleteComment(comment.id)}>
               <img src={trash} alt="delete post" />
               <p>Delete</p>
             </PostButton>
           )}
+            </DeleteSection>
         </CommentBlock>
       ))}
     </CommentsContainer>
