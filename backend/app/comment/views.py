@@ -1,8 +1,10 @@
+import os
+
 import openai
-from django.conf import settings
 from django.contrib.auth import get_user_model
 from post.models import Post
 from rest_framework.generics import (
+    CreateAPIView,
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
     get_object_or_404,
@@ -12,6 +14,10 @@ from user.permissions import IsOwner
 
 from .models import Comment
 from .serializers import CommentSerializer
+
+openai.api_key = os.environ.get("OPENAI_API_KEY")
+
+User = get_user_model()
 
 
 class ListCreateCommentAPIView(ListCreateAPIView):
@@ -68,11 +74,7 @@ class RetrieveUpdateDestroyCommentAPIView(RetrieveUpdateDestroyAPIView):
         return [permission() for permission in permission_classes]
 
 
-# set API key OpenAI
-openai.api_key = settings.OPENAI_API_KEY
-
-
-class ListCreateBotCommentAPIView(ListCreateAPIView):
+class CreateBotCommentAPIView(CreateAPIView):
     serializer_class = CommentSerializer
     lookup_url_kwarg = "post_id"
 
@@ -86,80 +88,25 @@ class ListCreateBotCommentAPIView(ListCreateAPIView):
         target_post = get_object_or_404(Post, id=post_id)
         user_comment = serializer.save(user=self.request.user, post=target_post)
 
-        # list of all gptbots
-        bot_usernames = ["gpt_bot", "gpt_bot2", "gpt_bot3"]
-        for bot_username in bot_usernames:
-            bot_user, _ = get_user_model().objects.get_or_create(username=bot_username)
+        self.create_chatbot_comment(target_post, user_comment)
 
-            # if user following gpt?
-            if bot_user.followers.filter(id=self.request.user.id).exists():
-                # generation gpt comment based on user comment
-                bot_comment_text = self.create_bot_comment(
-                    bot_username, target_post, user_comment.content
+    def create_chatbot_comment(self, target_post, user_comment):
+        chatbot_users = User.objects.filter(is_chatbot=True)
+        for chatbot_user in chatbot_users:
+            if chatbot_user.followers.filter(id=self.request.user.id).exists():
+                chatbot_response = self.get_chatbot_response(
+                    chatbot_user, user_comment.content
+                )
+                Comment.objects.create(
+                    user=chatbot_user, post=target_post, content=chatbot_response
                 )
 
-                # save gpt comment
-                if bot_comment_text:
-                    Comment.objects.create(
-                        user=bot_user, post=target_post, content=bot_comment_text
-                    )
-
-    def create_bot_comment(self, bot_username, post, user_comment_text):
-        user_message = {"role": "user", "content": user_comment_text}
-        if bot_username == "gpt_bot":
-            # logic for gpt_bot
-            messages_history = [
-                {
-                    "role": "system",
-                    "content": (
-                        "You are a motivator AI, named MotivAItor. "
-                        "Support  efforts to address climate challenges. "
-                        "Empower me to continue their efforts. "
-                        "Be creative in your encouragement. "
-                        "Answer me very shortly and cool!"
-                    ),
-                },
-                user_message,
-            ]
-
-            return self.create_specific_bot_comment(
-                post, user_comment_text, "motivator", messages_history
-            )
-        if bot_username == "gpt_bot2":
-            messages_history = [
-                {
-                    "role": "system",
-                    "content": (
-                        "You are a fact-checking AI, named FactChecker. "
-                        "Your role is to verify and provide accurate information about "
-                        "Earths climate, and help dispel myths. Answer me very shortly "
-                        "and cool!"
-                    ),
-                },
-                user_message,
-            ]
-            return self.create_specific_bot_comment(
-                post, user_comment_text, "informative", messages_history
-            )
-        if bot_username == "gpt_bot3":
-            messages_history = [
-                {
-                    "role": "system",
-                    "content": "You are an active climate revolutionist AI, "
-                    "named EcoChampion. "
-                    "Your role is to inpirate for protecting our Climate. "
-                    "Answer me veryshortly and cool!",
-                },
-                user_message,
-            ]
-            return self.create_specific_bot_comment(
-                post, user_comment_text, "supportive", messages_history
-            )
-        return None
-
-    def create_specific_bot_comment(
-        self, post, user_comment_text, bot_type, messages_history
-    ):
+    def get_chatbot_response(self, chatbot_user, user_text):
+        user_message = {"role": "user", "content": user_text}
+        messages_history = [
+            {"role": "system", "content": chatbot_user.chatbot_description},
+            user_message,
+        ]
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo", messages=messages_history
         )
