@@ -1,4 +1,12 @@
-version: "3"
+version: "3.9"
+
+x-django-environment: &django-environment
+  EMAIL_HOST:
+  EMAIL_PORT:
+  EMAIL_USE_TLS:
+  EMAIL_HOST_USER:
+  EMAIL_HOST_PASSWORD:
+  DEFAULT_FROM_EMAIL:
 
 services:
   app:
@@ -6,6 +14,8 @@ services:
     env_file:
       - ./envs/base.env
       - ./envs/prod.env
+    environment:
+      <<: *django-environment
     command: sh /scripts/prod.sh
     volumes:
       - static_files:/static-files
@@ -20,6 +30,8 @@ services:
     env_file:
       - ./envs/base.env
       - ./envs/prod.env
+    environment:
+      <<: *django-environment
     depends_on:
       - postgres
       - app
