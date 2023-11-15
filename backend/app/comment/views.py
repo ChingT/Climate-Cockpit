@@ -94,47 +94,79 @@ class ListCreateBotCommentAPIView(ListCreateAPIView):
             # if user following gpt?
             if bot_user.followers.filter(id=self.request.user.id).exists():
                 # generation gpt comment based on user comment
-                bot_comment_text = self.create_bot_comment(bot_username, target_post, user_comment.content)
+                bot_comment_text = self.create_bot_comment(
+                    bot_username, target_post, user_comment.content
+                )
 
                 # save gpt comment
                 if bot_comment_text:
-                    Comment.objects.create(user=bot_user, post=target_post, content=bot_comment_text)
+                    Comment.objects.create(
+                        user=bot_user, post=target_post, content=bot_comment_text
+                    )
 
     def create_bot_comment(self, bot_username, post, user_comment_text):
-
         user_message = {"role": "user", "content": user_comment_text}
         if bot_username == "gpt_bot":
             # logic for gpt_bot
             messages_history = [
-                {"role": "system",
-                 "content": "You are a motivator AI, named MotivAItor. Support  efforts to address climate challenges. Empower me to continue their efforts. Be creative in your encouragement. Answer me very shortly and cool!"},
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a motivator AI, named MotivAItor. "
+                        "Support  efforts to address climate challenges. "
+                        "Empower me to continue their efforts. "
+                        "Be creative in your encouragement. "
+                        "Answer me very shortly and cool!"
+                    ),
+                },
+                user_message,
+            ]
 
-                user_message]
-
-            return self.create_specific_bot_comment(post, user_comment_text, "motivator", messages_history)
-        elif bot_username == "gpt_bot2":
-            messages_history = [{"role": "system",
-                                 "content": "You are a fact-checking AI, named FactChecker. Your role is to verify and provide accurate information about Earths climate, and help dispel myths. Answer me very shortly and cool!"},
-
-                                user_message]
-            return self.create_specific_bot_comment(post, user_comment_text, "informative", messages_history)
-        elif bot_username == "gpt_bot3":
-            messages_history = [{"role": "system",
-                                 "content": "You are an active climate revolutionist AI, named EcoChampion. Your role is to inpirate for protecting our Climate. Answer me veryshortly and cool!"},
-
-                                user_message]
-            return self.create_specific_bot_comment(post, user_comment_text, "supportive", messages_history)
-
-    def create_specific_bot_comment(self, post, user_comment_text, bot_type, messages_history):
-        try:
-            #  API GPT-3 call logic
-            response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
-                messages=messages_history
+            return self.create_specific_bot_comment(
+                post, user_comment_text, "motivator", messages_history
             )
-            bot_message = {"role": "assistant", "content": response.choices[0].message["content"]}
-            messages_history.append(bot_message)
+        if bot_username == "gpt_bot2":
+            messages_history = [
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a fact-checking AI, named FactChecker. "
+                        "Your role is to verify and provide accurate information about "
+                        "Earths climate, and help dispel myths. Answer me very shortly "
+                        "and cool!"
+                    ),
+                },
+                user_message,
+            ]
+            return self.create_specific_bot_comment(
+                post, user_comment_text, "informative", messages_history
+            )
+        if bot_username == "gpt_bot3":
+            messages_history = [
+                {
+                    "role": "system",
+                    "content": "You are an active climate revolutionist AI, "
+                    "named EcoChampion. "
+                    "Your role is to inpirate for protecting our Climate. "
+                    "Answer me veryshortly and cool!",
+                },
+                user_message,
+            ]
+            return self.create_specific_bot_comment(
+                post, user_comment_text, "supportive", messages_history
+            )
+        return None
 
-            return bot_message["content"]
-        except Exception as e:
-            return str(e)
+    def create_specific_bot_comment(
+        self, post, user_comment_text, bot_type, messages_history
+    ):
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo", messages=messages_history
+        )
+        bot_message = {
+            "role": "assistant",
+            "content": response.choices[0].message["content"],
+        }
+        messages_history.append(bot_message)
+
+        return bot_message["content"]

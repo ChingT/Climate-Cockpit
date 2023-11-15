@@ -1,6 +1,10 @@
 from django.urls import path
 
-from .views import ListCreateCommentAPIView, RetrieveUpdateDestroyCommentAPIView, ListCreateBotCommentAPIView
+from .views import (
+    ListCreateBotCommentAPIView,
+    ListCreateCommentAPIView,
+    RetrieveUpdateDestroyCommentAPIView,
+)
 
 urlpatterns = [
     path("<int:post_id>/", ListCreateCommentAPIView.as_view(), name="comment-list"),
