@@ -51,7 +51,7 @@ const Post = ({
   const handleDeletePost = () => {
     sendRequest("delete", `social/posts/${postData.id}/`);
     setListOfPosts((current) =>
-      current.filter((post) => post.id !== postData.id),
+      current.filter((post) => post.id !== postData.id)
     );
   };
 
@@ -165,7 +165,10 @@ const Post = ({
       </FooterContainer>
       {areCommentsVisible && (
         <CommentContainer>
-          <CommentsSection postId={postData.id} />
+          <CommentsSection
+            postId={postData.id}
+            areCommentsVisible={areCommentsVisible}
+          />
         </CommentContainer>
       )}
     </PostContainer>

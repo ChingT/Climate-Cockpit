@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import send_icon from "../../../assets/images/send.png";
 import trash from "../../../assets/images/delete-folder.png";
+import send_icon from "../../../assets/images/send.png";
 import useApiRequest from "../../../hooks/useApiRequest.js";
 import useAutoFetch from "../../../hooks/useAutoFetch.js";
 import ProfileLink from "../../ProfileLink/ProfileLink.jsx";
@@ -16,7 +16,7 @@ import {
   StyledImg,
 } from "./Comment.style.js";
 
-const CommentsSection = ({ postId }) => {
+const CommentsSection = ({ postId, areCommentsVisible }) => {
   const userData = useSelector((store) => store.loggedInUser.user);
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
@@ -25,7 +25,12 @@ const CommentsSection = ({ postId }) => {
   const handleCommentChange = (e) => setCommentText(e.target.value);
 
   const urlToFetch = `social/comments/${postId}/?limit=3`;
-  const { data } = useAutoFetch("get", urlToFetch);
+  const { data } = useAutoFetch(
+    "get",
+    urlToFetch,
+    undefined,
+    areCommentsVisible
+  );
   useEffect(() => {
     if (data !== null) setComments(data.results);
   }, [data]);
@@ -48,7 +53,7 @@ const CommentsSection = ({ postId }) => {
   const deleteComment = (commentId) => {
     sendRequestDelete("delete", `social/comments/comment/${commentId}/`);
     setComments((currentComments) =>
-      currentComments.filter((comment) => comment.id !== commentId),
+      currentComments.filter((comment) => comment.id !== commentId)
     );
   };
 
