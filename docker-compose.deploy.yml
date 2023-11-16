@@ -8,6 +8,7 @@ x-django-environment: &django-environment
   EMAIL_HOST_USER:
   EMAIL_HOST_PASSWORD:
   DEFAULT_FROM_EMAIL:
+  OPENAI_API_KEY:
 
 x-postgres-environment: &postgres-environment
   POSTGRES_HOST:
