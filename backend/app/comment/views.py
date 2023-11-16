@@ -1,5 +1,10 @@
+import os
+
+from django.contrib.auth import get_user_model
+from openai import OpenAI
 from post.models import Post
 from rest_framework.generics import (
+    CreateAPIView,
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
     get_object_or_404,
@@ -9,6 +14,51 @@ from user.permissions import IsOwner
 
 from .models import Comment
 from .serializers import CommentSerializer
+
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+OPENAI_MODEL_NAME = "gpt-3.5-turbo"
+USER_ROLE = "user"
+SYSTEM_ROLE = "system"
+
+client = OpenAI(api_key=OPENAI_API_KEY)
+User = get_user_model()
+
+
+class CreateGPTBotCommentAPIView(CreateAPIView):
+    """post: Create a GPTbot comment to a post.
+
+    Create a GPTbot comment to a post by post ID and GPTbot user ID.
+    """
+
+    serializer_class = CommentSerializer
+
+    def create(self, request, *args, **kwargs):
+        post_id = kwargs.get("post_id")
+        post = get_object_or_404(Post, id=post_id)
+
+        gptbot_user_id = kwargs.get("gptbot_user_id")
+        gptbot_user = get_object_or_404(User, id=gptbot_user_id, is_gptbot=True)
+
+        gptbot_response = self.get_gptbot_response(gptbot_user, post.content)
+        request.data.update(
+            {"user": gptbot_user, "post": post, "content": gptbot_response}
+        )
+        return super().create(request, *args, **kwargs)
+
+    def perform_create(self, serializer):
+        serializer.save(**self.request.data)
+
+    def get_gptbot_response(self, gptbot_user: User, user_text: str):
+        user_message = {"role": USER_ROLE, "content": user_text}
+        system_message = {
+            "role": SYSTEM_ROLE,
+            "content": gptbot_user.gptbot_description,
+        }
+        messages_history = [system_message, user_message]
+        response = client.chat.completions.create(
+            model=OPENAI_MODEL_NAME, messages=messages_history
+        )
+        return response.choices[0].message.content
 
 
 class ListCreateCommentAPIView(ListCreateAPIView):
