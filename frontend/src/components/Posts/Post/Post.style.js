@@ -34,7 +34,8 @@ export const PostHeaderWrapper = styled.div`
 export const EditButton = styled.button`
   background: none;
   border: none;
-  padding-left: 1rem;
+  width: 1rem;
+  height: 100%;
 `;
 
 export const PostText = styled.p`
@@ -75,21 +76,22 @@ export const PostActionWrapper = styled.div`
 `;
 
 export const CommentImg = styled.img`
-  filter: saturate(0) brightness(1.35);
+  filter: saturate(0.2) brightness(1.35);
   width: 1.5rem;
   height: 1.5rem;
   transition: transform 200ms ease;
   cursor: pointer;
+  margin-left: 45%;
 `;
 
 export const CommentContainer = styled.div`
   display: flex;
-  gap: 1rem;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   cursor: pointer;
-  margin-right: 3%;
+  width: 100%;
+  gap: 3%;
 `;
 
 export const PostActionButton = styled.button`
@@ -106,7 +108,7 @@ export const PostActionButton = styled.button`
   }
 
   img {
-    filter: saturate(0) brightness(1.35);
+    filter: saturate(0.2) brightness(1.35);
     width: 1.5rem;
     height: 1.5rem;
     transition: transform 200ms ease;
@@ -120,23 +122,26 @@ export const PostActionButton = styled.button`
 export const DeleteButton = styled.button`
   background: none;
   border: none;
-  display: flex;
-  gap: 0.7rem;
-  font-family: inherit;
-  flex-direction: row;
-  margin-left: 1%;
-  align-items: center;
-  justify-content: center;
+  cursor: pointer;
   &:hover {
     transform: scale(1.2);
   }
-
   img {
-    filter: saturate(0) brightness(1.35);
+    filter: saturate(0.2) brightness(1.35);
     width: 1.5rem;
     height: 1.5rem;
     transition: transform 200ms ease;
 `;
+
+export const EditAndDelete = styled.div`
+  display: flex;
+  height: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+`;
+
 export const BottomButtons = styled.div`
   display: flex;
   flex-direction: row;
@@ -162,7 +167,7 @@ export const RightButtons = styled.div`
 export const LikeCount = styled.p`
   opacity: 90%;
   font-size: 15px;
-  width: 9%;
+  width: 21%;
   color: black;
   display: flex;
   align-items: end;

@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import send_icon from "../../../assets/images/send.png";
 import trash from "../../../assets/images/delete-folder.png";
 import useApiRequest from "../../../hooks/useApiRequest.js";
-import useAutoFetch from "../../../hooks/useAutoFetch.js";
 import ProfileLink from "../../ProfileLink/ProfileLink.jsx";
 import {
   CommentBlock,
@@ -16,19 +15,18 @@ import {
   StyledImg,
 } from "./Comment.style.js";
 
-const CommentsSection = ({ postId }) => {
+const CommentsSection = ({
+  postId,
+  comments,
+  setComments,
+  setAmountOfComments,
+}) => {
   const userData = useSelector((store) => store.loggedInUser.user);
-  const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
   const { sendRequest: sendRequestPost, data: dataPost } = useApiRequest();
   const { sendRequest: sendRequestDelete } = useApiRequest();
-  const handleCommentChange = (e) => setCommentText(e.target.value);
 
-  const urlToFetch = `social/comments/${postId}/?limit=3`;
-  const { data } = useAutoFetch("get", urlToFetch);
-  useEffect(() => {
-    if (data !== null) setComments(data.results);
-  }, [data]);
+  const handleCommentChange = (e) => setCommentText(e.target.value);
 
   const handlePostButtonClick = () => {
     if (!commentText.trim()) return;
@@ -37,12 +35,14 @@ const CommentsSection = ({ postId }) => {
       content: commentText,
     });
     setCommentText("");
+    setAmountOfComments((previous) => previous + 1);
   };
 
   useEffect(() => {
     if (dataPost !== null) {
       setComments((currentComments) => [dataPost, ...currentComments]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataPost]);
 
   const deleteComment = (commentId) => {
@@ -50,6 +50,7 @@ const CommentsSection = ({ postId }) => {
     setComments((currentComments) =>
       currentComments.filter((comment) => comment.id !== commentId),
     );
+    setAmountOfComments((previous) => previous - 1);
   };
 
   return (

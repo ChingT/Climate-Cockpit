@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import trash from "../../../assets/images/delete-folder.png";
 import likeHeart from "../../../assets/images/like.png";
-import comments from "../../../assets/images/message.png";
+import comments1 from "../../../assets/images/message.png";
 import shareArrow from "../../../assets/images/shortcut.png";
 import edit_post from "../../../assets/images/write-message.png";
 import useApiRequest from "../../../hooks/useApiRequest.js";
@@ -16,6 +16,7 @@ import {
   CommentContainer,
   CommentImg,
   DeleteButton,
+  EditAndDelete,
   EditButton,
   FooterContainer,
   LeftButtons,
@@ -30,6 +31,7 @@ import {
   RightButtons,
 } from "./Post.style.js";
 import SharedPost from "./SharedPost.jsx";
+import useAutoFetch from "../../../hooks/useAutoFetch.js";
 
 const Post = ({
   postData,
@@ -38,12 +40,13 @@ const Post = ({
   setListOfPosts,
 }) => {
   const userData = useSelector((store) => store.loggedInUser.user);
+  const [comments, setComments] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [content, setContent] = useState(postData.content);
   const [postImages, setPostImages] = useState([...postData.images]);
-
   const [postIsLiked, setPostIsLiked] = useState(postData.logged_in_user_liked);
   const [amountOfLikes, setAmountOfLikes] = useState(postData.amount_of_likes);
+  const [amountOfComments, setAmountOfComments] = useState("");
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const [areCommentsVisible, setAreCommentsVisible] = useState(false);
   const { sendRequest } = useApiRequest();
@@ -84,8 +87,16 @@ const Post = ({
     setContent(editedContent);
     setPostImages(editedImages);
   };
-  const toggle_comments = () =>
-    setAreCommentsVisible((prevState) => !prevState);
+  const toggleComments = () => setAreCommentsVisible((prevState) => !prevState);
+
+  const urlToFetch = `social/comments/${postData.id}/?limit=3`;
+  const { data } = useAutoFetch("get", urlToFetch);
+  useEffect(() => {
+    if (data !== null) {
+      setComments(data.results);
+      setAmountOfComments(data?.results.length);
+    }
+  }, [data]);
 
   return (
     <PostContainer>
@@ -95,28 +106,32 @@ const Post = ({
           isLoggedInUser={postData.user.id === userData.id}
           created={postData.created}
         />
-
-        {userData.id === postData.user.id && (
-          <>
+        <EditAndDelete>
+          {userData.id === postData.user.id && (
             <EditButton onClick={handleEditPost}>
               <StyledImg src={edit_post} />
             </EditButton>
-            {modalIsOpen && (
-              <ModalPost
-                postData={postData}
-                onClose={() => setModalIsOpen(false)}
-              />
-            )}
-            {editModalIsOpen && (
-              <EditPostModal
-                avatar={postData.user.avatar}
-                postData={postData}
-                onClose={() => setEditModalIsOpen(false)}
-                handleSaveEdit={handleSaveEdit}
-              />
-            )}
-          </>
-        )}
+          )}
+          {modalIsOpen && (
+            <ModalPost
+              postData={postData}
+              onClose={() => setModalIsOpen(false)}
+            />
+          )}
+          {editModalIsOpen && (
+            <EditPostModal
+              avatar={postData.user.avatar}
+              postData={postData}
+              onClose={() => setEditModalIsOpen(false)}
+              handleSaveEdit={handleSaveEdit}
+            />
+          )}
+          {userData.id === postData.user.id && (
+            <DeleteButton onClick={handleDeletePost}>
+              <img src={trash} alt="delete post" />
+            </DeleteButton>
+          )}
+        </EditAndDelete>
       </PostHeaderWrapper>
       <PostHeaderWrapper>
         <PostText onClick={() => setModalIsOpen(true)}>{content}</PostText>
@@ -152,20 +167,30 @@ const Post = ({
           <RightButtons></RightButtons>
         </BottomButtons>
 
-        <CommentContainer onClick={toggle_comments}>
-          <CommentImg src={comments} alt="Show/Hide Comments" /> Comments
+        <CommentContainer onClick={toggleComments}>
+          <CommentImg src={comments1} alt="Show/Hide Comments" />
+          {amountOfComments === 0
+            ? "Comment"
+            : amountOfComments === 1
+            ? "1 Comment"
+            : `${amountOfComments} Comments`}
         </CommentContainer>
-        {userData.id === postData.user.id && (
-          <DeleteButton onClick={handleDeletePost}>
-            <img src={trash} alt="delete post" />
-            <p>Delete</p>
-          </DeleteButton>
-        )}
-        <LikeCount>{amountOfLikes}&nbsp; likes</LikeCount>
+        <LikeCount>
+          {amountOfLikes === 0
+            ? "0 Like"
+            : amountOfLikes === 1
+            ? "1 Like"
+            : `${amountOfLikes} Likes`}
+        </LikeCount>
       </FooterContainer>
       {areCommentsVisible && (
         <CommentContainer>
-          <CommentsSection postId={postData.id} />
+          <CommentsSection
+            postId={postData.id}
+            comments={comments}
+            setComments={setComments}
+            setAmountOfComments={setAmountOfComments}
+          />
         </CommentContainer>
       )}
     </PostContainer>
