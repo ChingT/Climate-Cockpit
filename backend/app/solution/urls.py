@@ -27,7 +27,7 @@ urlpatterns = [
         name="scorecard-detail",
     ),
     path(
-        "category/",
+        "categories/",
         ListCategoryAPIView.as_view(),
         name="category-list",
     ),
