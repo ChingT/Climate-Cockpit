@@ -29,20 +29,15 @@ const CommentsSection = ({ postId }) => {
   const handlePostButtonClick = () => {
     if (!commentText.trim()) return;
 
-    sendRequestPost(
-      "post",
-      `
-social/comments/bot-comment/${postId}/`,
-      {
-        content: commentText,
-      },
-    );
+    sendRequestPost("post", `social/comments/${postId}/`, {
+      content: commentText,
+    });
     setCommentText("");
   };
 
   useEffect(() => {
     if (dataPost !== null) {
-      setComments((currentComments) => [...currentComments, dataPost]);
+      setComments((currentComments) => [dataPost, ...currentComments]);
     }
   }, [dataPost]);
 
