@@ -46,6 +46,7 @@ import {
 import CircleShapedEmissionPoints from "./CircleShapedEmissionPoints.jsx";
 import useAutoFetch from "../../hooks/useAutoFetch.js";
 import { useEffect, useState } from "react";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 
 export default function DashboardGrid({ listChanged, setEmissionEquation }) {
   const [dashboardItems, setDashboardItems] = useState([]);
@@ -67,7 +68,7 @@ export default function DashboardGrid({ listChanged, setEmissionEquation }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dashboardItems, setEmissionEquation]);
 
-  const { data } = useAutoFetch(
+  const { data, loading } = useAutoFetch(
     "get",
     "solution/dashboard-items/?limit=18",
     undefined,
@@ -95,6 +96,7 @@ export default function DashboardGrid({ listChanged, setEmissionEquation }) {
     ));
   };
 
+  if (loading) return <LoadingSpinner />;
   return (
     <>
       <StyledH2>Inland Emissions</StyledH2>
