@@ -59,13 +59,13 @@ export default function DashboardGrid({ listChanged, setEmissionEquation }) {
       setInlandSolutionScore(
         dashboardItems
           .slice(0, 14)
-          .reduce((total, item) => total + (item?.altered_amout || 0), 0)
+          .reduce((total, item) => total + (item?.altered_amout || 0), 0),
       );
 
       setImportSolutionScore(dashboardItems[14]?.altered_amout);
 
       setRemovedScore(
-        dashboardItems[15]?.initial_amount + dashboardItems[15]?.altered_amout
+        dashboardItems[15]?.initial_amount + dashboardItems[15]?.altered_amout,
       );
 
       setEmissionEquation((prevState) => ({
@@ -89,7 +89,7 @@ export default function DashboardGrid({ listChanged, setEmissionEquation }) {
     "solution/dashboard-items/?limit=18",
     undefined,
     listChanged,
-    "noAuth"
+    "noAuth",
   );
 
   useEffect(() => {
@@ -123,12 +123,12 @@ export default function DashboardGrid({ listChanged, setEmissionEquation }) {
             dashboardItems[0]?.initial_amount -
               dashboardItems[0]?.altered_amout,
             industry,
-            standardImageStyle
+            standardImageStyle,
           )}
           {renderIcons(
             dashboardItems[0]?.altered_amout,
             industryBlue,
-            standardImageStyle
+            standardImageStyle,
           )}
         </div>
         <div>
@@ -136,48 +136,48 @@ export default function DashboardGrid({ listChanged, setEmissionEquation }) {
             dashboardItems[1]?.initial_amount -
               dashboardItems[1]?.altered_amout,
             buildingIndustry,
-            standardImageStyle
+            standardImageStyle,
           )}
           {renderIcons(
             dashboardItems[1]?.altered_amout,
             buildingIndustryBlue,
-            standardImageStyle
+            standardImageStyle,
           )}
 
           {renderIcons(
             dashboardItems[2]?.initial_amount -
               dashboardItems[2]?.altered_amout,
             Trucks,
-            standardImageStyle
+            standardImageStyle,
           )}
           {renderIcons(
             dashboardItems[2]?.altered_amout,
             TrucksBlue,
-            standardImageStyle
+            standardImageStyle,
           )}
 
           {renderIcons(
             dashboardItems[3]?.initial_amount -
               dashboardItems[3]?.altered_amout,
             freightPlanes,
-            standardImageStyle
+            standardImageStyle,
           )}
           {renderIcons(
             dashboardItems[3]?.altered_amout,
             freightPlanesBlue,
-            standardImageStyle
+            standardImageStyle,
           )}
 
           {renderIcons(
             dashboardItems[4]?.initial_amount -
               dashboardItems[4]?.altered_amout,
             trashIndustry,
-            standardImageStyle
+            standardImageStyle,
           )}
           {renderIcons(
             dashboardItems[4]?.altered_amout,
             trashIndustryBlue,
-            standardImageStyle
+            standardImageStyle,
           )}
         </div>
 
@@ -187,36 +187,36 @@ export default function DashboardGrid({ listChanged, setEmissionEquation }) {
             dashboardItems[5]?.initial_amount -
               dashboardItems[5]?.altered_amout,
             buildingResidentialIcon,
-            standardImageStyle
+            standardImageStyle,
           )}
           {renderIcons(
             dashboardItems[5]?.altered_amout,
             buildingResidentialIconBlue,
-            standardImageStyle
+            standardImageStyle,
           )}
 
           {renderIcons(
             dashboardItems[6]?.initial_amount -
               dashboardItems[6]?.altered_amout,
             passengerPlaneIcon,
-            standardImageStyle
+            standardImageStyle,
           )}
           {renderIcons(
             dashboardItems[6]?.altered_amout,
             passengerPlaneIconBlue,
-            standardImageStyle
+            standardImageStyle,
           )}
 
           {renderIcons(
             dashboardItems[7]?.initial_amount -
               dashboardItems[7]?.altered_amout,
             trashHouseholdsIcon,
-            standardImageStyle
+            standardImageStyle,
           )}
           {renderIcons(
             dashboardItems[7]?.altered_amout,
             trashHouseholdsIconBlue,
-            standardImageStyle
+            standardImageStyle,
           )}
         </div>
         <div>
@@ -224,12 +224,12 @@ export default function DashboardGrid({ listChanged, setEmissionEquation }) {
             dashboardItems[8]?.initial_amount -
               dashboardItems[8]?.altered_amout,
             carIcon,
-            standardImageStyle
+            standardImageStyle,
           )}
           {renderIcons(
             dashboardItems[8]?.altered_amout,
             carIconBlue,
-            standardImageStyle
+            standardImageStyle,
           )}
         </div>
         <div>
@@ -246,45 +246,45 @@ export default function DashboardGrid({ listChanged, setEmissionEquation }) {
               dashboardItems[10]?.initial_amount -
                 dashboardItems[10]?.altered_amout,
               cowMeatIcon,
-              standardImageStyle
+              standardImageStyle,
             )}
             {renderIcons(
               dashboardItems[10]?.altered_amout,
               cowMeatIconBlue,
-              standardImageStyle
+              standardImageStyle,
             )}
             {renderIcons(
               dashboardItems[9]?.initial_amount -
                 dashboardItems[9]?.altered_amout,
               cowMilkIcon,
-              standardImageStyle
+              standardImageStyle,
             )}
             {renderIcons(
               dashboardItems[9]?.altered_amout,
               cowMilkIconBlue,
-              standardImageStyle
+              standardImageStyle,
             )}
             {renderIcons(
               dashboardItems[11]?.initial_amount -
                 dashboardItems[11]?.altered_amout,
               otherMeatIcon,
-              standardImageStyle
+              standardImageStyle,
             )}
             {renderIcons(
               dashboardItems[11]?.altered_amout,
               otherMeatIconBlue,
-              standardImageStyle
+              standardImageStyle,
             )}
             {renderIcons(
               dashboardItems[12]?.initial_amount -
                 dashboardItems[12]?.altered_amout,
               plantsIcon,
-              standardImageStyle
+              standardImageStyle,
             )}
             {renderIcons(
               dashboardItems[12]?.altered_amout,
               plantsIconBlue,
-              standardImageStyle
+              standardImageStyle,
             )}
           </div>
           <div className="right-column">
@@ -292,12 +292,12 @@ export default function DashboardGrid({ listChanged, setEmissionEquation }) {
               dashboardItems[13]?.initial_amount -
                 dashboardItems[13]?.altered_amout,
               electricityIcon,
-              standardImageStyle
+              standardImageStyle,
             )}
             {renderIcons(
               dashboardItems[13]?.altered_amout,
               electricityIconBlue,
-              standardImageStyle
+              standardImageStyle,
             )}
             <div>
               <CircleShapedEmissionPoints
@@ -325,12 +325,12 @@ export default function DashboardGrid({ listChanged, setEmissionEquation }) {
           dashboardItems[14]?.initial_amount -
             dashboardItems[14]?.altered_amout,
           importSecondary,
-          importImageStyle
+          importImageStyle,
         )}
         {renderIcons(
           dashboardItems[14]?.altered_amout,
           importSecondaryBlue,
-          importImageStyle
+          importImageStyle,
         )}
         <CircleShapedEmissionPoints
           data={{ type: "imported", total_number: 71, offset: "-1.2rem" }}
@@ -354,7 +354,7 @@ export default function DashboardGrid({ listChanged, setEmissionEquation }) {
             dashboardItems[15]?.initial_amount +
               dashboardItems[15]?.altered_amout,
             removalIcon,
-            standardImageStyle
+            standardImageStyle,
           )}
           <CircleShapedEmissionPoints
             data={{
@@ -384,7 +384,7 @@ export default function DashboardGrid({ listChanged, setEmissionEquation }) {
               dashboardItems[16]?.initial_amount +
                 dashboardItems[16]?.altered_amout,
               innovation,
-              standardImageStyle
+              standardImageStyle,
             )}
           </div>
           <div className="money">
@@ -392,7 +392,7 @@ export default function DashboardGrid({ listChanged, setEmissionEquation }) {
               dashboardItems[17]?.initial_amount +
                 dashboardItems[17]?.altered_amout,
               money,
-              standardImageStyle
+              standardImageStyle,
             )}
           </div>
         </div>

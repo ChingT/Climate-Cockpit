@@ -26,7 +26,7 @@ function Resources({ solutionId }) {
     `solution/resources/${solutionId}?type=${activeTab.toLocaleLowerCase()}`,
     undefined,
     activeTab,
-    "noAuth"
+    "noAuth",
   );
 
   const [videosList, setVideosList] = useState([]);
