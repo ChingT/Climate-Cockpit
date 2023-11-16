@@ -34,6 +34,14 @@ export const SolutionContainer = styled.div`
     padding: 5px;
   }
 
+  .dropdownToggleIcon {
+    width: 5%;
+    margin-right: 4%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .solutionBarLeft {
     display: flex;
     align-items: center;
@@ -48,12 +56,21 @@ export const SolutionContainer = styled.div`
     color: #555;
   }
 
+  .rotated {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+  }
+
+  .rotated-closed {
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+  }
+
   .solutionBarRight {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     gap: 10px;
-    margin-right: 5px;
   }
 
   .solutionBarRightInner {
@@ -88,6 +105,11 @@ export const SolutionContainer = styled.div`
     align-items: center;
     width: 100%;
   }
+`;
+
+export const ArrowImg = styled.img`
+  transform: rotate(90deg);
+  cursor: pointer;
 `;
 
 export const CheckboxContainer = styled.div`
