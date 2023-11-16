@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import {
+  AvatarAndTextField,
   CreatePostModalContainer,
   CustomImageUploadButton,
-  SubmitButton,
-  TextField,
 } from "./CreatePost.style.js";
-import sendIcon from "../../../assets/svgs/send_button.svg";
 import uploadIcon from "../../../assets/svgs/Shape.svg";
 import Overlay from "../../Overlay/Overlay.jsx";
 import useApiRequest from "../../../hooks/useApiRequest.js";
 import SharedPost from "../Post/SharedPost.jsx";
+import {
+  AvatarAndName,
+  SaveButton,
+  StyledTextarea,
+} from "../Post/Modal.styles.js";
 
 const CreatePostModal = ({
   setModalIsOpen,
@@ -70,19 +73,27 @@ const CreatePostModal = ({
     <Overlay onClose={setModalIsOpen}>
       <CreatePostModalContainer>
         <div className={"body-container"}>
-          <img className={"user-avatar"} src={userData.avatar} />
-          <TextField
-            className={"content-input"}
-            id="content"
-            cols="40"
-            rows="2"
-            name="content"
-            value={content}
-            placeholder={`What's on your mind ${
-              userData.first_name && `, ${userData.first_name}`
-            }?`}
-            onChange={(e) => setContent(e.target.value)}
-          />
+          <AvatarAndTextField>
+            <AvatarAndName>
+              <img className={"user-avatar"} src={userData.avatar} />
+              <h3>
+                {userData.first_name} {userData.last_name}
+              </h3>
+            </AvatarAndName>
+            <StyledTextarea
+              style={{ width: "90%", marginLeft: "15%" }}
+              className={"content-input"}
+              id="content"
+              cols="40"
+              rows="2"
+              name="content"
+              value={content}
+              placeholder={`What's on your mind ${
+                userData.first_name && `, ${userData.first_name}`
+              }?`}
+              onChange={(e) => setContent(e.target.value)}
+            />
+          </AvatarAndTextField>
           {postToShare && <SharedPost postData={postToShare} />}
           <div className={"image-preview-container"}>
             {imageToUpload &&
@@ -113,9 +124,9 @@ const CreatePostModal = ({
               onChange={uploadPreviewImage}
             />
           </CustomImageUploadButton>
-          <SubmitButton className={"send-post-button"} onClick={handleSubmit}>
-            <img src={sendIcon} />
-          </SubmitButton>
+          <SaveButton className={"send-post-button"} onClick={handleSubmit}>
+            Post
+          </SaveButton>
         </div>
       </CreatePostModalContainer>
     </Overlay>
