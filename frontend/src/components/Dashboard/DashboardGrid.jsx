@@ -68,14 +68,13 @@ export default function DashboardGrid({ listChanged, setEmissionEquation }) {
         dashboardItems[15]?.initial_amount + dashboardItems[15]?.altered_amout
       );
 
-      setEmissionEquation({
-        inland: 47,
-        imports: 71,
+      setEmissionEquation((prevState) => ({
+        ...prevState,
         solution: inlandSolutionScore + importSolutionScore,
         removed: removedScore,
         total:
           47 + 71 - importSolutionScore - inlandSolutionScore - removedScore,
-      });
+      }));
     }
   }, [
     dashboardItems,

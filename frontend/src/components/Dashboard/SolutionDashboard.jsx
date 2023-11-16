@@ -6,9 +6,9 @@ export default function SolutionDashboard({ listChanged }) {
   const [emissionEquation, setEmissionEquation] = useState({
     inland: 47,
     imports: 71,
-    solution: undefined,
-    removed: undefined,
-    total: undefined,
+    solution: null,
+    removed: null,
+    total: null,
   });
 
   return (
