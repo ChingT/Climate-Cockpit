@@ -14,7 +14,7 @@ export default function ScoreCard({ userID }) {
   const [scorecard, setScorecard] = useState([]);
   const { data, loading } = useAutoFetch(
     "get",
-    `solution/scorecards/${userID}`
+    `solution/scorecards/${userID}`,
   );
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function ScoreCard({ userID }) {
 
   const totalScore = scorecard.reduce(
     (sum, category) => sum + category.impact_from_user,
-    0
+    0,
   );
 
   const summary = (
