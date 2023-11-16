@@ -45,10 +45,10 @@ const FriendCard = ({ friendInfo, requestObject }) => {
     setIsPopupOpen(!isPopupOpen);
   };
 
-  const showFullAbout =
-    friendInfo.about_me.length > MAX_CHARACTERS
-      ? friendInfo.about_me.slice(0, MAX_CHARACTERS) + "..."
-      : friendInfo.about_me;
+ const showFullAbout =
+  friendInfo.about_me.length > MAX_CHARACTERS
+    ? friendInfo.about_me.slice(0, MAX_CHARACTERS) + "..."
+    : friendInfo.about_me;
 
   return (
     <FriendCardContainer>
