@@ -1,4 +1,3 @@
-from django.contrib.auth import get_user_model
 from post.models import Post
 from rest_framework.generics import (
     ListCreateAPIView,
@@ -10,8 +9,6 @@ from user.permissions import IsOwner
 
 from .models import Comment
 from .serializers import CommentSerializer
-
-User = get_user_model()
 
 
 class ListCreateCommentAPIView(ListCreateAPIView):
