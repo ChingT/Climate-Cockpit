@@ -6,6 +6,7 @@ import comments1 from "../../../assets/images/message.png";
 import shareArrow from "../../../assets/images/shortcut.png";
 import edit_post from "../../../assets/images/write-message.png";
 import useApiRequest from "../../../hooks/useApiRequest.js";
+import useAutoFetch from "../../../hooks/useAutoFetch.js";
 import ProfileLink from "../../ProfileLink/ProfileLink.jsx";
 import CommentsSection from "../Comment/CommentsSection.jsx";
 import EditPostModal from "./EditPosModal.jsx";
@@ -31,7 +32,6 @@ import {
   RightButtons,
 } from "./Post.style.js";
 import SharedPost from "./SharedPost.jsx";
-import useAutoFetch from "../../../hooks/useAutoFetch.js";
 
 const Post = ({
   postData,
@@ -54,7 +54,7 @@ const Post = ({
   const handleDeletePost = () => {
     sendRequest("delete", `social/posts/${postData.id}/`);
     setListOfPosts((current) =>
-      current.filter((post) => post.id !== postData.id),
+      current.filter((post) => post.id !== postData.id)
     );
   };
 
@@ -89,8 +89,13 @@ const Post = ({
   };
   const toggleComments = () => setAreCommentsVisible((prevState) => !prevState);
 
-  const urlToFetch = `social/comments/${postData.id}/?limit=3`;
-  const { data } = useAutoFetch("get", urlToFetch);
+  const urlToFetch = `social/comments/${postData.id}/`;
+  const { data } = useAutoFetch(
+    "get",
+    urlToFetch,
+    undefined,
+    areCommentsVisible
+  );
   useEffect(() => {
     if (data !== null) {
       setComments(data.results);

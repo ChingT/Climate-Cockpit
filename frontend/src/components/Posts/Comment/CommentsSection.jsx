@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import send_icon from "../../../assets/images/send.png";
 import trash from "../../../assets/images/delete-folder.png";
+import send_icon from "../../../assets/images/send.png";
 import useApiRequest from "../../../hooks/useApiRequest.js";
 import ProfileLink from "../../ProfileLink/ProfileLink.jsx";
 import {
@@ -42,13 +42,12 @@ const CommentsSection = ({
     if (dataPost !== null) {
       setComments((currentComments) => [dataPost, ...currentComments]);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataPost]);
+  }, [dataPost, setComments]);
 
   const deleteComment = (commentId) => {
     sendRequestDelete("delete", `social/comments/comment/${commentId}/`);
     setComments((currentComments) =>
-      currentComments.filter((comment) => comment.id !== commentId),
+      currentComments.filter((comment) => comment.id !== commentId)
     );
     setAmountOfComments((previous) => previous - 1);
   };
