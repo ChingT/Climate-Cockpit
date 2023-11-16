@@ -1,16 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../../assets/header_icons/logo.png";
+import logo from "../../assets/header_icons/Globus.png";
 import avatarImage from "../../assets/svgs/avatar.svg";
 import MenuDot from "../../assets/svgs/menu_dots.svg";
-import findFriendLogo from "../../assets/header_icons/find_friends.png";
-import lightbulb from "../../assets/header_icons/lightbulb-6624237-5487997.png";
-import posts from "../../assets/header_icons/posts.png";
-import posts_text from "../../assets/header_icons/posts_text.png";
-import find_friends_text from "../../assets/header_icons/find_friends_text.png";
-import solutions from "../../assets/header_icons/solutions.png";
-import profile from "../../assets/header_icons/profile.png";
+import lightbulb from "../../assets/header_icons/check-mark.png";
 import useAutoFetch from "../../hooks/useAutoFetch.js";
 import { setRequests } from "../../store/slices/friendRequests.js";
 import FriendsRequestsContainer from "./FriendsRequests/FriendsRequestsContainer.jsx";
@@ -20,15 +14,9 @@ import {
   ContainerLeft,
   ContainerRight,
   HeaderContainer,
-  LogoWrapper,
   MenuContainer,
   NavbarLink,
   NotificationButton,
-  PostsTextImage,
-  ProfileWrapper,
-  SolutionWrapper,
-  StyledImage,
-  TextImage,
 } from "./Navigation.style.js";
 import NavigationActionsContainer from "./NavigationActionsContainer.jsx";
 
@@ -70,37 +58,34 @@ const Navigation = () => {
   return (
     <HeaderContainer>
       <ContainerLeft>
-        <LogoWrapper to="/">
+        <NavbarLink to="/">
           <img src={logo} alt="Logo" />
-        </LogoWrapper>
-        <SolutionWrapper to="/solutions">
-          <img src={solutions} alt="Solutions" />
-        </SolutionWrapper>
+          <h1 style={{ color: "#0077BF", fontSize: "38" }}>Climate Cockpit</h1>
+        </NavbarLink>
+        <NavbarLink to="/solutions">
+          <h1>Solutions</h1>
+        </NavbarLink>
         {loggedInUser ? (
           <>
-            <ProfileWrapper to="/profile">
-              <img src={profile} alt="Profile" />
-            </ProfileWrapper>
+            <NavbarLink to="/profile">
+              <h1>Profile</h1>
+            </NavbarLink>
           </>
         ) : (
-          <ProfileWrapper to="/signin">
-            <img src={profile} alt="Profile" />
-          </ProfileWrapper>
+          <NavbarLink to="/signin">
+            <h1>Profile</h1>
+          </NavbarLink>
         )}
-        <nav>
-          {loggedInUser ? (
-            <>
-              <NavbarLink to="/posts">
-                <StyledImage src={posts} alt="Image description" />
-                <PostsTextImage src={posts_text} alt="Posts Text" />
-              </NavbarLink>
-              <NavbarLink to="/find-friends">
-                <StyledImage src={findFriendLogo} alt="Find Friends" />
-                <TextImage src={find_friends_text} alt="Find Friends Text" />
-              </NavbarLink>
-            </>
-          ) : null}
-        </nav>
+        {loggedInUser ? (
+          <>
+            <NavbarLink to="/posts">
+              <h1 style={{ fontSize: "34px" }}>Posts</h1>
+            </NavbarLink>
+            <NavbarLink to="/find-friends">
+              <h1>Networking</h1>
+            </NavbarLink>
+          </>
+        ) : null}
       </ContainerLeft>
 
       <nav>

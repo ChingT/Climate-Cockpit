@@ -18,8 +18,9 @@ from solution.solution_logic.models import SelectionRule
 
 from .models import Category, Resource, Solution, UserSelection
 from .serializers import (
-    CategorySerializer,
+    CategoryNameSerializer,
     ResourceSerializer,
+    ScorecardSerializer,
     SolutionSerializer,
     UserSelectionSerializer,
 )
@@ -67,14 +68,35 @@ class RetrieveSolutionAPIView(RetrieveAPIView):
     permission_classes = []
 
 
-class ListCategoryAPIView(ListAPIView):
-    """get: List all categories.
+class ListScorecardAPIView(ListAPIView):
+    """get: Retrieve the scorecard of an user.
 
-    List all categories.
+    Retrieve the scorecard of an user by user ID.
     """
 
     queryset = Category.objects.all().order_by("id")
-    serializer_class = CategorySerializer
+    serializer_class = ScorecardSerializer
+    permission_classes = []
+    lookup_url_kwarg = "user_id"
+
+    def get_serializer(self, *args, **kwargs):
+        user_id = self.kwargs.get(self.lookup_url_kwarg)
+        try:
+            user = User.objects.get(id=user_id)
+            kwargs["context"] = {"user": user}
+        except User.DoesNotExist:
+            pass
+        return super().get_serializer(*args, **kwargs)
+
+
+class ListCategoryAPIView(ListAPIView):
+    """get: List the category names.
+
+    List the category names.
+    """
+
+    queryset = Category.objects.all().order_by("id")
+    serializer_class = CategoryNameSerializer
     permission_classes = []
 
 

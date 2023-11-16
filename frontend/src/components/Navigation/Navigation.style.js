@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const HeaderContainer = styled.header`
   height: ${(props) => props.theme.header_height};
@@ -26,32 +26,34 @@ export const HeaderContainer = styled.header`
 export const ContainerLeft = styled.div`
   display: flex;
   align-items: center;
-  gap: 7rem;
+  justify-content: space-between;
   height: 100%;
+  gap: 2rem;
+  width: 72%;
 
   nav {
     display: flex;
     height: 100%;
-    gap: 2rem;
   }
-`;
-
-export const StyledP = styled.p`
-  font-size: 18px;
 `;
 
 export const NavbarLink = styled(NavLink)`
   text-decoration: none;
   color: black;
+  height: 100%;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
+  border-bottom: 1.5px solid transparent; /* Add default border color */
 
-  border-bottom: 2px solid;
-  border-color: transparent;
+  h1 {
+    font-size: 33px;
+    font-weight: 400;
+  }
 
   &.active {
-    border-color: #ffae00;
+    border-color: #0077bf;
+    color: #0077bf;
   }
 
   &:hover:not(.active) {
@@ -59,48 +61,16 @@ export const NavbarLink = styled(NavLink)`
   }
 `;
 
-export const PostsTextImage = styled.img`
-  width: 65px;
-  height: 21px;
-  margin-right: 2rem;
-`;
-
-export const TextImage = styled.img`
-  width: 150px;
-  height: 20px;
-`;
-
 export const StyledImage = styled.img`
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
+  filter: saturate(0.7) brightness(1.35);
 `;
 
 export const ContainerRight = styled.div`
   display: flex;
   align-items: center;
   gap: 2rem;
-`;
-
-export const LogoWrapper = styled(Link)`
-  img {
-    height: 55.4px;
-    width: 293.79px;
-  }
-`;
-
-export const SolutionWrapper = styled(Link)`
-  img {
-    height: 20px;
-    width: 129px;
-  }
-`;
-
-export const ProfileWrapper = styled(Link)`
-  img {
-    height: 20px;
-    width: 91px;
-    margin-right: 19rem;
-  }
 `;
 
 export const MenuContainer = styled.div`
@@ -125,8 +95,8 @@ export const NotificationButton = styled.button`
     cursor: pointer;
 
     > img {
-      height: 2.45rem;
-      width: 3.6rem;
+      height: 2.2rem;
+      width: 2.8rem;
       padding-right: 0.7rem;
     }
 

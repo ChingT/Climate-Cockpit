@@ -1,9 +1,7 @@
 import { DashboardCategoriesTotalPoints } from "./dashboard.style.js";
 
 export default function TotalPoints({ emissionEquation }) {
-  const isInvalid =
-    !emissionEquation ||
-    Object.values(emissionEquation).some((value) => isNaN(value));
+  const showNumber = (number) => (number ? number : "?");
 
   return (
     <DashboardCategoriesTotalPoints>
@@ -26,7 +24,7 @@ export default function TotalPoints({ emissionEquation }) {
       <div>
         <div>Removal</div>
         <div className="removed-emissions">
-          {isInvalid ? "?" : -emissionEquation.removed}
+          {showNumber(-emissionEquation.removed)}
         </div>
       </div>
       <div>
@@ -36,7 +34,7 @@ export default function TotalPoints({ emissionEquation }) {
       <div>
         <div>Solution</div>
         <div className="solution-emissions">
-          {isInvalid ? "?" : -emissionEquation.solution}
+          {showNumber(-emissionEquation.solution)}
         </div>
       </div>
       <div>
@@ -45,7 +43,7 @@ export default function TotalPoints({ emissionEquation }) {
       </div>
       <div>
         <div>Total</div>
-        {isInvalid ? "?" : -emissionEquation.total}
+        {showNumber(-emissionEquation.total)}
       </div>
     </DashboardCategoriesTotalPoints>
   );

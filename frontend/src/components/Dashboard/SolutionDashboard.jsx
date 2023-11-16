@@ -1,9 +1,15 @@
+import { useState } from "react";
 import DashboardGrid from "./DashboardGrid.jsx";
 import TotalPoints from "./TotalPoints.jsx";
-import { useState } from "react";
 
 export default function SolutionDashboard({ listChanged }) {
-  const [emissionEquation, setEmissionEquation] = useState({});
+  const [emissionEquation, setEmissionEquation] = useState({
+    inland: 47,
+    imports: 71,
+    solution: null,
+    removed: null,
+    total: null,
+  });
 
   return (
     <>

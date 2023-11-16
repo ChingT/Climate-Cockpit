@@ -1,38 +1,42 @@
-import industry from "../../assets/dashboard_icons/Indstry.png";
-import industryBlue from "../../assets/dashboard_icons/Indstry_Blue.png";
-import buildingIndustry from "../../assets/dashboard_icons/Buildings_Commercial.png";
-import buildingIndustryBlue from "../../assets/dashboard_icons/Buildings_Commercial_Blue.png";
-import Trucks from "../../assets/dashboard_icons/Transport_Trucks.png";
-import TrucksBlue from "../../assets/dashboard_icons/Transport_Trucks_Blue.png";
-import freightPlanes from "../../assets/dashboard_icons/Transport_Plane_Freight.png";
-import freightPlanesBlue from "../../assets/dashboard_icons/Transport_Plane_Freight_Blue.png";
 import trashIndustry from "../../assets/dashboard_icons//Trash_Industry.png";
-import trashIndustryBlue from "../../assets/dashboard_icons/Trash_Industry_Blue.png";
-import buildingResidentialIcon from "../../assets/dashboard_icons/Buildings_Residential.png";
-import buildingResidentialIconBlue from "../../assets/dashboard_icons/Buildings_Residential_Blue.png";
-import passengerPlaneIcon from "../../assets/dashboard_icons/Transport_Plane_People.png";
-import passengerPlaneIconBlue from "../../assets/dashboard_icons/Transport_Plane_People_Blue.png";
-import trashHouseholdsIcon from "../../assets/dashboard_icons/Trash_Residential.png";
-import trashHouseholdsIconBlue from "../../assets/dashboard_icons/Trash_Residential_Blue.png";
-import carIcon from "../../assets/dashboard_icons/Transport_Cars.png";
-import carIconBlue from "../../assets/dashboard_icons/Transport_Cars_Blue.png";
-import cowMilkIcon from "../../assets/dashboard_icons/Agriculture_Cow_Milk.png";
-import cowMilkIconBlue from "../../assets/dashboard_icons/Agriculture_Cow_Milk_Blue.png";
 import cowMeatIcon from "../../assets/dashboard_icons/Agriculture_Cow_Meat.png";
 import cowMeatIconBlue from "../../assets/dashboard_icons/Agriculture_Cow_Meat_Blue.png";
+import cowMilkIcon from "../../assets/dashboard_icons/Agriculture_Cow_Milk.png";
+import cowMilkIconBlue from "../../assets/dashboard_icons/Agriculture_Cow_Milk_Blue.png";
 import otherMeatIcon from "../../assets/dashboard_icons/Agriculture_Other_Meat.png";
 import otherMeatIconBlue from "../../assets/dashboard_icons/Agriculture_Other_Meat_Blue.png";
 import plantsIcon from "../../assets/dashboard_icons/Agriculture_Plants.png";
 import plantsIconBlue from "../../assets/dashboard_icons/Agriculture_Plants_Blue.png";
+import buildingIndustry from "../../assets/dashboard_icons/Buildings_Commercial.png";
+import buildingIndustryBlue from "../../assets/dashboard_icons/Buildings_Commercial_Blue.png";
+import buildingResidentialIcon from "../../assets/dashboard_icons/Buildings_Residential.png";
+import buildingResidentialIconBlue from "../../assets/dashboard_icons/Buildings_Residential_Blue.png";
 import electricityIcon from "../../assets/dashboard_icons/Electricity.png";
 import electricityIconBlue from "../../assets/dashboard_icons/Electricity_Blue.png";
-import removalIcon from "../../assets/dashboard_icons/Nature.png";
 import importPrimary from "../../assets/dashboard_icons/Imports_Primary.png";
 import importSecondary from "../../assets/dashboard_icons/Imports_Secondary.png";
 import importSecondaryBlue from "../../assets/dashboard_icons/Imports_SecondaryBlue.png";
+import industry from "../../assets/dashboard_icons/Indstry.png";
+import industryBlue from "../../assets/dashboard_icons/Indstry_Blue.png";
 import innovation from "../../assets/dashboard_icons/Innovation.png";
 import money from "../../assets/dashboard_icons/Money.png";
+import removalIcon from "../../assets/dashboard_icons/Nature.png";
+import carIcon from "../../assets/dashboard_icons/Transport_Cars.png";
+import carIconBlue from "../../assets/dashboard_icons/Transport_Cars_Blue.png";
+import freightPlanes from "../../assets/dashboard_icons/Transport_Plane_Freight.png";
+import freightPlanesBlue from "../../assets/dashboard_icons/Transport_Plane_Freight_Blue.png";
+import passengerPlaneIcon from "../../assets/dashboard_icons/Transport_Plane_People.png";
+import passengerPlaneIconBlue from "../../assets/dashboard_icons/Transport_Plane_People_Blue.png";
+import Trucks from "../../assets/dashboard_icons/Transport_Trucks.png";
+import TrucksBlue from "../../assets/dashboard_icons/Transport_Trucks_Blue.png";
+import trashIndustryBlue from "../../assets/dashboard_icons/Trash_Industry_Blue.png";
+import trashHouseholdsIcon from "../../assets/dashboard_icons/Trash_Residential.png";
+import trashHouseholdsIconBlue from "../../assets/dashboard_icons/Trash_Residential_Blue.png";
 
+import { useEffect, useState } from "react";
+import useAutoFetch from "../../hooks/useAutoFetch.js";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
+import CircleShapedEmissionPoints from "./CircleShapedEmissionPoints.jsx";
 import {
   CustomStyledP,
   CustomStyledP2,
@@ -43,32 +47,44 @@ import {
   StyledH2,
   StyledP,
 } from "./dashboard.style.js";
-import CircleShapedEmissionPoints from "./CircleShapedEmissionPoints.jsx";
-import useAutoFetch from "../../hooks/useAutoFetch.js";
-import { useEffect, useState } from "react";
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 
 export default function DashboardGrid({ listChanged, setEmissionEquation }) {
-  const [dashboardItems, setDashboardItems] = useState([]);
-  const inlandSolutionScore = dashboardItems
-    .slice(0, 14)
-    .reduce((total, item) => total + (item?.altered_amout || 0), 0);
-  const importSolutionScore = dashboardItems[14]?.altered_amout;
-  const removedScore =
-    dashboardItems[15]?.initial_amount + dashboardItems[15]?.altered_amout;
-  const emissionEquation = {
-    inland: 47,
-    imports: 71,
-    solution: inlandSolutionScore + importSolutionScore,
-    removed: removedScore,
-    total: 47 + 71 - importSolutionScore - inlandSolutionScore - removedScore,
-  };
-  useEffect(() => {
-    setEmissionEquation(emissionEquation);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dashboardItems, setEmissionEquation]);
+  const [dashboardItems, setDashboardItems] = useState(null);
+  const [inlandSolutionScore, setInlandSolutionScore] = useState(null);
+  const [importSolutionScore, setImportSolutionScore] = useState(null);
+  const [removedScore, setRemovedScore] = useState(null);
 
-  const { data, loading } = useAutoFetch(
+  useEffect(() => {
+    if (dashboardItems) {
+      setInlandSolutionScore(
+        dashboardItems
+          .slice(0, 14)
+          .reduce((total, item) => total + (item?.altered_amout || 0), 0),
+      );
+
+      setImportSolutionScore(dashboardItems[14]?.altered_amout);
+
+      setRemovedScore(
+        dashboardItems[15]?.initial_amount + dashboardItems[15]?.altered_amout,
+      );
+
+      setEmissionEquation((prevState) => ({
+        ...prevState,
+        solution: inlandSolutionScore + importSolutionScore,
+        removed: removedScore,
+        total:
+          47 + 71 - importSolutionScore - inlandSolutionScore - removedScore,
+      }));
+    }
+  }, [
+    dashboardItems,
+    importSolutionScore,
+    inlandSolutionScore,
+    removedScore,
+    setEmissionEquation,
+  ]);
+
+  const { data } = useAutoFetch(
     "get",
     "solution/dashboard-items/?limit=18",
     undefined,
@@ -96,7 +112,7 @@ export default function DashboardGrid({ listChanged, setEmissionEquation }) {
     ));
   };
 
-  if (loading) return <LoadingSpinner />;
+  if (dashboardItems === null) return <LoadingSpinner />;
   return (
     <>
       <StyledH2>Inland Emissions</StyledH2>
