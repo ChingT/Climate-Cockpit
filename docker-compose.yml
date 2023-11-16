@@ -34,6 +34,7 @@ services:
       - "5432:5432"
     env_file:
       - ./envs/base.env
+      - ./envs/dev.env
     volumes:
       - postgres_db:/var/lib/postgresql/data
 

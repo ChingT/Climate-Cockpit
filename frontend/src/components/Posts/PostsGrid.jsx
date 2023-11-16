@@ -4,11 +4,12 @@ import CreatePostSmall from "./CreatePost/CreatePostSmall.jsx";
 import useAutoFetch from "../../hooks/useAutoFetch.js";
 import Post from "./Post/Post.jsx";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const PostsGrid = ({ url, inProfile, columnsCount, gutter }) => {
   const [postToShare, setPostToShare] = useState();
+  const [listOfPosts, setListOfPosts] = useState([]);
   const searchText = useSelector((store) => store.postsFilter.filterSearch);
   let urlToFetch = url;
   if (searchText) {
@@ -17,23 +18,32 @@ const PostsGrid = ({ url, inProfile, columnsCount, gutter }) => {
   const { data, loading, error } = useAutoFetch("get", urlToFetch);
   const [showCreatePostModal, setShowCreatePostModal] = useState(false);
 
+  useEffect(() => {
+    if (data) {
+      setListOfPosts(data.results);
+    }
+  }, [data]);
+
+  if (loading) return <LoadingSpinner />;
   return (
     <MainContainer>
       <Masonry columnsCount={columnsCount} gutter={gutter}>
         {!inProfile && (
           <CreatePostSmall
+            setListOfPosts={setListOfPosts}
             postToShare={postToShare}
             setModalIsOpen={setShowCreatePostModal}
             modalIsOpen={showCreatePostModal}
           />
         )}
-        {loading && <LoadingSpinner />}
         {error && <p>{error.message}</p>}
         {data &&
-          data.results.map((post) => {
+          listOfPosts.map((post) => {
             return (
               <Post
                 key={post.id}
+                setListOfPosts={setListOfPosts}
+                listOfPosts={listOfPosts}
                 postData={post}
                 setPostToShare={setPostToShare}
                 setShowCreatePostModal={setShowCreatePostModal}

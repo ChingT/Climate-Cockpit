@@ -1,14 +1,14 @@
+import dark_green_texture from "../assets/category_textures/dark_green_texture.png";
+import gray_texture1 from "../assets/category_textures/gray_pencil_texture.png";
+import light_green_texture from "../assets/category_textures/light_green_texture.jpg";
+import orange_texture from "../assets/category_textures/light_orange_texture.png";
+import red_texture from "../assets/category_textures/light_red_texture.png";
 import pink_texture from "../assets/category_textures/pink_texture_1.png";
 import purple_texture from "../assets/category_textures/purple_texture.png";
-import violet_texture from "../assets/images/violet_texture.jpg";
-import light_green_texture from "../assets/category_textures/light_green_texture.jpg";
-import gray_texture1 from "../assets/category_textures/gray_pencil_texture.png";
-import gray_texture from "../assets/images/paper_texture.jpg";
-import red_texture from "../assets/category_textures/light_red_texture.png";
-import orange_texture from "../assets/category_textures/light_orange_texture.png";
-import dark_green_texture from "../assets/category_textures/dark_green_texture.png";
-import blue_texture from "../assets/images/light_blue_texture.jpg";
 import yellow_texture from "../assets/category_textures/yellow_texture.jpg";
+import blue_texture from "../assets/images/light_blue_texture.jpg";
+import gray_texture from "../assets/images/paper_texture.jpg";
+import violet_texture from "../assets/images/violet_texture.jpg";
 
 const theme = {
   General: {
@@ -33,6 +33,7 @@ const theme = {
     lightGray: "#aaa",
     lightGrayBorder: "#ddd",
     solutionPagePrimaryColor: "#0077BF",
+    editPostBorderColor: "#0077BF",
     unselectedSolution: "red",
     selectedSolution: "green",
   },
@@ -40,7 +41,7 @@ const theme = {
     loadingSpinner: "rgba(255, 255, 255, 0.5)",
     primary: "rgba(253, 247, 221, 0.2)",
     secondary: "white",
-    impactIconUnselected: "black",
+    impactIconUnselected: "#444;",
     impactIconSelected: "#0077BF",
     selectedSolutionBar: "rgba(0, 0, 255, 0.3)",
   },
@@ -52,21 +53,21 @@ const theme = {
   },
   categoryLabels: {
     default: `url(${gray_texture})`,
-    Electricity: `url(${violet_texture})`,
-    Buildings: `url(${orange_texture})`,
-    Transport: `url(${purple_texture})`,
-    Food: `url(${light_green_texture})`,
-    Trash: `url(${gray_texture1})`,
-    Industry: `url(${red_texture})`,
-    Import: `url(${pink_texture})`,
-    Nature: `url(${dark_green_texture})`,
-    Money: `url(${yellow_texture})`,
-    Innovation: `url(${blue_texture})`,
+    electricity: `url(${violet_texture})`,
+    buildings: `url(${orange_texture})`,
+    transport: `url(${purple_texture})`,
+    food: `url(${light_green_texture})`,
+    trash: `url(${gray_texture1})`,
+    industry: `url(${red_texture})`,
+    import: `url(${pink_texture})`,
+    nature: `url(${dark_green_texture})`,
+    money: `url(${yellow_texture})`,
+    innovation: `url(${blue_texture})`,
     fontSize: "16px",
-    fontColor: "black",
+    fontColor: "#333",
   },
   fontColors: {
-    primary: "black",
+    primary: "333",
     secondary: "#4c4c4c",
     impactIcon: "white",
     emissionLevel: "white",

@@ -1,4 +1,5 @@
-import avatarImage from "../../assets/svgs/avatar.svg";
+import { useState } from "react";
+import avatarImage from "../../assets/images/polar-bear.png";
 import FollowAddButtons from "../FollowAddFriendButtons/FollowAddButtons.jsx";
 import {
   Grid,
@@ -12,34 +13,85 @@ import {
   FriendCardHeader,
   FriendLocation,
   FriendName,
+  Memberships,
+  NameLocation,
+  ReadMoreButton,
+  RightBar,
+  RightBottom,
+  RightTop,
 } from "./FriendCard.style.js";
 
+const MAX_CHARACTERS = 90;
+const MIN_FONT_SIZE = 18;
+
 const FriendCard = ({ friendInfo, requestObject }) => {
+  const hasMemberships =
+    friendInfo.memberships && friendInfo.memberships.length > 0;
+  const [showFullAbout, setShowFullAbout] = useState(false);
+
+  const handleReadMoreClick = () => {
+    setShowFullAbout(!showFullAbout);
+  };
+
+  const aboutMeText = showFullAbout
+    ? friendInfo.about_me
+    : friendInfo.about_me.slice(0, MAX_CHARACTERS) +
+      (friendInfo.about_me.length > MAX_CHARACTERS ? "..." : "");
+
   return (
     <FriendCardContainer>
       <FriendCardHeader to={`/profile/${friendInfo.id}`}>
         <FriendAvatar alt="avatar" src={friendInfo.avatar || avatarImage} />
-        <FriendName>
-          {friendInfo.first_name
-            ? `${friendInfo.first_name} ${friendInfo.last_name}`
-            : friendInfo.email}
-        </FriendName>
-        <FriendLocation>{friendInfo.location}</FriendLocation>
       </FriendCardHeader>
-      <ButtonsWrapper>
-        <FollowAddButtons
-          friendInfo={friendInfo}
-          requestObject={requestObject}
-        />
-      </ButtonsWrapper>
-      <FriendAbout>{friendInfo.about_me}</FriendAbout>
-      <LikedThingsContainer $centered>
-        <Grid>
-          {friendInfo.memberships.map((thing) => (
-            <li key={thing}>{thing}</li>
-          ))}
-        </Grid>
-      </LikedThingsContainer>
+      <RightBar>
+        <RightTop>
+          <NameLocation>
+            <FriendName>
+              {friendInfo.first_name
+                ? `${friendInfo.first_name} ${friendInfo.last_name}`
+                : friendInfo.email
+                ? friendInfo.email.split("@")[0]
+                : ""}
+            </FriendName>
+            <FriendLocation>{friendInfo.location}</FriendLocation>
+          </NameLocation>
+          <ButtonsWrapper>
+            <FollowAddButtons
+              style={{ fontSize: "10px" }}
+              friendInfo={friendInfo}
+              requestObject={requestObject}
+            />
+          </ButtonsWrapper>
+        </RightTop>
+        <RightBottom>
+          <Memberships>
+            <LikedThingsContainer $centered>
+              <Grid>
+                {hasMemberships &&
+                  friendInfo.memberships.map((thing) => (
+                    <li key={thing}>{thing}</li>
+                  ))}
+              </Grid>
+            </LikedThingsContainer>
+          </Memberships>
+          <FriendAbout
+            fontSize={
+              friendInfo.about_me.length < 15
+                ? `${MIN_FONT_SIZE}px`
+                : hasMemberships
+                ? "1rem"
+                : "1.5rem"
+            }
+          >
+            {aboutMeText}
+            {friendInfo.about_me.length > MAX_CHARACTERS && (
+              <ReadMoreButton onClick={handleReadMoreClick}>
+                {showFullAbout ? "read less" : "read more"}
+              </ReadMoreButton>
+            )}
+          </FriendAbout>
+        </RightBottom>
+      </RightBar>
     </FriendCardContainer>
   );
 };

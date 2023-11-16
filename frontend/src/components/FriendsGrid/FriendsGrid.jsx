@@ -16,9 +16,9 @@ const FriendsGrid = ({ url }) => {
     return friendRequests.find((request) => request.receiver.id === friendID);
   };
 
+  if (loading) return <LoadingSpinner />;
   return (
     <FindFriendsContainer>
-      {loading && <LoadingSpinner />}
       <FriendsGridContainer>
         {data &&
           data.results

@@ -10,7 +10,12 @@ import { useSelector } from "react-redux";
 import sendIcon from "../../../assets/svgs/send_button.svg";
 import CreatePostModal from "./CreatePostModal.jsx";
 
-const CreatePostSmall = ({ postToShare, setModalIsOpen, modalIsOpen }) => {
+const CreatePostSmall = ({
+  postToShare,
+  setModalIsOpen,
+  modalIsOpen,
+  setListOfPosts,
+}) => {
   const userData = useSelector((store) => store.loggedInUser.user);
 
   return (
@@ -26,6 +31,7 @@ const CreatePostSmall = ({ postToShare, setModalIsOpen, modalIsOpen }) => {
       )}
       {modalIsOpen && (
         <CreatePostModal
+          setListOfPosts={setListOfPosts}
           userData={userData}
           setModalIsOpen={setModalIsOpen}
           postToShare={postToShare}

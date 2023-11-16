@@ -1,70 +1,85 @@
+import paper_texture from "../../assets/images/paper_texture.jpg";
 import ImpactIcon from "./ImpactIcon.jsx";
-
 import { useEffect, useState } from "react";
 import supportersIcon from "./../../assets/other_icons/supporters.png";
-import eCarIcon from "./../../assets/solution_icons/eCar.svg";
 import CategoryLabel from "./CategoryLabel.jsx";
 import ProgressComponent from "./ProgressBar.jsx";
 import Resources from "./Resources.jsx";
 import SvgIcon from "./SvgIcon.jsx";
-import { SolutionContainer } from "./solution.style.js";
+import { CheckboxContainer, SolutionContainer } from "./solution.style.js";
 
 import SolutionButton from "./SolutionButton.jsx";
+import useApiRequest from "../../hooks/useApiRequest.js";
 
-const CHECKBOX_API_ENDPOINT = "/api/checkbox-status";
-
-export default function SolutionDropDown({ solution }) {
-  const [isChecked, setIsChecked] = useState(false);
+export default function SolutionDropDown({
+  solution,
+  isSelected,
+  onSelectedListChange,
+}) {
+  const { sendRequest: toggleSelection, data } = useApiRequest("noAuth");
+  const [isChecked, setIsChecked] = useState(isSelected);
   const [isVisible, setIsVisible] = useState(false);
   const {
     category,
     name,
     impact,
-    description,
+    text,
     progress,
-    progress_description,
+    progress_text,
     number_of_supporters,
     button_text,
+    icon_name,
+    id,
   } = solution;
 
+  const handleToggleSelection = () => {
+    toggleSelection("post", `/solution/toggle-select/${id}/`);
+  };
+
   useEffect(() => {
-    const fetchCheckboxStatus = async () => {
-      try {
-        const response = await fetch(CHECKBOX_API_ENDPOINT);
-        const data = await response.json();
-        setIsChecked(data.isChecked);
-      } catch (error) {
-        console.error("Failed to fetch checkbox status:", error);
-      }
-    };
-    fetchCheckboxStatus();
-  }, []);
+    setIsChecked(isSelected);
+  }, [isSelected]);
+
+  useEffect(() => {
+    if (data && data.selected_solutions) {
+      onSelectedListChange(data.selected_solutions);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   const handleCheckboxChange = (event) => {
-    const newCheckedStatus = event.target.checked;
-    setIsChecked(newCheckedStatus);
+    setIsChecked(event.target.checked);
+    handleToggleSelection();
   };
 
   const handleButtonSelectionChange = (isSelected) => {
     setIsChecked(isSelected);
+    handleToggleSelection();
   };
   const handleSolutionDropDown = () => {
     setIsVisible(!isVisible);
   };
+  const style = {
+    "--background-image": `url(${paper_texture})`,
+  };
+
+  const solutionText = text.replace("{impact}", `${impact} megatons per year`);
+  const progressText = progress_text.replace("{progress}", progress);
 
   return (
-    <SolutionContainer $visibleOrChecked={isVisible || isChecked}>
-      <div className="solutionBar" onClick={handleSolutionDropDown}>
+    <SolutionContainer $isChecked={isChecked}>
+      <div className="solutionBar" onDoubleClick={handleSolutionDropDown}>
         <div className="solutionBarLeft">
-          <div>
+          <CheckboxContainer>
             <input
               type="checkbox"
               checked={isChecked}
               onChange={handleCheckboxChange}
+              className="custom-checkbox"
             />
-          </div>
+          </CheckboxContainer>
           <div>
-            <SvgIcon svg_icon={eCarIcon} />
+            <SvgIcon svg_icon={icon_name} />
           </div>
           <div className="solutionName">{name}</div>
         </div>
@@ -75,7 +90,7 @@ export default function SolutionDropDown({ solution }) {
               {number_of_supporters}
             </div>
             <div>
-              <CategoryLabel category={category} />
+              <CategoryLabel category={category.name} />
             </div>
           </div>
           <div>
@@ -87,18 +102,18 @@ export default function SolutionDropDown({ solution }) {
         </div>
       </div>
       {isVisible && (
-        <div className="solutionDetails">
-          <div>{description}</div>
-
+        <div className="solutionDetails" style={style}>
+          <div>{solutionText}</div>
+          <br />
           <ProgressComponent
             className="progressBar"
             percentage={progress}
-            progress_description={progress_description}
+            progress_description={progressText}
           />
 
           <div></div>
 
-          <Resources />
+          <Resources solutionId={id} />
 
           <div className="solutionButton">
             <SolutionButton

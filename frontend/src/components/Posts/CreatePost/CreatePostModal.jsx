@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CreatePostModalContainer,
-  TextField,
   CustomImageUploadButton,
   SubmitButton,
+  TextField,
 } from "./CreatePost.style.js";
 import sendIcon from "../../../assets/svgs/send_button.svg";
 import uploadIcon from "../../../assets/svgs/Shape.svg";
@@ -11,11 +11,16 @@ import Overlay from "../../Overlay/Overlay.jsx";
 import useApiRequest from "../../../hooks/useApiRequest.js";
 import SharedPost from "../Post/SharedPost.jsx";
 
-const CreatePostModal = ({ setModalIsOpen, userData, postToShare }) => {
+const CreatePostModal = ({
+  setModalIsOpen,
+  userData,
+  postToShare,
+  setListOfPosts,
+}) => {
   const [content, setContent] = useState();
   const [imageToUpload, setImageToUpload] = useState([]);
   const [error, setError] = useState(undefined);
-  const { sendRequest } = useApiRequest();
+  const { sendRequest, data } = useApiRequest();
 
   const uploadPreviewImage = (e) => {
     setImageToUpload([]);
@@ -47,8 +52,13 @@ const CreatePostModal = ({ setModalIsOpen, userData, postToShare }) => {
       formdata.append("images", image.file);
     });
     sendRequest("post", "social/posts/", formdata, true);
-    setModalIsOpen(false);
   };
+  useEffect(() => {
+    if (data !== null) {
+      setListOfPosts((prevState) => [data, ...prevState]);
+      setModalIsOpen(false);
+    }
+  }, [data, setListOfPosts, setModalIsOpen]);
 
   const removeImage = (clickedIndex) => {
     setImageToUpload(

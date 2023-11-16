@@ -1,8 +1,9 @@
 from django.contrib.auth import get_user_model
-from django.db.models import Q
+from django.db.models import Q, Sum
 from friend_request.models import FriendRequest, get_friends, is_friend
 from post.models import Post
 from rest_framework import serializers
+from utils import generate_aggregate
 
 User = get_user_model()
 
@@ -18,6 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
     amount_of_friends = serializers.SerializerMethodField()
     amount_of_followers = serializers.SerializerMethodField()
     amount_following = serializers.SerializerMethodField()
+    total_impact = serializers.SerializerMethodField()
 
     def get_logged_in_user_is_following(self, instance: User):
         current_user = self.context["request"].user
@@ -66,6 +68,10 @@ class UserSerializer(serializers.ModelSerializer):
     def get_amount_following(self, instance: User):
         return instance.followees.count()
 
+    def get_total_impact(self, instance: User):
+        selected_solutions = instance.user_selections.selected_solutions.all()
+        return generate_aggregate(selected_solutions, Sum("impact"))
+
     class Meta:
         model = User
         fields = [
@@ -89,6 +95,7 @@ class UserSerializer(serializers.ModelSerializer):
             "amount_of_followers",
             "amount_following",
             "memberships",
+            "total_impact",
         ]
 
 

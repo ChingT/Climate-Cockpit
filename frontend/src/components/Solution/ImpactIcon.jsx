@@ -1,9 +1,14 @@
 import { ImpactIconDiv } from "./solution.style.js";
 
 function ImpactIcon({ impact, visibleOrChecked }) {
+  let impactNumber = -impact;
+  if (impact == null) {
+    impactNumber = "?";
+  }
+
   return (
     <ImpactIconDiv $visibleOrChecked={visibleOrChecked}>
-      <div>{impact}</div>
+      <div>{impactNumber}</div>
     </ImpactIconDiv>
   );
 }
