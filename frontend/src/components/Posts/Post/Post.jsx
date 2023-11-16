@@ -175,13 +175,13 @@ const Post = ({
             ? "1 Comment"
             : `${amountOfComments} Comments`}
         </CommentContainer>
-       <LikeCount>
-  {amountOfLikes === 0
-    ? "0 Like"
-    : amountOfLikes === 1
-    ? "1 Like"
-    : `${amountOfLikes} Likes`}
-</LikeCount>
+        <LikeCount>
+          {amountOfLikes === 0
+            ? "0 Like"
+            : amountOfLikes === 1
+            ? "1 Like"
+            : `${amountOfLikes} Likes`}
+        </LikeCount>
       </FooterContainer>
       {areCommentsVisible && (
         <CommentContainer>
