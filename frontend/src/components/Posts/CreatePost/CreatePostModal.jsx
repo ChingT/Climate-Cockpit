@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
-import {
-  AvatarAndTextField,
-  CreatePostModalContainer,
-  CustomImageUploadButton,
-} from "./CreatePost.style.js";
+import { useSelector } from "react-redux";
 import uploadIcon from "../../../assets/svgs/Shape.svg";
-import Overlay from "../../Overlay/Overlay.jsx";
 import useApiRequest from "../../../hooks/useApiRequest.js";
-import SharedPost from "../Post/SharedPost.jsx";
+import Overlay from "../../Overlay/Overlay.jsx";
 import {
   AvatarAndName,
   SaveButton,
   StyledTextarea,
 } from "../Post/Modal.styles.js";
+import SharedPost from "../Post/SharedPost.jsx";
+import {
+  AvatarAndTextField,
+  CreatePostModalContainer,
+  CustomImageUploadButton,
+} from "./CreatePost.style.js";
 
 const CreatePostModal = ({
   setModalIsOpen,
@@ -24,6 +25,8 @@ const CreatePostModal = ({
   const [imageToUpload, setImageToUpload] = useState([]);
   const [error, setError] = useState(undefined);
   const { sendRequest, data } = useApiRequest();
+  const { sendRequest: sendBotCommentRequest } = useApiRequest();
+  const gptbotUsers = useSelector((store) => store.gptbotUsers.list);
 
   const uploadPreviewImage = (e) => {
     setImageToUpload([]);
@@ -56,16 +59,36 @@ const CreatePostModal = ({
     });
     sendRequest("post", "social/posts/", formdata, true);
   };
+
   useEffect(() => {
     if (data !== null) {
+      // Send request to create comment from GPTbot users if they are followed by the user
+      const createGptbotComments = () => {
+        gptbotUsers
+          .filter((gptbotUser) => gptbotUser.logged_in_user_is_following)
+          .forEach((gptbotUser) =>
+            sendBotCommentRequest(
+              "post",
+              `social/comments/${data.id}/gptbot-comment/${gptbotUser.id}`
+            )
+          );
+      };
+
+      createGptbotComments();
       setListOfPosts((prevState) => [data, ...prevState]);
       setModalIsOpen(false);
     }
-  }, [data, setListOfPosts, setModalIsOpen]);
+  }, [
+    data,
+    gptbotUsers,
+    sendBotCommentRequest,
+    setListOfPosts,
+    setModalIsOpen,
+  ]);
 
   const removeImage = (clickedIndex) => {
     setImageToUpload(
-      imageToUpload.filter((image) => image.index !== clickedIndex),
+      imageToUpload.filter((image) => image.index !== clickedIndex)
     );
   };
 
