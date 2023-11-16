@@ -27,7 +27,7 @@ export default function SolutionFilter({
     "solution/categories/",
     undefined,
     undefined,
-    "noAuth"
+    "noAuth",
   );
 
   const [categories, setCategories] = useState([]);
@@ -92,21 +92,21 @@ export default function SolutionFilter({
     sortingIcon,
     sortingOptions,
     handleSortChange,
-    selectedSortOption
+    selectedSortOption,
   );
   const CategoryDropdown = dropdown(
     "Category Filter",
     funnelIcon,
     categories,
     handleCategoryChange,
-    selectedCategory
+    selectedCategory,
   );
   const StatusDropdown = dropdown(
     "Status Filter",
     funnelIcon,
     statusOptions,
     handleStatusChange,
-    selectedStatus
+    selectedStatus,
   );
 
   return (

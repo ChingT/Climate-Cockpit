@@ -33,7 +33,7 @@ export const SolutionContainer = styled.div`
     border-radius: 10px;
     padding: 5px;
   }
-  
+
   .dropdownToggleIcon {
     width: 5%;
     margin-right: 4%;
@@ -55,17 +55,17 @@ export const SolutionContainer = styled.div`
     font-weight: bold;
     color: #555;
   }
-  
-    .rotated {
+
+  .rotated {
     transform: rotate(180deg);
-    transition: transform 0.3s ease; 
+    transition: transform 0.3s ease;
   }
-  
-    .rotated-closed {
+
+  .rotated-closed {
     transform: rotate(0deg);
-    transition: transform 0.3s ease; 
+    transition: transform 0.3s ease;
   }
-  
+
   .solutionBarRight {
     display: flex;
     align-items: center;
@@ -110,7 +110,7 @@ export const SolutionContainer = styled.div`
 export const ArrowImg = styled.img`
   transform: rotate(90deg);
   cursor: pointer;
-`
+`;
 
 export const CheckboxContainer = styled.div`
   .custom-checkbox {
