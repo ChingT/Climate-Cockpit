@@ -6,10 +6,11 @@ import CategoryLabel from "./CategoryLabel.jsx";
 import ProgressComponent from "./ProgressBar.jsx";
 import Resources from "./Resources.jsx";
 import SvgIcon from "./SvgIcon.jsx";
-import { CheckboxContainer, SolutionContainer } from "./solution.style.js";
+import {ArrowImg, CheckboxContainer, SolutionContainer} from "./solution.style.js";
 
 import SolutionButton from "./SolutionButton.jsx";
 import useApiRequest from "../../hooks/useApiRequest.js";
+import arrowToOpen from "../../assets/images/right-arrow.png";
 
 export default function SolutionDropDown({
   solution,
@@ -57,8 +58,7 @@ export default function SolutionDropDown({
     handleToggleSelection();
   };
   const handleSolutionDropDown = () => {
-    setIsVisible(!isVisible);
-  };
+    setIsVisible((prevVisible) => !prevVisible);  };
   const style = {
     "--background-image": `url(${paper_texture})`,
   };
@@ -99,6 +99,17 @@ export default function SolutionDropDown({
               visibleOrChecked={isVisible || isChecked}
             />
           </div>
+          <div
+        className={`dropdownToggleIcon ${isVisible ? 'rotated' : 'rotated-closed'}`}
+        onClick={handleSolutionDropDown}
+      >
+        <ArrowImg
+          src={arrowToOpen}
+          style={{ width: "1.6rem", height: "1.5rem" }}
+          className="arrow-icon"
+          alt="Arrow"
+        />
+      </div>
         </div>
       </div>
       {isVisible && (
