@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { CardWithShadowStyles } from "../../styles/globalStyles.js";
-import BackgroundImage from "../../assets/images/light_pink_texture.png";
 import paper_texture from "../../assets/images/paper_texture.jpg";
 
 export const FindFriendsContainer = styled.div`
@@ -28,6 +27,7 @@ export const FriendsGridContainer = styled.div`
 export const FriendCardContainer = styled(CardWithShadowStyles)`
   aspect-ratio: 1/2;
   display: flex;
+  background-image: url(${paper_texture});
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -36,13 +36,13 @@ export const FriendCardContainer = styled(CardWithShadowStyles)`
   padding: 0;
 
   &::after {
+    border-top: 1px solid lightgray;
     content: "";
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 50%;
-    background-image: url(${BackgroundImage});
     background-size: cover;
   }
 `;
@@ -78,7 +78,7 @@ export const NameLocation = styled.div`
   padding-right: 1.3rem;
   align-items: end;
   justify-content: center;
-  border-right: 1px solid black;
+  border-right: 1px solid lightgray;
 `;
 
 export const FriendCardHeader = styled(Link)`
@@ -165,14 +165,15 @@ export const PopUp = styled.div`
   display: flex;
   justify-content: center;
   align-items: end;
-  background-image: url(${paper_texture});
+  background: conic-gradient(from 90deg at 1.1px 1.1px, #f3f3e4 25%, rgb(217, 217, 217) 0);
+  background-size: 24px 24px;
   box-shadow:
-    0px 0px 1px rgba(0, 0, 0, 0.2),
+    0px 0px 1px rgba(0, 0, 0, 0.6),
     0px 10px 20px rgba(0, 0, 0, 0.05);
   border-radius: 4px;
   z-index: 10;
 
-  min-width: 12rem;
+  min-width: 11rem;
   min-height: 14rem;
   max-width: 30rem;
   max-height: 40rem;
