@@ -18,25 +18,25 @@ User = get_user_model()
 
 
 @receiver(post_save, sender=Post)
-def create_chatbot_comment_for_post(sender, instance, created, **kwargs):
+def create_gtpbot_comment_for_post(sender, instance, created, **kwargs):
     if created:
-        create_chatbot_comment(instance)
+        create_gtpbot_comment(instance)
 
 
-def create_chatbot_comment(target_post: Post):
-    chatbot_users = User.objects.filter(is_chatbot=True)
-    for chatbot_user in chatbot_users.filter(followers__id=target_post.user.id):
-        chatbot_response = get_chatbot_response(chatbot_user, target_post.content)
-        create_comment(chatbot_user, target_post, chatbot_response)
+def create_gtpbot_comment(target_post: Post):
+    gtpbot_users = User.objects.filter(is_GPTbot=True)
+    for gtpbot_user in gtpbot_users.filter(followers__id=target_post.user.id):
+        gtpbot_response = get_gtpbot_response(gtpbot_user, target_post.content)
+        create_comment(gtpbot_user, target_post, gtpbot_response)
 
 
 def create_comment(user, post, content):
     Comment.objects.create(user=user, post=post, content=content)
 
 
-def get_chatbot_response(chatbot_user: User, user_text: str):
+def get_gtpbot_response(gtpbot_user: User, user_text: str):
     user_message = {"role": USER_ROLE, "content": user_text}
-    system_message = {"role": SYSTEM_ROLE, "content": chatbot_user.chatbot_description}
+    system_message = {"role": SYSTEM_ROLE, "content": gtpbot_user.GPTbot_description}
     messages_history = [system_message, user_message]
     response = client.chat.completions.create(
         model=OPENAI_MODEL_NAME, messages=messages_history

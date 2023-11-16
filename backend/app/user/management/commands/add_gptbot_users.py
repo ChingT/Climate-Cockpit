@@ -8,11 +8,11 @@ User = get_user_model()
 
 
 class Command(BaseCommand):
-    help = "Create a GPT user in the database"  # noqa: A003
+    help = "Create a GPTbot user in the database"  # noqa: A003
 
     def handle(self, *args, **options):
         source_root = Path(__file__).parent / "source"
-        csv_file_path = source_root / "chatbot_users.csv"
+        csv_file_path = source_root / "gptbot_users.csv"
         with Path.open(csv_file_path, encoding="utf-8") as csv_file:
             csv_reader = csv.DictReader(csv_file)
             for row in csv_reader:

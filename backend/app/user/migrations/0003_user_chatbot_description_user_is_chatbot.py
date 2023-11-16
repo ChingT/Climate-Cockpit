@@ -11,12 +11,12 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name="user",
-            name="chatbot_description",
+            name="gptbot_description",
             field=models.TextField(blank=True),
         ),
         migrations.AddField(
             model_name="user",
-            name="is_chatbot",
+            name="is_gptbot",
             field=models.BooleanField(default=False),
         ),
     ]
