@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import send_icon from "../../../assets/images/send.png";
 import trash from "../../../assets/images/delete-folder.png";
 import useApiRequest from "../../../hooks/useApiRequest.js";
-import useAutoFetch from "../../../hooks/useAutoFetch.js";
 import ProfileLink from "../../ProfileLink/ProfileLink.jsx";
 import {
   CommentBlock,
@@ -43,6 +42,7 @@ const CommentsSection = ({
     if (dataPost !== null) {
       setComments((currentComments) => [dataPost, ...currentComments]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataPost]);
 
   const deleteComment = (commentId) => {
