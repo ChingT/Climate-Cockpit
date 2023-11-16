@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import trash from "../../../assets/images/delete-folder.png";
 import send_icon from "../../../assets/images/send.png";
 import useApiRequest from "../../../hooks/useApiRequest.js";
-import useAutoFetch from "../../../hooks/useAutoFetch.js";
 import ProfileLink from "../../ProfileLink/ProfileLink.jsx";
 import {
   CommentBlock,
@@ -21,24 +20,11 @@ const CommentsSection = ({
   comments,
   setComments,
   setAmountOfComments,
-  areCommentsVisible,
 }) => {
   const userData = useSelector((store) => store.loggedInUser.user);
   const [commentText, setCommentText] = useState("");
   const { sendRequest: sendRequestPost, data: dataPost } = useApiRequest();
   const { sendRequest: sendRequestDelete } = useApiRequest();
-
-  const urlToFetch = `social/comments/${postId}/?limit=3`;
-  const { data } = useAutoFetch(
-    "get",
-    urlToFetch,
-    undefined,
-    areCommentsVisible
-  );
-
-  useEffect(() => {
-    if (data !== null) setComments(data.results);
-  }, [data, setComments]);
 
   const handleCommentChange = (e) => setCommentText(e.target.value);
 

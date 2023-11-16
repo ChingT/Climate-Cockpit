@@ -89,8 +89,13 @@ const Post = ({
   };
   const toggleComments = () => setAreCommentsVisible((prevState) => !prevState);
 
-  const urlToFetch = `social/comments/${postData.id}/?limit=3`;
-  const { data } = useAutoFetch("get", urlToFetch);
+  const urlToFetch = `social/comments/${postData.id}/`;
+  const { data } = useAutoFetch(
+    "get",
+    urlToFetch,
+    undefined,
+    areCommentsVisible
+  );
   useEffect(() => {
     if (data !== null) {
       setComments(data.results);
@@ -190,7 +195,6 @@ const Post = ({
             comments={comments}
             setComments={setComments}
             setAmountOfComments={setAmountOfComments}
-            areCommentsVisible={areCommentsVisible}
           />
         </CommentContainer>
       )}
