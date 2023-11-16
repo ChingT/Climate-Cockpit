@@ -1,7 +1,7 @@
 import os
 
-import openai
 from django.contrib.auth import get_user_model
+from openai import OpenAI
 from post.models import Post
 from rest_framework.generics import (
     CreateAPIView,
@@ -15,7 +15,7 @@ from user.permissions import IsOwner
 from .models import Comment
 from .serializers import CommentSerializer
 
-openai.api_key = os.environ.get("OPENAI_API_KEY")
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 User = get_user_model()
 
@@ -107,13 +107,7 @@ class CreateBotCommentAPIView(CreateAPIView):
             {"role": "system", "content": chatbot_user.chatbot_description},
             user_message,
         ]
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model="gpt-3.5-turbo", messages=messages_history
         )
-        bot_message = {
-            "role": "assistant",
-            "content": response.choices[0].message["content"],
-        }
-        messages_history.append(bot_message)
-
-        return bot_message["content"]
+        return response.choices[0].message.content
