@@ -8,7 +8,7 @@ from .models import Category, Resource, Solution, UserSelection
 User = get_user_model()
 
 
-class CategorySerializer(serializers.ModelSerializer):
+class ScorecardSerializer(serializers.ModelSerializer):
     impact_from_user = serializers.SerializerMethodField()
     level_from_user = serializers.SerializerMethodField()
     solution_names = serializers.SerializerMethodField()
@@ -34,8 +34,14 @@ class CategorySerializer(serializers.ModelSerializer):
         return Solution.objects.none()
 
 
+class CategoryNameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ["name"]
+
+
 class SolutionSerializer(serializers.ModelSerializer):
-    category = CategorySerializer()
+    category = ScorecardSerializer()
     number_of_supporters = serializers.SerializerMethodField()
     selected_by_logged_in_user = serializers.SerializerMethodField()
 
