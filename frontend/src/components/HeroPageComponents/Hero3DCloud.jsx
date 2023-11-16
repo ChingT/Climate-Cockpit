@@ -40,10 +40,11 @@ const Hero3DCloud = () => {
       return;
     }
 
-    let d = -10;
-    let p = 200000;
-    let worldXAngle = 50;
-    let worldYAngle = 50;
+    let d = 1000;
+    let p = 1000;
+    let worldXAngle = 1000;
+    let worldYAngle = 1000;
+    updateView();
 
     viewport.style.webkitPerspective = p;
     viewport.style.MozPerspective = p;
@@ -54,9 +55,9 @@ const Hero3DCloud = () => {
     function createCloud() {
       const div = document.createElement("div");
       div.className = "cloudBase";
-      let x = 256 - Math.random() * 512;
-      let y = 256 - Math.random() * 512;
-      let z = 256 - Math.random() * 512;
+      let x = -50 - 0.2 * 512;
+      let y = 90;
+      let z = 106 - 0.1 * 512;
       const t = `translateX( ${x}px ) translateY( ${y}px ) translateZ( ${z}px )`;
       div.style.webkitTransform =
         div.style.MozTransform =
@@ -102,15 +103,6 @@ const Hero3DCloud = () => {
       return div;
     }
 
-    viewport.addEventListener("mousewheel", onContainerMouseWheel);
-    viewport.addEventListener("DOMMouseScroll", onContainerMouseWheel);
-
-    viewport.addEventListener("mousemove", (e) => {
-      worldYAngle = -0.5 - (e.clientX / viewport.clientWidth) * 180;
-      worldXAngle = 0.5 - (e.clientY / viewport.clientHeight) * 180;
-      updateView();
-    });
-
     function generate() {
       objects = [];
       if (world.hasChildNodes()) {
@@ -131,12 +123,6 @@ const Hero3DCloud = () => {
         world.style.oTransform =
         world.style.transform =
           t;
-    }
-
-    function onContainerMouseWheel(event) {
-      event = event ? event : window.event;
-      d = d - (event.detail ? event.detail * -5 : event.wheelDelta / 8);
-      updateView();
     }
 
     function update() {

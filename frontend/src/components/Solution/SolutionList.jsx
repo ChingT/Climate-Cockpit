@@ -5,7 +5,7 @@ import SolutionFilter from "../SolutionFilter/SolutionFilter.jsx";
 import SolutionDropDown from "./SolutionDropDown.jsx";
 import { FilterAndList, SolutionListDiv } from "./solution.style.js";
 
-function SolutionList() {
+function SolutionList({ setListChanged, listChanged }) {
   const [allSolutions, setAllSolutions] = useState([]);
   const [solutionList, setSolutionList] = useState([]);
   const [selectedSortOption, setSelectedSortOption] = useState("Default");
@@ -68,6 +68,7 @@ function SolutionList() {
     }
   }, [selectedData]);
   const handleSelectedListChange = (newSelectedList) => {
+    setListChanged(!listChanged);
     setSelectedList(newSelectedList);
   };
 

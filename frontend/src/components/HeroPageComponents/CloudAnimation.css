@@ -3,10 +3,12 @@
   margin: 0;
   padding: 0;
 }
+
 body {
   overflow: hidden;
   width: 50%;
 }
+
 #viewport {
   -webkit-perspective: 1000px;
   -moz-perspective: 1000px;
@@ -24,8 +26,8 @@ body {
 
 #world {
   position: absolute;
-  left: 65%;
-  top: 50%;
+  left: 60%;
+  top: 256px;
   margin-left: -256px;
   margin-top: -256px;
   height: 512px;
@@ -56,9 +58,10 @@ body {
 }
 
 .cloudLayer {
+  filter: brightness(0.2);
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: 256px;
+  top: 256px;
   width: 256px;
   height: 256px;
   margin-left: -128px;

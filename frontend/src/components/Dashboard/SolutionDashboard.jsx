@@ -1,16 +1,23 @@
-import useApiRequest from "../../hooks/useApiRequest.js";
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
+import { useState } from "react";
 import DashboardGrid from "./DashboardGrid.jsx";
 import TotalPoints from "./TotalPoints.jsx";
 
-export default function SolutionDashboard() {
-  const { loading } = useApiRequest();
+export default function SolutionDashboard({ listChanged }) {
+  const [emissionEquation, setEmissionEquation] = useState({
+    inland: 47,
+    imports: 71,
+    solution: null,
+    removed: null,
+    total: null,
+  });
 
-  if (loading) return <LoadingSpinner />;
   return (
     <>
-      <TotalPoints />
-      <DashboardGrid />
+      <TotalPoints emissionEquation={emissionEquation} />
+      <DashboardGrid
+        listChanged={listChanged}
+        setEmissionEquation={setEmissionEquation}
+      />
     </>
   );
 }

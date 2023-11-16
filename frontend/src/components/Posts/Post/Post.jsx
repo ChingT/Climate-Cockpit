@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
-import trash from "../../../assets/images/delete.svg";
-import edit_post from "../../../assets/svgs/edit-image.svg";
-import likeHeart from "../../../assets/svgs/heart_rgb.png";
-import shareArrow from "../../../assets/svgs/share.svg";
+import trash from "../../../assets/images/delete-folder.png";
+import likeHeart from "../../../assets/images/like.png";
+import comments from "../../../assets/images/message.png";
+import shareArrow from "../../../assets/images/shortcut.png";
+import edit_post from "../../../assets/images/write-message.png";
 import useApiRequest from "../../../hooks/useApiRequest.js";
 import ProfileLink from "../../ProfileLink/ProfileLink.jsx";
 import CommentsSection from "../Comment/CommentsSection.jsx";
@@ -12,9 +13,12 @@ import { StyledImg } from "./Modal.styles.js";
 import ModalPost from "./ModalPost.jsx";
 import {
   BottomButtons,
+  CommentContainer,
+  CommentImg,
   DeleteButton,
   EditButton,
   FooterContainer,
+  LeftButtons,
   LikeCount,
   PostActionButton,
   PostActionWrapper,
@@ -23,6 +27,7 @@ import {
   PostImage,
   PostImageContainer,
   PostText,
+  RightButtons,
 } from "./Post.style.js";
 import SharedPost from "./SharedPost.jsx";
 
@@ -40,6 +45,7 @@ const Post = ({
   const [postIsLiked, setPostIsLiked] = useState(postData.logged_in_user_liked);
   const [amountOfLikes, setAmountOfLikes] = useState(postData.amount_of_likes);
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
+  const [areCommentsVisible, setAreCommentsVisible] = useState(false);
   const { sendRequest } = useApiRequest();
 
   const handleDeletePost = () => {
@@ -77,16 +83,9 @@ const Post = ({
     sendRequest("patch", `social/posts/${postData.id}/`, formData, true);
     setContent(editedContent);
     setPostImages(editedImages);
-    // setListOfPosts((current) =>
-    //   current.map((post) =>
-    //     post.id === postData.id
-    //       ? { ...post, content: editedContent, images: editedImages }
-    //       : post,
-    //   ),
-    // );
   };
-
-  useEffect(() => {}, [postImages]);
+  const toggle_comments = () =>
+    setAreCommentsVisible((prevState) => !prevState);
 
   return (
     <PostContainer>
@@ -134,31 +133,41 @@ const Post = ({
       {postData.shared && <SharedPost postData={postData.shared} />}
       <FooterContainer>
         <BottomButtons>
-          <PostActionWrapper>
-            <PostActionButton onClick={handleClickLike}>
-              <img
-                src={likeHeart}
-                alt="like heart"
-                className={postIsLiked ? "liked-post" : null}
-              />
-              {postIsLiked ? "Liked" : "Like"}
-            </PostActionButton>
-            <PostActionButton onClick={sharePost}>
-              <img src={shareArrow} alt="share Icon" />
-              Share
-            </PostActionButton>
-          </PostActionWrapper>
-          {userData.id === postData.user.id && (
-            <DeleteButton onClick={handleDeletePost}>
-              <img src={trash} alt="delete post" />
-              <p>Delete</p>
-            </DeleteButton>
-          )}
+          <LeftButtons>
+            <PostActionWrapper>
+              <PostActionButton onClick={handleClickLike}>
+                <img
+                  src={likeHeart}
+                  alt="like heart"
+                  className={postIsLiked ? "liked-post" : null}
+                />
+                {postIsLiked ? "Liked" : "Like"}
+              </PostActionButton>
+              <PostActionButton onClick={sharePost}>
+                <img src={shareArrow} alt="share Icon" />
+                Share
+              </PostActionButton>
+            </PostActionWrapper>
+          </LeftButtons>
+          <RightButtons></RightButtons>
         </BottomButtons>
-        <LikeCount>{amountOfLikes} likes</LikeCount>
-      </FooterContainer>
 
-      <CommentsSection postId={postData.id} />
+        <CommentContainer onClick={toggle_comments}>
+          <CommentImg src={comments} alt="Show/Hide Comments" /> Comments
+        </CommentContainer>
+        {userData.id === postData.user.id && (
+          <DeleteButton onClick={handleDeletePost}>
+            <img src={trash} alt="delete post" />
+            <p>Delete</p>
+          </DeleteButton>
+        )}
+        <LikeCount>{amountOfLikes}&nbsp; likes</LikeCount>
+      </FooterContainer>
+      {areCommentsVisible && (
+        <CommentContainer>
+          <CommentsSection postId={postData.id} />
+        </CommentContainer>
+      )}
     </PostContainer>
   );
 };

@@ -19,7 +19,9 @@ class ListUserAPIView(ListAPIView):
     """
 
     serializer_class = UserSerializer
-    queryset = User.objects.filter(is_active=True).order_by("-date_joined")
+    queryset = User.objects.filter(is_active=True, is_staff=False).order_by(
+        "-is_gptbot", "-date_joined"
+    )
     filter_backends = [SearchFilter]
     search_fields = [
         "username",

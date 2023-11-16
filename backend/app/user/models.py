@@ -13,6 +13,8 @@ class User(AbstractUser):
     location = models.CharField(max_length=200, blank=True)
     about_me = models.CharField(max_length=1000, blank=True)
     memberships = models.JSONField(max_length=30, default=list, blank=True)
+    is_gptbot = models.BooleanField(default=False)
+    gptbot_description = models.TextField(blank=True)
 
     def __str__(self):
         return self.username

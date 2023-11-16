@@ -15,28 +15,40 @@ import {
   FriendName,
   Memberships,
   NameLocation,
+  PopUp,
   ReadMoreButton,
   RightBar,
   RightBottom,
   RightTop,
 } from "./FriendCard.style.js";
 
-const MAX_CHARACTERS = 90;
+const ReadMorePopup = ({ aboutMeText, onClose }) => {
+  return (
+    <PopUp>
+      <p>{aboutMeText}</p>
+      <ReadMoreButton style={{ marginTop: "0.5rem" }} onClick={onClose}>
+        close
+      </ReadMoreButton>
+    </PopUp>
+  );
+};
+
+const MAX_CHARACTERS = 75;
 const MIN_FONT_SIZE = 18;
 
 const FriendCard = ({ friendInfo, requestObject }) => {
   const hasMemberships =
     friendInfo.memberships && friendInfo.memberships.length > 0;
-  const [showFullAbout, setShowFullAbout] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleReadMoreClick = () => {
-    setShowFullAbout(!showFullAbout);
+    setIsPopupOpen(!isPopupOpen);
   };
 
-  const aboutMeText = showFullAbout
-    ? friendInfo.about_me
-    : friendInfo.about_me.slice(0, MAX_CHARACTERS) +
-      (friendInfo.about_me.length > MAX_CHARACTERS ? "..." : "");
+  const showFullAbout =
+    friendInfo.about_me.length > MAX_CHARACTERS
+      ? friendInfo.about_me.slice(0, MAX_CHARACTERS) + "..."
+      : friendInfo.about_me;
 
   return (
     <FriendCardContainer>
@@ -83,11 +95,18 @@ const FriendCard = ({ friendInfo, requestObject }) => {
                 : "1.5rem"
             }
           >
-            {aboutMeText}
+            {showFullAbout}
             {friendInfo.about_me.length > MAX_CHARACTERS && (
               <ReadMoreButton onClick={handleReadMoreClick}>
                 {showFullAbout ? "read less" : "read more"}
               </ReadMoreButton>
+            )}
+
+            {isPopupOpen && (
+              <ReadMorePopup
+                aboutMeText={friendInfo.about_me}
+                onClose={handleReadMoreClick}
+              />
             )}
           </FriendAbout>
         </RightBottom>

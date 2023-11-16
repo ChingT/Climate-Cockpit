@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import theme from "../../styles/theme.js";
 
 export const Main = styled.div`
   height: 100%;
@@ -98,7 +97,8 @@ export const DashboardCategoriesTotalPoints = styled.div`
   justify-content: space-around;
   flex-direction: row;
   align-items: start;
-  border-bottom: 1.2px solid ${theme.colors.solutionPagePrimaryColor};
+  border-bottom: 1.2px solid
+    ${(props) => props.theme.colors.solutionPagePrimaryColor};
   font-size: ${(props) => props.theme.fontSize.equation};
   color: ${(props) => props.theme.fontColors.primary};
   font-weight: 500;
@@ -193,7 +193,9 @@ export const LeftBar = styled.div`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  border-right: 1.2px solid ${theme.colors.solutionPagePrimaryColor};
+  border-right: 1.2px solid
+    ${(props) => props.theme.colors.solutionPagePrimaryColor};
+
   position: sticky;
   top: 0;
   height: 100%;

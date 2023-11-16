@@ -11,7 +11,7 @@ import { useState } from "react";
 import clock from "../../../assets/svgs/Groupclock.svg";
 import useApiRequest from "../../../hooks/useApiRequest.js";
 
-const FriendRequest = ({ user, requestId, sentRequest }) => {
+const FriendRequest = ({ user, userId, requestId, sentRequest }) => {
   const [isClicked, setIsClicked] = useState(true);
   const [message, setMessage] = useState("");
 
@@ -35,7 +35,7 @@ const FriendRequest = ({ user, requestId, sentRequest }) => {
     <RequestContainer>
       {isClicked ? (
         <>
-          <Link to={`/profile/${requestId}`}>
+          <Link to={`/profile/${userId}`}>
             <RequestStatusIcon
               alt="avatar"
               src={user.avatar ? user.avatar : avatarImage}
