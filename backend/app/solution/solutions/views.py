@@ -67,15 +67,22 @@ class RetrieveSolutionAPIView(RetrieveAPIView):
     permission_classes = []
 
 
-class ListCategoryAPIView(ListAPIView):
-    """get: List all categories.
+class ListScorecardAPIView(ListAPIView):
+    """get: Retrieve the scorecard of an user.
 
-    List all categories.
+    Retrieve the scorecard of an user by user ID.
     """
 
     queryset = Category.objects.all().order_by("id")
     serializer_class = CategorySerializer
     permission_classes = []
+    lookup_url_kwarg = "user_id"
+
+    def get_serializer(self, *args, **kwargs):
+        user_id = self.kwargs.get(self.lookup_url_kwarg)
+        user = get_object_or_404(User, id=user_id)
+        kwargs["context"] = {"user": user}
+        return super().get_serializer(*args, **kwargs)
 
 
 class ResourceTypeSearchFilter(SearchFilter):

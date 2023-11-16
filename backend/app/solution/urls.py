@@ -4,8 +4,8 @@ from solution.solution_logic.views import (
     ListDashboardItemAPIView,
 )
 from solution.solutions.views import (
-    ListCategoryAPIView,
     ListResourceAPIView,
+    ListScorecardAPIView,
     ListSolutionAPIView,
     ListUserSelectionAPIView,
     RetrieveSolutionAPIView,
@@ -20,7 +20,11 @@ urlpatterns = [
         RetrieveSolutionAPIView.as_view(),
         name="solution-detail",
     ),
-    path("categories/", ListCategoryAPIView.as_view(), name="category-list"),
+    path(
+        "scorecards/<int:user_id>/",
+        ListScorecardAPIView.as_view(),
+        name="scorecard-detail",
+    ),
     path(
         "resources/<int:solution_id>/",
         ListResourceAPIView.as_view(),
