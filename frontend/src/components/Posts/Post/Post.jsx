@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import trash from "../../../assets/images/delete-folder.png";
-import edit_post from "../../../assets/images/write-message.png";
-import comments from "../../../assets/images/message.png";
 import likeHeart from "../../../assets/images/like.png";
+import comments from "../../../assets/images/message.png";
 import shareArrow from "../../../assets/images/shortcut.png";
+import edit_post from "../../../assets/images/write-message.png";
 import useApiRequest from "../../../hooks/useApiRequest.js";
 import ProfileLink from "../../ProfileLink/ProfileLink.jsx";
 import CommentsSection from "../Comment/CommentsSection.jsx";
@@ -51,7 +51,7 @@ const Post = ({
   const handleDeletePost = () => {
     sendRequest("delete", `social/posts/${postData.id}/`);
     setListOfPosts((current) =>
-      current.filter((post) => post.id !== postData.id),
+      current.filter((post) => post.id !== postData.id)
     );
   };
 
@@ -83,16 +83,9 @@ const Post = ({
     sendRequest("patch", `social/posts/${postData.id}/`, formData, true);
     setContent(editedContent);
     setPostImages(editedImages);
-    // setListOfPosts((current) =>
-    //   current.map((post) =>
-    //     post.id === postData.id
-    //       ? { ...post, content: editedContent, images: editedImages }
-    //       : post,
-    //   ),
-    // );
   };
-
-  useEffect(() => {}, [postImages]);
+  const toggle_comments = () =>
+    setAreCommentsVisible((prevState) => !prevState);
 
   return (
     <PostContainer>
@@ -159,13 +152,9 @@ const Post = ({
           <RightButtons></RightButtons>
         </BottomButtons>
 
-        {userData.id !== postData.user.id && (
-          <CommentContainer
-            onClick={() => setAreCommentsVisible(!areCommentsVisible)}
-          >
-            <CommentImg src={comments} alt="Show/Hide Comments" /> Comments
-          </CommentContainer>
-        )}
+        <CommentContainer onClick={toggle_comments}>
+          <CommentImg src={comments} alt="Show/Hide Comments" /> Comments
+        </CommentContainer>
         {userData.id === postData.user.id && (
           <DeleteButton onClick={handleDeletePost}>
             <img src={trash} alt="delete post" />
@@ -174,7 +163,7 @@ const Post = ({
         )}
         <LikeCount>{amountOfLikes}&nbsp; likes</LikeCount>
       </FooterContainer>
-      {userData.id !== postData.user.id && areCommentsVisible && (
+      {areCommentsVisible && (
         <CommentContainer>
           <CommentsSection postId={postData.id} />
         </CommentContainer>
