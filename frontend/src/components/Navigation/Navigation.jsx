@@ -4,11 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/header_icons/Globus.png";
 import avatarImage from "../../assets/svgs/avatar.svg";
 import MenuDot from "../../assets/svgs/menu_dots.svg";
-import findFriendLogo from "../../assets/header_icons/algorithm.png";
 import lightbulb from "../../assets/header_icons/check-mark.png";
-import posts from "../../assets/header_icons/blogging.png";
-import solutions from "../../assets/header_icons/code.png"
-import profile from "../../assets/header_icons/contacts-book.png"
 import useAutoFetch from "../../hooks/useAutoFetch.js";
 import { setRequests } from "../../store/slices/friendRequests.js";
 import FriendsRequestsContainer from "./FriendsRequests/FriendsRequestsContainer.jsx";
@@ -65,33 +61,28 @@ const Navigation = () => {
       <ContainerLeft>
         <NavbarLink to="/">
           <img src={logo} alt="Logo" />
-          <h1 style={{ color: "#0077BF", fontSize: "37" }}>Climate Cockpit</h1>
+          <h1 style={{ color: "#0077BF", fontSize: "38" }}>Climate Cockpit</h1>
         </NavbarLink>
         <NavbarLink to="/solutions">
-          {/*<StyledImage src={solutions} alt="Solutions" />*/}
           <h1>Solutions</h1>
         </NavbarLink>
         {loggedInUser ? (
           <>
             <NavbarLink to="/profile">
-              {/*<StyledImage src={profile} alt="Profile" />*/}
               <h1>Profile</h1>
             </NavbarLink>
           </>
         ) : (
           <NavbarLink to="/signin">
-            {/*<StyledImage src={profile} alt="Profile" />*/}
             <h1>Profile</h1>
           </NavbarLink>
         )}
           {loggedInUser ? (
             <>
               <NavbarLink to="/posts">
-                {/*<StyledImage src={posts} alt="Image description" />*/}
                 <h1 style = {{fontSize: "34px"}}>Posts</h1>
               </NavbarLink>
               <NavbarLink to="/find-friends">
-                {/*<StyledImage src={findFriendLogo} alt="Find Friends" />*/}
                 <h1>Networking</h1>
               </NavbarLink>
             </>
