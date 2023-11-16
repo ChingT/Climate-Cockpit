@@ -17,7 +17,6 @@ import {
   MenuContainer,
   NavbarLink,
   NotificationButton,
-  StyledImage,
 } from "./Navigation.style.js";
 import NavigationActionsContainer from "./NavigationActionsContainer.jsx";
 
@@ -77,16 +76,16 @@ const Navigation = () => {
             <h1>Profile</h1>
           </NavbarLink>
         )}
-          {loggedInUser ? (
-            <>
-              <NavbarLink to="/posts">
-                <h1 style = {{fontSize: "34px"}}>Posts</h1>
-              </NavbarLink>
-              <NavbarLink to="/find-friends">
-                <h1>Networking</h1>
-              </NavbarLink>
-            </>
-          ) : null}
+        {loggedInUser ? (
+          <>
+            <NavbarLink to="/posts">
+              <h1 style={{ fontSize: "34px" }}>Posts</h1>
+            </NavbarLink>
+            <NavbarLink to="/find-friends">
+              <h1>Networking</h1>
+            </NavbarLink>
+          </>
+        ) : null}
       </ContainerLeft>
 
       <nav>

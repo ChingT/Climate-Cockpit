@@ -52,15 +52,14 @@ export const NavbarLink = styled(NavLink)`
   }
 
   &.active {
-    border-color: #0077bf; 
-    color: #0077bf; 
+    border-color: #0077bf;
+    color: #0077bf;
   }
 
   &:hover:not(.active) {
-    border-color: #ccc; 
+    border-color: #ccc;
   }
 `;
-
 
 export const StyledImage = styled.img`
   width: 30px;
