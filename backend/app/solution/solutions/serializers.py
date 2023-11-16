@@ -12,7 +12,6 @@ class ScorecardSerializer(serializers.ModelSerializer):
     impact_from_user = serializers.SerializerMethodField()
     level_from_user = serializers.SerializerMethodField()
     solution_names = serializers.SerializerMethodField()
-    category = serializers.SerializerMethodField()
 
     def get_impact_from_user(self, instance: Category):
         return generate_aggregate(self.get_selected_solutions(instance), Sum("impact"))
@@ -23,23 +22,15 @@ class ScorecardSerializer(serializers.ModelSerializer):
     def get_solution_names(self, instance: Category):
         return instance.solutions.values_list("name", flat=True)
 
-    def get_category(self, instance: Category):
-        return instance.name
-
     class Meta:
         model = Category
-        fields = [
-            "id",
-            "impact_from_user",
-            "level_from_user",
-            "solution_names",
-            "category",
-        ]
+        fields = ["id", "impact_from_user", "level_from_user", "solution_names", "name"]
 
     def get_selected_solutions(self, instance: Category):
-        user = self.context["user"]
-        selected_solutions = user.user_selections.selected_solutions
-        return selected_solutions.filter(category=instance)
+        if user := self.context.get("user", None):
+            selected_solutions = user.user_selections.selected_solutions
+            return selected_solutions.filter(category=instance)
+        return Solution.objects.none()
 
 
 class CategoryNameSerializer(serializers.ModelSerializer):
