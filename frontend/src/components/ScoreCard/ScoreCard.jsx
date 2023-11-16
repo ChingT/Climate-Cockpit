@@ -10,17 +10,19 @@ import {
 } from "./Scorecard.style.js";
 import ScorecardCategory from "./ScorecardCategory.jsx";
 
-export default function ScoreCard() {
-  const [categories, setCategories] = useState([]);
-  // TODO: fetch categories and totalScore from api
-  const { data, loading } = useAutoFetch("get", "solution/categories/");
+export default function ScoreCard({ userID }) {
+  const [scorecard, setScorecard] = useState([]);
+  const { data, loading } = useAutoFetch(
+    "get",
+    `solution/scorecards/${userID}`
+  );
 
   useEffect(() => {
-    if (data !== null) setCategories(data.results);
+    if (data !== null) setScorecard(data.results);
   }, [data]);
 
-  const totalScore = categories.reduce(
-    (sum, category) => sum + category.impact_from_logged_in_user,
+  const totalScore = scorecard.reduce(
+    (sum, category) => sum + category.impact_from_user,
     0
   );
 
@@ -35,7 +37,7 @@ export default function ScoreCard() {
     <>
       <ScorecardContainer>
         <ScoreCardContent>
-          {categories.map((category, i) => (
+          {scorecard.map((category, i) => (
             <ScorecardCategory key={i} category={category} />
           ))}
           <TitleAndBar>
