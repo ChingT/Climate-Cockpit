@@ -81,8 +81,11 @@ class ListScorecardAPIView(ListAPIView):
 
     def get_serializer(self, *args, **kwargs):
         user_id = self.kwargs.get(self.lookup_url_kwarg)
-        user = get_object_or_404(User, id=user_id)
-        kwargs["context"] = {"user": user}
+        try:
+            user = User.objects.get(id=user_id)
+            kwargs["context"] = {"user": user}
+        except User.DoesNotExist:
+            pass
         return super().get_serializer(*args, **kwargs)
 
 
