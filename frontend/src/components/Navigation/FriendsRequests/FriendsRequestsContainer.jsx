@@ -15,7 +15,6 @@ const FriendsRequestsContainer = ({ sentRequests, receivedRequests }) => {
               <FriendRequest
                 key={request.id}
                 user={request.requester}
-
                 requestId={request.id}
               />
             ))}
