@@ -1,10 +1,6 @@
-import os
-
 from django.contrib.auth import get_user_model
-from openai import OpenAI
 from post.models import Post
 from rest_framework.generics import (
-    CreateAPIView,
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
     get_object_or_404,
@@ -14,8 +10,6 @@ from user.permissions import IsOwner
 
 from .models import Comment
 from .serializers import CommentSerializer
-
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 User = get_user_model()
 
@@ -72,42 +66,3 @@ class RetrieveUpdateDestroyCommentAPIView(RetrieveUpdateDestroyAPIView):
         else:
             permission_classes = [IsOwner | IsAdminUser]
         return [permission() for permission in permission_classes]
-
-
-class CreateBotCommentAPIView(CreateAPIView):
-    serializer_class = CommentSerializer
-    lookup_url_kwarg = "post_id"
-
-    def get_queryset(self):
-        post_id = self.kwargs.get(self.lookup_url_kwarg)
-        target_post = get_object_or_404(Post, id=post_id)
-        return Comment.objects.filter(post=target_post).order_by("-created")
-
-    def perform_create(self, serializer):
-        post_id = self.kwargs.get(self.lookup_url_kwarg)
-        target_post = get_object_or_404(Post, id=post_id)
-        user_comment = serializer.save(user=self.request.user, post=target_post)
-
-        self.create_chatbot_comment(target_post, user_comment)
-
-    def create_chatbot_comment(self, target_post, user_comment):
-        chatbot_users = User.objects.filter(is_chatbot=True)
-        for chatbot_user in chatbot_users:
-            if chatbot_user.followers.filter(id=self.request.user.id).exists():
-                chatbot_response = self.get_chatbot_response(
-                    chatbot_user, user_comment.content
-                )
-                Comment.objects.create(
-                    user=chatbot_user, post=target_post, content=chatbot_response
-                )
-
-    def get_chatbot_response(self, chatbot_user, user_text):
-        user_message = {"role": "user", "content": user_text}
-        messages_history = [
-            {"role": "system", "content": chatbot_user.chatbot_description},
-            user_message,
-        ]
-        response = client.chat.completions.create(
-            model="gpt-3.5-turbo", messages=messages_history
-        )
-        return response.choices[0].message.content
