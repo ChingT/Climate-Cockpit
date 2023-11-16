@@ -16,13 +16,17 @@ import {
   StyledImg,
 } from "./Comment.style.js";
 
-const CommentsSection = ({ postId, areCommentsVisible }) => {
+const CommentsSection = ({
+  postId,
+  comments,
+  setComments,
+  setAmountOfComments,
+  areCommentsVisible,
+}) => {
   const userData = useSelector((store) => store.loggedInUser.user);
-  const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
   const { sendRequest: sendRequestPost, data: dataPost } = useApiRequest();
   const { sendRequest: sendRequestDelete } = useApiRequest();
-  const handleCommentChange = (e) => setCommentText(e.target.value);
 
   const urlToFetch = `social/comments/${postId}/?limit=3`;
   const { data } = useAutoFetch(
@@ -31,9 +35,12 @@ const CommentsSection = ({ postId, areCommentsVisible }) => {
     undefined,
     areCommentsVisible
   );
+
   useEffect(() => {
     if (data !== null) setComments(data.results);
-  }, [data]);
+  }, [data, setComments]);
+
+  const handleCommentChange = (e) => setCommentText(e.target.value);
 
   const handlePostButtonClick = () => {
     if (!commentText.trim()) return;
@@ -42,19 +49,21 @@ const CommentsSection = ({ postId, areCommentsVisible }) => {
       content: commentText,
     });
     setCommentText("");
+    setAmountOfComments((previous) => previous + 1);
   };
 
   useEffect(() => {
     if (dataPost !== null) {
       setComments((currentComments) => [dataPost, ...currentComments]);
     }
-  }, [dataPost]);
+  }, [dataPost, setComments]);
 
   const deleteComment = (commentId) => {
     sendRequestDelete("delete", `social/comments/comment/${commentId}/`);
     setComments((currentComments) =>
       currentComments.filter((comment) => comment.id !== commentId)
     );
+    setAmountOfComments((previous) => previous - 1);
   };
 
   return (
