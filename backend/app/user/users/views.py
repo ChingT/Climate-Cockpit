@@ -10,6 +10,16 @@ from user.serializers import UserSerializer
 User = get_user_model()
 
 
+class ListGptbotUserAPIView(ListAPIView):
+    """get: List all GPTbot users.
+
+    List all GPTbot users.
+    """
+
+    serializer_class = UserSerializer
+    queryset = User.objects.filter(is_gptbot=True).order_by("-date_joined")
+
+
 class ListUserAPIView(ListAPIView):
     """get: List all active users.
 

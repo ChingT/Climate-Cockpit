@@ -96,6 +96,7 @@ class UserSerializer(serializers.ModelSerializer):
             "amount_following",
             "memberships",
             "total_impact",
+            "is_gptbot",
         ]
 
 
