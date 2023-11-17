@@ -6,7 +6,7 @@ export const PostContainer = styled(CardWithShadowStyles)`
   display: flex;
   background-image: url(${paper_texture});
   flex-direction: column;
-  padding: 2rem;
+  padding: 2.3rem;
   gap: 1.5rem;
   font-size: 0.9rem;
   height: unset;
@@ -39,8 +39,10 @@ export const EditButton = styled.button`
 `;
 
 export const PostText = styled.p`
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
+  font-weight: 500;
+  color: black;
   margin-top: 0.5%;
 `;
 

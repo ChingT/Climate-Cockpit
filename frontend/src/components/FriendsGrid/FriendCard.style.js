@@ -148,8 +148,8 @@ export const Memberships = styled.div`
 `;
 
 export const FriendAbout = styled.p`
-  font-size: 0.875rem;
-  line-height: 1.7;
+  font-size: 16px;
+  line-height: 1.35;
   text-align: end;
   margin-bottom: 1.2rem;
   width: 43%;

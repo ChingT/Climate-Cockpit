@@ -81,7 +81,7 @@ export const StyledP = styled.p`
 
 export const CustomStyledP = styled.p`
   line-height: 1px;
-  font-size: 17px;
+  font-size: 19px;
   padding-right: 82%;
 `;
 
