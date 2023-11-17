@@ -6,12 +6,7 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q
 from rest_framework import status
 from rest_framework.filters import OrderingFilter, SearchFilter
-from rest_framework.generics import (
-    GenericAPIView,
-    ListAPIView,
-    RetrieveAPIView,
-    get_object_or_404,
-)
+from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveAPIView
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from solution.solution_logic.models import SelectionRule
@@ -122,8 +117,7 @@ class ListResourceAPIView(ListAPIView):
 
     def get_queryset(self):
         solution_id = self.kwargs.get(self.lookup_url_kwarg)
-        target_solution = get_object_or_404(Solution, id=solution_id)
-        return Resource.objects.filter(solution=target_solution).order_by("id")
+        return Resource.objects.filter(solution__id=solution_id).order_by("id")
 
 
 class ToggleSelectSolution(GenericAPIView):
