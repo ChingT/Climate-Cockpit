@@ -1,7 +1,5 @@
 import styled, { css } from "styled-components";
 import { ButtonsStyle } from "../../styles/buttons.style.js";
-import purple_texture from "../../assets/images/violet_texture.jpg";
-import light_pink_texture from "../../assets/images/light_pink_texture.png";
 
 export const FollowOrRequestButton = styled.button`
   ${ButtonsStyle};
