@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import checkbox_checked from "../../assets/other_icons/checkbox_checked.png";
 import checkbox_unchecked from "../../assets/other_icons/checkbox_unchecked.png";
+import paper_texture from "../../assets/images/paper_texture2.png";
 
 export const FilterAndList = styled.div`
   display: flex;
@@ -93,7 +94,7 @@ export const SolutionContainer = styled.div`
     flex-direction: column;
     gap: 10px;
     padding: 20px;
-    background-image: var(--background-image);
+    background-image: url(${paper_texture});
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -130,14 +131,6 @@ export const CheckboxContainer = styled.div`
     }
   }
 `;
-
-export const CheckMark = styled.div``;
-
-export const MegatonIcon = styled.div``;
-
-export const Title = styled.div``;
-
-export const NumberOfSupporters = styled.div``;
 
 export const CategoryLabelDiv = styled.div`
   display: flex;

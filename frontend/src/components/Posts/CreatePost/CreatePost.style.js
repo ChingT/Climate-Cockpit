@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { defaultButtonStyles } from "../../../styles/globalStyles.js";
-import paper_texture from "../../../assets/images/paper_texture.jpg";
-
+import paper_texture from "../../../assets/images/paper_texture2.png";
 export const CreatePostModalContainer = styled.div`
   width: 100%;
   min-height: 6rem;

@@ -55,13 +55,13 @@ const LeftEditContainer = ({ initialAvatar, handleProfileUpdate }) => {
         {imagePreview ? (
           <>
             <ProfileButton
-              style={{ color: "black" }}
+              style={{width: "9.5rem"}}
               onClick={handleProfileImageUpdate}
             >
               Upload image
             </ProfileButton>
             <ProfileButton
-              style={{ color: "black" }}
+              style={{width: "9.5rem"}}
               onClick={() => setImagePreview(undefined)}
             >
               Cancel
@@ -69,7 +69,7 @@ const LeftEditContainer = ({ initialAvatar, handleProfileUpdate }) => {
           </>
         ) : (
           <CustomFileInputButton>
-            <ProfileButton style={{ color: "black" }}>
+            <ProfileButton style={{width: "9.5rem"}}>
               Choose Image
             </ProfileButton>
             <input
@@ -82,8 +82,8 @@ const LeftEditContainer = ({ initialAvatar, handleProfileUpdate }) => {
         )}
       </div>
       <p>{error}</p>
-      <ProfileButton style={{ color: "black" }}>Delete account</ProfileButton>
-      <ProfileButton style={{ color: "black" }} onClick={handleProfileUpdate}>
+      <ProfileButton style={{width: "9.5rem"}}>Delete account</ProfileButton>
+      <ProfileButton style={{width: "9.5rem"}} onClick={handleProfileUpdate}>
         Save changes
       </ProfileButton>
     </EditAvatarContainer>

@@ -2,14 +2,15 @@ import styled from "styled-components";
 import blue_texture from "../../assets/score_bar_textures/blue_texture.jpg";
 import purple_texture from "../../assets/score_bar_textures/purple_texture1.jpg";
 import red_texture from "../../assets/score_bar_textures/red_texture1.jpg";
+import paper_texture from "../../assets/images/paper_texture2.png"
 
 export const ScorecardContainer = styled.div`
   width: 44rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  background-image: url(${paper_texture});
   align-items: center;
-  background-color: ${(props) => props.theme.backgroundColors.secondary};
   padding: 24px 20px;
   border-radius: 6px;
   position: absolute;

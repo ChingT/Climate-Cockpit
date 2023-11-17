@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import paper_texture from "../../../assets/images/paper_texture.jpg";
+import paper_texture from "../../../assets/images/paper_texture2.png";
 
 export const CreatePostModalContainer = styled.div`
   background-image: url(${paper_texture});
@@ -62,7 +62,7 @@ export const BrowseAndRemove = styled.div`
 
 export const StyledLabel = styled.label`
   width: 6rem;
-  border: 1.5px solid lightgray;
+  border: 1.5px solid gray;
   margin-right: 1%;
   margin-left: 1%;
   padding: 8px 16px 8px 16px;
@@ -82,7 +82,7 @@ export const StyledLabel = styled.label`
   height: 2.4rem;
   border-radius: 10px;
   cursor: pointer;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+  //box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
 `;
 
 export const StyledInput = styled.input`
@@ -124,17 +124,17 @@ export const StyledImg = styled.img`
   }
 `;
 
-const buttonStyles = `
+export const buttonStyles = `
 background: conic-gradient(
     from 90deg at 1.1px 1.1px,
     #f3f3e4 25%,
     rgb(217, 217, 217) 0
   );
   width: 6rem;
+  border: 1.5px solid gray;
   border-radius: 10px;
   margin-right: 1%;
   margin-left: 1%;
-box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);\`;
   padding: 8px 16px 8px 16px;
   margin-bottom: 1%;
   cursor: pointer;
