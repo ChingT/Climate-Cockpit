@@ -31,6 +31,8 @@ class OurUserAdmin(UserAdmin):
                     "banner",
                     "location",
                     "about_me",
+                    "is_gptbot",
+                    "gptbot_description",
                 )
             },
         ),

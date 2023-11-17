@@ -5,12 +5,13 @@ from typing import TYPE_CHECKING
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from rest_framework import status
-from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.filters import OrderingFilter
 from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveAPIView
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from solution.solution_logic.models import SelectionRule
 
+from .filters import CategorySearchFilter, ResourceTypeSearchFilter
 from .models import Category, Resource, Solution, UserSelection
 from .serializers import (
     CategoryNameSerializer,
@@ -25,11 +26,6 @@ if TYPE_CHECKING:
 
 
 User = get_user_model()
-
-
-class CategorySearchFilter(SearchFilter):
-    search_param = "category"
-    search_description = "Category name"
 
 
 class ListSolutionAPIView(ListAPIView):
@@ -93,11 +89,6 @@ class ListCategoryAPIView(ListAPIView):
     queryset = Category.objects.all().order_by("id")
     serializer_class = CategoryNameSerializer
     permission_classes = [AllowAny]
-
-
-class ResourceTypeSearchFilter(SearchFilter):
-    search_param = "type"
-    search_description = f"Select from {Resource.TypeChoices.labels}"
 
 
 class ListResourceAPIView(ListAPIView):
