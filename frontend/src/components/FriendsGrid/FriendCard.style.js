@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { CardWithShadowStyles } from "../../styles/globalStyles.js";
-import paper_texture from "../../assets/images/paper_texture.jpg";
+import paper_texture from "../../assets/images/paper_texture2.png";
 
 export const FindFriendsContainer = styled.div`
   display: flex;
@@ -165,7 +165,11 @@ export const PopUp = styled.div`
   display: flex;
   justify-content: center;
   align-items: end;
-  background: conic-gradient(from 90deg at 1.1px 1.1px, #f3f3e4 25%, rgb(217, 217, 217) 0);
+  background: conic-gradient(
+    from 90deg at 1.1px 1.1px,
+    #f3f3e4 25%,
+    rgb(217, 217, 217) 0
+  );
   background-size: 24px 24px;
   box-shadow:
     0px 0px 1px rgba(0, 0, 0, 0.6),

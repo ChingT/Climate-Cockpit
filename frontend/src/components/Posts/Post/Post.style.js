@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { CardWithShadowStyles } from "../../../styles/globalStyles.js";
-import paper_texture from "../../../assets/images/paper_texture.jpg";
+import paper_texture from "../../../assets/images/paper_texture2.png";
 
 export const PostContainer = styled(CardWithShadowStyles)`
   display: flex;
@@ -8,7 +8,7 @@ export const PostContainer = styled(CardWithShadowStyles)`
   flex-direction: column;
   padding: 2rem;
   gap: 1.5rem;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   height: unset;
   max-width: 58rem;
   position: relative;

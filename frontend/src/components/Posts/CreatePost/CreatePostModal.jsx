@@ -69,8 +69,8 @@ const CreatePostModal = ({
           .forEach((gptbotUser) =>
             sendBotCommentRequest(
               "post",
-              `social/comments/${data.id}/gptbot-comment/${gptbotUser.id}`
-            )
+              `social/comments/${data.id}/gptbot-comment/${gptbotUser.id}`,
+            ),
           );
       };
 
@@ -88,7 +88,7 @@ const CreatePostModal = ({
 
   const removeImage = (clickedIndex) => {
     setImageToUpload(
-      imageToUpload.filter((image) => image.index !== clickedIndex)
+      imageToUpload.filter((image) => image.index !== clickedIndex),
     );
   };
 
