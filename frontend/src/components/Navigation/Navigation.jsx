@@ -45,14 +45,14 @@ const Navigation = () => {
       setSentRequests(
         friendRequests.filter(
           (request) =>
-            request.requester.id === loggedInUser.id && request.status === "P"
-        )
+            request.requester.id === loggedInUser.id && request.status === "P",
+        ),
       );
       setReceivedRequests(
         friendRequests.filter(
           (request) =>
-            request.requester.id !== loggedInUser.id && request.status === "P"
-        )
+            request.requester.id !== loggedInUser.id && request.status === "P",
+        ),
       );
     }
   }, [friendRequests, loggedInUser]);

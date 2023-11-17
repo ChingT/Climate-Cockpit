@@ -120,7 +120,7 @@ export default function SolutionDropDown({
         </div>
       </div>
       {isVisible && (
-        <div className="solutionDetails" style={{ fontSize: "20px"}}>
+        <div className="solutionDetails" style={{ fontSize: "20px" }}>
           <div>{solutionText}</div>
           <br />
           <ProgressComponent
