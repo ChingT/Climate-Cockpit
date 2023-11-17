@@ -1,4 +1,3 @@
-import paper_texture from "../../assets/images/paper_texture.jpg";
 import ImpactIcon from "./ImpactIcon.jsx";
 import { useEffect, useState } from "react";
 import supportersIcon from "./../../assets/other_icons/supporters.png";
@@ -64,9 +63,7 @@ export default function SolutionDropDown({
   const handleSolutionDropDown = () => {
     setIsVisible((prevVisible) => !prevVisible);
   };
-  const style = {
-    "--background-image": `url(${paper_texture})`,
-  };
+
 
   const solutionText = text.replace("{impact}", `${impact} megatons per year`);
   const progressText = progress_text.replace("{progress}", progress);
