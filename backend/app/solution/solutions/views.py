@@ -7,7 +7,7 @@ from django.db.models import Q
 from rest_framework import status
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveAPIView
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from solution.solution_logic.models import SelectionRule
 
@@ -48,7 +48,7 @@ class ListSolutionAPIView(ListAPIView):
     filter_backends = [CategorySearchFilter, OrderingFilter]
     search_fields = ["=category__name"]
     ordering = ["id"]
-    permission_classes = []
+    permission_classes = [AllowAny]
 
 
 class RetrieveSolutionAPIView(RetrieveAPIView):
@@ -60,7 +60,7 @@ class RetrieveSolutionAPIView(RetrieveAPIView):
     queryset = Solution.objects.all()
     serializer_class = SolutionSerializer
     lookup_url_kwarg = "solution_id"
-    permission_classes = []
+    permission_classes = [AllowAny]
 
 
 class ListScorecardAPIView(ListAPIView):
@@ -71,7 +71,7 @@ class ListScorecardAPIView(ListAPIView):
 
     queryset = Category.objects.all().order_by("id")
     serializer_class = ScorecardSerializer
-    permission_classes = []
+    permission_classes = [AllowAny]
     lookup_url_kwarg = "user_id"
 
     def get_serializer(self, *args, **kwargs):
@@ -92,7 +92,7 @@ class ListCategoryAPIView(ListAPIView):
 
     queryset = Category.objects.all().order_by("id")
     serializer_class = CategoryNameSerializer
-    permission_classes = []
+    permission_classes = [AllowAny]
 
 
 class ResourceTypeSearchFilter(SearchFilter):
@@ -113,7 +113,7 @@ class ListResourceAPIView(ListAPIView):
     lookup_url_kwarg = "solution_id"
     filter_backends = [ResourceTypeSearchFilter]
     search_fields = ["=resource_type"]
-    permission_classes = []
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         solution_id = self.kwargs.get(self.lookup_url_kwarg)
