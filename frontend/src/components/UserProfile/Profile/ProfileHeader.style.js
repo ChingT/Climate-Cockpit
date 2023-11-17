@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { CardWithShadowStyles } from "../../../styles/globalStyles.js";
-import blue_texture from "../../../assets/images/blue_texture.png";
 import { ButtonsStyle } from "../../../styles/buttons.style.js";
-import pencil_texture from "../../../assets/images/paper_texture.jpg";
+import paper_texture from "../../../assets/images/paper_texture2.png";
 
 export const ProfilePageMain = styled.div`
   display: flex;
@@ -45,6 +44,7 @@ export const ProfileBackground = styled.img`
 export const ProfileHeaderContainer = styled(CardWithShadowStyles)`
   position: relative;
   height: 22rem;
+  background-image: url(${paper_texture});
   max-width: ${(props) => props.theme.max_content_width};
   display: flex;
   z-index: 2;
@@ -136,7 +136,7 @@ export const EditAvatarImg = styled.img`
 
 export const ProfileHeaderEditContainer = styled.div`
   position: relative;
-  background-image: url(${pencil_texture});
+  background-image: url(${paper_texture});
   height: fit-content;
   max-width: ${(props) => props.theme.max_content_width};
   display: flex;
@@ -165,7 +165,7 @@ export const EditAvatarContainer = styled.div`
   }
 
   button {
-    width: 12rem;
+    width: 8rem;
     max-width: 100%;
     margin-top: 1rem;
   }
@@ -179,20 +179,25 @@ export const LabelStyle = styled.div`
 
 export const ProfileButton = styled.button`
   position: relative;
-  margin-left: 6rem;
-  background-image: url(${blue_texture});
+  margin-left: 7.5rem;
+  margin-top: 0.3rem;
+  border: 1.5px solid gray;
   background-size: cover;
   border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.25);
-  padding: 10px 20px 10px 20px;
+  color: ${(props) => props.theme.fontColors.primary};
+  background: conic-gradient(
+    from 90deg at 1.1px 1.1px,
+    #f3f3e4 25%,
+    rgb(217, 217, 217) 0
+  );
+  padding: 10px 17px 10px 17px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 16px;
   font-family: "CabinSketch", serif;
   font-weight: 600;
   color: ${(props) => props.theme.fontColors.primary};
-}
+}`;
 
-  >`;
 export const SavedChangesMessage = styled(CardWithShadowStyles)`
   position: absolute;
   top: 50%;

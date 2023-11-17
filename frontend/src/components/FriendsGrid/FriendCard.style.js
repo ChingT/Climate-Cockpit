@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { CardWithShadowStyles } from "../../styles/globalStyles.js";
-import paper_texture from "../../assets/images/paper_texture.jpg";
+import paper_texture from "../../assets/images/paper_texture2.png";
 
 export const FindFriendsContainer = styled.div`
   display: flex;
