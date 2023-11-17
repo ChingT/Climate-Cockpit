@@ -6,7 +6,11 @@ import light_pink_texture from "../../assets/images/light_pink_texture.png";
 export const FollowOrRequestButton = styled.button`
   ${ButtonsStyle};
   width: 100%;
-  background: conic-gradient( from 90deg at 1.1px 1.1px, #f3f3e4 25%, rgb(217, 217, 217) 0 );
+  background: conic-gradient(
+    from 90deg at 1.1px 1.1px,
+    #f3f3e4 25%,
+    rgb(217, 217, 217) 0
+  );
   border: 1.5px solid gray;
   position: relative;
   background-size: cover;

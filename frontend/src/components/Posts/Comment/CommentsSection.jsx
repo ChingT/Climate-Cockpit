@@ -47,7 +47,7 @@ const CommentsSection = ({
   const deleteComment = (commentId) => {
     sendRequestDelete("delete", `social/comments/comment/${commentId}/`);
     setComments((currentComments) =>
-      currentComments.filter((comment) => comment.id !== commentId)
+      currentComments.filter((comment) => comment.id !== commentId),
     );
     setAmountOfComments((previous) => previous - 1);
   };
