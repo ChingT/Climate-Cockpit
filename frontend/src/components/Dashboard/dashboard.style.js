@@ -215,3 +215,30 @@ export const RightBar = styled.div`
     box-sizing: border-box;
   }
 `;
+
+export const Source = styled.div`
+  margin-left: 3rem;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  position: relative;
+  padding: 10px;
+  height: 100%;
+  align-items: flex-start;
+`;
+
+export const TopDiv = styled.div`
+  align-self: flex-end;
+  margin-bottom: auto;
+  text-align: right;
+`;
+
+export const BottomDiv = styled.div`
+  align-self: flex-start;
+  margin-top: auto;
+  text-align: left;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;

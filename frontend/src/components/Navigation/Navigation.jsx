@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/header_icons/Globus.png";
 import lightbulb from "../../assets/header_icons/check-mark.png";
+import swissFlag from "../../assets/other_icons/SwissFlag.png";
 import avatarImage from "../../assets/svgs/avatar.svg";
 import MenuDot from "../../assets/svgs/menu_dots.svg";
 import useAutoFetch from "../../hooks/useAutoFetch.js";
@@ -17,6 +18,7 @@ import {
   MenuContainer,
   NavbarLink,
   NotificationButton,
+  SwissFlag,
 } from "./Navigation.style.js";
 import NavigationActionsContainer from "./NavigationActionsContainer.jsx";
 
@@ -45,14 +47,14 @@ const Navigation = () => {
       setSentRequests(
         friendRequests.filter(
           (request) =>
-            request.requester.id === loggedInUser.id && request.status === "P"
-        )
+            request.requester.id === loggedInUser.id && request.status === "P",
+        ),
       );
       setReceivedRequests(
         friendRequests.filter(
           (request) =>
-            request.requester.id !== loggedInUser.id && request.status === "P"
-        )
+            request.requester.id !== loggedInUser.id && request.status === "P",
+        ),
       );
     }
   }, [friendRequests, loggedInUser]);
@@ -63,6 +65,9 @@ const Navigation = () => {
         <NavbarLink to="/">
           <img src={logo} alt="Logo" />
           <h1 style={{ color: "#0077BF", fontSize: "38" }}>Climate Cockpit</h1>
+          <SwissFlag>
+            <img src={swissFlag} alt="Swiss Flag" />
+          </SwissFlag>
         </NavbarLink>
         <NavbarLink to="/solutions">
           <h1>Solutions</h1>
