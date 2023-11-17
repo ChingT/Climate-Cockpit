@@ -5,6 +5,7 @@ export const CreatePostModalContainer = styled.div`
   width: 100%;
   min-height: 6rem;
   max-width: 42rem;
+  font-size: 19px;
   background-image: url(${paper_texture});
   box-shadow:
     0px 0px 1px rgba(0, 0, 0, 0.2),
@@ -108,6 +109,7 @@ export const SubmitButton = styled.button`
 export const CreatePostCardContainer = styled.div`
   width: 100%;
   min-height: 6rem;
+  font-size: 18px;
   background-image: url(${paper_texture});
   box-shadow:
     0px 0px 1px rgba(0, 0, 0, 0.2),

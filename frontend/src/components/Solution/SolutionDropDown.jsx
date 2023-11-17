@@ -64,7 +64,6 @@ export default function SolutionDropDown({
     setIsVisible((prevVisible) => !prevVisible);
   };
 
-
   const solutionText = text.replace("{impact}", `${impact} megatons per year`);
   const progressText = progress_text.replace("{progress}", progress);
 

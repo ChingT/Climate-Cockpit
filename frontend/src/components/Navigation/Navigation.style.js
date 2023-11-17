@@ -94,18 +94,27 @@ export const SolutionWrapper = styled(Link)`
   }
 `;
 export const SwissFlag = styled.div`
-  width: 20px;
+  width: 10px;
   height: 20px;
   display: flex;
   justify-content: flex-start;
+  align-items: start;
+  margin-top: -0.3rem;
 
   max-width: 100%;
-  max-height: 100%;
+  max-height: 20%;
 
   img {
-    height: 30px;
-    width: 30px;
+    height: 28px;
+    width: 17px;
   }
+`;
+
+export const StyledH1 = styled.h1`
+  display: flex;
+  color: #0077bf;
+  font-size: 38px;
+  flex-direction: row;
 `;
 
 export const ProfileWrapper = styled(Link)`
