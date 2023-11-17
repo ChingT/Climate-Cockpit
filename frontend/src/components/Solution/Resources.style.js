@@ -73,6 +73,8 @@ export const Container = styled.div`
 export const Tab = styled.div`
   padding: 5px;
   cursor: pointer;
+  font-weight: 600;
+  margin-top: 1vh;
   color: ${(props) => props.theme.ResourcesColors.tabColor};
   border-bottom: ${(props) => (props.$isActive ? "2px solid black" : "none")};
 `;
