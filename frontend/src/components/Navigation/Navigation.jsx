@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/header_icons/Globus.png";
+import lightbulb from "../../assets/header_icons/check-mark.png";
 import avatarImage from "../../assets/svgs/avatar.svg";
 import MenuDot from "../../assets/svgs/menu_dots.svg";
-import lightbulb from "../../assets/header_icons/check-mark.png";
 import useAutoFetch from "../../hooks/useAutoFetch.js";
 import { setRequests } from "../../store/slices/friendRequests.js";
-import FriendsRequestsContainer from "./FriendsRequests/FriendsRequestsContainer.jsx";
 import { ButtonsStyle } from "../../styles/buttons.style.js";
+import FriendsRequestsContainer from "./FriendsRequests/FriendsRequestsContainer.jsx";
 import {
   Avatar,
   ContainerLeft,
@@ -41,18 +41,20 @@ const Navigation = () => {
   }, [data, dispatch]);
 
   useEffect(() => {
-    setSentRequests(
-      friendRequests.filter(
-        (request) =>
-          request.requester.id === loggedInUser.id && request.status === "P",
-      ),
-    );
-    setReceivedRequests(
-      friendRequests.filter(
-        (request) =>
-          request.requester.id !== loggedInUser.id && request.status === "P",
-      ),
-    );
+    if (loggedInUser) {
+      setSentRequests(
+        friendRequests.filter(
+          (request) =>
+            request.requester.id === loggedInUser.id && request.status === "P"
+        )
+      );
+      setReceivedRequests(
+        friendRequests.filter(
+          (request) =>
+            request.requester.id !== loggedInUser.id && request.status === "P"
+        )
+      );
+    }
   }, [friendRequests, loggedInUser]);
 
   return (
