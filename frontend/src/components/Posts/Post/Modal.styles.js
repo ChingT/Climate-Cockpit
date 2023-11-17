@@ -100,9 +100,9 @@ export const StyledTextarea = styled.textarea`
   background-size: 24px 24px;
   padding: 8px;
   margin-bottom: 10px;
-  font-size: 16px;
+  font-size: 19px;
   font-family: "CabinSketch", serif;
-  font-weight: 500;
+  font-weight: 600;
   border: 1px solid darkgray;
   border-radius: 4px;
   outline: none;

@@ -18,7 +18,7 @@ export const CommentInput = styled.input`
   background-size: 24px 24px;
   padding: 10px;
   border: 1px solid darkgray;
-  font-size: 16px;
+  font-size: 19px;
   font-family: "CabinSketch", serif;
   font-weight: 500;
   outline-style: none;
@@ -67,7 +67,7 @@ export const CommentsContainer = styled.div`
 
 export const CommentContent = styled.div`
   margin-top: 3%;
-  font-size: 16px;
+  font-size: 18px;
   margin-left: 1.4%;
 `;
 
