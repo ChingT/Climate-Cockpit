@@ -17,7 +17,8 @@ import {
   HeaderContainer,
   MenuContainer,
   NavbarLink,
-  NotificationButton, StyledH1,
+  NotificationButton,
+  StyledH1,
   SwissFlag,
 } from "./Navigation.style.js";
 import NavigationActionsContainer from "./NavigationActionsContainer.jsx";
@@ -64,9 +65,12 @@ const Navigation = () => {
       <ContainerLeft>
         <NavbarLink to="/">
           <img src={logo} alt="Logo" />
-          <StyledH1>Climate Cockpit <SwissFlag>
-            <img src={swissFlag} alt="Swiss Flag" />
-          </SwissFlag></StyledH1>
+          <StyledH1>
+            Climate Cockpit{" "}
+            <SwissFlag>
+              <img src={swissFlag} alt="Swiss Flag" />
+            </SwissFlag>
+          </StyledH1>
         </NavbarLink>
         <NavbarLink to="/solutions">
           <h1>Solutions</h1>

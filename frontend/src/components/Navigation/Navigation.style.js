@@ -112,11 +112,10 @@ export const SwissFlag = styled.div`
 
 export const StyledH1 = styled.h1`
   display: flex;
-  color: #0077BF;
+  color: #0077bf;
   font-size: 38px;
   flex-direction: row;
-  `
-
+`;
 
 export const ProfileWrapper = styled(Link)`
   img {
