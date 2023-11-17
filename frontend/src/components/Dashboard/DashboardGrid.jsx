@@ -38,12 +38,14 @@ import useAutoFetch from "../../hooks/useAutoFetch.js";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 import CircleShapedEmissionPoints from "./CircleShapedEmissionPoints.jsx";
 import {
+  BottomDiv,
   CustomStyledP,
   CustomStyledP2,
   DashboardGridDiv,
   Import,
   Innovation,
   Removal,
+  Source,
   StyledH2,
   StyledP,
 } from "./dashboard.style.js";
@@ -397,6 +399,16 @@ export default function DashboardGrid({ listChanged, setEmissionEquation }) {
           </div>
         </div>
       </Innovation>
+      <Source>
+        <BottomDiv>
+          <div style={{ textAlign: "right" }}>
+            SOURCE: Swiss Greenhouse Gas Inventory 2022, Bundesamt für Umwelt
+            {"\u00A0"}
+            {"\u00A0"}
+          </div>
+          <div style={{ textAlign: "right" }}>In Megatons of CO2e</div>
+        </BottomDiv>
+      </Source>
     </>
   );
 }

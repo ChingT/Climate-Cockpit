@@ -1,5 +1,5 @@
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
 
 export const HeaderContainer = styled.header`
   height: ${(props) => props.theme.header_height};
@@ -37,6 +37,10 @@ export const ContainerLeft = styled.div`
   }
 `;
 
+export const StyledP = styled.p`
+  font-size: 18px;
+`;
+
 export const NavbarLink = styled(NavLink)`
   text-decoration: none;
   color: black;
@@ -71,6 +75,45 @@ export const ContainerRight = styled.div`
   display: flex;
   align-items: center;
   gap: 2rem;
+`;
+
+export const LogoWrapper = styled(Link)`
+  display: flex;
+  flex-direction: row;
+
+  img {
+    height: 55.4px;
+    width: 293.79px;
+  }
+`;
+
+export const SolutionWrapper = styled(Link)`
+  img {
+    height: 20px;
+    width: 129px;
+  }
+`;
+export const SwissFlag = styled.div`
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: flex-start;
+
+  max-width: 100%;
+  max-height: 100%;
+
+  img {
+    height: 30px;
+    width: 30px;
+  }
+`;
+
+export const ProfileWrapper = styled(Link)`
+  img {
+    height: 20px;
+    width: 91px;
+    margin-right: 19rem;
+  }
 `;
 
 export const MenuContainer = styled.div`
