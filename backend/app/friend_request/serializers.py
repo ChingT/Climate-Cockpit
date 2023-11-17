@@ -13,7 +13,7 @@ class FriendRequestSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FriendRequest
-        fields = "__all__"
+        fields = ["id", "requester", "receiver", "status", "created", "modified"]
 
 
 def validate_requester_not_receiver(requester, receiver):

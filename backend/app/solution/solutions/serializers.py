@@ -24,7 +24,15 @@ class ScorecardSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ["id", "impact_from_user", "level_from_user", "solution_names", "name"]
+        fields = [
+            "id",
+            "impact_from_user",
+            "level_from_user",
+            "solution_names",
+            "name",
+            "created",
+            "modified",
+        ]
 
     def get_selected_solutions(self, instance: Category):
         if user := self.context.get("user", None):
@@ -36,7 +44,7 @@ class ScorecardSerializer(serializers.ModelSerializer):
 class CategoryNameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ["name"]
+        fields = ["id", "name"]
 
 
 class SolutionSerializer(serializers.ModelSerializer):
@@ -55,17 +63,33 @@ class SolutionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Solution
-        fields = "__all__"
+        fields = [
+            "id",
+            "name",
+            "shorter_name",
+            "category",
+            "impact",
+            "text",
+            "text_source",
+            "progress",
+            "progress_text",
+            "progress_source",
+            "button_text",
+            "icon_name",
+            "level",
+            "number_of_supporters",
+            "selected_by_logged_in_user",
+        ]
 
 
 class ResourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resource
-        fields = "__all__"
+        fields = ["id", "solution", "title", "source", "author", "url", "resource_type"]
 
 
 class UserSelectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserSelection
-        fields = ["user", "selected_solutions"]
+        fields = ["id", "user", "selected_solutions"]
         read_only_fields = ["user", "selected_solutions"]

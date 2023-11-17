@@ -6,8 +6,9 @@ const useApiRequest = (auth) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  axios.defaults.baseURL = "https://climate-cockpit.propulsion-learn.ch/api/";
+  axios.defaults.baseURL = `${import.meta.env.VITE_API_BASEURL}`;
 
+  console.log("sendRequest");
   const sendRequest = (method, url, requestData, isFormData) => {
     setLoading(true);
     setData(null);

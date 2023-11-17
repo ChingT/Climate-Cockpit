@@ -9,7 +9,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         while True:
-            time.sleep(5)
+            time.sleep(60)
 
             emails = Email.objects.filter(is_sent=False)
             for email in emails:

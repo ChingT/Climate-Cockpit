@@ -6,7 +6,7 @@ from user.serializers import BasicUserSerializer, UserSerializer
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
-        fields = "__all__"
+        fields = ["id", "image", "post"]
 
 
 class SharedPostSerializer(serializers.ModelSerializer):

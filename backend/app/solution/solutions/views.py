@@ -5,17 +5,13 @@ from typing import TYPE_CHECKING
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from rest_framework import status
-from rest_framework.filters import OrderingFilter, SearchFilter
-from rest_framework.generics import (
-    GenericAPIView,
-    ListAPIView,
-    RetrieveAPIView,
-    get_object_or_404,
-)
-from rest_framework.permissions import IsAdminUser
+from rest_framework.filters import OrderingFilter
+from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveAPIView
+from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from solution.solution_logic.models import SelectionRule
 
+from .filters import CategorySearchFilter, ResourceTypeSearchFilter
 from .models import Category, Resource, Solution, UserSelection
 from .serializers import (
     CategoryNameSerializer,
@@ -30,11 +26,6 @@ if TYPE_CHECKING:
 
 
 User = get_user_model()
-
-
-class CategorySearchFilter(SearchFilter):
-    search_param = "category"
-    search_description = "Category name"
 
 
 class ListSolutionAPIView(ListAPIView):
@@ -53,7 +44,7 @@ class ListSolutionAPIView(ListAPIView):
     filter_backends = [CategorySearchFilter, OrderingFilter]
     search_fields = ["=category__name"]
     ordering = ["id"]
-    permission_classes = []
+    permission_classes = [AllowAny]
 
 
 class RetrieveSolutionAPIView(RetrieveAPIView):
@@ -65,7 +56,7 @@ class RetrieveSolutionAPIView(RetrieveAPIView):
     queryset = Solution.objects.all()
     serializer_class = SolutionSerializer
     lookup_url_kwarg = "solution_id"
-    permission_classes = []
+    permission_classes = [AllowAny]
 
 
 class ListScorecardAPIView(ListAPIView):
@@ -76,7 +67,7 @@ class ListScorecardAPIView(ListAPIView):
 
     queryset = Category.objects.all().order_by("id")
     serializer_class = ScorecardSerializer
-    permission_classes = []
+    permission_classes = [AllowAny]
     lookup_url_kwarg = "user_id"
 
     def get_serializer(self, *args, **kwargs):
@@ -97,12 +88,7 @@ class ListCategoryAPIView(ListAPIView):
 
     queryset = Category.objects.all().order_by("id")
     serializer_class = CategoryNameSerializer
-    permission_classes = []
-
-
-class ResourceTypeSearchFilter(SearchFilter):
-    search_param = "type"
-    search_description = f"Select from {Resource.TypeChoices.labels}"
+    permission_classes = [AllowAny]
 
 
 class ListResourceAPIView(ListAPIView):
@@ -118,12 +104,11 @@ class ListResourceAPIView(ListAPIView):
     lookup_url_kwarg = "solution_id"
     filter_backends = [ResourceTypeSearchFilter]
     search_fields = ["=resource_type"]
-    permission_classes = []
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         solution_id = self.kwargs.get(self.lookup_url_kwarg)
-        target_solution = get_object_or_404(Solution, id=solution_id)
-        return Resource.objects.filter(solution=target_solution).order_by("id")
+        return Resource.objects.filter(solution__id=solution_id).order_by("id")
 
 
 class ToggleSelectSolution(GenericAPIView):

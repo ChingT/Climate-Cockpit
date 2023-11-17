@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.generics import CreateAPIView, GenericAPIView
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -39,14 +40,14 @@ class RegistrationView(CreateAPIView):
     """post: Create a non-active user with email info only."""
 
     serializer_class = RegistrationSerializer
-    permission_classes = []
+    permission_classes = [AllowAny]
 
 
 class RegistrationValidationView(GenericAPIView):
     """patch: Update user info. Activate user."""
 
     serializer_class = RegistrationValidationSerializer
-    permission_classes = []
+    permission_classes = [AllowAny]
 
     def patch(self, request):
         serializer = self.get_serializer(data=request.data)
@@ -59,7 +60,7 @@ class PasswordResetView(CreateAPIView):
     """post: Send email with password reset code to user."""
 
     serializer_class = PasswordResetSerializer
-    permission_classes = []
+    permission_classes = [AllowAny]
 
     def perform_create(self, serializer):
         serializer.send_password_reset_email()
@@ -68,7 +69,7 @@ class PasswordResetView(CreateAPIView):
 class PasswordResetValidationView(GenericAPIView):
     """Update passwords."""
 
-    permission_classes = []
+    permission_classes = [AllowAny]
     serializer_class = PasswordResetValidationSerializer
 
     def patch(self, request):

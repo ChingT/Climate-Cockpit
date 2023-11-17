@@ -10,7 +10,7 @@ from .models import DashboardGroup, DashboardItem, ImpactDetail
 class DashboardGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = DashboardGroup
-        fields = "__all__"
+        fields = ["id", "name", "subgroup_name"]
 
 
 class DashboardItemSerializer(serializers.ModelSerializer):
@@ -23,7 +23,19 @@ class DashboardItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = DashboardItem
-        fields = "__all__"
+        fields = [
+            "id",
+            "name",
+            "initial_amount",
+            "altered_type",
+            "group",
+            "icon_name_initial",
+            "icon_name_altered",
+            "created",
+            "modified",
+            "group",
+            "altered_amout",
+        ]
 
     def get_impact_details(self, instance: DashboardItem) -> QuerySet[ImpactDetail]:
         """Retrieve impact details related to a specific instance.
