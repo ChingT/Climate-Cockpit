@@ -1,6 +1,7 @@
 version: "3.9"
 
 x-django-environment: &django-environment
+  DJANGO_SECRET_KEY:
   DJANGO_DEBUG:
   EMAIL_HOST:
   EMAIL_PORT:
