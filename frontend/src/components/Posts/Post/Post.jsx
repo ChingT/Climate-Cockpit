@@ -78,7 +78,6 @@ const Post = ({
   const handleSaveEdit = (editedContent, editedImages) => {
     let formData = new FormData();
     formData.append("content", editedContent);
-    console.log(editedImages);
     editedImages.forEach((image) => {
       formData.append(`images`, image.file);
     });

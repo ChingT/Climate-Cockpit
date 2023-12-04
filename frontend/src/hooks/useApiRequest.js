@@ -8,7 +8,6 @@ const useApiRequest = (auth) => {
 
   axios.defaults.baseURL = `${import.meta.env.VITE_API_BASEURL}`;
 
-  console.log("sendRequest");
   const sendRequest = (method, url, requestData, isFormData) => {
     setLoading(true);
     setData(null);
@@ -24,11 +23,9 @@ const useApiRequest = (auth) => {
 
     axios({ method, url, data: requestData })
       .then((response) => {
-        console.log("response.data", response.data);
         return setData(response.data);
       })
       .catch((error) => {
-        console.log("error.response.data", error.response.data);
         setError(error.response.data);
       })
       .finally(() => setLoading(false));
