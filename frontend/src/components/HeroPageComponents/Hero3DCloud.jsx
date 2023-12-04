@@ -33,12 +33,7 @@ const Hero3DCloud = () => {
     const world = document.getElementById("world");
     const viewport = document.getElementById("viewport");
 
-    if (!viewport) {
-      console.error(
-        "Viewport not found in the DOM. Make sure your HTML structure is correct.",
-      );
-      return;
-    }
+    if (!viewport) return;
 
     let d = 1000;
     let p = 1000;
