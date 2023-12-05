@@ -17,7 +17,7 @@ Climate Cockpit serves as a visual and interactive hub where users can not only
 compare various climate solutions but also track their personal and social
 progress in adopting environmentally friendly practices.
 
-[Visit Climate Cockpit](https://climate-cockpit.propulsion-learn.ch/).
+Explore [Climate Cockpit](https://climate-cockpit.propulsion-learn.ch/).
 
 ## Technology Stack
 
@@ -27,7 +27,16 @@ maintained within a PostgreSQL database management system. Docker and Docker
 Compose ensure seamless containerization, and GitLab CI pipelines facilitate
 efficient development and deployment on Digital Ocean servers.
 
-## Backend API Documentation
+## Screenshots
 
-For detailed information on the backend API endpoints, check the interactive
-[Swagger documentation](https://climate-cockpit.propulsion-learn.ch/api/docs/).
+### Hero Page ![Hero](screenshots/hero.png)
+
+### Solutions Page ![Hero](screenshots/solutions.png)
+
+### Profile Page of the Logged-in User ![Hero](screenshots/profile.png)
+
+### Profile Page of Another User ![Hero](screenshots/profile-user.png)
+
+### Posts Page ![Hero](screenshots/posts.png)
+
+### Networking Page ![Hero](screenshots/networking.png)
