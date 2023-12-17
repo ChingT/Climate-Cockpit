@@ -8,16 +8,54 @@
 
 ## Overview
 
-Climate Cockpit is an innovative platform tackling a crucial question: What's
-the environmental impact of your daily choices? With climate change consistently
-ranking as a top concern, individuals are increasingly eager to understand the
-tangible effects of their actions on the planet.
+Climate Cockpit stands as an inventive platform addressing a critical question:
+What's the environmental impact of your daily choices? As climate change
+consistently takes center stage as a top concern, individuals are increasingly
+eager to comprehend the tangible effects of their actions on the planet.
 
-Climate Cockpit serves as a visual and interactive hub where users can not only
-compare various climate solutions but also track their personal and social
+Serving as a visual and interactive hub, Climate Cockpit enables users not only
+to explore and engage with climate solutions aimed at reducing Switzerland's
+greenhouse gas (GHG) emissions but also to monitor their personal and social
 progress in adopting environmentally friendly practices.
 
-Explore [Climate Cockpit](https://climate-cockpit.propulsion-learn.ch/).
+Embark on your journey with
+[Climate Cockpit](https://climate-cockpit.propulsion-learn.ch/).
+
+## Technical Features
+
+1. **GHG Emissions Dashboard:**
+
+   - Experience a visually intuitive dashboard presenting real-time data on
+     Switzerland's GHG emissions.
+
+2. **Interactive Climate Solutions List:**
+
+   - Engage with an appealing list highlighting various climate solutions, each
+     accompanied by its specific impact on reducing GHG emissions in
+     Switzerland.
+
+3. **Detailed Solution Information:**
+
+   - Dive into comprehensive insights for each climate solution, including
+     detailed explanations, progress updates, enriching videos, and curated
+     articles, ensuring users stay well-informed.
+
+4. **Personalized Climate Profiles:**
+
+   - Create and manage personalized profiles, allowing users to track and
+     support their chosen climate solutions, fostering a sense of individual
+     impact.
+
+5. **Social Connectivity:**
+
+   - Connect with fellow users, compare climate profiles, and participate in
+     meaningful discussions through posts and comments. Contribute to building a
+     community committed to positive climate action!
+
+6. **AI Interaction:**
+   - Interact with AI-driven features such as a fact checker, ensuring accurate
+     information, and a motivator providing feedback on user posts, elevating
+     the overall user experience.
 
 ## Technology Stack
 
@@ -27,7 +65,7 @@ maintained within a PostgreSQL database management system. Docker and Docker
 Compose ensure seamless containerization, and GitLab CI pipelines facilitate
 efficient development and deployment on Digital Ocean servers.
 
-## Screenshots
+## Demo
 
 ### Hero Page ![Hero](screenshots/hero.png)
 
